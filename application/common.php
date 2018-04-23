@@ -10,3 +10,7 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+function password($password, $password_salt){
+    return md5(md5($password) . md5($password_salt));
+}
