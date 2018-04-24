@@ -15,7 +15,7 @@ function password($password, $password_salt){
     return md5(md5($password) . md5($password_salt));
 }
 
-function getErweima(){
+function getCaptcha(){
     session_start();
     $image = imagecreatetruecolor(100, 30);
     $bgcolor = imagecolorallocate($image, 255, 255, 255);

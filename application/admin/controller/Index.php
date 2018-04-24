@@ -2,6 +2,8 @@
 namespace app\Admin\controller;
 use app\admin\model\Adminusers;
 use \think\Controller;
+use think\Request;
+
 class Index extends Controller
 {
     public function index()
@@ -25,8 +27,26 @@ class Index extends Controller
         return view("login");
     }
 
-    public function getEr(){
-        getErweima();
+    public function checkUser(Request $request){
+        session_start();
+        $captcha = $_SESSION['captcha'];
+        $username = $request->param('username');
+        $password = $request->param('password');
+        $userObj = new Adminusers();
+        $re = $userObj->where('username', $username)->where('password',$password)
+            ->find();
+        if($re){
+            $_SESSION['adminUserInfo'] = $re;
+        }else{
+            $url = url('admin/index/login');
+            $this->redirect($url);
+//            echo "<pre>";var_dump(2);
+        }
+//        echo "<pre>";var_dump($_SESSION);
+    }
+
+    public function getCaptcha(){
+        getCaptcha();
 
     }
 
