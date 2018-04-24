@@ -15,6 +15,7 @@ Route::group('admin',[
     '/$' => ['admin/index/index', ['method' => 'get']],
     'welcome' => ['admin/index/welcome', ['method' => 'get']],
     '/getEr' => ['admin/index/getEr', ['method' => 'get']],
+    '/create' => ['admin/index/createUser', ['method' => 'get']],
     ':id'   => ['Blog/read', ['method' => 'get'], ['id' => '\d+']],
     ':name' => ['Blog/read', ['method' => 'post']],
     '/' => 'admin/index/index', // 首页访问路由

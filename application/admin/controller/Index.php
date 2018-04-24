@@ -1,5 +1,6 @@
 <?php
 namespace app\Admin\controller;
+use app\admin\model\Adminusers;
 use \think\Controller;
 class Index extends Controller
 {
@@ -27,6 +28,14 @@ class Index extends Controller
     public function getEr(){
         getErweima();
 
+    }
+
+    public function createUser(){
+        $user = new Adminusers([
+            'username'  =>  'admin',
+            'password' =>  'admin'
+        ]);
+        $user->save();
     }
 
 
