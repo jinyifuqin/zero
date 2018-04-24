@@ -3,18 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="{:url('/jq/jquery-3.3.1.min.js','','')}"></script>
 </head>
 <body>
 <input type="text" id = "text">
 helloworld!
 
 <script>
-    $(function(){
-        var txt = $('#text');
-        txt.onchange(function(){
-            alert(123);
-        })
-    })
+    $(document).ready(function(){
+        $("#text").change(function(){
+            var txt = $('#text').val();
+            $.ajax({
+                type: "GET",
+                url: "{:url('/my')}",
+                data: {username:$("#text").val()},
+                dataType: "json",
+                success: function(data){
+                    $.each(data, function(commentIndex, comment){
+                        console.log(comment);
+                    });
+                    $('#text').val(data.a);
+                }
+            });
+        });
+
+    });
 </script>
+
 </body>
 </html>

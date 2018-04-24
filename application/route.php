@@ -11,7 +11,7 @@
 use think\Route;
 Route::get([
     '/' => 'index', // 首页访问路由
-    'my' => 'Member/myinfo', // 静态地址路由
+    'my' => 'ajax', // 静态地址路由
     'blog/:id' => 'Blog/read', // 静态地址和动态地址结合
     'new/:year/:month/:day'=>'News/read', // 静态地址和动态地址结合
     'new/:id'=>'hello/index/index',
