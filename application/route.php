@@ -14,8 +14,7 @@ Route::group('admin',[
     'login' => ['admin/index/login', ['method' => 'get']],
     '/$' => ['admin/index/index', ['method' => 'get']],
     'welcome' => ['admin/index/welcome', ['method' => 'get']],
-//    'login' => 'admin/index/login', // 静态地址路由
-//    'welcome' => 'admin/index/welcome', // 静态地址路由
+    '/getEr' => ['admin/index/getEr', ['method' => 'get']],
     ':id'   => ['Blog/read', ['method' => 'get'], ['id' => '\d+']],
     ':name' => ['Blog/read', ['method' => 'post']],
     '/' => 'admin/index/index', // 首页访问路由

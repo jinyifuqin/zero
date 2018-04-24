@@ -18,9 +18,18 @@ class Index extends Controller
     public function login()
     {
 //        echo 1;exit;
+//        session_start();
+//        echo "<pre>";var_dump($_SESSION);
 //        return $this->fetch('admin@index/login');
         return view("login");
     }
+
+    public function getEr(){
+        getErweima();
+
+    }
+
+
 
     public function ajax()
     {
