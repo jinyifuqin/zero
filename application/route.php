@@ -15,6 +15,11 @@ Route::group('admin',[
     '/$' => ['admin/index/index', ['method' => 'get']],
     'welcome' => ['admin/index/welcome', ['method' => 'get']],
     'getCaptcha' => ['admin/index/getCaptcha', ['method' => 'get']],
+    'signout' => ['admin/index/signOut', ['method' => 'get']],
+    'brand$' => ['admin/index/brand', ['method' => 'get']],
+    'brand/show' => ['admin/index/brandShow', ['method' => 'get']],
+    'addbrand' => ['admin/index/addbrand', ['method' => 'post']],
+
     '/create' => ['admin/index/createUser', ['method' => 'get']],
     '/check' => ['admin/index/checkUser', ['method' => 'post']],
     ':id'   => ['Blog/read', ['method' => 'get'], ['id' => '\d+']],

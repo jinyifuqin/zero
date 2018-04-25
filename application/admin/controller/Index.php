@@ -1,6 +1,7 @@
 <?php
 namespace app\Admin\controller;
 use app\admin\model\Adminusers;
+use app\admin\model\Brands;
 use \think\Controller;
 use think\Request;
 
@@ -68,12 +69,10 @@ class Index extends Controller
             );
             return $msg;
         }
-//        echo "<pre>";var_dump($_SESSION);
     }
 
     public function getCaptcha(){
         getCaptcha();
-
     }
 
     public function createUser(){
@@ -84,7 +83,48 @@ class Index extends Controller
         $user->save();
     }
 
+    public function signOut(){
+        unset($_SESSION['adminUserInfo']);
+        $url = url('admin/index/login');
+        return redirect($url);
+    }
 
+    public function brand(){
+        $re = Brands::all();
+        foreach ($re as $k=>&$v){
+            $v->logo = preg_replace('/\\\\/','/',$v->logo);
+//            echo "<pre>";var_export($a);exit;
+        }
+
+        return view("admin@index/brand",['re'=>$re]);
+    }
+
+    public function brandShow(){
+        return view("admin@index/brandShow",'');
+    }
+
+    public function addbrand(Request $request){
+        $file = $request->file('file-2');
+        $name = $request->param('name');
+        $sort = $request->param('sort');
+        $creatTime = date('Y-m-d H:i:s',time());
+        $re = upload($file);
+        $end = htmlspecialchars($re->getSaveName());
+//        echo "<pre>";var_export($end);exit;
+        if($re->getError() == ''){
+            $logo = $end;
+            $brandObj = new Brands([
+                'name'  =>  $name,
+                'sort' =>  $sort,
+                'logo' => $logo,
+                'create_time' =>$creatTime
+            ]);
+            $brandObj->save();
+        }
+
+
+//        echo "<pre>";var_dump($re->getError());
+    }
 
     public function ajax()
     {
