@@ -16,7 +16,7 @@ function password($password, $password_salt){
 }
 
 function getCaptcha(){
-    session_start();
+//    session_start();
     $image = imagecreatetruecolor(100, 30);
     $bgcolor = imagecolorallocate($image, 255, 255, 255);
     imagefill($image, 0, 0, $bgcolor);
@@ -30,6 +30,7 @@ function getCaptcha(){
         $x = ($i * 100 / 4) + mt_rand(5, 10);
         $y = mt_rand(5, 10);
         imagestring($image, $fontsize, $x, $y, $fontcontent, $fontcolor);
+        $captcha = strtolower($captcha);
         $_SESSION["captcha"] = $captcha;
     }
         for ($$i = 0; $i < 200; $i++) {

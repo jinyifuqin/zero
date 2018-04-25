@@ -7,15 +7,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5shiv.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="/admins/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/admins/lib/respond.min.js"></script>
+  
 <![endif]-->
 <link href="/admins/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="/admins/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
 <link href="/admins/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/admins/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
 <!--[if IE 6]>
-<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script type="text/javascript" src="/admins/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <title>后台登录 - H-ui.admin v3.1</title>
@@ -31,19 +32,19 @@
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="username" type="text" placeholder="账户" class="input-text size-L">
+          <input name="username" type="text" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="password" type="password" placeholder="密码" class="input-text size-L">
+          <input name="password" type="password" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <input name="captcha" class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-          <img src="/admin/getCaptcha"> <a id="kanbuq" href="/admin/login">看不清，换一张</a> </div>
+          <img id="restCaptcha" src="/admin/getCaptcha"> <a id="kanbuq" href="javascript:void(0);">看不清，换一张</a> </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
@@ -54,7 +55,7 @@
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input name="" id="sub" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>
@@ -62,10 +63,38 @@
   </div>
 </div>
 <div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/admins/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="/admins/static/h-ui/js/H-ui.min.js"></script>
 <script>
+  $(function(){
+      $('#kanbuq').click(function(){
+          var src = '/admin/getCaptcha';
+          $('#restCaptcha').attr('src',src);
+      });
+      $("#sub").click(function(e){
+          e.preventDefault();
+          var captcha = $("input[name='captcha']").val();
+          var username = $("input[name='username']").val();
+          var password = $("input[name='password']").val();
+          var data = {'captcha':captcha,'username':username,'password':password};
 
+          // console.log(captcha);return;
+          $.ajax({
+              type: "POST",
+              url: "{:url('/admin/check')}",
+              data: data,
+              dataType: "json",
+              success: function(data){
+                  if(data.error){
+                      alert(data.error);
+                  }else if(data.url){
+                      window.location.href=data.url;
+                  }
+
+              }
+          });
+      });
+  })
 </script>
 <!--此乃百度统计代码，请自行删除-->
 <script>
