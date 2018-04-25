@@ -17,7 +17,7 @@ Route::group('admin',[
     'getCaptcha' => ['admin/index/getCaptcha', ['method' => 'get']],
     'signout' => ['admin/index/signOut', ['method' => 'get']],
     'brand$' => ['admin/index/brand', ['method' => 'get']],
-    'brand/show' => ['admin/index/brandShow', ['method' => 'get']],
+    'brand/show/:id' => ['admin/index/brandShow', ['method' => 'get']],
     'addbrand' => ['admin/index/addbrand', ['method' => 'post']],
 
     '/create' => ['admin/index/createUser', ['method' => 'get']],

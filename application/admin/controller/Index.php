@@ -99,8 +99,12 @@ class Index extends Controller
         return view("admin@index/brand",['re'=>$re]);
     }
 
-    public function brandShow(){
-        return view("admin@index/brandShow",'');
+    public function brandShow(Request $request){
+        $id = $request->param('id');
+        $re = Brands::get(['id' => $id]);
+        $re->logo = preg_replace('/\\\\/','/',$re->logo);
+//        echo "<pre>";var_dump($re->logo);exit;
+        return view("admin@index/brandShow",['re'=>$re]);
     }
 
     public function addbrand(Request $request){
