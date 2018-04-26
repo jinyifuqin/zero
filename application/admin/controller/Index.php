@@ -164,7 +164,6 @@ class Index extends Controller
     public function brandDelById(Request $request){
         $id = $request->param('id');
         $branInfo = Brands::get($id);
-//        echo "<pre>";var_dump($branInfo);exit;
         $re = $branInfo->delete();
         if($re){
             $msg = array('status'=>'Success');
@@ -172,7 +171,17 @@ class Index extends Controller
             $msg = array('status'=>'fails');
         }
         echo json_encode($msg);
-//        echo "<pre>";var_dump($id);
+    }
+
+    public function brandDelAll(Request $request){
+        $ids = $request->param()['ids'];
+        $re = Brands::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
     }
 
     public function ajax()

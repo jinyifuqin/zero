@@ -22,6 +22,35 @@
 			<button type="submit" class="btn btn-success" id="addSub" name="" ><i class="Hui-iconfont">&#xe600;</i> 添加</button>
 		</form>
 	</div>
+	<script>
+		function datadel(){
+		    var table = $('#DataTables_Table_0');
+		    var checkBox = table.find("input:checkbox");
+            checkBox.splice(0,1);
+			var arr = [];
+            checkBox.each(function(){
+                var checked = $(this).prop('checked');
+                if(checked){
+                    var id = $(this).parent().next().html();
+					arr.push(id);
+				}
+
+			})
+            $.ajax({
+                type: "GET",
+                url: "{:url('/admin/brandDelAll')}",
+                data: {ids:arr},
+                dataType: "json",
+                success: function(data){
+                    if(data.status == "Success"){
+                        location.reload();
+                    }
+                }
+            });
+			console.log(arr);
+
+		}
+	</script>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-sort">
