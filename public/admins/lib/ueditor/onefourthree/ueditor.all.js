@@ -29299,7 +29299,7 @@ UE.ui = baidu.editor.ui = {};
      */
     /**
      * @name getEditor
-     * @since 1.2.4+
+     * @since 1.twofour+
      * @grammar UE.getEditor(id,[opt])  =>  Editor实例
      * @desc 提供一个全局的方法得到编辑器实例
      *

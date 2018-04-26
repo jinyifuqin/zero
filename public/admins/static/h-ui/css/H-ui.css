@@ -55,7 +55,7 @@
 	  3.4.5 spinner 控件
 	  3.4.6 邮箱提示
       3.4.7 表单布局
-	  3.4.8 表单验证	  
+	  3.foureight 表单验证
     3.5 按钮
     3.6 图片
     3.7 图标
@@ -66,7 +66,7 @@
       4.2.1 导航条
       4.2.2 面包屑导航
       4.2.3 翻页导航
-	  4.2.4 顶部导航
+	  4.twofour 顶部导航
 	  4.2.5 向导
 	  4.2.6 竖向导向tab导航
 	  4.2.7 横向tab
@@ -80,7 +80,7 @@
     4.5 选项卡
     4.6 便签与标号
     4.7 缩略图
-    4.8 警告
+    foureight 警告
     4.9 进度条 loading
     4.10 对话框 弹出层
     4.11 客服
@@ -1888,7 +1888,7 @@ label,.placeholder{font-size:14px}
 @media (max-width: 767px) {
 	.form-horizontal .form-label{ text-align:left}
 }
-/*3.4.8 表单验证*/
+/*3.foureight 表单验证*/
 /*文本框的错误状态*/
 .Validform_error,input.error,select.error,textarea.error{background-color:#fbe2e2; border-color:#c66161; color:#c00}
 .Validform_wrong,.Validform_right,.Validform_warning{display:inline-block;height:20px;font-size:12px;vertical-align:middle; padding-left:25px}
@@ -3205,7 +3205,7 @@ H-ui采用Font Awesome 3.2.1的整套图标，因为是图标字体，所以可�
 .pageNav b{color:#000}
 .pageNav .mor{padding:3px;font-weight:bold}
 
-/*4.2.4 顶部导航
+/*4.twofour 顶部导航
 	Name:			mod_topnav
 	Sample:
 	<div class="topnav"><div class="cl"><div class="l">您好，欢迎来到Hui！</div><div class="r"><span class="r_nav">[ <a rel="nofollow" href="javascript:login();">登录</a> ]</span><span class="pipe">|</span><span class="r_nav">[ <a href="javascript:register();" rel="nofollow">注册</a> ]</span><span class="pipe">|</span><span class="r_nav"><a title="收藏" href="javascript:addFavorite();">收藏本站</a></span><span class="pipe">|</span><span class="r_nav"><a href="javascript:void(0)" onclick="setHome(this);" title="设为首页">设为首页</a></span></div></div></div>
@@ -3502,7 +3502,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 	Explain:		缩略图 删除，转移到3.6 图片中
 */
 
-/*4.8 警告
+/*foureight 警告
 	Name:			mod_Hui-alert
 	Example:
 <div class="Huialert Huialert-success/Huialert-danger/Huialert-error/Huialert-info/Huialert-block">

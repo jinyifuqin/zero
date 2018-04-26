@@ -4669,7 +4669,7 @@
     // DateTime : 2013:09:01 22:53:55
     // ExifIFDPointer : 190
     // ExposureTime : 0.058823529411764705 [1/17]
-    // FNumber : 2.4 [12/5]
+    // FNumber : twofour [12/5]
     // ExposureProgram : Normal program
     // ISOSpeedRatings : 800
     // ExifVersion : 0220

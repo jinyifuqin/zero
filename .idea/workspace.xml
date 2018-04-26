@@ -2,8 +2,406 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d5ad212-cd19-4785-be1a-01f288b4a794" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/application/admin/view/index/index.html" afterPath="$PROJECT_DIR$/application/admin/view/index/index.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/application/admin/view/index/itemAdd.html" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/application/admin/controller/Item.php" afterPath="$PROJECT_DIR$/application/admin/controller/Item.php" />
+      <change beforePath="$PROJECT_DIR$/application/admin/view/index/brand.html" afterPath="$PROJECT_DIR$/application/admin/view/index/brand.html" />
+      <change beforePath="$PROJECT_DIR$/application/admin/view/index/brandShow.html" afterPath="$PROJECT_DIR$/application/admin/view/index/brandShow.html" />
+      <change beforePath="$PROJECT_DIR$/application/admin/view/index/item.html" afterPath="$PROJECT_DIR$/application/admin/view/index/item.html" />
       <change beforePath="$PROJECT_DIR$/application/route.php" afterPath="$PROJECT_DIR$/application/route.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/foot/foot.html" afterPath="$PROJECT_DIR$/public/admins/foot/foot.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/head/head.html" afterPath="$PROJECT_DIR$/public/admins/head/head.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/1.0.8/demo.html" afterPath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/onezeroeight/demo.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/1.0.8/iconfont.css" afterPath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/onezeroeight/iconfont.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/1.0.8/iconfont.eot" afterPath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/onezeroeight/iconfont.eot" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/1.0.8/iconfont.min.css" afterPath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/onezeroeight/iconfont.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/1.0.8/iconfont.svg" afterPath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/onezeroeight/iconfont.svg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/1.0.8/iconfont.ttf" afterPath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/onezeroeight/iconfont.ttf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/1.0.8/iconfont.woff" afterPath="$PROJECT_DIR$/public/admins/lib/Hui-iconfont/onezeroeight/iconfont.woff" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/WdatePicker.js" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/WdatePicker.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/calendar.js" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/calendar.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/lang/en.js" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/lang/en.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/lang/zh-cn.js" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/lang/zh-cn.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/lang/zh-tw.js" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/lang/zh-tw.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/WdatePicker.css" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/WdatePicker.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/datePicker.gif" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/datePicker.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/default/datepicker.css" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/default/datepicker.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/default/img.gif" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/default/img.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/twoer/datepicker-dev.css" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/twoer/datepicker-dev.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/twoer/datepicker.css" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/twoer/datepicker.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/twoer/img.gif" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/twoer/img.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/twoer/img.png" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/twoer/img.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/whyGreen/bg.jpg" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/whyGreen/bg.jpg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/whyGreen/datepicker.css" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/whyGreen/datepicker.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/skin/whyGreen/img.gif" afterPath="$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/skin/whyGreen/img.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/jquery.validation/1.14.0/additional-methods.js" afterPath="$PROJECT_DIR$/public/admins/lib/jquery.validation/oneonefourzero/additional-methods.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/jquery.validation/1.14.0/jquery.validate.js" afterPath="$PROJECT_DIR$/public/admins/lib/jquery.validation/oneonefourzero/jquery.validate.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/jquery.validation/1.14.0/messages_zh.js" afterPath="$PROJECT_DIR$/public/admins/lib/jquery.validation/oneonefourzero/messages_zh.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/jquery.validation/1.14.0/validate-methods.js" afterPath="$PROJECT_DIR$/public/admins/lib/jquery.validation/oneonefourzero/validate-methods.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/jquery/1.9.1/jquery.js" afterPath="$PROJECT_DIR$/public/admins/lib/jquery/onenineone/jquery.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/jquery/1.9.1/jquery.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/jquery/onenineone/jquery.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/layer/2.4/layer.js" afterPath="$PROJECT_DIR$/public/admins/lib/layer/twofour/layer.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/layer/2.4/skin/default/icon-ext.png" afterPath="$PROJECT_DIR$/public/admins/lib/layer/twofour/skin/default/icon-ext.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/layer/2.4/skin/default/icon.png" afterPath="$PROJECT_DIR$/public/admins/lib/layer/twofour/skin/default/icon.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/layer/2.4/skin/default/loading-0.gif" afterPath="$PROJECT_DIR$/public/admins/lib/layer/twofour/skin/default/loading-0.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/layer/2.4/skin/default/loading-1.gif" afterPath="$PROJECT_DIR$/public/admins/lib/layer/twofour/skin/default/loading-1.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/layer/2.4/skin/default/loading-2.gif" afterPath="$PROJECT_DIR$/public/admins/lib/layer/twofour/skin/default/loading-2.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/layer/2.4/skin/layer.css" afterPath="$PROJECT_DIR$/public/admins/lib/layer/twofour/skin/layer.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/anchor/anchor.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/anchor/anchor.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/attachment.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/attachment.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/attachment.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/attachment.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/attachment.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/attachment.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_chm.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_chm.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_default.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_default.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_doc.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_doc.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_exe.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_exe.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_jpg.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_jpg.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_mp3.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_mp3.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_mv.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_mv.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_pdf.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_pdf.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_ppt.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_ppt.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_psd.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_psd.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_rar.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_rar.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_txt.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_txt.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/fileTypeImages/icon_xls.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/fileTypeImages/icon_xls.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/alignicon.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/alignicon.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/alignicon.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/alignicon.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/file-icons.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/file-icons.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/file-icons.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/file-icons.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/icons.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/icons.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/icons.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/icons.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/image.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/image.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/progress.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/progress.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/success.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/success.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/attachment/images/success.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/attachment/images/success.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/background/background.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/background/background.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/background/background.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/background/background.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/background/background.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/background/background.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/background/images/bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/background/images/bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/background/images/success.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/background/images/success.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/chart.config.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/chart.config.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/charts.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/charts.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/charts.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/charts.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/charts.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/charts.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/images/charts0.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/images/charts0.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/images/charts1.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/images/charts1.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/images/charts2.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/images/charts2.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/images/charts3.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/images/charts3.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/images/charts4.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/images/charts4.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/charts/images/charts5.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/charts/images/charts5.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/emotion.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/emotion.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/emotion.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/emotion.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/emotion.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/emotion.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/0.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/0.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/bface.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/bface.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/cface.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/cface.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/fface.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/fface.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/jxface2.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/jxface2.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/neweditor-tab-bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/neweditor-tab-bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/tface.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/tface.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/wface.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/wface.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/emotion/images/yface.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/emotion/images/yface.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/gmap/gmap.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/gmap/gmap.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/help/help.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/help/help.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/help/help.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/help/help.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/help/help.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/help/help.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/image.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/image.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/image.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/image.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/image.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/image.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/alignicon.jpg" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/alignicon.jpg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/icons.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/icons.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/icons.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/icons.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/image.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/image.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/progress.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/progress.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/success.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/success.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/image/images/success.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/image/images/success.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/insertframe/insertframe.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/insertframe/insertframe.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/internal.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/internal.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/link/link.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/link/link.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/map/map.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/map/map.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/map/show.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/map/show.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/music/music.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/music/music.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/music/music.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/music/music.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/music/music.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/music/music.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/preview/preview.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/preview/preview.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/addimg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/addimg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/brush.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/brush.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/delimg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/delimg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/delimgH.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/delimgH.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/empty.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/empty.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/emptyH.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/emptyH.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/eraser.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/eraser.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/redo.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/redo.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/redoH.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/redoH.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/scale.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/scale.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/scaleH.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/scaleH.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/size.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/size.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/undo.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/undo.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/images/undoH.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/images/undoH.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/scrawl.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/scrawl.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/scrawl.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/scrawl.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/scrawl/scrawl.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/scrawl/scrawl.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/searchreplace/searchreplace.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/searchreplace/searchreplace.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/searchreplace/searchreplace.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/searchreplace/searchreplace.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/snapscreen/snapscreen.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/snapscreen/snapscreen.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/spechars/spechars.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/spechars/spechars.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/spechars/spechars.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/spechars/spechars.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/table/dragicon.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/table/dragicon.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/table/edittable.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/table/edittable.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/table/edittable.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/table/edittable.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/table/edittable.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/table/edittable.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/table/edittd.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/table/edittd.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/table/edittip.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/table/edittip.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/config.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/config.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/images/bg.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/images/bg.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/images/pre0.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/images/pre0.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/images/pre1.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/images/pre1.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/images/pre2.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/images/pre2.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/images/pre3.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/images/pre3.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/images/pre4.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/images/pre4.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/template.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/template.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/template.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/template.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/template/template.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/template/template.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/center_focus.jpg" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/center_focus.jpg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/file-icons.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/file-icons.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/file-icons.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/file-icons.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/icons.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/icons.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/icons.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/icons.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/image.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/image.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/left_focus.jpg" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/left_focus.jpg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/none_focus.jpg" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/none_focus.jpg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/progress.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/progress.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/right_focus.jpg" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/right_focus.jpg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/success.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/success.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/images/success.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/images/success.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/video.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/video.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/video.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/video.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/video/video.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/video/video.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/webapp/webapp.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/webapp/webapp.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/wordimage/fClipboard_ueditor.swf" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/wordimage/fClipboard_ueditor.swf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/wordimage/imageUploader.swf" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/wordimage/imageUploader.swf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/wordimage/tangram.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/wordimage/tangram.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/wordimage/wordimage.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/wordimage/wordimage.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/dialogs/wordimage/wordimage.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/dialogs/wordimage/wordimage.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/index.html" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/index.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/config.json" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/config.json" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/controller.jsp" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/controller.jsp" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/lib/commons-codec-1.9.jar" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/lib/commons-codec-1.9.jar" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/lib/commons-fileupload-1.3.1.jar" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/lib/commons-fileupload-1.3.1.jar" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/lib/commons-io-2.4.jar" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/lib/commons-io-2.4.jar" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/lib/json.jar" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/lib/json.jar" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/lib/ueditor-1.1.1.jar" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/lib/ueditor-1.1.1.jar" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/ActionEnter.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/ActionEnter.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/ConfigManager.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/ConfigManager.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/Encoder.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/Encoder.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/PathFormat.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/PathFormat.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/ActionMap.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/ActionMap.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/ActionState.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/ActionState.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/AppInfo.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/AppInfo.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/BaseState.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/BaseState.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/FileType.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/FileType.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/MIMEType.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/MIMEType.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/MultiState.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/MultiState.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/define/State.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/define/State.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/hunter/FileManager.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/hunter/FileManager.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/hunter/ImageHunter.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/hunter/ImageHunter.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/upload/Base64Uploader.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/upload/Base64Uploader.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/upload/BinaryUploader.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/upload/BinaryUploader.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/upload/StorageManager.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/upload/StorageManager.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/jsp/src/com/baidu/ueditor/upload/Uploader.java" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/jsp/src/com/baidu/ueditor/upload/Uploader.java" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/en.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/en.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/addimage.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/addimage.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/alldeletebtnhoverskin.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/alldeletebtnhoverskin.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/alldeletebtnupskin.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/alldeletebtnupskin.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/background.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/background.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/button.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/button.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/copy.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/copy.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/deletedisable.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/deletedisable.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/deleteenable.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/deleteenable.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/listbackground.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/listbackground.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/localimage.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/localimage.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/music.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/music.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/rotateleftdisable.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/rotateleftdisable.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/rotateleftenable.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/rotateleftenable.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/rotaterightdisable.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/rotaterightdisable.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/rotaterightenable.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/rotaterightenable.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/en/images/upload.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/en/images/upload.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/zh-cn/images/copy.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/zh-cn/images/copy.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/zh-cn/images/localimage.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/zh-cn/images/localimage.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/zh-cn/images/music.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/zh-cn/images/music.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/zh-cn/images/upload.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/zh-cn/images/upload.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/lang/zh-cn/zh-cn.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/Config.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/Config.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/ConfigHandler.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/ConfigHandler.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/CrawlerHandler.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/CrawlerHandler.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/Handler.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/Handler.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/ListFileHandler.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/ListFileHandler.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/NotSupportedHandler.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/NotSupportedHandler.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/PathFormater.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/PathFormater.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/App_Code/UploadHandler.cs" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/App_Code/UploadHandler.cs" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/Bin/Newtonsoft.Json.xml" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/Bin/Newtonsoft.Json.xml" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/README.md" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/README.md" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/Web.config" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/Web.config" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/config.json" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/config.json" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/controller.ashx" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/controller.ashx" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/net/net.sln" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/net/net.sln" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/php/Uploader.class.php" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/php/Uploader.class.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/php/action_crawler.php" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/php/action_crawler.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/php/action_list.php" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/php/action_list.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/php/action_upload.php" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/php/action_upload.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/php/config.json" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/php/config.json" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/php/controller.php" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/php/controller.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/css/ueditor.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/css/ueditor.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/css/ueditor.min.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/css/ueditor.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/dialogbase.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/dialogbase.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/anchor.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/anchor.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/arrow.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/arrow.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/arrow_down.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/arrow_down.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/arrow_up.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/arrow_up.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/button-bg.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/button-bg.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/cancelbutton.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/cancelbutton.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/charts.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/charts.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/cursor_h.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/cursor_h.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/cursor_h.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/cursor_h.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/cursor_v.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/cursor_v.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/cursor_v.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/cursor_v.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/dialog-title-bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/dialog-title-bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/filescan.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/filescan.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/highlighted.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/highlighted.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/icons-all.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/icons-all.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/icons.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/icons.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/icons.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/icons.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/loaderror.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/loaderror.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/loading.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/loading.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/lock.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/lock.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/neweditor-tab-bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/neweditor-tab-bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/pagebreak.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/pagebreak.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/scale.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/scale.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/sortable.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/sortable.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/spacer.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/spacer.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/sparator_v.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/sparator_v.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/table-cell-align.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/table-cell-align.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/tangram-colorpicker.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/tangram-colorpicker.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/toolbar_bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/toolbar_bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/unhighlighted.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/unhighlighted.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/upload.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/upload.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/videologo.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/videologo.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/word.gif" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/word.gif" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/default/images/wordpaste.png" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/default/images/wordpaste.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/themes/iframe.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/themes/iframe.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/SyntaxHighlighter/shCore.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/SyntaxHighlighter/shCore.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/SyntaxHighlighter/shCoreDefault.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/SyntaxHighlighter/shCoreDefault.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/codemirror/codemirror.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/codemirror/codemirror.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/codemirror/codemirror.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/codemirror/codemirror.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/adapters/mootools-adapter.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/adapters/mootools-adapter.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/adapters/mootools-adapter.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/adapters/mootools-adapter.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/adapters/prototype-adapter.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/adapters/prototype-adapter.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/adapters/prototype-adapter.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/adapters/prototype-adapter.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/adapters/standalone-framework.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/adapters/standalone-framework.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/adapters/standalone-framework.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/adapters/standalone-framework.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/highcharts-more.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/highcharts-more.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/highcharts-more.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/highcharts-more.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/highcharts.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/highcharts.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/highcharts.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/highcharts.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/annotations.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/annotations.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/annotations.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/annotations.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/canvas-tools.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/canvas-tools.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/canvas-tools.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/canvas-tools.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/data.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/data.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/data.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/data.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/drilldown.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/drilldown.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/drilldown.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/drilldown.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/exporting.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/exporting.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/exporting.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/exporting.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/funnel.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/funnel.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/funnel.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/funnel.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/heatmap.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/heatmap.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/heatmap.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/heatmap.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/map.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/map.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/map.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/map.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/no-data-to-display.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/no-data-to-display.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/modules/no-data-to-display.src.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/modules/no-data-to-display.src.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/themes/dark-blue.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/themes/dark-blue.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/themes/dark-green.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/themes/dark-green.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/themes/gray.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/themes/gray.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/themes/grid.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/themes/grid.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/highcharts/themes/skies.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/highcharts/themes/skies.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/jquery-1.10.2.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/jquery-1.10.2.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/jquery-1.10.2.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/jquery-1.10.2.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/jquery-1.10.2.min.map" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/jquery-1.10.2.min.map" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/font/vjs.eot" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/font/vjs.eot" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/font/vjs.svg" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/font/vjs.svg" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/font/vjs.ttf" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/font/vjs.ttf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/font/vjs.woff" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/font/vjs.woff" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/video-js.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/video-js.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/video-js.min.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/video-js.min.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/video-js.swf" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/video-js.swf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/video.dev.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/video.dev.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/video-js/video.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/video-js/video.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/Uploader.swf" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/Uploader.swf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.css" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.custom.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.custom.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.custom.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.custom.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.flashonly.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.flashonly.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.flashonly.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.flashonly.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.html5only.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.html5only.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.html5only.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.html5only.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.withoutimage.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.withoutimage.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/webuploader/webuploader.withoutimage.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/webuploader/webuploader.withoutimage.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/zeroclipboard/ZeroClipboard.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/zeroclipboard/ZeroClipboard.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/zeroclipboard/ZeroClipboard.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/zeroclipboard/ZeroClipboard.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/third-party/zeroclipboard/ZeroClipboard.swf" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/third-party/zeroclipboard/ZeroClipboard.swf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/ueditor.all.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/ueditor.all.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/ueditor.all.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/ueditor.all.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/ueditor.config.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/ueditor.config.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/ueditor.parse.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/ueditor.parse.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/ueditor/1.4.3/ueditor.parse.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/ueditor/onefourthree/ueditor.parse.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/README.md" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/README.md" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/Uploader.swf" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/Uploader.swf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/cropper/cropper.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/cropper/cropper.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/cropper/index.html" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/cropper/index.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/cropper/uploader.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/cropper/uploader.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/expressInstall.swf" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/expressInstall.swf" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/image-upload/index.html" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/image-upload/index.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/image-upload/upload.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/image-upload/upload.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/images/bg.png" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/images/bg.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/images/icons.png" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/images/icons.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/images/icons.psd" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/images/icons.psd" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/images/image.png" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/images/image.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/images/progress.png" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/images/progress.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/images/progress.psd" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/images/progress.psd" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/images/success.png" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/images/success.png" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/md5-demo/index.html" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/md5-demo/index.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/md5-demo/script.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/md5-demo/script.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/requirejs/app.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/requirejs/app.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/requirejs/index.html" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/requirejs/index.html" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/requirejs/require.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/requirejs/require.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/server/crossdomain.xml" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/server/crossdomain.xml" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/server/fileupload.php" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/server/fileupload.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/server/fileupload2.php" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/server/fileupload2.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/server/preview.php" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/server/preview.php" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.css" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.css" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.custom.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.custom.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.custom.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.custom.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.fis.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.fis.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.flashonly.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.flashonly.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.flashonly.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.flashonly.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.html5only.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.html5only.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.html5only.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.html5only.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.noimage.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.noimage.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.noimage.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.noimage.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.nolog.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.nolog.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.nolog.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.nolog.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.withoutimage.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.withoutimage.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/lib/webuploader/0.1.5/webuploader.withoutimage.min.js" afterPath="$PROJECT_DIR$/public/admins/lib/webuploader/zeroonefive/webuploader.withoutimage.min.js" />
+      <change beforePath="$PROJECT_DIR$/public/admins/static/h-ui/css/H-ui.css" afterPath="$PROJECT_DIR$/public/admins/static/h-ui/css/H-ui.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,67 +415,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/admin/controller/Index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="43" />
-              <folding>
-                <element signature="e#38#69#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/admin/view/index/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-1404">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="40" />
-              <folding>
-                <element signature="n#style#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#nav#1;n#div#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#a#0;n#li#3;n#ul#0;n#nav#1;n#div#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="brand.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/admin/view/index/brand.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="40" />
-              <folding>
-                <element signature="e#165#169#1" expanded="true" />
-                <element signature="e#206#210#1" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#form#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#span#0;n#form#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="head.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/admins/head/head.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/common.php">
+      <file leaf-file-name="brand.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/admin/view/index/brand.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1066">
-              <caret line="49" column="23" lean-forward="false" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+            <state relative-caret-position="19">
+              <caret line="61" column="23" lean-forward="true" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -86,8 +438,8 @@
       <file leaf-file-name="route.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/route.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="494">
+              <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="12" />
               <folding>
                 <element signature="e#6#80#0#PHP" expanded="true" />
               </folding>
@@ -98,8 +450,8 @@
       <file leaf-file-name="Item.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/admin/controller/Item.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+            <state relative-caret-position="442">
+              <caret line="22" column="43" lean-forward="false" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
               <folding>
                 <element signature="e#136#167#0#PHP" expanded="true" />
               </folding>
@@ -107,33 +459,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="item.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="item.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/admin/view/index/item.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="22" column="47" lean-forward="true" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+            <state relative-caret-position="130">
+              <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
               <folding>
-                <element signature="e#525#529#1" expanded="true" />
-                <element signature="e#566#570#1" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#nav#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#2;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <marker date="1524712761435" expanded="true" signature="6240:6260" ph="..." />
-                <marker date="1524712761435" expanded="true" signature="6350:6358" ph="..." />
-                <marker date="1524712761435" expanded="true" signature="6686:6706" ph="..." />
-                <marker date="1524712761435" expanded="true" signature="6795:6803" ph="..." />
+                <element signature="n#style#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="e#508#512#1" expanded="true" />
+                <element signature="e#549#553#1" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#nav#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#2;n#div#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#2;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+                <marker date="1524730714200" expanded="true" signature="7631:7651" ph="..." />
+                <marker date="1524730714200" expanded="true" signature="7741:7749" ph="..." />
+                <marker date="1524730714200" expanded="true" signature="8143:8163" ph="..." />
+                <marker date="1524730714200" expanded="true" signature="8252:8260" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/index/view/index/index.html">
+      <file leaf-file-name="brandShow.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/view/index/brandShow.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="26" selection-end-column="15" />
+            <state relative-caret-position="191">
+              <caret line="145" column="18" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="176" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="itemAdd.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/admin/view/index/itemAdd.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1208">
+              <caret line="111" column="42" lean-forward="false" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -150,36 +516,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>缩略图：</find>
-      <find>static</find>
-      <find>input type=&quot;text&quot; onfocus=&quot;Wdate</find>
-      <find>dndArea</find>
-      <find>imgWrap</find>
+      <find>url</find>
+      <find>.0.8</find>
+      <find>1.0.8</find>
+      <find>width=device-width,initial-scale=18,minimum-scale=18.0140188,maximum-scale=18.0140188,user-scalable=no</find>
+      <find>formControls</find>
+      <find>widt</find>
+      <find>ueditor</find>
+      <find>jquery.min.js</find>
+      <find>editor</find>
+      <find>edit</find>
+      <find>&lt;meta name=&quot;viewport&quot; content=&quot;</find>
+      <find>edite</find>
+      <find>0.1.5</find>
+      <find>{$</find>
+      <find>admin</find>
+      <find>X-UA-Compatible</find>
+      <find>1.4.3</find>
       <find>lib</find>
-      <find>radius</find>
-      <find>username</find>
-      <find>x-www-form-urlencoded</find>
-      <find>brandUpdate</find>
-      <find>btn-refresh</find>
-      <find>submit</find>
-      <find>uploadfile</find>
-      <find>upload-url</find>
-      <find>Hui-iconfont</find>
-      <find>upload-btn</find>
-      <find>aler</find>
-      <find>品牌管理</find>
-      <find>form-member-add</find>
-      <find>json_encode</find>
-      <find>hidd</find>
-      <find>Huiform</find>
-      <find>ChangeListManager</find>
-      <find>file-2</find>
-      <find>批量</find>
-      <find>brandDelById</find>
-      <find>brandDelAll</find>
-      <find>datePicker({ maxDate:'#F&lt;?p</find>
-      <find>pos-a</find>
-      <find>产品管理</find>
+      <find>static</find>
+      <find>r/4.8/skin/datePicker.gif</find>
+      <find>编辑</find>
+      <find>添加产品</find>
+      <find>泽花纹自然,</find>
+      <find>brand_edit</find>
+      <find>product_add</find>
+      <find>alidform_v5.3.2_min.js</find>
+      <find>re</find>
+      <find>{$re</find>
+      <find>1.14.0</find>
+      <find>2.4</find>
     </findStrings>
     <replaceStrings>
       <replace>test/lib</replace>
@@ -187,9 +553,16 @@
       <replace>/admins/test/</replace>
       <replace>/admins/lib/</replace>
       <replace>admins/</replace>
-      <replace>/admins/static</replace>
       <replace>static</replace>
+      <replace>/admins/admins</replace>
+      <replace>zeroonefive</replace>
+      <replace>onezeroeight</replace>
+      <replace>/admins/static</replace>
       <replace>/admins/lib</replace>
+      <replace>/admins/temp</replace>
+      <replace>onefourthree</replace>
+      <replace>oneonefourzero</replace>
+      <replace>twofour</replace>
     </replaceStrings>
     <dirStrings>
       <dir>D:\work\zero</dir>
@@ -201,7 +574,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/config.php" />
         <option value="$PROJECT_DIR$/../test/index.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/application/index/controller/Index.php" />
@@ -218,18 +590,22 @@
         <option value="$PROJECT_DIR$/application/admin/model/Brands.php" />
         <option value="$PROJECT_DIR$/database/migrations/20180425020827_brands.php" />
         <option value="$PROJECT_DIR$/public/admins/head/foot.html" />
-        <option value="$PROJECT_DIR$/public/admins/head/head.html" />
-        <option value="$PROJECT_DIR$/public/admins/foot/foot.html" />
         <option value="$PROJECT_DIR$/public/admins/head/brandHead.html" />
         <option value="$PROJECT_DIR$/public/admins/foot/brandFoot.html" />
         <option value="$PROJECT_DIR$/application/admin/view/index/brandShow.html" />
         <option value="$PROJECT_DIR$/public/uploads/.gitignore" />
         <option value="$PROJECT_DIR$/application/admin/view/index/brand.html" />
         <option value="$PROJECT_DIR$/application/admin/controller/Index.php" />
-        <option value="$PROJECT_DIR$/application/route.php" />
-        <option value="$PROJECT_DIR$/application/admin/controller/Item.php" />
         <option value="$PROJECT_DIR$/application/admin/view/index/index.html" />
+        <option value="$PROJECT_DIR$/application/route.php" />
+        <option value="$PROJECT_DIR$/public/.htaccess" />
+        <option value="$PROJECT_DIR$/application/.htaccess" />
+        <option value="$PROJECT_DIR$/application/config.php" />
+        <option value="$PROJECT_DIR$/public/admins/foot/foot.html" />
+        <option value="$PROJECT_DIR$/public/admins/head/head.html" />
+        <option value="$PROJECT_DIR$/application/admin/controller/Item.php" />
         <option value="$PROJECT_DIR$/application/admin/view/index/item.html" />
+        <option value="$PROJECT_DIR$/application/admin/view/index/itemAdd.html" />
       </list>
     </option>
   </component>
@@ -315,51 +691,12 @@
               <item name="view" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="index" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="zero" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zero" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="index" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="zero" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zero" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="index" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="view" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="zero" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zero" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="index" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="view" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="index" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="zero" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zero" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="zero" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zero" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="admins" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="zero" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zero" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="admins" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="head" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -404,29 +741,29 @@
       <workItem from="1524457375574" duration="10356000" />
       <workItem from="1524529682837" duration="201000" />
       <workItem from="1524616160050" duration="31282000" />
-      <workItem from="1524702384411" duration="10010000" />
+      <workItem from="1524702384411" duration="12357000" />
+      <workItem from="1524720900658" duration="10297000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56828000" />
+    <option name="totallyTimeSpent" value="69472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.293125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.293125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -447,68 +784,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/route.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="13" column="7" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="7" />
-          <folding>
-            <element signature="e#6#80#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3536">
-          <caret line="144" column="42" lean-forward="false" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/index/view/index/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/runtime/log/201804/23.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/log/driver/File.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-260">
-          <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../test/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="1" column="22" lean-forward="false" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/extra/queue.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/jq/jquery-3.3.1.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -520,14 +795,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3536">
-          <caret line="144" column="42" lean-forward="false" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -608,24 +875,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3666">
           <caret line="141" column="43" lean-forward="false" selection-start-line="141" selection-start-column="43" selection-end-line="141" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/admins/head/foot.html" />
-    <entry file="file://$USER_HOME$/Desktop/H-ui.admin/picture-add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="77" column="61" lean-forward="true" selection-start-line="77" selection-start-column="61" selection-end-line="77" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/admins/lib/My97DatePicker/4.8/WdatePicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/model/Adminusers.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -641,13 +895,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/H-ui.admin/product-add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="184" column="57" lean-forward="true" selection-start-line="184" selection-start-column="57" selection-end-line="184" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/20180425020828_brands.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -655,7 +902,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/admins/lib/jquery.validation/1.14.0/jquery.validate.js">
+    <entry file="file://$PROJECT_DIR$/public/admins/lib/jquery.validation/oneonefourzero/jquery.validate.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-702">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
@@ -664,13 +911,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/admins/head/brandHead.html" />
-    <entry file="file://$PROJECT_DIR$/public/admins/foot/foot.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="4" column="32" lean-forward="true" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/runtime/temp/cc3eb4bf4628c0aee11f9ee759b1738d.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -699,7 +939,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -707,7 +946,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,7 +953,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -723,25 +960,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/view/index/brandShow.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="164" column="19" lean-forward="false" selection-start-line="164" selection-start-column="19" selection-end-line="164" selection-end-column="59" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#span#0;n#div#0;n#div#1;n#form#0;n#article#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/index/view/index/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="26" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -749,95 +967,214 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admins/lib/My97DatePicker/foureight/WdatePicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1378">
+          <caret line="56" column="8034" lean-forward="false" selection-start-line="56" selection-start-column="8034" selection-end-line="56" selection-end-column="8034" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../jiaoben4531/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="30" column="7" lean-forward="false" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="43" />
+          <folding>
+            <element signature="e#38#69#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runtime/temp/a839720117c207cb8887a2036951454f.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5278">
+          <caret line="224" column="83" lean-forward="false" selection-start-line="224" selection-start-column="83" selection-end-line="224" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding>
+            <marker date="1524723962354" expanded="true" signature="0:215" ph="&lt;IfModule mod_rewrite.c&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="92" column="21" lean-forward="true" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admins/head/head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="105" lean-forward="false" selection-start-line="7" selection-start-column="105" selection-end-line="7" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/H-ui.admin/picture-add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="69" column="70" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="832" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/route.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="494">
+          <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="12" />
           <folding>
             <element signature="e#6#80#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Index.php">
+    <entry file="file://$USER_HOME$/Desktop/H-ui.admin/product-list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="43" />
+        <state relative-caret-position="208">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="234" selection-end-column="7" />
           <folding>
-            <element signature="e#38#69#0#PHP" expanded="true" />
+            <marker date="1524558077225" expanded="true" signature="7843:7863" ph="..." />
+            <marker date="1524558077225" expanded="true" signature="7953:7961" ph="..." />
+            <marker date="1524558077225" expanded="true" signature="8289:8309" ph="..." />
+            <marker date="1524558077225" expanded="true" signature="8398:8406" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/controller/Item.php">
+    <entry file="file://$USER_HOME$/Desktop/H-ui.admin/admin-add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        <state relative-caret-position="-416">
+          <caret line="5" column="62" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="167" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/H-ui.admin/product-add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="199" column="28" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="918" selection-end-column="7" />
           <folding>
-            <element signature="e#136#167#0#PHP" expanded="true" />
+            <element signature="n#style#0;n#script#0;n#div#0;n#div#21;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <marker date="1524558077215" expanded="true" signature="11643:11651" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/admin/view/index/brand.html">
+    <entry file="file://$PROJECT_DIR$/application/index/view/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="40" />
-          <folding>
-            <element signature="e#165#169#1" expanded="true" />
-            <element signature="e#206#210#1" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#nav#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#form#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#span#0;n#form#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/admins/head/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="13" column="44" lean-forward="false" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+        <state relative-caret-position="130">
+          <caret line="5" column="56" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/view/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-1404">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/controller/Item.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="22" column="43" lean-forward="false" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
           <folding>
-            <element signature="n#style#0;n#i#0;n#a#0;n#li#2;n#ul#0;n#nav#1;n#div#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#a#0;n#li#3;n#ul#0;n#nav#1;n#div#0;n#div#0;n#header#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="e#136#167#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/H-ui.admin/user-add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/admin/view/index/item.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="22" column="47" lean-forward="true" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+        <state relative-caret-position="130">
+          <caret line="5" column="45" lean-forward="false" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
           <folding>
-            <element signature="e#525#529#1" expanded="true" />
-            <element signature="e#566#570#1" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#nav#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#2;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <marker date="1524712761435" expanded="true" signature="6240:6260" ph="..." />
-            <marker date="1524712761435" expanded="true" signature="6350:6358" ph="..." />
-            <marker date="1524712761435" expanded="true" signature="6686:6706" ph="..." />
-            <marker date="1524712761435" expanded="true" signature="6795:6803" ph="..." />
+            <element signature="n#style#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="e#508#512#1" expanded="true" />
+            <element signature="e#549#553#1" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#nav#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#2;n#div#0;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#2;n#td#7;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#1;n#body#0;n#!!top" expanded="true" />
+            <marker date="1524730714200" expanded="true" signature="7631:7651" ph="..." />
+            <marker date="1524730714200" expanded="true" signature="7741:7749" ph="..." />
+            <marker date="1524730714200" expanded="true" signature="8143:8163" ph="..." />
+            <marker date="1524730714200" expanded="true" signature="8252:8260" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/view/index/brandShow.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="145" column="18" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="176" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/view/index/itemAdd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1208">
+          <caret line="111" column="42" lean-forward="false" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admins/foot/foot.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="52" lean-forward="false" selection-start-line="1" selection-start-column="52" selection-end-line="1" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/admin/view/index/brand.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="61" column="23" lean-forward="true" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>

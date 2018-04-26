@@ -17,4 +17,10 @@ class Item  extends Controller
     public function index(){
         return view("admin@index/item");
     }
+
+    public function itemAdd(){
+
+        return view("admin@index/itemAdd");
+    }
+
 }

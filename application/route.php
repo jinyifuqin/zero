@@ -23,6 +23,7 @@ Route::group('admin',[
     'brandDelById' => ['admin/index/brandDelById', ['method' => 'get']],
     'brandDelAll' => ['admin/index/brandDelAll', ['method' => 'get']],
     'items' => ['admin/item/index', ['method' => 'get']],
+    'itemAdd' => ['admin/item/itemAdd', ['method' => 'get']],
 
     '/create' => ['admin/index/createUser', ['method' => 'get']],
     '/check' => ['admin/index/checkUser', ['method' => 'post']],
