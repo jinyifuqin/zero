@@ -94,7 +94,6 @@ class Index extends Controller
         $re = Brands::all();
         foreach ($re as $k=>&$v){
             $v->logo = preg_replace('/\\\\/','/',$v->logo);
-//            echo "<pre>";var_export($a);exit;
         }
         return view("admin@index/brand",['re'=>$re]);
     }
@@ -103,20 +102,16 @@ class Index extends Controller
         $id = $request->param('id');
         $re = Brands::get(['id' => $id]);
         $re->logo = preg_replace('/\\\\/','/',$re->logo);
-//        echo "<pre>";var_dump($re->logo);exit;
         return view("admin@index/brandShow",['re'=>$re]);
     }
 
     public function addbrand(Request $request){
-//        echo "<pre>";var_dump($_FILES);
-//        echo "<pre>";var_dump($request->file());exit;
         $file = $request->file('file');
         $name = $request->param('name');
         $sort = $request->param('sort');
         $creatTime = date('Y-m-d H:i:s',time());
         $re = upload($file);
         $end = htmlspecialchars($re->getSaveName());
-//        echo "<pre>";var_export($end);exit;
         if($re->getError() == ''){
             $logo = $end;
             $brandObj = new Brands([
@@ -164,6 +159,20 @@ class Index extends Controller
 
         $re = array('type'=>$result);
         echo json_encode($re);
+    }
+
+    public function brandDelById(Request $request){
+        $id = $request->param('id');
+        $branInfo = Brands::get($id);
+//        echo "<pre>";var_dump($branInfo);exit;
+        $re = $branInfo->delete();
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+//        echo "<pre>";var_dump($id);
     }
 
     public function ajax()
