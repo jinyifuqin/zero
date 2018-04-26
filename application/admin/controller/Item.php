@@ -23,4 +23,8 @@ class Item  extends Controller
         return view("admin@index/itemAdd");
     }
 
+    public function catList(){
+        return view("admin@index/catList");
+    }
+
 }
