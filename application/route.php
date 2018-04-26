@@ -19,6 +19,7 @@ Route::group('admin',[
     'brand$' => ['admin/index/brand', ['method' => 'get']],
     'brand/show/:id' => ['admin/index/brandShow', ['method' => 'get']],
     'addbrand' => ['admin/index/addbrand', ['method' => 'post']],
+    'brandUpdate' => ['admin/index/brandUpdate', ['method' => 'post']],
 
     '/create' => ['admin/index/createUser', ['method' => 'get']],
     '/check' => ['admin/index/checkUser', ['method' => 'post']],

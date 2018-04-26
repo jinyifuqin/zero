@@ -7,6 +7,7 @@ use think\Request;
 
 class Index extends Controller
 {
+    public $logo;
     public function __construct(Request $request = null)
     {
         session_start();
@@ -95,7 +96,6 @@ class Index extends Controller
             $v->logo = preg_replace('/\\\\/','/',$v->logo);
 //            echo "<pre>";var_export($a);exit;
         }
-
         return view("admin@index/brand",['re'=>$re]);
     }
 
@@ -126,8 +126,39 @@ class Index extends Controller
             $brandObj->save();
         }
 
+    }
 
-//        echo "<pre>";var_dump($re->getError());
+    public function brandUpdate(Request $request){
+//        echo "<pre>";var_dump($request->file('file-2'));exit;
+        if($request->file('file-2')){
+            $file = $request->file('file-2');
+            $fileRe = upload($file);
+            $logo = htmlspecialchars($fileRe->getSaveName());
+            $re = array('re'=>$logo);
+            echo json_encode($re);
+            return;
+        }
+
+            $logo = $request->param('logopath');
+            $check = strrpos($logo,'uploads');
+
+            $brand = new Brands();
+            $creatTime = date('Y-m-d H:i:s',time());
+            $id = $request->param('id');
+            $name = $request->param('name');
+            $desc = $request->param('desc');
+            $sort = $request->param('sort');
+            $re = Brands::get(['id' => $id]);
+            if($check){
+                $logo = $re->logo;
+            }
+            $result = $brand->save(
+                ['logo'=>$logo,'name'=>$name,'desc'=>$desc,'sort'=>$sort,'create_time'=>$creatTime],
+                ['id'=>$id]
+            );
+
+        $re = array('type'=>$result);
+        echo json_encode($re);
     }
 
     public function ajax()
