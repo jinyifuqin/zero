@@ -25,6 +25,8 @@ Route::group('admin',[
     'items' => ['admin/item/index', ['method' => 'get']],
     'itemAdd' => ['admin/item/itemAdd', ['method' => 'get']],
     'cats' => ['admin/item/catList', ['method' => 'get']],
+    'addCat' => ['admin/item/addCat', ['method' => 'get']],
+    'saveCat' => ['admin/item/saveCat', ['method' => 'post']],
 
     '/create' => ['admin/index/createUser', ['method' => 'get']],
     '/check' => ['admin/index/checkUser', ['method' => 'post']],
