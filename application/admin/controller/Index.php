@@ -108,7 +108,9 @@ class Index extends Controller
     }
 
     public function addbrand(Request $request){
-        $file = $request->file('file-2');
+//        echo "<pre>";var_dump($_FILES);
+//        echo "<pre>";var_dump($request->file());exit;
+        $file = $request->file('file');
         $name = $request->param('name');
         $sort = $request->param('sort');
         $creatTime = date('Y-m-d H:i:s',time());
@@ -123,7 +125,10 @@ class Index extends Controller
                 'logo' => $logo,
                 'create_time' =>$creatTime
             ]);
-            $brandObj->save();
+            $result = $brandObj->save();
+            if($result)
+                $msg = array('status'=>'Success');
+                echo json_encode($msg);
         }
 
     }

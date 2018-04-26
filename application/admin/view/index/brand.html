@@ -1,25 +1,4 @@
-﻿<!--<!DOCTYPE HTML>-->
-<!--<html>-->
-<!--<head>-->
-<!--<meta charset="utf-8">-->
-<!--<meta name="renderer" content="webkit|ie-comp|ie-stand">-->
-<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
-<!--<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />-->
-<!--<meta http-equiv="Cache-Control" content="no-siteapp" />-->
-<!--&lt;!&ndash;[if lt IE 9]>-->
-<!--<script type="text/javascript" src="/admins/lib/html5shiv.js"></script>-->
-<!--<script type="text/javascript" src="/admins/lib/respond.min.js"></script>-->
-<!--<![endif]&ndash;&gt;-->
-<!--<link rel="stylesheet" type="text/css" href="/admins/static/h-ui/css/H-ui.min.css" />-->
-<!--<link rel="stylesheet" type="text/css" href="/admins/static/h-ui.admin/css/H-ui.admin.css" />-->
-<!--<link rel="stylesheet" type="text/css" href="/admins/lib/Hui-iconfont/1.0.8/iconfont.css" />-->
-<!--<link rel="stylesheet" type="text/css" href="/admins/static/h-ui.admin/skin/default/skin.css" id="skin" />-->
-<!--<link rel="stylesheet" type="text/css" href="/admins/static/h-ui.admin/css/style.css" />-->
-<!--&lt;!&ndash;[if IE 6]>-->
-<!--<script type="text/javascript" src="/admins/lib/DD_belatedPNG_0.0.8a-min.js" ></script>-->
-<!--<script>DD_belatedPNG.fix('*');</script>-->
-<!--<![endif]&ndash;&gt;-->
-{include file="admins/head/head.html" /}
+﻿{include file="admins/head/head.html" /}
 <title>品牌管理2</title>
 </head>
 <body>
@@ -27,12 +6,12 @@
 <div class="page-container">
 	<div class="text-c">
 		<form class="Huiform" method="post" action="/admin/addbrand" target="_self" enctype="multipart/form-data">
-			<input type="text" name="name" placeholder="分类名称" value="" class="input-text" style="width:120px">
-			<input type="text" name="sort" placeholder="排序" value="" class="input-text" style="width:120px">
+			<input id="name" type="text" name="name" placeholder="品牌名称" value="" class="input-text" style="width:120px">
+			<input id="sort" type="text" name="sort" placeholder="排序" value="" class="input-text" style="width:120px">
 			<span class="btn-upload form-group">
 			<input class="input-text upload-url" type="text" name="uploadfile-2" id="uploadfile-2" readonly style="width:200px">
 			<a href="javascript:void();" class="btn btn-primary upload-btn"><i class="Hui-iconfont">&#xe642;</i> 上传logo</a>
-			<input type="file" multiple name="file-2" class="input-file">
+			<input id="file-2" type="file" multiple name="file-2" class="input-file">
 			</span>
 			<!--<span class="select-box" style="width:150px">-->
 			<!--<select class="select" name="brandclass" size="1">-->
@@ -40,7 +19,7 @@
 				<!--<option value="0">国外品牌</option>-->
 			<!--</select>-->
 			<!--</span>-->
-			<button type="submit" class="btn btn-success" id="" name="" ><i class="Hui-iconfont">&#xe600;</i> 添加</button>
+			<button type="submit" class="btn btn-success" id="addSub" name="" ><i class="Hui-iconfont">&#xe600;</i> 添加</button>
 		</form>
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
@@ -100,7 +79,31 @@ $('.table-sort').dataTable({
 	]
 });
 $(function(){
+	$('#addSub').click(function(e){
+	    e.preventDefault();
+        var formData = new FormData();
+        var name = $('#name').val();
+        var sort = $('#sort').val();
+        var form = $(".Huiform");
+        var url = form.attr('action');
+        formData.append('file',$('#file-2')[0].files[0]);
+        formData.append('name',name);
+        formData.append('sort',sort);
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+        }).success(function (data) {
+            location.reload();
+            // window.parent.location.reload();//刷新父页面
+        }).error(function () {
+            alert("上传失败");
+        });
 
+	})
 })
 
 </script>
