@@ -1,75 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d5ad212-cd19-4785-be1a-01f288b4a794" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/application/index/controller/Item.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/application/index/view/item/index.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/application/index/view/item/item.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/css/css_yan.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom11.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom22.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom3.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom33.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom4.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom44.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom5.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/Appbottom55.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/banner1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/banner2.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/banner3.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/bi.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dh1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dh2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dh3.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dh4.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dhbj1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dhbj2.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dhbj3.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dhbj4.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/dot.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/fh.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/fushow1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/gonggao_bj.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/head.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/nbanner1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/ping.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/ping1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/rinfo.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/shouse.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sp1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sp1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sp2.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sp3.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sp4.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/spjieshao.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sq_1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sq_2.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sq_3.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sq_4.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sqrt_bj.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/sqrt_jt.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/title_bj.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user1.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user2.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user3.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user4.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user5.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user6.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user7.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/user_bj.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/yiyuanhuan.jpg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/zan.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/images/zan1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/js/jcarousellite_1.0.1c4.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/js/jquery.flexslider-min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/js/jquery.min.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/indexsource/js/pic.js" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/application/index/view/index/index.html" afterPath="$PROJECT_DIR$/application/index/view/index/index.html" />
-      <change beforePath="$PROJECT_DIR$/application/route.php" afterPath="$PROJECT_DIR$/application/route.php" />
-    </list>
+    <list default="true" id="6d5ad212-cd19-4785-be1a-01f288b4a794" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -162,16 +94,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="item.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="item.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/index/view/item/item.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="83" column="16" lean-forward="true" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+            <state relative-caret-position="349">
+              <caret line="86" column="54" lean-forward="false" selection-start-line="86" selection-start-column="54" selection-end-line="86" selection-end-column="54" />
               <folding>
                 <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="weixin.php" pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/Desktop/weixin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -187,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>brand_edit</find>
       <find>$re</find>
       <find>lib</find>
       <find>sendFormDate</find>
@@ -217,6 +158,7 @@
       <find>redirect</find>
       <find>购买</find>
       <find>images/</find>
+      <find>Echina</find>
     </findStrings>
     <replaceStrings>
       <replace>test/lib</replace>
@@ -480,12 +422,12 @@
       <workItem from="1524616160050" duration="31282000" />
       <workItem from="1524702384411" duration="12357000" />
       <workItem from="1524720900658" duration="16414000" />
-      <workItem from="1524789001672" duration="17437000" />
+      <workItem from="1524789001672" duration="17584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93026000" />
+    <option name="totallyTimeSpent" value="93173000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -523,14 +465,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/.htaccess">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -939,13 +873,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/index/view/item/item.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="83" column="16" lean-forward="true" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+        <state relative-caret-position="349">
+          <caret line="86" column="54" lean-forward="false" selection-start-line="86" selection-start-column="54" selection-end-line="86" selection-end-column="54" />
           <folding>
             <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/weixin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
