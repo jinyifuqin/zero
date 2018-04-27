@@ -41,7 +41,8 @@ Route::get([
     'getInfo' => ['getInfo', ['method' => 'get']],
     'itemList' => ['item/itemList', ['method' => 'get']],
     'item/:id' => ['item/item', ['method' => 'get']],
-    'wxlogin' => ['wxLogin', ['method' => 'get']],
+    'wxlogin/:id' => ['wxLogin', ['method' => 'get']],
+    'buy' => ['buy', ['method' => 'get']],
 //    'admin' => 'admin/index/index', // 静态地址路由
 //    'admin/login' => 'admin/index/login', // 静态地址路由
 //    'admin/welcome' => 'admin/index/welcome', // 静态地址路由

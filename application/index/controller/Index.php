@@ -18,12 +18,22 @@ class Index
         return view();
     }
 
-    public function wxLogin(){
+    public function buy(){
+        $itemid = $_SESSION['itemid'];
+        return view("index@item/buy",['itemid'=>$itemid]);
+//        echo "<pre>";var_dump($_SESSION['itemid']);
+    }
 
+    public function wxLogin(Request $request){
+        $_SESSION['itemid'] = $request->param('id');
+        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+        if(array_key_exists('userinfo',$_SESSION)){
+
+            return redirect('/buy');
+        }
         $url = $this->wxObj->get_authorize_url(1);
 //        unset($_SESSION['getinfo']);
 //        unset($_SESSION['get_access_token']);
-//        echo "<pre>";var_dump($url);exit;
         return redirect($url);
     }
 
@@ -31,9 +41,7 @@ class Index
         $get = $request->param();
         $_SESSION['getinfo'] = $get;
         $code = $get['code'];
-        $state = $get['state'];
 
-//        echo "<pre>";var_dump($code);exit;
         if(!array_key_exists('get_access_token',$_SESSION)){
             $get_access_token = $this->wxObj->get_access_token($code);
             $_SESSION['get_access_token'] = $get_access_token;
@@ -48,28 +56,31 @@ class Index
             $get_user_info = $_SESSION['get_user_info'];
         }
 
-        $this->createUser($get_user_info);
+        $re = $this->createUser($get_user_info);
+
+        return redirect($_SESSION['url']);
     }
 
     public function createUser($get_user_info){
         $re = Users::where('username',$get_user_info['nickname'])->find();
         if($re){
-            header("Location:/admin");
-            exit;
+            $_SESSION['userinfo'] = $re;
+            return true;
+//            header("Location:/admin");
+        }else{
+            $data['openid'] = $get_user_info['openid'];
+            $data['sex'] = $get_user_info['sex'];
+            $pic = download($get_user_info['headimgurl']);
+            $data['pic'] = $pic;
+            $data['username'] = $get_user_info['nickname'];
+            $data['password'] = $get_user_info['openid'];
+            $catsObj = new Users($data);
+            $result = $catsObj->save();
+            $re = Users::where('username',$get_user_info['nickname'])->find();
+            $_SESSION['userinfo'] = $re;
         }
 
-        $data['openid'] = $get_user_info['openid'];
-        $data['sex'] = $get_user_info['sex'];
-        $pic = download($get_user_info['headimgurl']);
-        $data['pic'] = $pic;
-        $data['username'] = $get_user_info['nickname'];
-        $data['password'] = $get_user_info['openid'];
-        $catsObj = new Users($data);
-        $result = $catsObj->save();
-        if($result){
-            $url = url('/admin');
-            return redirect('/admin');
-        }
+        return $result;
     }
 
 
