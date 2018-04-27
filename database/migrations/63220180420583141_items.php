@@ -28,7 +28,7 @@ class Items extends Migrator
      */
     public function change()
     {
-        $table = $this->table('items');
+        $table  = $this->table('items',array('engine'=>'InnoDB'));
         $table->addColumn('sort', 'integer',array('limit' => 32,'default'=>0,'comment'=>'排序'))
             ->addColumn('pic', 'string',array('limit' => 64,'default'=>'','comment'=>'商品图'))
             ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'商品名称'))
@@ -36,7 +36,15 @@ class Items extends Migrator
             ->addColumn('price', 'integer',array('limit' => 32,'default'=>0,'signed'=>false,'comment'=>'商品价格'))
             ->addColumn('create_time', 'datetime',array('default'=>'CURRENT_TIMESTAMP','comment'=>'创建时间'))
             ->addColumn('status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'状态'))
+            ->addColumn('cat_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'分类ID'))
+            ->addColumn('brand_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'品牌ID'))
             ->addIndex(array('name'), array('unique' => true))
+            ->addForeignKey ('cat_id' , 'cats' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
+            ->addForeignKey ('brand_id' , 'brands' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
+
             ->create();
     }
+
+
+
 }

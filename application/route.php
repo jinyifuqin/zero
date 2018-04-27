@@ -24,6 +24,7 @@ Route::group('admin',[
     'brandDelAll' => ['admin/index/brandDelAll', ['method' => 'get']],
     'items' => ['admin/item/index', ['method' => 'get']],
     'itemAdd' => ['admin/item/itemAdd', ['method' => 'get']],
+    'itemSave' => ['admin/item/itemSave', ['method' => 'post']],
     'cats' => ['admin/item/catList', ['method' => 'get']],
     'addCat' => ['admin/item/addCat', ['method' => 'get']],
     'saveCat' => ['admin/item/saveCat', ['method' => 'post']],
