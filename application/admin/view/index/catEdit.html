@@ -5,12 +5,13 @@
 </head>
 <body>
 <article class="page-container">
-	<form enctype="multipart/form-data" action="/admin/saveCat" method="post" class="form form-horizontal" id="form-cat-add">
+	<form action="/admin/saveCat" method="post" class="form form-horizontal" id="form-cat-update">
 
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" id="name" class="input-text" value="" placeholder="" name="name">
+				<input type="text" id="name" class="input-text" value="{$re.name}" placeholder="{$re.name}" name="name">
+				<input type="hidden" name="id" value="{$re.id}"/>
 			</div>
 		</div>
 
@@ -39,7 +40,7 @@
 
         $('#submit').click(function(e){
             e.preventDefault();
-            var form = $("#form-cat-add");
+            var form = $("#form-cat-update");
             var url = form.attr('action');
             var data = form.serialize();
             $.ajax({

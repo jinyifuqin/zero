@@ -10,8 +10,37 @@
 			<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜权限节点</button>
 		</form>
 	</div>
+	<script>
+        function datadel(){
+            var table = $('#DataTables_Table_0');
+            var checkBox = table.find("input:checkbox");
+            checkBox.splice(0,1);
+            var arr = [];
+            checkBox.each(function(){
+                var checked = $(this).prop('checked');
+                if(checked){
+                    var id = $(this).parent().next().html();
+                    arr.push(id);
+                }
+
+            })
+            $.ajax({
+                type: "GET",
+                url: "{:url('/admin/catDelAll')}",
+                data: {ids:arr},
+                dataType: "json",
+                success: function(data){
+                    if(data.status == "Success"){
+                        location.reload();
+                    }
+                }
+            });
+            // console.log(arr);
+
+        }
+	</script>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="cat_add('分类添加','/admin/addCat','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 分类添加</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
-	<table class="table table-border table-bordered table-bg">
+	<table class="table table-border table-bordered table-bg" id="DataTables_Table_0">
 		<thead>
 			<tr>
 				<th scope="col" colspan="7">权限节点</th>
@@ -24,12 +53,31 @@
 			</tr>
 		</thead>
 		<tbody>
+		<script>
+            function active_del(dom,id){
+                data = {'id':id};
+                $.ajax({
+                    type: "GET",
+                    url: "{:url('/admin/catDelById')}",
+                    data: data,
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == "Success"){
+                            location.reload();
+                        }
+
+                    }
+                });
+            }
+		</script>
+		{foreach $re as $vo}
 			<tr class="text-c">
 				<td><input type="checkbox" value="1" name=""></td>
-				<td>1</td>
-				<td>栏目添加</td>
-				<td><a title="编辑" href="javascript:;" onclick="admin_permission_edit('角色编辑','admin-permission-add.html','1','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_permission_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td>{$vo.id}</td>
+				<td>{$vo.name}</td>
+				<td><a title="编辑" href="javascript:;" onclick="admin_cat_edit('角色编辑','/admin/catEdit/{$vo.id}','1','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="active_del(this,'{$vo.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
+		{/foreach}
 		</tbody>
 	</table>
 </div>
@@ -50,7 +98,7 @@ function cat_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 /*管理员-权限-编辑*/
-function admin_permission_edit(title,url,id,w,h){
+function admin_cat_edit(title,url,id,w,h){
 	layer_show(title,url,w,h);
 }
 

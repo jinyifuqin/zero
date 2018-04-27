@@ -27,6 +27,10 @@ Route::group('admin',[
     'cats' => ['admin/item/catList', ['method' => 'get']],
     'addCat' => ['admin/item/addCat', ['method' => 'get']],
     'saveCat' => ['admin/item/saveCat', ['method' => 'post']],
+    'catEdit/:id' => ['admin/item/catEdit', ['method' => 'get']],
+    'catDelAll' => ['admin/item/catDelAll', ['method' => 'get']],
+    'catDelById' => ['admin/item/catDelById', ['method' => 'get']],
+
 
     '/create' => ['admin/index/createUser', ['method' => 'get']],
     '/check' => ['admin/index/checkUser', ['method' => 'post']],
