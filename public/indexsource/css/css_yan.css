@@ -1,0 +1,1446 @@
+p,ul,ol,h1,h2,h3,h4,h5,h6,figure,figcaption{ padding:0;margin:0; }
+body {
+    font-family:microsoft yahei;
+    font-size:100%;
+    color: #333333;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+}
+ul,ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color:#333333;
+    border: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+input
+{
+    font-family: 'microsoft yahei', arial;
+}
+select
+{
+    font-family: 'microsoft yahei', arial;
+}
+.Cmain
+{
+    margin-bottom:4.5rem;
+    margin-top: 3rem;
+}
+/*底部*/
+.APPbtn
+{
+    position: fixed;
+    width: 100%;
+    height:auto;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    display: block;
+    background: #fff;
+    background-size: 120% auto;
+    padding:0.3rem 0 0.3rem 0;
+    border-top: 0.01rem solid #e5e5e5;
+
+}
+/*手机端的头部*/
+.APPtop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3rem;
+    width: 100%;
+    background-image:linear-gradient(90deg,#ff8e0d,#f66b16,#ea3c24,#e1162d);
+    z-index: 99;
+    box-shadow: .05rem 0.05rem 0.05rem #ccc;
+
+}
+
+.user_top
+{
+    box-shadow:none!important;
+}
+
+.APPtop .page {
+    text-align: center;
+    line-height: 3rem;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.APPtop .fh {
+    position: absolute;
+    display: block;
+    height: 50%;
+    top: 25%;
+    left: 2%;
+}
+
+.APPtop .shouse {
+    position: absolute;
+    height: 54%;
+    width: auto;
+    top: 23%;
+    right: 0.5rem;
+}
+
+.APPtop .applogo {
+    height: 80%;
+    width: auto;
+    margin: 1% auto;
+    position: relative;
+    display: block;
+}
+/*这是蒙版*/
+.rbj
+{
+    position: fixed;
+    width: 100%;
+    height:100%;
+    top:0;
+    left: 0;
+    z-index: 99;
+    background: rgba(0,0,0,0.2);
+    display: none;
+}
+.menuS
+{
+    display: none;
+    position: fixed;
+    top:3rem;
+    right:0%;
+    width:40%;
+    /*height:100%;*/
+    z-index: 999;
+    background: #f66b16;
+}
+.menuS p:first-child
+{
+    top: 10rem;
+}
+
+.menuS p
+{
+    width: 100%;
+    line-height: 3rem;
+    font-size: 1rem;
+    color: #ffffff;
+    text-align: center;
+    border-bottom: 0.01rem solid #cccccc;
+}
+.menuS p:hover
+{
+    color: #014b8c;
+    background: #ffffff;
+}
+
+
+/*底部*/
+.APPbtn  .APPbtn1
+{
+    width:20%;
+    height: 100%;
+    float: left;
+}
+.APPbtn  .APPbtn1 .APPbtn1_img
+{
+    position: relative;
+    width: 100%;
+    height:1.8rem;
+    overflow: hidden;
+}
+.APPbtn  .APPbtn1 .APPbtn1_img img
+{
+    display: block;
+    position: absolute;
+    max-width: 100%;
+    height: 100%;
+    top: 0;
+    left:30%;
+}
+.APPbtn  .APPbtn1 .APPbtn1_img img:first-child
+{
+    display: none;
+}
+.APPbtnbj  .APPbtn1_img img:first-child
+{
+    display: block!important;
+}
+.APPbtnbj .APPbtn1_img   img:last-child
+{
+    display: none!important;
+}
+.APPbtnbj  a
+{
+    color: #faa73f!important;
+}
+.APPbtn  .APPbtn1 a
+{
+    color: #999999;
+    display: block;
+    text-align: center;
+    position: relative;
+}
+
+/*还要设置一个外层的banner的高度就好了*/
+
+.flexslider{position:relative;height:100%;width: 100%;overflow:hidden;}
+.slides{position:relative;z-index:1;height: 100%;width: 100%}
+.slides li{height:100%;width: 100%;position: relative;background-size: 100% 100%}
+.flex-control-nav{position:absolute;bottom:.1rem;z-index:2;width:100%;text-align:center;}
+.flex-control-nav li{display:inline-block;width:14px;height:14px;margin:0 5px;display:inline;zoom:1;}
+.flex-control-nav a{background:url(../images/dot.png) right 0 no-repeat;display:inline-block;width:14px;height:14px;line-height:40px;overflow:hidden;cursor:pointer;}
+.flex-control-nav .flex-active{background-position:0 0;}
+.flex-direction-nav{position:absolute;z-index:3;width:100%;top:45%;}
+.flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute;}
+.flex-direction-nav li a.flex-prev{left:40px;/*background:url(../images/prev.png) center center no-repeat;*/display: none}
+.flex-direction-nav li a.flex-next{right:40px;/*background:url(../images/next.png) center center no-repeat;*/display: none}
+
+
+.Appbanner
+{
+    height:10rem;
+    position: relative;
+}
+.nbanner
+{
+    width: 100%;
+}
+.nbanner img
+{
+    display: block;
+    width: 100%;
+}
+
+.mh
+{
+    height: 0.8rem;
+}
+
+
+/*标题的样式*/
+.title
+{
+    background: url("../images/title_bj.png") no-repeat center #fff;
+    background-size: 46%;
+    -ms-background-position-y:1.1rem ;
+    background-position-y:1.1rem ;
+    padding: .8rem 0;
+    font-size: 1.1rem;
+    text-align: center;
+    border-bottom: 0.01rem solid #f0f0f0;
+}
+.title_line
+{
+    padding: .8rem 3%;
+    background: #ffffff;
+    width: 94%;
+    font-size: 1.1rem;
+}
+.title_line  .line
+{
+    width: .2rem;
+    height: 1.4rem;
+    display: block;
+    float: left;
+    margin-right: .2rem;
+    background-image:linear-gradient(180deg,#ff8d0d,#ed4721,#e21c2c);
+}
+.line_bottom
+{
+    border-bottom: 0.1rem solid #f0f0f0;
+}
+
+
+
+/*产品介绍*/
+.cpjs
+{
+    width: 94%;
+    padding:.8rem 3%;
+    background: #fff;
+    overflow: hidden;
+}
+.cpjs .cpjs_img
+{
+    width: 35%;
+    height: 6.5rem;
+    float: left;
+    border-radius: .3rem;
+    overflow: hidden;
+}
+.cpjs .cpjs_img img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.cpjs .cpjs_text
+{
+    width: 62%;
+    float: right;
+}
+.cpjs .cpjs_text  .cpjs_text1
+{
+    display: block;
+    font-size: 1.1rem;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.cpjs .cpjs_text  .cpjs_text2
+{
+    display: block;
+    line-height: 1.4rem;
+    height:2.8rem ;
+    overflow: hidden;
+    font-size: 0.9rem;
+    color: #666666;
+    text-align: justify;
+}
+.cpjs .cpjs_text  .cpjs_text3
+{
+    overflow: hidden;
+    margin-top: .5rem;
+}
+.cpjs .cpjs_text  .cpjs_text3 .cpjs_text31
+{
+     float: left;
+    font-size: 0.9rem;
+}
+.cpjs .cpjs_text  .cpjs_text3 .cpjs_text31 b
+{
+    color: #e0162e;
+    font-size: 1rem;
+    font-weight: normal;
+}
+.cpjs .cpjs_text  .cpjs_text3 .cpjs_text32
+{
+    float: right;
+    width: 5rem;
+    height: 1.6rem;
+    text-align: center;
+    line-height: 1.6rem;
+    color: #ffffff;
+    display: block;
+    border-radius: 1rem;
+    background-image:linear-gradient(90deg,#fe8b0d,#f0521e,#e11a2d);
+}
+
+
+/*积分换礼的列表*/
+.jfhl
+{
+    width: 94%;
+    margin: .3rem auto 1rem auto;
+    overflow: hidden;
+}
+.jfhl li
+{
+    float: left;
+    width: 48%;
+    margin-top: .7rem;
+    height: auto;
+    border-radius: .5rem;
+    background: #ffffff;
+    overflow: hidden;
+    padding-bottom: .5rem;
+}
+
+.jfhl li:nth-child(2n)
+{
+    float: right;
+}
+.jfhl li .jfhl1
+{
+    display: block;
+    width: 100%;
+    height: 9rem;
+}
+.jfhl li .jfhl1 img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.jfhl li .jfhl2
+{
+    display: block;
+    width: 94%;
+    margin: 0 auto;
+    line-height: 1.6rem;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.jfhl li .jfhl3
+{
+    display: block;
+    width: 94%;
+    margin: 0 auto;
+    line-height: 1.6rem;
+    color: #666666;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.jfhl li .jfhl3 span
+{
+    position: relative;
+    margin: 0 .2rem;
+}
+.jfhl li .jfhl3 span b
+{
+    position: absolute;
+    top: .6rem;
+    left: 0;
+    width: 110%;
+    display: block;
+    height: .1rem;
+    background: #e0162e;
+
+}
+.jfhl li .jfhl4
+{
+    display: block;
+    width: 94%;
+    margin: 0 auto;
+    line-height: 1.6rem;
+    color: #666666;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.jfhl li .jfhl4 span
+{
+    color: #e0162e;
+}
+/*—————————————————————————————————————————————————————————————这是商城的列表，与首页的积分换礼共用—*/
+.sc_list
+{
+    border: 0.01rem solid #e5e5e5;
+}
+
+/*服务中心*/
+.fwzx
+{
+    width: 94%;
+    padding:.5rem 3%;
+    background: #ffffff;
+}
+.fwzx li
+{
+    overflow: hidden;
+    line-height:1.8rem;
+}
+.fwzx li .fwzx1
+{
+    display: block;
+    float: left;
+    width: 70%;
+    color: #666666;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.fwzx li .fwzx1 span
+{
+    color: #faa73f;
+    margin-right: .2rem;
+}
+.fwzx li .fwzx2
+{
+    color: #999999;
+    width: 30%;
+    float: right;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.yiyuanhuan
+{
+    width: 96%;
+    overflow: hidden;
+    margin: 1rem auto;
+    border-radius: .5rem;
+}
+.yiyuanhuan img
+{
+    display: block;
+    width: 100%;
+}
+
+
+/*社区热帖的样式*/
+
+.sqrt
+{
+    margin: .8rem 0;
+    overflow: hidden;
+}
+.sqrt .sqrtL
+{
+    width: 15%;
+    float: left;
+    height: 5.6rem;
+}
+.sqrt .sqrtL img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.sqrtR {
+    width: 85%;
+    background: #ffffff;
+    float: left;
+}
+.sqrtR .thumbnail
+{
+    width: 5%;
+    float:left;
+
+}
+.sqrtR .thumbnail img
+{
+    display: block;
+    width: 100%;
+    margin-top: .2rem;
+    margin-left: .3rem;
+}
+.sqrtR ul li {
+    list-style:none;
+    display:block;
+    height: 1.4rem;
+    line-height: 1.4rem;
+}
+.sqrtR .info {
+    float:right;
+    width:92%;
+}
+.sqrtR .info a
+{
+    display: block;
+    width: 64%;
+    float: left;
+    color: #666666;
+    font-size: 0.9rem;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.sqrtR .info span.cat {
+    display: block;
+    width:36%;
+    float: left;
+    font-size: 0.9rem;
+    color:#999999;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*这是社区公告*/
+.gonggao
+{
+    margin: 0 auto 0.8rem auto!important;
+}
+.gonggaoL
+{
+    width: 15%!important;
+    height: 3.3rem!important;
+}
+
+.newsticker-jcarousellite {
+    width: 85%;
+    background: #ffffff;
+    float: left;
+}
+.newsticker-jcarousellite .thumbnail
+{
+    width: 1%;
+    float:left;
+
+}
+.newsticker-jcarousellite .thumbnail img
+{
+    display: block;
+    width: 100%;
+    margin-top: .1rem;
+    margin-left: .3rem;
+}
+.newsticker-jcarousellite ul li {
+    list-style:none;
+    display:block;
+    height: 1.6rem;
+    line-height: 1.6rem;
+}
+.newsticker-jcarousellite .info {
+    float:right;
+    width:97%;
+}
+.newsticker-jcarousellite .info a
+{
+    display: block;
+    width: 65%;
+    float: left;
+    color: #666666;
+    font-size: 0.9rem;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.newsticker-jcarousellite .info span.cat {
+    display: block;
+    width:35%;
+    float: left;
+    font-size: 0.9rem;
+    color:#999999;
+}
+
+/*———————————————————————————————————————————————————————————服务中心的列表———*/
+.fwzx_list
+{
+    width: 100%;
+    background: #fff;
+}
+.fwzx_list li
+{
+    border-bottom: 0.1rem solid #f0f0f0;
+    overflow: hidden;
+    width: 94%;
+    padding: .8rem 3%;
+}
+.fwzx_list li .fwzx_listL
+{
+    width: 35%;
+    height: 6.5rem;
+    float: left;
+}
+.fwzx_list li .fwzx_listL img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.fwzx_list li .fwzx_listR
+{
+    width: 63%;
+    float: right;
+}
+.fwzx_list li .fwzx_listR a
+{
+    display: block;
+}
+.fwzx_list li .fwzx_listR .fwzx_listR1
+{
+    font-size: 1.1rem;
+    line-height: 2rem;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.fwzx_list li .fwzx_listR .fwzx_listR2
+{
+    line-height: 1.4rem;
+    color: #666666;
+    height: 2.8rem;
+    overflow: hidden;
+}
+.fwzx_list li .fwzx_listR .fwzx_listR3
+{
+    color: #999;
+    font-size: 0.9rem;
+    margin-top: .2rem;
+}
+/*—————————————————————————————————————————————————————————————添加资料的页面—————*/
+.add_main
+{
+    width: 94%;
+    padding: .8rem 3%;
+    background: #ffffff;
+    min-height: 20.6rem;
+}
+.add_main_jifen
+{
+    min-height: 10rem;
+}
+.add_main .add_main1
+{
+    text-align: center;
+}
+.add_main .add_main2
+{
+    text-align: center;
+    color: #999;
+    line-height: 1.8rem;
+}
+.add_main .add_main3
+{
+    text-align: left;
+    font-size: 1.1rem;
+    margin-bottom: .4rem;
+}
+.add_main_box
+{
+    color: #666666;
+    line-height: 1.6rem;
+    text-align: justify;
+}
+.add_main_box img
+{
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/*—————————————————————————————————————————————————————————————————积分的详情页面———*/
+.jifenxq
+{
+    width: 94%;
+    padding: .8rem 3%;
+    background: #fff;
+    margin-bottom: .8rem;
+}
+.jifenxq .jifenxq_img
+{
+    width: 100%;
+}
+.jifenxq .jifenxq_img img
+{
+    display: block;
+    width: 100%;
+}
+.jifenxq_name
+{
+    font-size: 1.1rem;
+    margin: .5rem 0;
+}
+.jifenxq_info
+{
+   clear: both;
+    overflow: hidden;
+    color: #666666;
+    font-size: 0.9rem;
+}
+.jifenxq_info span
+{
+    display: block;
+    width: 50%;
+    float: left;
+}
+.jifenxq_info span b
+{
+    color: #e0162e;
+    font-weight: normal;
+    padding: 0 0 0 .3rem ;
+}
+.jifenxq_info2
+{
+    text-align: right;
+}
+
+/*积分的底部*/
+.jf_btn
+{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+    overflow: hidden;
+}
+.jf_btn .jf_btn1
+{
+    display: block;
+    width: 50%;
+    float: left;
+    text-align: center;
+    line-height: 3.4rem;
+    color: #e0162e;
+}
+.jf_btn .jf_btn2
+{
+    display: block;
+    width: 50%;
+    float: left;
+    text-align: center;
+    line-height: 3.4rem;
+    color: #ffffff;
+    background-image:linear-gradient(90deg,#fe8b0d,#f0521e,#e11a2d);
+}
+
+
+
+
+/*———————————————————————————————————————————————————————————个人中心的样式———*/
+.user_bj
+{
+    width: 100%;
+    height: 8rem;
+    background: url("../images/user_bj.jpg") no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+.user_info
+{
+    display: 50%;
+    float: left;
+    margin: 1rem 0 0 1rem;
+}
+.user_info .user_info_img
+{
+    display: block;
+    width: 4.8rem;
+    height: 4.8rem;
+    float: left;
+    overflow: hidden;
+    border-radius: 4rem;
+    border: 0.2rem solid rgba(255,255,255,0.5);
+}
+.user_info .user_info_img img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.user_info .user_info_name
+{
+    display: block;
+    line-height: 4.8rem;
+    float: left;
+    padding: 0 .5rem;
+    color: #fff;
+    font-size: 1.1rem;
+}
+.user_bj  .user_jifen
+{
+    position: absolute;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    padding: 0 .8rem;
+    background: #faa73f;
+    color: #ffffff;
+    bottom:3.4rem;
+    right: 0;
+    font-size: 0.9rem;
+    border-radius: 1rem  0 0 1rem;
+}
+.user
+{
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+}
+.user li
+{
+    width: 33%;
+    float: left;
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 0.1rem solid #f5f5f5;
+    border-right: 0.1rem solid #f5f5f5;
+}
+.user li:nth-child(3n)
+{
+    border-right:none;
+}
+.user li .user_img img
+{
+   display: block;
+    width: 2.3rem;
+    height: 2.3rem;
+    margin: 0 auto;
+}
+.user li .user_text
+{
+    display: block;
+    text-align: center;
+    line-height: 2rem;
+    color: #666666;
+}
+
+
+
+/*————————————————————————————————————————————————————————————————积分兑换的页面*/
+.dh
+{
+    width: 94%;
+    padding: .8rem 3% 0rem 3%;
+    overflow: hidden;
+    background: #ffffff;
+
+}
+.dh li
+{
+    width: 48%;
+    float: left;
+    position: relative;
+    margin-bottom: .8rem;
+    text-align: center;
+    line-height: 2.8rem;
+    height: 2.8rem;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+.dh li:nth-child(2n)
+{
+    float: right;
+}
+.dh li .dh_bj
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.dh li .dh_bj img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.dh li .dh_text
+{
+    position: relative;
+    display: block;
+    color: #fff;
+    text-align: center;
+}
+.dh li .dh_text img
+{
+    width: 2rem;
+    margin-right: .2rem;
+    vertical-align: middle;
+}
+
+/*—————————————————————————————————————————————————————————————社区的样式———*/
+.sq
+{
+    width: 94%;
+    padding: .8rem 3% 0rem 3%;
+    overflow: hidden;
+    background: #ffffff;
+
+}
+.sq li
+{
+    width: 48%;
+    float: left;
+    position: relative;
+    margin-bottom: .8rem;
+    text-align: center;
+    line-height: 2.8rem;
+    height: 2.8rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+.sq li:nth-child(2n)
+{
+    float: right;
+}
+.sq li .sq_text
+{
+    position: relative;
+    display: block;
+    text-align: center;
+}
+.sq li .sq_text img
+{
+    width: 2rem;
+    margin-right: .2rem;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+
+/*————————————————————————————————————————————————————————————————我的积分————*/
+.wdjf
+{
+    text-align: center;
+    background: #ffffff;
+    padding: .8rem 0;
+}
+.wdjf  .wdjf1
+{
+    color: #faa73f;
+}
+.wdjf  .wdjf2
+{
+    color: #999999;
+    font-size: 0.9rem;
+    margin: .3rem 0 .7rem 0;
+}
+.wdjf  .wdjf3 a
+{
+    color: #faa73f;
+    height: 1.6rem;
+    margin: 0 .5rem;
+    line-height:1.6rem;
+    border-radius: 1rem;
+    padding: 0 1.2rem;
+    display: inline-block;
+    border: 0.1rem solid #faa73f;
+}
+
+/*选项卡的样式*/
+.tap
+{
+    width: 94%;
+    padding: 0 3%;
+    background: #ffffff;
+    overflow: hidden;
+    border-bottom: 0.1rem solid #f0f0f0;
+}
+.tap li
+{
+    width: 25%;
+    float: left;
+    text-align: center;
+}
+.tap li a
+{
+    display: inline-block;
+    padding: .6rem 0;
+}
+.tap  .tapbj  a
+{
+    color: #faa73f;
+    border-bottom: 0.2rem solid #faa73f;
+}
+
+/*——————————————————————————————————————————————————————————————这是我的订单的样式——*/
+.order_list
+{
+    width: 100%;
+}
+.order_list li
+{
+    background: #ffffff;
+    width: 94%;
+    padding: 0rem 3% .2rem 3%;
+    margin-bottom: .8rem;
+}
+.order_list li .order_list1
+{
+    width: 100%;
+    overflow: hidden;
+    padding: .5rem 0;
+}
+.order_list li .order_list1 .order_list1_img
+{
+    width:25%;
+    height:4.5rem;
+    float: left;
+}
+.order_list li .order_list1 .order_list1_img img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+
+}
+.order_list li .order_list1 .order_list1_text
+{
+    width: 73%;
+    float: right;
+}
+.order_list li .order_list1 .order_list1_text .order_list1_text1
+{
+    line-height: 1.7rem;
+    max-height: 3.4rem;
+    overflow: hidden;
+}
+.order_list li .order_list1 .order_list1_text  .order_list1_text2
+{
+    color: #e0162e;
+    font-size: 0.9rem;
+}
+.order_list li .order_list2
+{
+    text-align: right;
+    width: 106%;
+    margin-left: -3%;
+    border-bottom: 0.1rem solid #f0f0f0;
+    border-top: 0.1rem solid #f0f0f0;
+    line-height:2.6em;
+}
+.order_list li .order_list3
+{
+    text-align: right;
+    line-height:2.6em;
+}
+.order_list li .order_list3 a
+{
+    display: inline-block;
+    margin-left: .8rem;
+    height:1.6rem;
+    border: 1rem;
+    padding: 0 1rem;
+    border-radius: 1rem;
+    line-height: 1.6rem;
+    font-size: 0.8rem;
+}
+.order_list li .order_list3 .order_list31
+{
+    border: 0.1rem solid #999999;
+}
+.order_list li .order_list3 .order_list32
+{
+    color: #faa73f;
+    border: 0.1rem solid #faa73f;
+}
+
+/*这是社区的样式*/
+.sq_list
+{
+    width: 100%;
+}
+.sq_list li
+{
+    width: 94%;
+    padding: .5rem 3% .5rem 3%;
+    background: #ffffff;
+    margin-top: .8rem;
+
+}
+.sq_list li .sq_list1
+{
+    overflow: hidden;
+    width: 100%;
+}
+.sq_list li .sq_list1 .sq_list_img
+{
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+    float: left;
+    border-radius: 3rem;
+}
+.sq_list li .sq_list1 .sq_list_img img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.sq_list li .sq_list1 p
+{
+    line-height: 1.4rem;
+}
+.sq_list li .sq_list1 p:first-child
+{
+    margin-top: .8rem;
+    font-size: 1.1rem;
+}
+.sq_list li .sq_list1 p:last-child
+{
+    color: #999999;
+    font-size: 0.8rem;
+}
+.sq_list li .sq_list1 .sq_text
+{
+    width: 78%;
+    float: right;
+    line-height: 4rem;
+}
+.sq_list li .sq_list1 .sq_text span
+{
+    display: inline-block;
+    float: left;
+}
+.sq_list li .sq_list1 .sq_text span:first-child
+{
+    width:70%;
+    font-size: 1.1rem;
+}
+.sq_list li .sq_list1 .sq_text span:last-child
+{
+    width:30%;
+    text-align: right;
+    color: #999999;
+}
+.sq_list2
+{
+    display: block;
+    line-height: 2.2rem;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    white-space:nowrap;/*不显示的地方用省略号...代替*/
+    text-overflow:ellipsis;/* 支持 IE */
+}
+.sq_list3
+{
+    display: block;
+    line-height:1.4rem;
+    height: 4.2rem;
+    overflow:hidden; /*超出的部分隐藏起来。*/
+    text-align: justify;
+    color: #666666;
+    font-size: 0.9rem;
+    padding-bottom: .3rem;
+    border-bottom: 0.1rem solid #f5f5f5;
+}
+.sq_list3xq
+{
+    height: auto;
+}
+.sq_list4
+{
+    text-align: right;
+    margin-top: .8rem;
+}
+.sq_list4xq
+{
+    text-align: left;
+}
+.sq_list4 span
+{
+    padding: 0 .5rem 0 1.8rem;
+    height: 1.6rem;
+    margin-left: .5rem;
+    border-radius: 1.6rem;
+    font-size: 0.9rem;
+    border: 0.1rem solid #b6b6b6;
+}
+.sq_list4  .sq_list4_zan
+{
+    background: url("../images/zan.png") no-repeat .3rem -.1rem;
+    background-size: auto 100%;
+}
+.sq_list4  .sq_list4_zan1
+{
+    background: url("../images/zan1.png") no-repeat .3rem -.1rem;
+    background-size: auto 100%;
+    color: #faa73f;
+    border: 0.1rem solid #faa73f;
+}
+.sq_list4  .sq_list4_ping
+{
+    background: url("../images/ping.png") no-repeat .3rem;
+    background-size: auto 100%;
+}
+.sq_list4  .sq_list4_ping1
+{
+    background: url("../images/ping1.png") no-repeat .3rem;
+    background-size: auto 100%;
+    color: #faa73f;
+    border: 0.1rem solid #faa73f;
+}
+
+
+/*———————————————————————————————————————————————————————————社区详情的评论列表———*/
+.pinglun_list
+{
+    width: 100%;
+    margin-top: .8rem;
+}
+.pinglun_list li
+{
+    width: 94%;
+    padding: .6rem 3%;
+    background: #fff;
+    overflow: hidden;
+    border-bottom: 0.1rem solid #f0f0f0;
+}
+.pinglun_list li .pinglun_list_img
+{
+    width: 3.6rem;
+    height: 3.6rem;
+    float: left;
+    border-radius: 3.6rem;
+    overflow: hidden;
+}
+.pinglun_list li .pinglun_list_img img
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.pinglun_list li .pinglun_list_text
+{
+    width: 80%;
+
+    float: right;
+}
+.pinglun_list li .pinglun_list_text .pinglun_list_text1
+{
+    line-height: 3.2rem;
+    color: #666666;
+}
+.pinglun_con
+{
+    overflow: hidden;
+    width: 100%;
+}
+.pinglun_con .pinglun_con_text
+{
+    width: 75%;
+    float: left;
+    font-size: 0.9rem;
+    text-align: justify;
+}
+.pinglun_con  .pinglun_zan
+{
+    padding: 0 1.5rem 0 0;
+    float: right;
+    height: 1.2rem;
+    background: url("../images/zan.png") no-repeat right bottom;
+    background-size: auto 1.2rem;
+}
+.pinglun_con  .pinglun_zan1
+{
+    padding: 0 1.5rem 0 0;
+    float: right;
+    height: 1.2rem;
+    color: #faa73f;
+    background: url("../images/zan1.png") no-repeat right bottom;
+    background-size: auto 1.2rem;
+}
+
+.sq_btn
+{
+    width: 94%;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    background: #ffffff;
+    padding:0.8rem 3% 0.5rem 3%;
+    border-top: 0.01rem solid #e5e5e5;
+}
+.sq_btn .sq_btn1
+{
+    float: left;
+    height: 1.8rem;
+}
+.sq_btn .sq_btn2
+{
+    float: left;
+    width: 74%;
+    margin: 0 1%;
+    -webkit-appearance:none;
+    border-radius: 0;
+    outline: none;
+    height: 1.8rem;
+    border: none;
+    resize: none;
+    padding-top: .3rem;
+    font-family: 'microsoft yahei', arial;
+}
+.sq_btn .sq_btn3
+{
+    float: left;
+    height: 2rem;
+}
+
+/*这是用户信息的资料*/
+.user_xx
+{
+    width: 100%;
+}
+.user_xx li
+{
+    width: 94%;
+    padding: 0 3%;
+    background: #fff;
+    line-height: 3.2rem;
+    overflow: hidden;
+    border-bottom: 0.1rem solid #f0f0f0;
+}
+.user_xx li:nth-of-type(5)
+{
+    margin-top: .8rem;
+}
+.user_xx li .user_xx1
+{
+    display: block;
+    float: left;
+    width: 20%;
+}
+.user_head
+{
+    padding: 1rem 3%!important;
+}
+ .user_head  .user_xx1
+{
+    line-height: 4rem;
+}
+.user_xx li .user_xx2
+{
+    display: block;
+    width: 73%;
+    text-align: right;
+    float: left;
+    padding-right: 6%;
+    background: url("../images/rinfo.png") no-repeat right;
+    background-size: 0.9rem;
+}
+.user_xx li .user_xx2 img
+{
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

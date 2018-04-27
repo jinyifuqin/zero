@@ -32,17 +32,14 @@ Route::group('admin',[
     'catDelAll' => ['admin/item/catDelAll', ['method' => 'get']],
     'catDelById' => ['admin/item/catDelById', ['method' => 'get']],
 
-
-    '/create' => ['admin/index/createUser', ['method' => 'get']],
-    '/check' => ['admin/index/checkUser', ['method' => 'post']],
-    ':id'   => ['Blog/read', ['method' => 'get'], ['id' => '\d+']],
-    ':name' => ['Blog/read', ['method' => 'post']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
 Route::get([
     '/' => 'index', // 首页访问路由
     'my' => 'ajax', // 静态地址路由
+    'itemList' => ['item/itemList', ['method' => 'get']],
+    'item/:id' => ['item/item', ['method' => 'get']],
 //    'admin' => 'admin/index/index', // 静态地址路由
 //    'admin/login' => 'admin/index/login', // 静态地址路由
 //    'admin/welcome' => 'admin/index/welcome', // 静态地址路由
