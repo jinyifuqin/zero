@@ -36,10 +36,12 @@ Route::group('admin',[
 ]);
 
 Route::get([
-    '/' => 'index', // 首页访问路由
+    '/$' => 'index', // 首页访问路由
     'my' => 'ajax', // 静态地址路由
+    'getInfo' => ['getInfo', ['method' => 'get']],
     'itemList' => ['item/itemList', ['method' => 'get']],
     'item/:id' => ['item/item', ['method' => 'get']],
+    'wxlogin' => ['wxLogin', ['method' => 'get']],
 //    'admin' => 'admin/index/index', // 静态地址路由
 //    'admin/login' => 'admin/index/login', // 静态地址路由
 //    'admin/welcome' => 'admin/index/welcome', // 静态地址路由

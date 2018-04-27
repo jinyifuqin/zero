@@ -31,6 +31,8 @@ class Users extends Migrator
         $table = $this->table('users');
         $table->addColumn('username', 'string',array('limit' => 15,'default'=>'','comment'=>'用户名，登陆使用'))
             ->addColumn('password', 'string',array('limit' => 32,'default'=>md5('123456'),'comment'=>'用户密码'))
+            ->addColumn('openid', 'string',array('default'=>'','comment'=>'OpenId'))
+            ->addColumn('pic', 'string',array('default'=>'','comment'=>'头像'))
             ->addColumn('phone_number', 'integer',array('limit' => 15,'default'=>0,'comment'=>'手机号'))
             ->addColumn('referee_id', 'integer',array('limit' => 15,'default'=>0,'comment'=>'推荐人'))
             ->addColumn('sex', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'性别'))
