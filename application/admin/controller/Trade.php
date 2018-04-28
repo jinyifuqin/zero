@@ -29,15 +29,12 @@ class Trade extends Controller
 
     public function send(Request $request){
         $id = $request->param('id');
-//        echo "<pre>";var_dump($id);exit;
         $trade = Trades::get($id);
 
-        if($trade->getData('status') == 0){
+        if($trade->getData('type') == 0){
             $trade->type = 1;
-            echo "<pre>";var_dump($trade->type);exit;
         }else{
             $trade->type = 0;
-            echo "<pre>";var_dump(1);exit;
         }
         $result = $trade->save();
         if($request){
