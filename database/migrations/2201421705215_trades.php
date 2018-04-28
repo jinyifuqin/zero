@@ -29,15 +29,16 @@ class Trades extends Migrator
     public function change()
     {
         $table = $this->table('trades');
-        $table->addColumn('trade_number', 'string',array('default'=>"0",'comment'=>'订单号'))
+        $table->addColumn('trade_number', 'string',array('default'=>"",'comment'=>'订单号'))
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
             ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'用户名'))
             ->addColumn('address', 'integer',array('default'=>0,'null'=>true,'comment'=>'收货地址ID'))
             ->addColumn('type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'类型1发货0未发货'))
             ->addColumn('item_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'商品ID'))
             ->addColumn('buy_num', 'integer',array('default'=>1,'null'=>true,'comment'=>'购买数量'))
-            ->addColumn('phone_num', 'integer',array('default'=>0,'null'=>true,'comment'=>'手机号'))
-            ->addColumn('create_time', 'datetime',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
+            ->addColumn('phone_num', 'string',array('default'=>'','null'=>true,'comment'=>'手机号'))
+            ->addColumn('create_time', 'datetime',array('default'=>'CURRENT_TIMESTAMP','comment'=>'创建时间'))
+            ->addColumn('update_time', 'datetime',array('default'=>'CURRENT_TIMESTAMP','comment'=>'更新时间'))
             ->addForeignKey ('user_id' , 'users' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
             ->create();
     }
