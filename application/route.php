@@ -33,6 +33,7 @@ Route::group('admin',[
     'catEdit/:id' => ['admin/item/catEdit', ['method' => 'get']],
     'catDelAll' => ['admin/item/catDelAll', ['method' => 'get']],
     'catDelById' => ['admin/item/catDelById', ['method' => 'get']],
+    'trade' => ['admin/trade/index', ['method' => 'get']],
 
     '/' => 'admin/index/index', // 首页访问路由
 ]);

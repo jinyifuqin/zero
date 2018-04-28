@@ -34,10 +34,10 @@ class Item extends Controller
     public function tradeCreate(Request $request){
         $post = $request->param();
         $trade = new Trades();
-        $tradeNum = date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+        $tradeNum = date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
         $create_time = date("Y-m-d H:i:s");
-//        echo "<pre>";var_dump($create_time);exit;
-        $trade->data([
+//        echo "<pre>";var_dump($post);exit;
+        $all = [
             'name'  =>  $post['name'],
             'address'  =>  $post['address'],
             'item_id'  =>  $post['item_id'],
@@ -45,10 +45,11 @@ class Item extends Controller
             'type'  =>  $post['type'],
             'buy_num'  =>  $post['number'],
             'phone_num'  =>  $post['phone_num'],
-            'buy_num'  =>  $post['number'],
             'trade_number'  =>  $tradeNum,
             'create_time'  =>  $create_time,
-        ]);
+        ];
+        $trade->data($all);
+//        echo "<pre>";var_dump($all);exit;
         $re = $trade->save();
         if($re){
             $this->success('订单生成成功！请等待服务中心发货');
