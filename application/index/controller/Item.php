@@ -24,4 +24,13 @@ class Item extends Controller
 //        echo "<pre>";var_dump($re);exit;
         return view("index@item/item",['re'=>$re]);
     }
+
+    public function addAddr(){
+        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+        return view("index@item/addAddr");
+    }
+
+    public function tradeCreate(){
+
+    }
 }

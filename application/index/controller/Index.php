@@ -22,8 +22,13 @@ class Index
 
     public function buy(){
         $itemid = $_SESSION['itemid'];
-        return view("index@item/buy",['itemid'=>$itemid]);
-//        echo "<pre>";var_dump($_SESSION['itemid']);
+        $re = Items::get(['id' => $itemid]);
+        $userinfo = $_SESSION['userinfo'];
+        $data['item'] = $re;
+        $data['userinfo'] = $userinfo;
+//        unset($_SESSION['userinfo']);
+//        echo "<pre>";var_dump($userinfo);exit;
+        return view("index@item/buy",['data'=>$data]);
     }
 
     public function wxLogin(Request $request){
