@@ -37,6 +37,11 @@ Route::group('admin',[
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
+Route::post([
+    'tradeCreate' => ['item/tradeCreate', ['method' => 'post']],
+
+]);
+
 Route::get([
     '/$' => 'index', // 首页访问路由
     'my' => 'ajax', // 静态地址路由
@@ -46,23 +51,15 @@ Route::get([
     'wxlogin/:id' => ['wxLogin', ['method' => 'get']],
     'buy' => ['buy', ['method' => 'get']],
     'addAddr' => ['item/addAddr', ['method' => 'get']],
-    'tradeCreate' => ['item/tradeCreate', ['method' => 'post']],
-//    'admin' => 'admin/index/index', // 静态地址路由
-//    'admin/login' => 'admin/index/login', // 静态地址路由
-//    'admin/welcome' => 'admin/index/welcome', // 静态地址路由
-    'blog/:id' => 'Blog/read', // 静态地址和动态地址结合
-    'new/:year/:month/:day'=>'News/read', // 静态地址和动态地址结合
-    'new/:id'=>'hello/index/index',
-    'blog/:name'=>'Blog/detail',
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
-
-];
+//return [
+//    '__pattern__' => [
+//        'name' => '\w+',
+//    ],
+//    '[hello]'     => [
+//        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
+//        ':name' => ['index/hello', ['method' => 'post']],
+//    ],
+//
+//];

@@ -33,7 +33,7 @@ class Trades extends Migrator
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
             ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'用户名'))
             ->addColumn('address', 'integer',array('default'=>0,'null'=>true,'comment'=>'收货地址ID'))
-            ->addColumn('type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'类型'))
+            ->addColumn('type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'类型1发货0未发货'))
             ->addColumn('item_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'商品ID'))
             ->addColumn('buy_num', 'integer',array('default'=>1,'null'=>true,'comment'=>'购买数量'))
             ->addColumn('phone_num', 'integer',array('default'=>0,'null'=>true,'comment'=>'手机号'))

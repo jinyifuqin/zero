@@ -8,6 +8,7 @@
 
 namespace app\index\controller;
 use app\admin\model\Items;
+use app\index\model\Trades;
 use \think\Controller;
 use think\Request;
 
@@ -30,7 +31,28 @@ class Item extends Controller
         return view("index@item/addAddr");
     }
 
-    public function tradeCreate(){
+    public function tradeCreate(Request $request){
+        $post = $request->param();
+        $trade = new Trades();
+        $tradeNum = date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+        $create_time = date("Y-m-d H:i:s");
+//        echo "<pre>";var_dump($create_time);exit;
+        $trade->data([
+            'name'  =>  $post['name'],
+            'address'  =>  $post['address'],
+            'item_id'  =>  $post['item_id'],
+            'user_id'  =>  $post['userid'],
+            'type'  =>  $post['type'],
+            'buy_num'  =>  $post['number'],
+            'phone_num'  =>  $post['phone_num'],
+            'buy_num'  =>  $post['number'],
+            'trade_number'  =>  $tradeNum,
+            'create_time'  =>  $create_time,
+        ]);
+        $re = $trade->save();
+        if($re){
+            $this->success('订单生成成功！请等待服务中心发货');
+        }
 
     }
 }

@@ -35,21 +35,32 @@
     <div class="nbanner">
         <img src="/indexsource/images/nbanner1.jpg" alt=""/>
     </div>
-    <form method="post" action="trade">
+    <form action="/tradeCreate" method="post">
         <table>
 
             <tr>
-                <td>收货地址：{$data.userinfo.address}</td>
-                <td><a href="addAddr"><button>添加地址</button></a> </td>
+                <td>收货地址：{$data.addr.desc}</td>
+                <td><a href="/addAddr">添加地址</a> </td>
+                <input type="hidden" name="address" value="{$data.addr.desc}"/>
             </tr>
 
             <tr>
                 <td>商品：{$data.item.name}</td>
                 <td>价格：{$data.item.price}</td>
+                <input type="hidden" name="item_id" value="{$data.item.id}"/>
+                <input type="hidden" name="type" value="0"/>
+                <input type="hidden" name="name" value="{$data.userinfo.username}"/>
+                <input type="hidden" name="userid" value="{$data.userinfo.id}"/>
             </tr>
+
             <tr>
                 <td>
                     商品数量：<input type="number" name="number">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    电话号码：<input type="number" name="phone_num">
                 </td>
             </tr>
             <tr>
