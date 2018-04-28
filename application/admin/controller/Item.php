@@ -35,6 +35,55 @@ class Item  extends Controller
         return view("admin@index/itemAdd",['data'=>$data]);
     }
 
+    public function itemEdit(Request $request){
+        $id = $request->param('id');
+        $item = Items::get($id);
+//        echo "<pre>";var_dump($items);exit;
+        $brand = Brands::all();
+        $cat = Cats::all();
+        $data = ['brand'=>$brand,'cat'=>$cat,'item'=>$item];
+        $item->pic = preg_replace('/\\\\/','/',$item->pic);
+        return view("admin@index/itemEdit",['data'=>$data]);
+    }
+
+    public function itemUpdate(Request $request){
+        if($request->file('file-2')){
+            $file = $request->file('file-2');
+            $fileRe = upload($file);
+            $pic = htmlspecialchars($fileRe->getSaveName());
+            $re = array('re'=>$pic);
+            echo json_encode($re);
+            return;
+        }
+        $pic = $request->param('logopath');
+        $check = strrpos($pic,'uploads');
+
+        $item = new Items();
+        $creatTime = date('Y-m-d H:i:s',time());
+        $id = $request->param('id');
+        $name = $request->param('name');
+        $desc = $request->param('desc');
+        $content = $request->param('content');
+        $price = $request->param('price');
+        $status = $request->param('status');
+        $catid = $request->param('cat_id');
+        $brandid = $request->param('brand_id');
+        $sort = $request->param('sort');
+        $re = Items::get(['id' => $id]);
+        if($check){
+            $pic = $re->pic;
+        }
+
+        $result = $item->save(
+            ['pic'=>$pic,'name'=>$name,'desc'=>$desc,'sort'=>$sort,'create_time'=>$creatTime,
+                'content'=>$content,'price'=>$price,'status'=>$status,'cat_id'=>$catid,'brand_id'=>$brandid],
+            ['id'=>$id]
+        );
+
+        $re = array('type'=>$result);
+        echo json_encode($re);
+    }
+
     public function itemSave(Request $request){
         $data = $request->param();
         unset($data['uploadfile']);

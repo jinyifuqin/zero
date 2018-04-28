@@ -74,24 +74,23 @@
     <!--标题-->
     <div class="title">产品介绍</div>
     <!--产品介绍-->
+    {foreach $re as $vo}
     <div class="cpjs">
         <div class="cpjs_img">
-            <a href="#"><img src="/indexsource/images/fushow1.jpg" alt=""/></a>
+            <a href="#"><img src="/uploads/{$vo.pic}" alt=""/></a>
         </div>
         <div class="cpjs_text">
-            <a class="cpjs_text1" href="#">尚善靓延牌综合酵素饮品</a>
-            <a class="cpjs_text2" href="#">配料：葛根、陈皮、玉竹、山楂、
-                黄芪、麦芽、大枣、银耳、荞麦、
-                黑米、橙子、蜂蜜、首乌（制）、
-                发酵液。
+            <a class="cpjs_text1" href="#">{$vo.name}</a>
+            <a class="cpjs_text2" href="#">
+                {$vo.desc}
             </a>
             <div class="cpjs_text3">
-                <span class="cpjs_text31">价格：<b>￥1299</b></span>
+                <span class="cpjs_text31">价格：<b>￥{$vo.price}</b></span>
                 <a class="cpjs_text32" href="/itemList">购买</a>
             </div>
         </div>
     </div>
-
+    {/foreach}
     <!--社区热帖-->
     <div class="sqrt">
         <div class="sqrtL">

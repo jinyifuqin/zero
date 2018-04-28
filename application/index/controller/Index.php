@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use app\weixin\controller\Wechat;
 use app\index\model\Users;
+use app\admin\model\Items;
 use think\Request;
 class Index
 {
@@ -14,8 +15,9 @@ class Index
 
     public function index()
     {
+        $re = Items::all();
 //        echo password(123,456);exit;
-        return view();
+        return view("index@index/index",['re'=>$re]);
     }
 
     public function buy(){
