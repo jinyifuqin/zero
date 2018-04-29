@@ -35,6 +35,7 @@ class Brands extends Migrator
             ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'品牌名称'))
             ->addColumn('desc', 'string',array('limit' => 32,'default'=>'','comment'=>'品牌描述'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'最后登录时间'))
+            ->addColumn('update_time', 'timestamp',array('comment'=>'最后登录时间'))
             ->addIndex(array('name'), array('unique' => true))
             ->create();
     }
