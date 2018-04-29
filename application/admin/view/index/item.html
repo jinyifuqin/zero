@@ -1,6 +1,6 @@
-﻿{include file="admins/head/head.html" /}
+﻿{include file="public/admins/head/head.html" /}
 	<title>建材列表</title>
-	<link rel="stylesheet" href="/admins/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<link rel="stylesheet" href="/public/admins/lib/zTree/v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 </head>
 <body class="pos-r">
 <div class="pos-a" style="width:200px;left:0;top:0; bottom:0; height:100%; border-right:1px solid #e5e5e5; background-color:#f5f5f5; overflow:auto;">
@@ -51,8 +51,8 @@
 
 					<td><input name="" type="checkbox" value=""></td>
 					<td>{$vo.id}</td>
-					<td><a onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img width="60" class="product-thumb" src="/uploads/{$vo.pic}"></a></td>
-					<td class="text-l"><a style="text-decoration:none" onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img title="国内品牌" src="/admins/static/h-ui.admin/images/cn.gif"> <b class="text-success"></b> {$vo.name}</a></td>
+					<td><a onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img width="60" class="product-thumb" src="/public/uploads/{$vo.pic}"></a></td>
+					<td class="text-l"><a style="text-decoration:none" onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img title="国内品牌" src="/public/admins/static/h-ui.admin/images/cn.gif"> <b class="text-success"></b> {$vo.name}</a></td>
 					<td class="text-l">{$vo.desc}</td>
 					<td><span class="price">{$vo.price}</span> 元/件</td>
 					<td><span class="price">{$vo.sort}</span></td>
@@ -76,12 +76,12 @@
 	</div>
 </div>
 
-{include file="admins/foot/foot.html" /}
+{include file="public/admins/foot/foot.html" /}
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="/admins/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
-<script type="text/javascript" src="/admins/lib/My97DatePicker/4.8/WdatePicker.js"></script>
-<script type="text/javascript" src="/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="/admins/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/public/admins/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="/public/admins/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/public/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/admins/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
     var setting = {
         view: {
