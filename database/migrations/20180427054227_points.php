@@ -34,7 +34,7 @@ class Points extends Migrator
             ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'类型add/del'))
             ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式'))
             ->addColumn('frozen_flag', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'冻结标识'))
-            ->addColumn('create_time', 'datetime',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
+            ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
             ->addForeignKey ('user_id' , 'users' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
             ->create();
     }

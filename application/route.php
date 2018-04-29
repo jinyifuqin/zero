@@ -12,6 +12,7 @@ use think\Route;
 Route::group('admin',[
 //    '/' => 'admin/index/index', // 首页访问路由
     'login' => ['admin/index/login', ['method' => 'get']],
+    'check' => ['admin/index/checkUser', ['method' => 'post']],
     '/$' => ['admin/index/index', ['method' => 'get']],
     'welcome' => ['admin/index/welcome', ['method' => 'get']],
     'getCaptcha' => ['admin/index/getCaptcha', ['method' => 'get']],
