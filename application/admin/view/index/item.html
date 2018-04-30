@@ -27,9 +27,39 @@
                 layer_show(title,url,w,h);
             }
 		</script>
+        <script>
+            function datadel(){
+                var table = $('#DataTables_Table_0');
+                var checkBox = table.find("input:checkbox");
+//                console.log(checkBox);return;
+                checkBox.splice(0,1);
+                var arr = [];
+                checkBox.each(function(){
+                    var checked = $(this).prop('checked');
+                    if(checked){
+                        var id = $(this).parent().next().html();
+                        arr.push(id);
+                    }
+
+                })
+                $.ajax({
+                    type: "GET",
+                    url: "{:url('/admin/itemDelAll')}",
+                    data: {ids:arr},
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == "Success"){
+                            location.reload();
+                        }
+                    }
+                });
+                // console.log(arr);
+
+            }
+        </script>
 		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" onclick="product_add('添加产品','/admin/itemAdd','4','','510')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加产品</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
 		<div class="mt-20">
-			<table class="table table-border table-bordered table-bg table-hover table-sort">
+			<table id="DataTables_Table_0" class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
 				<tr class="text-c">
 					<th width="40"><input name="" type="checkbox" value=""></th>
@@ -57,7 +87,11 @@
 					<td><span class="price">{$vo.price}</span> 元/件</td>
 					<td><span class="price">{$vo.sort}</span></td>
 					<td><span class="price">{$vo.brand_name}</span></td>
+                    {empty name="$vo.cat_name"}
+                    <td><span class="price"></span></td>
+                    {else}
 					<td><span class="price">{$vo.cat_name}</span></td>
+                    {/empty}
 					<td class="td-status">
 						{eq name="$vo.status" value="1"}
 						<span class="label label-success radius">已发布</span>
@@ -66,7 +100,7 @@
 						{/eq}
 
 					</td>
-					<td class="td-manage"><a style="text-decoration:none" onClick="product_stop(this,'10001')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_edit('产品编辑','itemEdit/{$vo.id}','{$vo.id}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+					<td class="td-manage"><a style="text-decoration:none" onClick="product_stop(this,'10001')" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_edit('产品编辑','itemEdit/{$vo.id}','{$vo.id}')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'{$vo.id}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 
 				</tr>
 				{/foreach}
@@ -79,7 +113,7 @@
 {include file="public/admins/foot/foot.html" /}
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/public/admins/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
-<script type="text/javascript" src="/public/admins/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/public/admins/lib/My97DatePicker/foureight/WdatePicker.js"></script>
 <script type="text/javascript" src="/public/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/public/admins/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
@@ -221,8 +255,8 @@
     function product_del(obj,id){
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
-                type: 'POST',
-                url: '',
+                type: 'get',
+                url: '/admin/itemDel/'+id,
                 dataType: 'json',
                 success: function(data){
                     $(obj).parents("tr").remove();

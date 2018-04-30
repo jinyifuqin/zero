@@ -25,6 +25,8 @@ Route::group('admin',[
     'brandDelAll' => ['admin/index/brandDelAll', ['method' => 'get']],
     'items' => ['admin/item/index', ['method' => 'get']],
     'itemAdd' => ['admin/item/itemAdd', ['method' => 'get']],
+    'itemDel/:id' => ['admin/item/itemDelById', ['method' => 'get']],
+    'itemDelAll' => ['admin/item/itemDelAll', ['method' => 'get']],
     'itemEdit/:id' => ['admin/item/itemEdit', ['method' => 'get']],
     'itemUpdate' => ['admin/item/itemUpdate', ['method' => 'post']],
     'itemSave' => ['admin/item/itemSave', ['method' => 'post']],
