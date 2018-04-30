@@ -27,6 +27,7 @@ Route::group('admin',[
     'itemAdd' => ['admin/item/itemAdd', ['method' => 'get']],
     'itemDel/:id' => ['admin/item/itemDelById', ['method' => 'get']],
     'itemDelAll' => ['admin/item/itemDelAll', ['method' => 'get']],
+    'itemStatus' => ['admin/item/itemStatus', ['method' => 'get']],//商品上下架
     'itemEdit/:id' => ['admin/item/itemEdit', ['method' => 'get']],
     'itemUpdate' => ['admin/item/itemUpdate', ['method' => 'post']],
     'itemSave' => ['admin/item/itemSave', ['method' => 'post']],

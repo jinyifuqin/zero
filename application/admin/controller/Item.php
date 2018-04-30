@@ -126,7 +126,19 @@ class Item  extends Controller
             $msg = array('status'=>'fails');
         }
         echo json_encode($msg);
+    }
 
+    public function itemStatus(Request $request){   //商品上下架
+        $item = Items::get($request->param('id'));
+
+        $item->status = $item->status == 0?1:0;
+        $result = $item->save();
+        if($result){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
     }
 
     public function itemDelAll(Request $request){
