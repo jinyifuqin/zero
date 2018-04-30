@@ -11,10 +11,10 @@
 //echo 1;exit;
 // [ 应用入口文件 ]
 // 定义appID   wx6776429a5eb23a64 正式
-define('WX_APPID', 'wxde130ba36af554ed');
-//define('WX_APPID', 'wx6776429a5eb23a64');
+define('WX_APPID', 'wx8e4f59fdf635407f');
+//define('WX_APPID', 'wx6776429a5eb23a64');//正式
 // 定义appsecret   bd62c90a0c1eca2e8ae55cb89729f1bb 正式
-define('WX_APPSCRET', '189d920d5fde1fcca4c123af3e54c58f');
+define('WX_APPSCRET', 'fe224c15419d6f46bf8b802aa6b93b5d');
 //define('WX_APPSCRET', 'bd62c90a0c1eca2e8ae55cb89729f1bb');
 // 定义应用目录
 //define('APP_PATH', __DIR__ . '/../application/');

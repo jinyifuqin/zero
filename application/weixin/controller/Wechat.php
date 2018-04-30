@@ -19,7 +19,7 @@ class Wechat {
      */
     public function __construct()
     {
-        $this->redirect_uri = "http://".$_SERVER['HTTP_HOST']."/index.php/getInfo";
+        $this->redirect_uri = "http://".$_SERVER['HTTP_HOST']."/getInfo";
 //        $this->redirect_uri = "http://www.zero.com/index.php/getInfo";
     }
 
@@ -36,7 +36,7 @@ class Wechat {
     public function get_access_token($code)
     {
         $token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$this->app_id}&secret={$this->app_secret}&code={$code}&grant_type=authorization_code";
-        $token_data = $this->http($token_url,'POST');
+        $token_data = $this->http($token_url,'GET');
 
 
         if($token_data[0] == 200)
@@ -55,10 +55,11 @@ class Wechat {
      */
     public function get_user_info($access_token,$open_id)
     {
+
         if($access_token && $open_id)
         {
             $info_url = "https://api.weixin.qq.com/sns/userinfo?access_token={$access_token}&openid={$open_id}&lang=zh_CN";
-            $info_data = $this->http($info_url,'POST');
+            $info_data = $this->http($info_url,'GET');
 
             if($info_data[0] == 200)
             {

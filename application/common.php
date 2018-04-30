@@ -66,9 +66,8 @@ function upload($file){
     }
 }
 
-function download($url, $path = 'uploads')
+function download($url, $path = 'public/uploads')
 {
-//    echo "<pre>";var_dump($url);exit;
     $dir = date("Ymd").DS;
     $path = $path.DS.$dir;
     $ch = curl_init();
@@ -77,8 +76,9 @@ function download($url, $path = 'uploads')
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
     $file = curl_exec($ch);
     curl_close($ch);
-    $filename = pathinfo($url, PATHINFO_BASENAME).'.jpg';
-    $resource = fopen($path . $filename, 'a');
+    $filename = md5(microtime(true)).'.jpg';
+//    echo "<pre>";var_dump($filename);exit;
+    $resource = fopen($path . $filename,"a");
     fwrite($resource, $file);
     fclose($resource);
     return $dir.$filename;
