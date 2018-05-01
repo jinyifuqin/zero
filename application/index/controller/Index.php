@@ -25,19 +25,24 @@ class Index
         $itemid = $_SESSION['itemid'];
         $item = Items::get(['id' => $itemid]);
         $userinfo = $_SESSION['userinfo'];
-        $addr = Addrs::where('id',$userinfo->address)->find();
+        $userid = $userinfo->id;
+        $user = Users::where('id',$userid)->find();
+        $_SESSION['userinfo'] = $user;
+        $addr = Addrs::where('id',$user->address)->find();
         $data['item'] = $item;
         $data['userinfo'] = $userinfo;
         $data['addr'] = $addr;
+
+
 //        unset($_SESSION['userinfo']);
-//        echo "<pre>";var_dump($_SESSION);exit;
+//        echo "<pre>";var_dump($data);exit;
         return view("index@item/buy",['data'=>$data]);
     }
 
     public function wxLogin(Request $request){
         $_SESSION['itemid'] = $request->param('id');
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
-//        unset($_SESSION['userinfo']);
+        unset($_SESSION['userinfo']);
         if(array_key_exists('userinfo',$_SESSION)){
 
             return redirect('/buy');
@@ -81,12 +86,19 @@ class Index
             return true;
 //            header("Location:/admin");
         }else{
+//            $nic = $get_user_info['nickname'];
+//            $js = json_encode($nic);
+//            urlencode($js);
+//                    echo "<pre>";var_dump($js);
+//            var_dump(urlencode($js));
+//            var_dump(htmlspecialchars($js));
+//            exit;
             $data['openid'] = $get_user_info['openid'];
             $data['sex'] = $get_user_info['sex'];
             $pic = download($get_user_info['headimgurl']);
             $data['pic'] = $pic;
             $data['username'] = uniqid();
-            $data['nickname'] = json_encode($get_user_info['nickname']);
+            $data['nickname'] = urlencode(json_encode($get_user_info['nickname']));
             $data['password'] = $get_user_info['openid'];
 //            echo "<pre>";var_dump($data);exit;
             $catsObj = new Users($data);

@@ -48,7 +48,7 @@ Route::post([
 
 ]);
 
-Route::get([
+Route::group('',[
     '/$' => 'index', // 首页访问路由
     'my' => 'ajax', // 静态地址路由
     'getInfo' => ['getInfo', ['method' => 'get']],
@@ -57,6 +57,7 @@ Route::get([
     'wxlogin/:id' => ['wxLogin', ['method' => 'get']],
     'buy' => ['buy', ['method' => 'get']],
     'addAddr' => ['item/addAddr', ['method' => 'get']],
+    'saveAddr' => ['item/saveAddr', ['method' => 'post']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

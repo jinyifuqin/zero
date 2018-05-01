@@ -8,12 +8,20 @@
 
 namespace app\index\controller;
 use app\admin\model\Items;
+use app\index\model\Addrs;
+use app\index\model\Users;
 use app\index\model\Trades;
 use \think\Controller;
+use think\Db;
 use think\Request;
 
 class Item extends Controller
 {
+    public function __construct(Request $request)
+    {
+        session_start();
+    }
+
     public function itemList(){
         $re = Items::all();
         return view("index@item/index",['re'=>$re]);
@@ -28,7 +36,22 @@ class Item extends Controller
 
     public function addAddr(){
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+
         return view("index@item/addAddr");
+    }
+
+    public function saveAddr(Request $request){
+        if($request->param('default')){
+            $default = 1;
+        }else{
+            $default = 0;
+        }
+        $userinfo = $_SESSION['userinfo'];
+        $userid = $userinfo->id;
+        $addrsObj = new Addrs();
+        $addrsObj->saveAddr($userid,$request->param('desc'),$default);
+
+        return redirect($_SESSION['url']);
     }
 
     public function tradeCreate(Request $request){
@@ -36,7 +59,7 @@ class Item extends Controller
         $trade = new Trades();
         $tradeNum = date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
         $create_time = date("Y-m-d H:i:s");
-//        echo "<pre>";var_dump($post);exit;
+        echo "<pre>";var_dump($post);exit;
         $all = [
             'name'  =>  $post['name'],
             'address'  =>  $post['address'],

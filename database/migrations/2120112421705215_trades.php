@@ -31,7 +31,7 @@ class Trades extends Migrator
         $table = $this->table('trades');
         $table->addColumn('trade_number', 'string',array('default'=>"",'comment'=>'订单号'))
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
-            ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'用户名'))
+            ->addColumn('name', 'string',array('default'=>'','comment'=>'用户名'))
             ->addColumn('address', 'integer',array('default'=>0,'null'=>true,'comment'=>'收货地址ID'))
             ->addColumn('type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'类型1发货0未发货'))
             ->addColumn('item_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'商品ID'))

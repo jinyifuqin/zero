@@ -23,7 +23,7 @@ class Trade extends Controller
             $v['item_name'] = $v->items->name;
             $v['address'] = $v->addrs->desc;
         }
-
+        
         return view("admin@trade/index",['trades'=>$trades]);
     }
 
