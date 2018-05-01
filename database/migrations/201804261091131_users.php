@@ -29,7 +29,9 @@ class Users extends Migrator
     public function change()
     {
         $table = $this->table('users');
-        $table->addColumn('username', 'string',array('limit' => 15,'default'=>'','comment'=>'用户名，登陆使用'))
+        $table
+            ->addColumn('username', 'string',array('limit' => 64,'default'=>'','comment'=>'用户名，登陆使用'))
+            ->addColumn('nickname', 'string',array('limit' => 32,'default'=>'','comment'=>'昵称'))
             ->addColumn('password', 'string',array('limit' => 32,'default'=>md5('123456'),'comment'=>'用户密码'))
             ->addColumn('openid', 'string',array('default'=>'','comment'=>'OpenId'))
             ->addColumn('pic', 'string',array('default'=>'','comment'=>'头像'))

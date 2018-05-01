@@ -37,8 +37,8 @@ class Trades extends Migrator
             ->addColumn('item_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'商品ID'))
             ->addColumn('buy_num', 'integer',array('default'=>1,'null'=>true,'comment'=>'购买数量'))
             ->addColumn('phone_num', 'string',array('default'=>'','null'=>true,'comment'=>'手机号'))
-            ->addColumn('create_time', 'datetime',array('comment'=>'创建时间'))
-            ->addColumn('update_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'更新时间'))
+            ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'最后登录时间'))
+            ->addColumn('update_time', 'timestamp',array('comment'=>'更新时间'))
             ->addForeignKey ('user_id' , 'users' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
             ->create();
     }

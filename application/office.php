@@ -14,13 +14,13 @@ return [
         // 数据库类型
         'type'            => 'mysql',
         // 服务器地址
-        'hostname'        => '192.168.1.189',
+        'hostname'        => '121.201.51.150',
         // 数据库名
         'database'        => 'yzt',
         // 用户名
-        'username'        => 'root',
+        'username'        => 'yzt',
         // 密码
-        'password'        => 'abc.123',
+        'password'        => '201314##yy',
         // 端口
         'hostport'        => '',
         // 连接dsn

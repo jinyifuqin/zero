@@ -30,7 +30,7 @@ class Index
         $data['userinfo'] = $userinfo;
         $data['addr'] = $addr;
 //        unset($_SESSION['userinfo']);
-//        echo "<pre>";var_dump($addr);exit;
+//        echo "<pre>";var_dump($_SESSION);exit;
         return view("index@item/buy",['data'=>$data]);
     }
 
@@ -85,11 +85,13 @@ class Index
             $data['sex'] = $get_user_info['sex'];
             $pic = download($get_user_info['headimgurl']);
             $data['pic'] = $pic;
-            $data['username'] = $get_user_info['nickname'];
+            $data['username'] = uniqid();
+            $data['nickname'] = json_encode($get_user_info['nickname']);
             $data['password'] = $get_user_info['openid'];
+//            echo "<pre>";var_dump($data);exit;
             $catsObj = new Users($data);
             $result = $catsObj->save();
-            $re = Users::where('username',$get_user_info['nickname'])->find();
+            $re = Users::where('openid',$data['openid'])->find();
             $_SESSION['userinfo'] = $re;
         }
 
