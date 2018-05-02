@@ -65,7 +65,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" value="提交">
+                    <input id="sub" type="submit" value="提交">
                 </td>
             </tr>
         </table>
@@ -125,3 +125,35 @@
 </div>
 </body>
 </html>
+<script type="text/javascript" src="/public/admins/lib/jquery/onenineone/jquery.min.js"></script>
+<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+<script>
+    $(function(){
+        $('#sub').click(function (e) {
+            e.preventDefault();
+            var form = $("form");
+            var url = form.attr('action');
+            var data = form.serialize();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    var data = JSON.parse(data);
+                    if(data.type == "success"){
+                        layer.msg(data.msg,{icon:"6",time:'3000'});
+                        window.parent.location.reload();//刷新父页面
+                    }else{
+                        layer.msg(data.msg,{icon:"2",time:'3000'});
+                    }
+
+                }
+            });
+        });
+
+        // setTimeout(function(){
+        //     self.parent.location.href="'.$url.'" rel="external nofollow" rel="external nofollow"
+        // },2000)
+    });
+</script>

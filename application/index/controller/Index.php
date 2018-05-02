@@ -42,7 +42,7 @@ class Index
     public function wxLogin(Request $request){
         $_SESSION['itemid'] = $request->param('id');
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
-        unset($_SESSION['userinfo']);
+//        unset($_SESSION['userinfo']);
         if(array_key_exists('userinfo',$_SESSION)){
 
             return redirect('/buy');

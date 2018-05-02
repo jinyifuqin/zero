@@ -59,7 +59,23 @@ class Item extends Controller
         $trade = new Trades();
         $tradeNum = date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
         $create_time = date("Y-m-d H:i:s");
-        echo "<pre>";var_dump($post);exit;
+        $numMatch = preg_match('/^\d+$/',$post['number']);
+        $phoneMatch = preg_match('/^1[34578]\d{9}$/',$post['phone_num']);
+        if(!$numMatch){
+            $data = ['msg'=>"请输入正确的数量！",'type'=>"error"];
+            return  json_encode($data);
+
+        }
+        if(!$phoneMatch){
+            $data = ['msg'=>"请输入正确的手机号！",'type'=>"error"];
+            return json_encode($data);
+
+        }
+        if($post['address'] == ''){
+            $data = ['msg'=>"请添加收货地址！",'type'=>"error"];
+            return json_encode($data);
+
+        }
         $all = [
             'name'  =>  $post['name'],
             'address'  =>  $post['address'],
@@ -75,7 +91,11 @@ class Item extends Controller
 //        echo "<pre>";var_dump($all);exit;
         $re = $trade->save();
         if($re){
-            $this->success('订单生成成功！请等待服务中心发货');
+            $data = ['msg'=>"订单生成成功！请等待服务中心发货",'type'=>"success"];
+            return json_encode($data);
+        }else{
+            $data = ['msg'=>"订单生成失败！",'type'=>"error"];
+            return json_encode($data);
         }
 
     }

@@ -45,7 +45,9 @@ class Users extends Migrator
             ->addColumn('login_status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'登陆状态'))
             ->addColumn('login_code', 'string',array('limit' => 32,'default'=>0,'comment'=>'排他性登陆标识'))
             ->addColumn('last_login_time', 'datetime',array('default'=>0,'comment'=>'最后登录时间'))
-            ->addIndex(array('username','phone_number','id_card'), array('unique' => true))
+            ->addIndex(array('openid'), array('unique' => true))
+            ->addIndex(array('phone_number'), array('unique' => true))
+            ->addIndex(array('id_card'), array('unique' => true))
             ->create();
     }
 }
