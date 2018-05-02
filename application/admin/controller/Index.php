@@ -205,17 +205,23 @@ class Index extends Controller
     }
 
     public function admin_list(){
-        return view("admin@index/adminList");
+        $re = Adminusers::all();
+        return view("admin@index/adminList",['re'=>$re]);
     }
 
     public function admin_add(){
         return view("admin@index/adminAdd");
     }
 
+    public function admin_edit(Request $request){
+        $id = $request->param('id');
+        $re = Adminusers::get(['id' => $id]);
+        return view("admin@index/adminEdit",['re'=>$re]);
+    }
+
     public function save_admin(Request $request){
         $post = $request->param();
         $ip = getIp();
-//        echo "<pre>";var_dump(date('Y-m-d H:i:s'));exit;
         $data = [
             'username'=>$post['adminName'],
             'password'=>$post['password'],
@@ -226,8 +232,15 @@ class Index extends Controller
             'last_login_ip'=>$ip,
             'last_login_time'=>date('Y-m-d H:i:s')
         ];
-        $adminObj = new Adminusers($data);
-        $result = $adminObj->save();
+        if(array_key_exists('id',$post)){
+            $result = Adminusers::where('id', $post['id'])
+                ->update($data);
+        }else{
+            $adminObj = new Adminusers($data);
+            $result = $adminObj->save();
+        }
+
+
         if($result){
             $msg = array('status'=>'Success');
         }else{

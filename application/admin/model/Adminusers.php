@@ -11,5 +11,9 @@ use think\Model;
 
 class Adminusers extends Model
 {
-
+    public function getTypeAttr($value)
+    {
+        $type = [0=>'服务中心账号',1=>'超级管理员'];
+        return $type[$value];
+    }
 }

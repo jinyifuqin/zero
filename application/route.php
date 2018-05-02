@@ -44,6 +44,7 @@ Route::group('admin',[
     'adminList' => ['admin/index/admin_list', ['method' => 'get']],
     'adminAdd' => ['admin/index/admin_add', ['method' => 'get']],
     'saveAdmin' => ['admin/index/save_admin', ['method' => 'post']],
+    'adminEdit/:id' => ['admin/index/admin_edit', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

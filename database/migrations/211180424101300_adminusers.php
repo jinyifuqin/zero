@@ -34,7 +34,7 @@ class Adminusers extends Migrator
             ->addColumn('login_status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'登陆状态'))
             ->addColumn('sex', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'性别'))
             ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'账号类型0服务中心1超级管理员'))
-            ->addColumn('phone_number', 'integer',array('limit' => 15,'default'=>0,'comment'=>'手机号'))
+            ->addColumn('phone_number', 'string',array('default'=>0,'comment'=>'手机号'))
             ->addColumn('email', 'string',array('default'=>'','comment'=>'邮箱'))
             ->addColumn('last_login_ip', 'string',array('default'=>'','comment'=>'最后登录IP'))
             ->addColumn('last_login_time', 'datetime',array('default'=>0,'comment'=>'最后登录时间'))
