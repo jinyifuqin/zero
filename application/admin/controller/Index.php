@@ -8,6 +8,18 @@ use think\Request;
 class Index extends Controller
 {
     public $logo;
+
+    protected $beforeActionList = [
+        'check_login' =>  ['except'=>'get_captcha,login,check_user'],
+    ];
+
+    public function check_login(){
+        $check = array_key_exists('adminUserInfo',$_SESSION);
+        if(!$check)
+            $this->redirect('/admin/login');
+    }
+
+
     public function __construct(Request $request = null)
     {
         session_start();
@@ -42,7 +54,7 @@ class Index extends Controller
         return view("login");
     }
 
-    public function checkUser(Request $request){
+    public function check_user(Request $request){
         $captcha = $_SESSION['captcha'];
         $username = $request->param('username');
         $password = $request->param('password');
@@ -72,7 +84,7 @@ class Index extends Controller
         }
     }
 
-    public function getCaptcha(){
+    public function get_captcha(){
         getCaptcha();
     }
 
@@ -184,15 +196,8 @@ class Index extends Controller
         echo json_encode($msg);
     }
 
-    public function ajax()
-    {
-//        echo password(123,456);exit;
-        $arr = array(
-            "a"=>"hello",
-            "b"=>"world"
-        );
-        $re = json_encode($arr);
-        echo $re;
-//        return view();
+    public function member_list(){
+        return view("admin@index/memberList");
     }
+
 }

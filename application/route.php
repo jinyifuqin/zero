@@ -12,10 +12,10 @@ use think\Route;
 Route::group('admin',[
 //    '/' => 'admin/index/index', // 首页访问路由
     'login' => ['admin/index/login', ['method' => 'get']],
-    'check' => ['admin/index/checkUser', ['method' => 'post']],
+    'check' => ['admin/index/check_user', ['method' => 'post']],
     '/$' => ['admin/index/index', ['method' => 'get']],
     'welcome' => ['admin/index/welcome', ['method' => 'get']],
-    'getCaptcha' => ['admin/index/getCaptcha', ['method' => 'get']],
+    'getCaptcha' => ['admin/index/get_captcha', ['method' => 'get']],
     'signout' => ['admin/index/signOut', ['method' => 'get']],
     'brand$' => ['admin/index/brand', ['method' => 'get']],
     'brand/show/:id' => ['admin/index/brandShow', ['method' => 'get']],
@@ -39,7 +39,7 @@ Route::group('admin',[
     'catDelById' => ['admin/item/catDelById', ['method' => 'get']],
     'trade' => ['admin/trade/index', ['method' => 'get']],
     'send/:id' => ['admin/trade/send', ['method' => 'get']],
-
+    'memberList' => ['admin/index/member_list', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

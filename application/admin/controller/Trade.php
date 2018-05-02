@@ -22,8 +22,9 @@ class Trade extends Controller
         foreach ($trades as $k=>&$v){
             $v['item_name'] = $v->items->name;
             $v['address'] = $v->addrs->desc;
+            $v['name'] = json_decode(urldecode($v['name']));
         }
-        
+
         return view("admin@trade/index",['trades'=>$trades]);
     }
 
