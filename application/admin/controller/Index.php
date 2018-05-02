@@ -33,9 +33,9 @@ class Index extends Controller
         if(!isset($_SESSION['adminUserInfo'])){
             $this->redirect('/admin/login');
         }
-
-//        return $this->fetch('admin@index/login');
-        return view();
+//        echo "<pre>";var_dump($_SESSION);exit;
+        $admin = $_SESSION['adminUserInfo'];
+        return view("admin@index/index",['admin'=>$admin]);
     }
 
     public function welcome()
