@@ -212,5 +212,30 @@ class Index extends Controller
         return view("admin@index/adminAdd");
     }
 
+    public function save_admin(Request $request){
+        $post = $request->param();
+        $ip = getIp();
+//        echo "<pre>";var_dump(date('Y-m-d H:i:s'));exit;
+        $data = [
+            'username'=>$post['adminName'],
+            'password'=>$post['password'],
+            'sex'=>$post['sex'],
+            'type'=>$post['type'],
+            'phone_number'=>$post['phone'],
+            'email'=>$post['email'],
+            'last_login_ip'=>$ip,
+            'last_login_time'=>date('Y-m-d H:i:s')
+        ];
+        $adminObj = new Adminusers($data);
+        $result = $adminObj->save();
+        if($result){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+//        echo "<pre>";var_dump($post);
+    }
+
 
 }

@@ -43,6 +43,7 @@ Route::group('admin',[
     'memberAdd' => ['admin/index/member_add', ['method' => 'get']],
     'adminList' => ['admin/index/admin_list', ['method' => 'get']],
     'adminAdd' => ['admin/index/admin_add', ['method' => 'get']],
+    'saveAdmin' => ['admin/index/save_admin', ['method' => 'post']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
