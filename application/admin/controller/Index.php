@@ -200,4 +200,17 @@ class Index extends Controller
         return view("admin@index/memberList");
     }
 
+    public function member_add(){
+        return view("admin@index/memberAdd");
+    }
+
+    public function admin_list(){
+        return view("admin@index/adminList");
+    }
+
+    public function admin_add(){
+        return view("admin@index/adminAdd");
+    }
+
+
 }
