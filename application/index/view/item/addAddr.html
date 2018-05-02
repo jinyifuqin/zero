@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <title>商城(测试)</title>
-    <link rel="stylesheet" href="/indexsource/css/css_yan.css"/>
-    <script src="/indexsource/js/jquery.min.js"></script>
-    <script src="/indexsource/js/pic.js"></script>
+    <link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
+    <script src="/public/indexsource/js/jquery.min.js"></script>
+    <script src="/public/indexsource/js/pic.js"></script>
 </head>
 <body>
 <!--这是头部-->
 <div class="APPtop">
-    <a href="#"><img class="fh" src="/indexsource/images/fh.png" alt=""/></a>
+    <a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>
     <p class="page">永之泰俱乐部</p>
-    <!--<img class="applogo" src="/indexsource/images/applogo.png" alt="" />-->
-    <img class="shouse" src="/indexsource/images/shouse.png" alt="" />
+    <!--<img class="applogo" src="/public/indexsource/images/applogo.png" alt="" />-->
+    <img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />
 </div>
 <div class="rbj"></div>
 <ul class="menuS">
@@ -33,23 +33,20 @@
 <div class="Cmain">
     <!--内页的banner图-->
     <div class="nbanner">
-        <img src="/indexsource/images/nbanner1.jpg" alt=""/>
+        <img src="/public/indexsource/images/nbanner1.jpg" alt=""/>
     </div>
-    <form method="post" action="">
+    <form method="post" action="/saveAddr">
         <table>
 
             <tr>
-                <td>收货地址：{$data.userinfo.address}</td>
-                <input type="hidden" name=""/>
+                <td>收货地址：</td>
+                <td><input type="text" name="desc"/></td>
+
             </tr>
+
             <tr>
-                <td>
-                    手机号:<input type="number" name="phone_num" value="">
-                </td>
-            </tr>
-            <tr>
-                <td>商品：{$data.item.name}</td>
-                <td>价格：{$data.item.price}</td>
+                <td>设置为默认地址：</td>
+                <td><input type="checkbox" value="1" name="default"/></td>
             </tr>
 
             <tr>
@@ -70,16 +67,16 @@
 <div class="APPbtn">
     <div class="APPbtn1 APPbtnbj">
         <a href="#"><div class="APPbtn1_img">
-            <img src="/indexsource/images/Appbottom11.png" alt=""/>
-            <img src="/indexsource/images/Appbottom1.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom11.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom1.png" alt=""/>
         </div>
         </a>
         <a href="#">首页</a>
     </div>
     <div class="APPbtn1">
         <a href="#"><div class="APPbtn1_img">
-            <img src="/indexsource/images/Appbottom22.png" alt=""/>
-            <img src="/indexsource/images/Appbottom2.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom22.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom2.png" alt=""/>
         </div>
         </a>
         <a href="#">商城</a>
@@ -87,8 +84,8 @@
     <div class="APPbtn1">
         <a href="#">
             <div class="APPbtn1_img">
-                <img src="/indexsource/images/Appbottom33.png" alt=""/>
-                <img src="/indexsource/images/Appbottom3.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom33.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom3.png" alt=""/>
             </div>
         </a>
         <a href="#">社区</a>
@@ -96,8 +93,8 @@
     <div class="APPbtn1">
         <a href="#">
             <div class="APPbtn1_img">
-                <img src="/indexsource/images/Appbottom44.png" alt=""/>
-                <img src="/indexsource/images/Appbottom4.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom44.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom4.png" alt=""/>
             </div>
         </a>
         <a href="#">分享</a>
@@ -105,8 +102,8 @@
     <div class="APPbtn1">
         <a href="#">
             <div class="APPbtn1_img">
-                <img src="/indexsource/images/Appbottom55.png" alt=""/>
-                <img src="/indexsource/images/Appbottom5.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom55.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom5.png" alt=""/>
             </div>
         </a>
         <a href="#">会员中心</a>

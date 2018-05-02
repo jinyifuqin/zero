@@ -25,19 +25,24 @@ class Index
         $itemid = $_SESSION['itemid'];
         $item = Items::get(['id' => $itemid]);
         $userinfo = $_SESSION['userinfo'];
-        $addr = Addrs::where('id',$userinfo->address)->find();
+        $userid = $userinfo->id;
+        $user = Users::where('id',$userid)->find();
+        $_SESSION['userinfo'] = $user;
+        $addr = Addrs::where('id',$user->address)->find();
         $data['item'] = $item;
         $data['userinfo'] = $userinfo;
         $data['addr'] = $addr;
+
+
 //        unset($_SESSION['userinfo']);
-//        echo "<pre>";var_dump($addr);exit;
+//        echo "<pre>";var_dump($data);exit;
         return view("index@item/buy",['data'=>$data]);
     }
 
     public function wxLogin(Request $request){
         $_SESSION['itemid'] = $request->param('id');
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
-//        unset($_SESSION['userinfo']);exit;
+        unset($_SESSION['userinfo']);
         if(array_key_exists('userinfo',$_SESSION)){
 
             return redirect('/buy');
@@ -52,21 +57,23 @@ class Index
         $get = $request->param();
         $_SESSION['getinfo'] = $get;
         $code = $get['code'];
-
-        if(!array_key_exists('get_access_token',$_SESSION)){
+//        echo "<pre>";var_dump($get);exit;
+        if(!array_key_exists('get_access_token',$_SESSION) || $_SESSION['get_access_token'] == false){
             $get_access_token = $this->wxObj->get_access_token($code);
             $_SESSION['get_access_token'] = $get_access_token;
+//            echo "<pre>";var_dump($get_access_token);exit;
         }else{
             $get_access_token = $_SESSION['get_access_token'];
         }
 
-        if(!array_key_exists('get_user_info',$_SESSION)){
+        if(!array_key_exists('get_user_info',$_SESSION) || $_SESSION['get_user_info'] == false){
+//            echo "<pre>";var_dump(22);exit;
             $get_user_info = $this->wxObj->get_user_info($get_access_token['access_token'],$get_access_token['openid']);
             $_SESSION['get_user_info'] = $get_user_info;
         }else{
             $get_user_info = $_SESSION['get_user_info'];
         }
-
+//        echo "<pre>";var_dump($get_user_info);exit;
         $re = $this->createUser($get_user_info);
 
         return redirect($_SESSION['url']);
@@ -79,15 +86,24 @@ class Index
             return true;
 //            header("Location:/admin");
         }else{
+//            $nic = $get_user_info['nickname'];
+//            $js = json_encode($nic);
+//            urlencode($js);
+//                    echo "<pre>";var_dump($js);
+//            var_dump(urlencode($js));
+//            var_dump(htmlspecialchars($js));
+//            exit;
             $data['openid'] = $get_user_info['openid'];
             $data['sex'] = $get_user_info['sex'];
             $pic = download($get_user_info['headimgurl']);
             $data['pic'] = $pic;
-            $data['username'] = $get_user_info['nickname'];
+            $data['username'] = uniqid();
+            $data['nickname'] = urlencode(json_encode($get_user_info['nickname']));
             $data['password'] = $get_user_info['openid'];
+//            echo "<pre>";var_dump($data);exit;
             $catsObj = new Users($data);
             $result = $catsObj->save();
-            $re = Users::where('username',$get_user_info['nickname'])->find();
+            $re = Users::where('openid',$data['openid'])->find();
             $_SESSION['userinfo'] = $re;
         }
 

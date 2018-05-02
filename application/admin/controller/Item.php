@@ -19,12 +19,19 @@ class Item  extends Controller
     public function index(){
         $items = Items::all();
         foreach ($items as $k=>&$v){
-            $catname = Cats::where('id',$v->cat_id)->column('name');
-            $brandname = Brands::where('id',$v->brand_id)->column('name');
-            $v->cat_name = $catname[0];
-            $v->brand_name = $brandname[0];
+            if($v->cat_id){
+                $catname = Cats::where('id',$v->cat_id)->column('name');
+                $v->cat_name = $catname[0];
+            }
+            if($v->brand_id){
+                $brandname = Brands::where('id',$v->brand_id)->column('name');
+                $v->brand_name = $brandname[0];
+            }
+
+//            echo "<pre>";var_dump($v);
         }
-//        echo "<pre>";var_dump($items);exit;
+//exit;
+//        exit;
         return view("admin@index/item",['item'=>$items]);
     }
 
@@ -90,6 +97,13 @@ class Item  extends Controller
         $data['create_time'] = date('Y-m-d H:i:s',time());
         $file = $request->file('file-2');
         $re = upload($file);
+        if($re == null){
+            $itemObj = new Items($data);
+            $result = $itemObj->save();
+            if($result)
+                return  redirect('/admin/items');
+        }
+//        echo "<pre>";var_dump($re);exit;
         if($re->getError() == ''){
             $end = htmlspecialchars($re->getSaveName());
             $data['pic'] = $end;
@@ -100,6 +114,43 @@ class Item  extends Controller
         }
 
 
+    }
+
+    public function itemDelById(Request $request){
+        $id = $request->param("id");
+        $item = Items::get($id);
+        $re = $item->delete();
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function itemStatus(Request $request){   //商品上下架
+        $item = Items::get($request->param('id'));
+
+        $item->status = $item->status == 0?1:0;
+        $result = $item->save();
+        if($result){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function itemDelAll(Request $request){
+//        echo "<pre>";var_dump($request);exit;
+        $ids = $request->param()['ids'];
+        $re = Items::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
     }
 
     public function catList(){

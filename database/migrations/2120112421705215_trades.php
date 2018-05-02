@@ -3,7 +3,7 @@
 use think\migration\Migrator;
 use think\migration\db\Column;
 
-class Points extends Migrator
+class Trades extends Migrator
 {
     /**
      * Change Method.
@@ -28,13 +28,17 @@ class Points extends Migrator
      */
     public function change()
     {
-        $table = $this->table('points');
-        $table->addColumn('count', 'integer',array('limit' => 32,'default'=>0,'comment'=>'积分数'))
+        $table = $this->table('trades');
+        $table->addColumn('trade_number', 'string',array('default'=>"",'comment'=>'订单号'))
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
-            ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'类型add/del'))
-            ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式'))
-            ->addColumn('frozen_flag', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'冻结标识'))
-            ->addColumn('create_time', 'datetime',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
+            ->addColumn('name', 'string',array('default'=>'','comment'=>'用户名'))
+            ->addColumn('address', 'integer',array('default'=>0,'null'=>true,'comment'=>'收货地址ID'))
+            ->addColumn('type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'类型1发货0未发货'))
+            ->addColumn('item_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'商品ID'))
+            ->addColumn('buy_num', 'integer',array('default'=>1,'null'=>true,'comment'=>'购买数量'))
+            ->addColumn('phone_num', 'string',array('default'=>'','null'=>true,'comment'=>'手机号'))
+            ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'最后登录时间'))
+            ->addColumn('update_time', 'timestamp',array('comment'=>'更新时间'))
             ->addForeignKey ('user_id' , 'users' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
             ->create();
     }

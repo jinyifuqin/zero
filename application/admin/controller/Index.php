@@ -46,8 +46,8 @@ class Index extends Controller
         $captcha = $_SESSION['captcha'];
         $username = $request->param('username');
         $password = $request->param('password');
-
-        if(strtolower($request->param('captcha')) != $_SESSION['captcha']){
+//        echo "<pre>";var_dump($request->param());exit;
+        if(strtolower($request->param('captcha')) != $captcha){
             $msg = array(
                 "error"=>"验证码输入有误!",
             );

@@ -3,7 +3,7 @@
 use think\migration\Migrator;
 use think\migration\db\Column;
 
-class ArticleTypes extends Migrator
+class Points extends Migrator
 {
     /**
      * Change Method.
@@ -28,9 +28,14 @@ class ArticleTypes extends Migrator
      */
     public function change()
     {
-        $table = $this->table('article_types',array('engine'=>'InnoDB'));
-        $table->addColumn('name', 'string',array('limit' => 32,'default'=>0,'comment'=>'类型名称'))
+        $table = $this->table('points');
+        $table->addColumn('count', 'integer',array('limit' => 32,'default'=>0,'comment'=>'积分数'))
+            ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
+            ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'类型add/del'))
+            ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式'))
+            ->addColumn('frozen_flag', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'冻结标识'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
+            ->addForeignKey ('user_id' , 'users' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
             ->create();
     }
 }

@@ -31,7 +31,7 @@ class Articles extends Migrator
         $table = $this->table('articles',array('engine'=>'InnoDB'));
         $table->addColumn('content', 'string',array('default'=>'','comment'=>'文章内容'))
             ->addColumn('title', 'string',array('limit' => 32,'default'=>'','comment'=>'文章标题'))
-            ->addColumn('create_time', 'datetime',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
+            ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
             ->create();
     }
 }
