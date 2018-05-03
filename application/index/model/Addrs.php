@@ -23,11 +23,22 @@ class Addrs extends Model
         if($re == null){
             $default = 1;
         }
-        if($postInfo['addrid']){
+        if(array_key_exists('addrid',$postInfo)){
             $addrId = $postInfo['addrid'];
-            $this->save([
-                'default'  => $default,
-            ],['id' => $addrId]);
+//            echo "<pre>";var_dump($postInfo);exit;
+            if(count($postInfo) == 1){
+                $this->save([
+                    'default'  => $default,
+                ],['id' => $addrId]);
+            }else{
+                $this->save([
+                    'default'  => $default,
+                    'name'=>$postInfo['name'],
+                    'desc'=>$postInfo['desc'],
+                    'phone_num'=>$postInfo['phone_num'],
+                ],['id' => $addrId]);
+            }
+
         }else{
             $this->data['name'] = $postInfo['name'];
             $this->phone_num = $postInfo['phone_num'];
@@ -37,6 +48,7 @@ class Addrs extends Model
 //        echo "<pre>";var_dump($this);exit;
             $this->save();
             $addrId = $this->id;
+//            echo "<pre>";var_dump(55);exit;
         }
 
 

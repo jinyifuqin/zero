@@ -46,13 +46,13 @@
 			<div class="shdzgl">
 				<ul>
 					{foreach $re.addr as $vo}
-					<li class="choose" chooseid="{$vo.id}">
+					<li>
 						<a href="#">
 							{eq name="$vo.default" value="1"}
 							<img src="/public/indexsource/images/zz39.png" class="wimg" />
 							{else/}
 							{/eq}
-							<div class="shdz_l shdz_ll">
+							<div class="shdz_l shdz_ll choose" chooseid="{$vo.id}">
 								<div class="shdz1"><span>{$vo.name}</span> <span> {$vo.phone_num}</span>
 									{eq name="$vo.default" value="1"}
 									<font>默认</font>
@@ -61,7 +61,7 @@
 								</div>
 								<div class="shdz2"><span>{$vo.desc}</span></div>
 							</div>
-							<div class="shdz_r">
+							<div class="shdz_r" chooseid="{$vo.id}">
 								<img src="/public/indexsource/images/zz37.png" />
 								<img src="/public/indexsource/images/zz38.png" />
 							</div>
@@ -95,6 +95,14 @@
                     addrId = $(this).attr('chooseid');
                     $(".jifen5").css("display", "block");
                 })
+
+				$('.shdz_r').click(function(){
+                    addrId = $(this).attr('chooseid');
+                    var url = "/addrEdit/"+addrId;
+                    window.location.href = url;
+				    // console.log(addrId);
+				})
+
                 $(".button1").click(function() {
                     var url = "/changeAddr";
                     var data = {'id':addrId};

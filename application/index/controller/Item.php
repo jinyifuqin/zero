@@ -68,6 +68,18 @@ class Item extends Controller
         echo json_encode($msg);
     }
 
+    public function addr_edit(Request $request){
+        $id = $request->param('id');
+        $addr = Addrs::get($id);
+        $delimiter = urlencode(',');
+        $addrArr = explode($delimiter,$addr->desc);
+        $addr->desc1 = $addrArr[count($addrArr)-1];
+        array_pop($addrArr);
+        $addr->desc = implode(' ',$addrArr);
+
+        return view("index@item/addrEdit",['re'=>$addr]);
+    }
+
     public function saveAddr(Request $request){
         $delimiter = urlencode(',');
         $desc = implode($delimiter,explode(' ',$request->param('desc'))).$delimiter.$request->param('desc1');
@@ -76,6 +88,7 @@ class Item extends Controller
         }else{
             $default = 0;
         }
+
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
         $postInfo = [
@@ -84,11 +97,14 @@ class Item extends Controller
             'desc'=>$desc,
             'phone_num'=>$request->param('phone_num'),
         ];
+        if(array_key_exists('addrId',$request->param())){
+            $postInfo['addrid']=$request->param('addrId');
+        }
 
         $addrsObj = new Addrs();
         $addrsObj->saveAddr($userid,$postInfo,$default);
 
-        return redirect($_SESSION['url']);
+        return redirect('/addAddr');
     }
 
     public function tradeCreate(Request $request){
