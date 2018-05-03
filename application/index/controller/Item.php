@@ -36,11 +36,22 @@ class Item extends Controller
 
     public function addAddr(){
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+        $userinfo = $_SESSION['userinfo'];
+        $userid = $userinfo->id;
+        $addr = Addrs::all(['user_id'=>$userid]);
+        $data['userid'] = $userid;
+        $data['addr'] = $addr;
+//        echo "<pre>";var_dump($data);exit;
+        return view("index@item/addAddr3",['re'=>$data]);
+    }
 
-        return view("index@item/addAddr");
+    public function add_addr_info(){
+        return view("index@item/addAddrInfo");
     }
 
     public function saveAddr(Request $request){
+        $delimiter = urlencode(',');
+        $desc = implode($delimiter,explode(' ',$request->param('desc'))).$delimiter.$request->param('desc1');
         if($request->param('default')){
             $default = 1;
         }else{
@@ -48,8 +59,15 @@ class Item extends Controller
         }
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
+        $postInfo = [
+            'user_id'=>$userid,
+            'name'=>$request->param('name'),
+            'desc'=>$desc,
+            'phone_num'=>$request->param('phone_num'),
+        ];
+
         $addrsObj = new Addrs();
-        $addrsObj->saveAddr($userid,$request->param('desc'),$default);
+        $addrsObj->saveAddr($userid,$postInfo,$default);
 
         return redirect($_SESSION['url']);
     }

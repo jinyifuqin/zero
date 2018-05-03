@@ -30,7 +30,9 @@ class Addrs extends Migrator
     {
         $table = $this->table('addrs',array('engine'=>'InnoDB'));
         $table->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
-            ->addColumn('desc', 'string',array('limit' => 32,'default'=>'','comment'=>'收货地址'))
+            ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'收货人名字'))
+            ->addColumn('desc', 'string',array('default'=>'','comment'=>'收货地址'))
+            ->addColumn('phone_num', 'string',array('default'=>'','null'=>true,'comment'=>'手机号'))
             ->addColumn('default', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'默认标识'))
             ->addForeignKey ('user_id' , 'users' , 'id' , [ 'delete' =>  'SET_NULL' , 'update' =>  'NO_ACTION' ])
             ->create();

@@ -62,6 +62,7 @@ Route::group('',[
     'wxlogin/:id' => ['wxLogin', ['method' => 'get']],
     'buy' => ['buy', ['method' => 'get']],
     'addAddr' => ['item/addAddr', ['method' => 'get']],
+    'addAddrInfo' => ['item/add_addr_info', ['method' => 'get']],
     'saveAddr' => ['item/saveAddr', ['method' => 'post']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=10" />
+		<title>提交订单3</title>
+		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/public/indexsource/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
+
+	</head>
+
+	<body class="bjhs1">
+		<div class="big_qb11">
+			<div class="shdz">
+				{if condition="($data.addr =='')"}
+				<div class="tjddb1">
+					<a href="/addAddr">
+						<span>您还没有收货地址，</span>
+						<font>点击新建</font>
+						<div class="tjddb2"></div>
+						<div class="huise"></div>
+					</a>
+				</div>
+				{else/}
+				<a href="/addAddr">
+				<div class="shdz1">
+					<font>{$data.addr.name}</font><span>{$data.addr.phone_num}</span></div>
+				<img src="/public/indexsource/images/jian1.jpg" class="jiantou" />
+				<div class="shdz2">
+					<span>地址：{$data.addr.desc}</span>
+				</div>
+				<div class="shdz3"></div>
+				</a>
+				{/if}
+			</div>
+			<div class="yidakuai">
+				<div class="tjddb3">
+					<div class="tjddb31">
+						<h3>江山时代</h3>
+					</div>
+					<div class="tjddb32">
+						<dl>
+							<dt><img src="/public/indexsource/images/zz5.jpg"/></dt>
+							<dd class="tjddb34">
+								<h4>整合渠道营销</h4><span>x1</span></dd>
+							<dd class="tjddb35">
+								<b>¥4500</b>
+								<div class="tjddb33">
+									<ul>
+										<li class="tjddb36">+</li>
+										<li class="tjddb37">1</li>
+										<li class="tjddb38">-</li>
+									</ul>
+								</div>
+							</dd>
+							<div class="cl"></div>
+						</dl>
+					</div>
+				</div>
+				<div class="tjddb39">
+					<a href="#">
+						<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>
+						<font class="yxyz">已选一张</font>
+					</a>
+				</div>
+			</div>
+			<div class="yidakuai">
+				<div class="tjddb3">
+					<div class="tjddb31">
+						<h3>盈科律师事务所</h3>
+					</div>
+					<div class="tjddb32">
+						<dl>
+							<dt><img src="/public/indexsource/images/zz5.jpg"/></dt>
+							<dd class="tjddb34">
+								<h4>常年法律顾问</h4><span>x1</span></dd>
+							<dd class="tjddb35">
+								<b>¥4500</b>
+								<div class="tjddb33">
+									<ul>
+										<li class="tjddb36">+</li>
+										<li class="tjddb37">1</li>
+										<li class="tjddb38">-</li>
+									</ul>
+								</div>
+							</dd>
+							<div class="cl"></div>
+						</dl>
+					</div>
+
+				</div>
+				<div class="tjddb39">
+					<a href="#">
+						<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>
+						<font class="yxyz">已选一张</font>
+					</a>
+				</div>
+			</div>
+			<div class="tjddb40">
+				<span>共1件商品 </span>
+				<font>小计：</font><b>¥4500</b>
+			</div>
+			<div class="huise1"></div>
+			<div class="tjddb39">
+				<a href="#">
+					<h3 class="xiaoziti">发票</h3><span>普通发票-个人<img src="/public/indexsource/images/jian1.jpg"/></span>
+
+				</a>
+			</div>
+			<div class="huise1"></div>
+			<div class="tjddb39">
+				<a href="#">
+					<h3>代金券</h3><span>-¥100.00<img src="/public/indexsource/images/jian1.jpg"/></span>
+				<font class="yxyz">已选一张</font>
+				</a>
+			</div>
+			<div class="tjddb41">
+				<h3>买家留言：</h3>
+				<input type="text" class="mjly" placeholder="请和买家协商确认" />
+			</div>
+			<div class="tjddb42">
+				<div class="tjddb421">
+					<h3>使用预存款支付</h3><span>（当前可用余额：¥7005.95）</span></div>
+				<div class="tjddb422">
+					<label class="switch-btn circle-style">
+            <input class="checked-switch" type="checkbox" />
+            <span class="text-switch"></span>
+            <span class="toggle-btn"></span>
+        </label></div>
+
+			</div>
+			<div class="tjddb43">
+				<div class="tjddb44">
+					<font>共<i>1</i>件</font><span>合计支付：</span><b>¥4500.00</b>
+				</div>
+				<div class="tjddb45">
+					<a href="#">提交订单</a>
+				</div>
+			</div>
+		</div>
+
+		<!--底部-->
+		<!--<div class="APPbtn">
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="images/Appbottom11.png" alt="" />
+						<img src="images/Appbottom1.png" alt="" />
+					</div>
+				</a>
+				<a href="#">店铺首页</a>
+			</div>
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="images/z2.png" alt="" />
+						<img src="images/z22.png" alt="" />
+					</div>
+				</a>
+				<a href="#">全部服务</a>
+			</div>
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="images/z33.png" alt="" />
+						<img src="images/z3.png" alt="" />
+					</div>
+				</a>
+				<a href="#">精彩案例</a>
+			</div>
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="images/z44.png" alt="" />
+						<img src="images/z4.png" alt="" />
+					</div>
+				</a>
+				<a href="#">店铺资料</a>
+			</div>
+		</div>-->
+	</body>
+
+</html>

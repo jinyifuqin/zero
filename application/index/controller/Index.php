@@ -31,12 +31,13 @@ class Index
         $addr = Addrs::where('id',$user->address)->find();
         $data['item'] = $item;
         $data['userinfo'] = $userinfo;
+        $addr->desc = preg_replace('/%2C/',' ',$addr->desc);
         $data['addr'] = $addr;
 
 
 //        unset($_SESSION['userinfo']);
-//        echo "<pre>";var_dump($data);exit;
-        return view("index@item/buy",['data'=>$data]);
+//        echo "<pre>";var_dump($addr);exit;
+        return view("index@item/buying",['data'=>$data]);
     }
 
     public function wxLogin(Request $request){

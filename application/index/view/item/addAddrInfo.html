@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>新建收货地址</title>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="telephone=no" name="format-detection">
+	<link rel="stylesheet" href="/public/indexsource/address/css/ydui.css?rev=@@hash">
+	<link rel="stylesheet" href="/public/indexsource/address/css/demo.css">
+	<!--<script src="/public/indexsource/address/js/ydui.flexible.js"></script>-->
+	<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+	<link href="/public/indexsource/css/css2.css" type="text/css" rel="stylesheet">
+	<link href="/public/indexsource/css/css_yan.css" type="text/css" rel="stylesheet">
+	<style>
+		.key{
+			width: 26%;
+			height: 4rem;
+			line-height: 4rem;
+			font-size: 1rem;
+			color: #333333;
+			padding-left: 5%;
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.value{
+			outline: none;
+			background: transparent;
+			border: none;
+			font-size: .95rem;
+			width: 54%;
+			vertical-align: middle;
+		}
+	</style>
+</head>
+<body>
+<!--这是头部-->
+<div class="APPtop">
+	<!--<a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>-->
+	<p class="page">永之泰俱乐部</p>
+	<!--<img class="applogo" src="/public/indexsource/images/applogo.png" alt="" />-->
+	<img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />
+</div>
+<div class="rbj"></div>
+<ul class="menuS">
+	<a href="index.html">
+		<p>首页</p>
+	</a>
+	<a href="#">
+		<p>商城</p>
+	</a>
+	<a href="#">
+		<p>社区</p>
+	</a>
+	<a href="#">
+		<p>分享</p>
+	</a>
+	<a href="#">
+		<p>会员中心</p>
+	</a>
+</ul>
+
+<section class="g-flexview">
+	<form method="post" id="formSub" action="/saveAddr">
+	<section class="g-scrollview">
+		<div class="fapiao1"><span>收货人</span><input type="text" name="name" placeholder="请填写收货人姓名"></div>
+		<div class="huixian"></div>
+		<div class="fapiao1 "><span>联系方式</span><input type="text" name="phone_num" placeholder="请填写收货人联系方式"></div>
+
+		<div class="huixian"></div>
+		<!--<div class="m-celltitle">默认调用</div>-->
+		<div class="m-cell ">
+			<div class="cell-item">
+				<div class="cell-left key">所在地区：</div>
+				<div class="cell-right cell-arrow">
+					<input type="text" name="desc" class="cell-input value" readonly id="J_Address" placeholder="请选择收货地址">
+				</div>
+			</div>
+		</div>
+		<div class="huixian"></div>
+		<div class="fapiao">
+			<div class="fapiao1"><span>详细地址</span><input type="text" name="desc1" placeholder="请填写详细地址"></div>
+		</div>
+		<!--<div class="m-celltitle">设置默认值</div>-->
+		<!--<div class="m-cell">-->
+			<!--<div class="cell-item">-->
+				<!--<div class="cell-left">所在地区：</div>-->
+				<!--<div class="cell-right cell-arrow">-->
+					<!--<input type="text" class="cell-input" readonly id="J_Address2" value="新疆 乌鲁木齐市 天山区" placeholder="请选择收货地址">-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<div class="huixian"></div>
+		<div class="mrdz">
+			<span>设为默认地址<br><font>注：每次下单时会使用该地址</font></span>
+			<div class="mrdz1">
+				<label class="switch-btn1 circle-style1" style="top: 18.5rem;">
+					<input class="checked-switch1" type="checkbox" />
+					<span class="text-switch1"></span>
+					<span class="toggle-btn1"></span>
+				</label>
+			</div>
+		</div>
+		<div class="shdz15"><a href="#" id="sub">保存并使用</a></div>
+	</section>
+	</form>
+</section>
+
+<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
+<script type="text/javascript" src="/public/indexsource/address/js/ydui.citys.js"></script>
+<script type="text/javascript" src="/public/indexsource/address/js/ydui.js"></script>
+<script type="text/javascript">
+	$(function(){
+	    var sub = $('#sub');
+	    sub.click(function(e){
+	        e.preventDefault();
+	        var form = $('#formSub');
+	        form.submit();
+		})
+	})
+    /**
+     * 默认调用
+     */
+    !function () {
+        var $target = $('#J_Address');
+
+        $target.citySelect();
+
+        $target.on('click', function (event) {
+            event.stopPropagation();
+            $target.citySelect('open');
+        });
+
+        $target.on('done.ydui.cityselect', function (ret) {
+            $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+        });
+    }();
+    /**
+     * 设置默认值
+     */
+    !function () {
+        var $target = $('#J_Address2');
+
+        $target.citySelect({
+            provance: '新疆',
+            city: '乌鲁木齐市',
+            area: '天山区'
+        });
+
+        $target.on('click', function (event) {
+            event.stopPropagation();
+            $target.citySelect('open');
+        });
+
+        $target.on('done.ydui.cityselect', function (ret) {
+            console.log(ret);
+            $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+        });
+    }();
+</script>
+
+</body>
+</html>
+

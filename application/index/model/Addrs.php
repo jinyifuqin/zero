@@ -17,15 +17,19 @@ class Addrs extends Model
         return Db::table('yzt_addrs')->where('id','<>', $addrId)->where('user_id',$userid)->update(['default' => '0']);
     }
 
-    public function saveAddr($userid,$desc,$default){
+    public function saveAddr($userid,$postInfo,$default){
         $re = $this->where('user_id', $userid)
             ->find();
         if($re == null){
             $default = 1;
         }
+
+        $this->data['name'] = $postInfo['name'];
+        $this->phone_num = $postInfo['phone_num'];
         $this->user_id = $userid;
-        $this->desc = $desc;
+        $this->desc = $postInfo['desc'];
         $this->default = $default;
+//        echo "<pre>";var_dump($this);exit;
         $this->save();
         $addrId = $this->id;
         try{
