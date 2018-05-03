@@ -64,6 +64,7 @@ Route::group('',[
     'addAddr' => ['item/addAddr', ['method' => 'get']],
     'addAddrInfo' => ['item/add_addr_info', ['method' => 'get']],
     'saveAddr' => ['item/saveAddr', ['method' => 'post']],
+    'changeAddr' => ['item/change_addr', ['method' => 'post']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

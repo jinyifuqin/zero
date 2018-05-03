@@ -23,15 +23,23 @@ class Addrs extends Model
         if($re == null){
             $default = 1;
         }
-
-        $this->data['name'] = $postInfo['name'];
-        $this->phone_num = $postInfo['phone_num'];
-        $this->user_id = $userid;
-        $this->desc = $postInfo['desc'];
-        $this->default = $default;
+        if($postInfo['addrid']){
+            $addrId = $postInfo['addrid'];
+            $this->save([
+                'default'  => $default,
+            ],['id' => $addrId]);
+        }else{
+            $this->data['name'] = $postInfo['name'];
+            $this->phone_num = $postInfo['phone_num'];
+            $this->user_id = $userid;
+            $this->desc = $postInfo['desc'];
+            $this->default = $default;
 //        echo "<pre>";var_dump($this);exit;
-        $this->save();
-        $addrId = $this->id;
+            $this->save();
+            $addrId = $this->id;
+        }
+
+
         try{
             if($default){
                 $this->setDefault($addrId,$userid);

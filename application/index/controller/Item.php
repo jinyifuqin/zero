@@ -53,6 +53,21 @@ class Item extends Controller
         return view("index@item/addAddrInfo");
     }
 
+    public function change_addr(Request $request){
+        $id = $request->param('id');
+        $addr = new Addrs();
+        $userId = $_SESSION['userinfo']->id;
+        $postInfo = ['addrid'=>$id];
+        $default = 1;
+        $re = $addr->saveAddr($userId,$postInfo,$default);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
     public function saveAddr(Request $request){
         $delimiter = urlencode(',');
         $desc = implode($delimiter,explode(' ',$request->param('desc'))).$delimiter.$request->param('desc1');

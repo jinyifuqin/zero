@@ -11,7 +11,8 @@
 		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
 		<link href="/public/indexsource/css/css2.css" type="text/css" rel="stylesheet">
 		<link href="/public/indexsource/css/css_yan.css" type="text/css" rel="stylesheet">
-
+		<script src="/public/indexsource/js/jquery.min.js"></script>
+		<script src="/public/indexsource/js/pic.js"></script>
 	</head>
 
 	<body class="bjhs2">
@@ -45,7 +46,7 @@
 			<div class="shdzgl">
 				<ul>
 					{foreach $re.addr as $vo}
-					<li>
+					<li class="choose" chooseid="{$vo.id}">
 						<a href="#">
 							{eq name="$vo.default" value="1"}
 							<img src="/public/indexsource/images/zz39.png" class="wimg" />
@@ -76,8 +77,44 @@
 					<a href="/addAddrInfo"><img src="/public/indexsource/images/zz40.png" /><span>新建地址</span></a>
 				</div>
 			</div>
-		</div>
 
+			<div class="jifen5">
+				<div class="jifen5_1">
+					<span>你确定要将<i>此地址</i>设为<i>默认地址</i>吗？</span>
+				</div>
+				<div>
+					<button type="button" class="button1"><a href="#">确定</a></button>
+					<button type="button" class="button2"><a href="#">取消</a></button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+            $(function() {
+                var addrId;
+                $(".choose").click(function() {
+                    addrId = $(this).attr('chooseid');
+                    $(".jifen5").css("display", "block");
+                })
+                $(".button1").click(function() {
+                    var url = "/changeAddr";
+                    var data = {'id':addrId};
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data,
+                        dataType: "json",
+                        success: function(data){
+							location.reload();
+                        }
+                    });
+                    $(".jifen5").css("display", "none");
+                })
+                $(".button2").click(function() {
+                    $(".jifen5").css("display", "none");
+                })
+
+            })
+		</script>
 	</body>
 
 </html>

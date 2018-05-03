@@ -290,3 +290,66 @@
 .xqgl2_r .wei{color: #ff5250;}
 .xqgl2_r .yi{color: #169e49;}
 /*------------------------------永之泰开始-----------------------------------------------------------------------------------------------------------*/
+.jifen1 span{width: 45%;text-align: center;display: inline-block;float: left;height: 2.2rem;line-height: 2.2rem;font-size: 1.1rem;margin-top: 2rem;color: #fbc179;border: 1px solid #fbc179;}
+.jifen1{width: 90%;margin-left: 5%;}
+.jifen1 span:nth-of-type(1){margin-right: 6%;}
+.jifen1 span a{color: #fbc179;display: block;}
+.jifen2 .jifen2_1{background: #fff;}
+.jifen2 .jifen2_1{height: 3rem;line-height: 3rem;}
+.jifen2 .jifen2_1 span{font-size: 1rem; padding-left: 3%;width: 30%;;float: left;overflow:hidden;color: #333;}
+.jifen2 .jifen2_1 font{font-size: 1rem;margin-left:3%;width: 40% ;float: left;overflow: hidden;;color: #333;}
+.jifen2 .jifen2_1 i{font-style: normal;font-size: .9rem;width: 20%;float: right;overflow: hidden;color: #333;}
+
+.jifen3 .jifen3_1{background: #fff;}
+.jifen3 .jifen3_1{height: 3rem;line-height: 3rem;border-bottom: 1px solid #f5f5f5;}
+.jifen3 .jifen3_1 span{font-size: 1rem; padding-left: 3%;width: 30%;;float: left;overflow:hidden;color: #333;}
+.jifen3 .jifen3_1 font{font-size: 1rem;margin-left:3%;width: 30% ;float: left;overflow: hidden;;color: #333;}
+.jifen3 .jifen3_1 i{font-style: normal;font-size: .9rem;width: 15%;float: right;overflow: hidden;color: #333;float: left;}
+.jifen3 .jifen3_1:nth-of-type(1){margin-top: .5rem;}
+.jifen3 img{vertical-align: middle;width: 7%;text-align: right;margin-left: 5%;}
+.tmtm{position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0rem;
+    bottom: 4.5rem;
+    left: 0;
+    background: rgba(0,0,0,0.5);z-index: 9999;display: none;}
+.jifen3 .jifen3_2{background: #fff;height: 3rem;line-height: 3rem;margin-top: .5rem;border-bottom: 1px solid #f5f5f5;margin-bottom: .2rem;}
+.jifen3 .jifen3_2 span{font-size: 1.1rem; padding-left: 3%;width: 30%;;float: left;overflow:hidden;color: #333;}
+.jifen3 .jifen3_2 font{font-size: 1.1rem;margin-left:3%;width: 30% ;float: left;overflow: hidden;;color: #333;}
+.jifen3 .jifen3_2 i{font-style: normal;font-size: 1.1rem;width: 15%;float: right;overflow: hidden;color: #333;float: left;}
+.find_qb{width: 100%;background: #fff;padding-top: .5rem;padding-bottom: .5rem;}
+.find{display: block;;margin: 0 auto;background: #fff;width: 62%;border: 1px solid #acacac;height: 2rem;line-height: 2rem;margin-top: 1rem;padding-left: 5%;border-radius: .5rem;font-size: 1rem;}
+.find1{width: 40%;vertical-align: middle;padding-left: 5%;border:none;outline: none;font-size: .8rem;}
+.find2{width: 12%;background: url(images/ss.png) no-repeat center center/cover  #fff;border: 1px solid #a9a9a9;background-size: 1.4rem 1.4rem;vertical-align: middle;border:none;outline: none;}
+.jifen4{width: 80%;height: 14rem;position: absolute;left: 10%; top: 16rem;z-index: 99999;display: none;background: #fff;text-align: center;}
+.jifen4 span{font-size: 1.3rem;color: #faa73f;display: block;margin-top: 2rem;text-align: left;margin-left: 10%;}
+.jifen4 font{font-size: 1rem;border: 1px solid #faa73f;padding: .5rem;margin-top: 1rem;padding: .5rem;display: inline-block;;color: #faa73f;}
+.jifen4 i{font-style: normal;font-size: 1rem;margin-left: 5%;margin-top: 1rem;display: inline-block;}
+.button1{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-top: 1.5rem;color: #fff;background: #7ecef4;border:none;}
+.button2{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-left: 5%;margin-top: 1.5rem;color: #fff;background: #91cd9e;border:none;}
+.button1 a{color: #fff;display: block;}
+.button2 a{color: #fff;display: block;}
+
+.jifen5{width: 80%;height: 14rem;position: absolute;left: 10%; top: 16rem;z-index: 99999;display: none;background: #fff;text-align: center;}
+.jifen5_1 span{font-size: 1.1rem;color: #333;display: block;margin-top: 2rem;text-align: left;margin-left: 10%;line-height: 2rem;padding-right: 5%;}
+.jifen5_1 i{font-style: normal;font-size: 1rem;margin-left: 2%;display: inline-block;color: #88abda;padding-right: .5rem;}
+.button1{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-top: 1.5rem;color: #fff;background: #7ecef4;border:none;}
+.button2{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-left: 5%;margin-top: 1.5rem;color: #fff;background: #91cd9e;border:none;}
+.button1 a{color: #fff;display: block;}
+.button2 a{color: #fff;display: block;}
+.jifen6{background: #fff;margin-top: 1rem;}
+.jifen6 ul li{width: 50%;float: left;text-align: center;height: 3rem;line-height: 3rem;font-size: 1rem;}
+.cl{height: 0;overflow: hidden;clear: both;}
+.tuoguan{background:#fff ;}
+.tuoguan1 {padding: .5rem 0;}
+.tuoguan1 span{font-size: 1.05rem;height: 1.6rem;line-height: 1.6rem;padding-left: 3%;width: 62%;display: inline-block;%;;}
+.tuoguan1 .button3{width: 15%;background:#7ecef4 ;border: none;height: 1.6rem;line-height: 1.6rem;}
+.tuoguan1 .button4{width: 15%;background:#91cd9e ;border: none;height: 1.6rem;line-height: 1.6rem;margin-left: 3%;}
+.tuoguan1 a{color: #fff;display: block;}
+.tuoguan2{width: 80%;height: 14rem;position: absolute;left: 10%; top: 16rem;z-index: 99999;display: none;background: #fff;text-align: center;}
+.tuoguan2 span{font-size: 1.1rem;text-align: center;;margin-top: 2rem;display: block;}
+.button5{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-top: 1.5rem;color: #fff;background: #7ecef4;border:none;}
+.button6{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-left: 5%;margin-top: 1.5rem;color: #fff;background: #91cd9e;border:none;}
+.button5 a{color: #fff;display: block;}
+.button6 a{color: #fff;display: block;}
