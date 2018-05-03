@@ -66,18 +66,23 @@ function upload($file){
     }
 }
 
-function download($url, $path = 'public/uploads')
+function download($url, $path = '')
 {
     $dir = date("Ymd").DS;
-    $path = $path.DS.$dir;
+
+    $path = 'public'.DS.'uploads'.DS.$dir;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
     $file = curl_exec($ch);
     curl_close($ch);
+//    echo "<pre>";var_dump($path);var_dump(file_exists($path));exit;
+    if(!file_exists($path)){
+        mkdir($path);
+    }
     $filename = md5(microtime(true)).'.jpg';
-//    echo "<pre>";var_dump($filename);exit;
+//    echo "<pre>";var_dump($filename);var_dump($path . $filename);exit;
     $resource = fopen($path . $filename,"a");
     fwrite($resource, $file);
     fclose($resource);

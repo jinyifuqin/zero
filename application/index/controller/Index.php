@@ -73,14 +73,14 @@ class Index
         }else{
             $get_user_info = $_SESSION['get_user_info'];
         }
-//        echo "<pre>";var_dump($get_user_info);exit;
+
         $re = $this->createUser($get_user_info);
 
         return redirect($_SESSION['url']);
     }
 
     public function createUser($get_user_info){
-        $re = Users::where('username',$get_user_info['nickname'])->find();
+        $re = Users::where('openid',$get_user_info['openid'])->find();
         if($re){
             $_SESSION['userinfo'] = $re;
             return true;
