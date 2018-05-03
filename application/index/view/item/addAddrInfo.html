@@ -34,7 +34,7 @@
 		}
 	</style>
 </head>
-<body>
+<body class="bjhs2">
 <!--这是头部-->
 <div class="APPtop">
 	<!--<a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>-->
@@ -94,14 +94,16 @@
 		<div class="huixian"></div>
 		<div class="mrdz">
 			<span>设为默认地址<br><font>注：每次下单时会使用该地址</font></span>
-			<div class="mrdz1">
+			<div class="mrdz1" id="changeBox">
 				<label class="switch-btn1 circle-style1" style="top: 18.5rem;">
-					<input class="checked-switch1" type="checkbox" />
+					<input name="default" value="0" class="checked-switch1" type="checkbox"  />
 					<span class="text-switch1"></span>
 					<span class="toggle-btn1"></span>
 				</label>
 			</div>
+
 		</div>
+
 		<div class="shdz15"><a href="#" id="sub">保存并使用</a></div>
 	</section>
 	</form>
@@ -112,6 +114,18 @@
 <script type="text/javascript" src="/public/indexsource/address/js/ydui.js"></script>
 <script type="text/javascript">
 	$(function(){
+	    $('#changeBox').click(function () {
+	        var input = $(this).find('input');
+	        if(input.val() == 1){
+                input.prop('checked',false);
+                input.val(0);
+			}else{
+                input.prop('checked',true);
+                input.val(1);
+			}
+
+        });
+
 	    var sub = $('#sub');
 	    sub.click(function(e){
 	        e.preventDefault();

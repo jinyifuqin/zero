@@ -40,9 +40,13 @@ class Item extends Controller
         $userid = $userinfo->id;
         $addr = Addrs::all(['user_id'=>$userid]);
         $data['userid'] = $userid;
+        foreach ($addr as $k=>&$v){
+            $v['desc'] = preg_replace('/%2C/',' ',$v->desc);
+        }
+
         $data['addr'] = $addr;
-//        echo "<pre>";var_dump($data);exit;
-        return view("index@item/addAddr3",['re'=>$data]);
+
+        return view("index@item/addAddrList",['re'=>$data]);
     }
 
     public function add_addr_info(){

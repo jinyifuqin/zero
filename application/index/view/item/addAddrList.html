@@ -52,10 +52,13 @@
 							{else/}
 							{/eq}
 							<div class="shdz_l shdz_ll">
-								<div class="shdz1"><span>{$re.userid}张三</span> <span> 13112345678</span>
+								<div class="shdz1"><span>{$vo.name}</span> <span> {$vo.phone_num}</span>
+									{eq name="$vo.default" value="1"}
 									<font>默认</font>
+									{else/}
+									{/eq}
 								</div>
-								<div class="shdz2"><span>湖北省武汉市东湖新技术开发区  光谷未来城海外 人才大楼b4栋</span></div>
+								<div class="shdz2"><span>{$vo.desc}</span></div>
 							</div>
 							<div class="shdz_r">
 								<img src="/public/indexsource/images/zz37.png" />
