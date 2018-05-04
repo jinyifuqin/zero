@@ -17,6 +17,7 @@
 		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
 		<link href="/public/indexsource/css/css2.css" type="text/css" rel="stylesheet">
 		<link href="/public/indexsource/css/css_yan.css" type="text/css" rel="stylesheet">
+		<script src="/public/indexsource/js/pic.js"></script>
 	</head>
 <style type="text/css">
 	.buynum{
@@ -35,6 +36,22 @@
 	}
 </style>
 	<body class="bjhs1">
+	<div class="APPtop user_top">
+		<a href="/item/{$data.item.id}"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>
+		<p class="page">永之泰俱乐部</p>
+		<!--<img class="applogo" src="images/applogo.png" alt="" />-->
+		<img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />
+	</div>
+	<div class="rbj"></div>
+	<ul class="menuS">
+		<a href="index.html"><p>首页</p></a>
+		<a href="#"><p>商城</p></a>
+		<a href="#"><p>社区</p></a>
+		<a href="#"><p>分享</p></a>
+		<a href="#"><p>会员中心</p></a>
+	</ul>
+
+
 		<form method="post" action="/tradeCreate">
 
 
@@ -194,6 +211,10 @@
 		}
 
 		$(function(){
+			var top = $('.APPtop');
+            var height = top.outerHeight();
+            var addr = $('.big_qb11');
+            addr.css('padding-top',height);
             var num = $('.inputNum').val();
             var onePrice = $('.oneprice').attr('oneprice');
             $('.inputNum').blur(function(){
