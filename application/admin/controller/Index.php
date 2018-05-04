@@ -2,6 +2,7 @@
 namespace app\Admin\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
+use app\admin\model\Discounts;
 use \think\Controller;
 use think\Request;
 
@@ -248,6 +249,47 @@ class Index extends Controller
         }
         echo json_encode($msg);
 //        echo "<pre>";var_dump($post);
+    }
+
+    public function discount(){
+        $disList = Discounts::all();
+        return view("admin@index/discount",['disList'=>$disList]);
+    }
+
+    public function add_discount(){
+        $str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $len = 30;
+        $content = "";
+        for($i=0;$i<30;$i++){
+            $num = mt_rand(0,strlen($str)-1);
+            $content .= substr($str,$num,1);
+        }
+        $dis = new Discounts([
+            'number'  =>  $content,
+        ]);
+        $re = $dis->save();
+        if($re){
+            return view("admin@index/alertDiscount",['number'=>$content]);
+        }
+//        echo "<pre>";var_dump($content);exit;
+
+    }
+
+    public function del_discount(Request $request){
+        $id = $request->param('id');
+        $re = Discounts::destroy($id);
+        return $re;
+    }
+
+    public function del_discount_all(Request $request){
+        $ids = $request->param()['ids'];
+        $re = Discounts::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
     }
 
 

@@ -45,6 +45,10 @@ Route::group('admin',[
     'adminAdd' => ['admin/index/admin_add', ['method' => 'get']],
     'saveAdmin' => ['admin/index/save_admin', ['method' => 'post']],
     'adminEdit/:id' => ['admin/index/admin_edit', ['method' => 'get']],
+    'discount' => ['admin/index/discount', ['method' => 'get']],
+    'addDiscount' => ['admin/index/add_discount', ['method' => 'get']],
+    'discountDel' => ['admin/index/del_discount', ['method' => 'get']],
+    'discountDelAll' => ['admin/index/del_discount_all', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
