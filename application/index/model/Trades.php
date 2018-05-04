@@ -22,11 +22,11 @@ class Trades extends Model
         return $type[$value];
     }
 
-    public function items(){
-        return $this->hasOne('app\admin\model\Items','id','item_id');
-    }
-
-    public function addrs(){
-        return $this->hasOne('app\index\model\Addrs','id','address');
-    }
+//    public function items(){
+//        return $this->hasOne('app\admin\model\Items','id','item_id');
+//    }
+//
+//    public function addrs(){
+//        return $this->hasOne('app\index\model\Addrs','id','address');
+//    }
 }

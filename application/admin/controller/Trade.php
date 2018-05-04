@@ -11,6 +11,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Cats;
 use app\admin\model\Items;
+use app\index\model\Addrs;
 use app\index\model\Trades;
 use \think\Controller;
 use think\Request;
@@ -19,10 +20,10 @@ class Trade extends Controller
 {
     public function index(){
         $trades = Trades::all();
+        $delimiter = urlencode(',');
         foreach ($trades as $k=>&$v){
-            $v['item_name'] = $v->items->name;
-            $v['address'] = $v->addrs->desc;
-            $v['name'] = json_decode(urldecode($v['name']));
+            $v['item_name'] = Items::where('id',$v['item_id'])->value('name');
+            $v['address'] = preg_replace("/$delimiter/",' ',$v['address']);
         }
 
         return view("admin@trade/index",['trades'=>$trades]);
