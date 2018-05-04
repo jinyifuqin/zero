@@ -33,7 +33,7 @@ function getCaptcha(){
         $captcha = strtolower($captcha);
         $_SESSION["captcha"] = $captcha;
     }
-        for ($$i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $pointcolor = imagecolorallocate($image, mt_rand(50, 200), mt_rand(50, 200), mt_rand(50, 200));
             imagesetpixel($image, mt_rand(1, 99), mt_rand(1, 29), $pointcolor);
         }
