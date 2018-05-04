@@ -29,7 +29,7 @@ class Brands extends Migrator
     public function change()
     {
 
-        $table = $this->table('brands');
+        $table = $this->table('brands',array('engine'=>'MyISAM'));
         $table->addColumn('sort', 'integer',array('limit' => 32,'default'=>0,'comment'=>'排序'))
             ->addColumn('logo', 'string',array('limit' => 64,'default'=>'','comment'=>'LOGO'))
             ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'品牌名称'))

@@ -108,40 +108,43 @@ class Item extends Controller
     }
 
     public function tradeCreate(Request $request){
+        $userid = $_SESSION['userinfo']->id;
         $post = $request->param();
         $trade = new Trades();
         $tradeNum = date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
         $create_time = date("Y-m-d H:i:s");
-        $numMatch = preg_match('/^\d+$/',$post['number']);
+
+        $numMatch = preg_match('/^\d+$/',$post['buynum']);
         $phoneMatch = preg_match('/^1[34578]\d{9}$/',$post['phone_num']);
         if(!$numMatch){
             $data = ['msg'=>"请输入正确的数量！",'type'=>"error"];
             return  json_encode($data);
-
         }
         if(!$phoneMatch){
             $data = ['msg'=>"请输入正确的手机号！",'type'=>"error"];
             return json_encode($data);
-
         }
         if($post['address'] == ''){
             $data = ['msg'=>"请添加收货地址！",'type'=>"error"];
             return json_encode($data);
-
         }
+//        return;
+        $delimiter = urlencode(',');
+        $post['address'] = implode($delimiter,explode(' ',$post['address']));
+//        echo "<pre>";var_dump($post['address']);exit;
         $all = [
             'name'  =>  $post['name'],
             'address'  =>  $post['address'],
-            'item_id'  =>  $post['item_id'],
-            'user_id'  =>  $post['userid'],
-            'type'  =>  $post['type'],
-            'buy_num'  =>  $post['number'],
+            'item_id'  =>  $post['itemid'],
+            'user_id'  =>  $userid,
+            'type'  =>  0,
+            'buy_num'  =>  $post['buynum'],
+            'buy_price' => $post['totalprice'],
             'phone_num'  =>  $post['phone_num'],
             'trade_number'  =>  $tradeNum,
             'create_time'  =>  $create_time,
         ];
         $trade->data($all);
-//        echo "<pre>";var_dump($all);exit;
         $re = $trade->save();
         if($re){
             $data = ['msg'=>"订单生成成功！请等待服务中心发货",'type'=>"success"];

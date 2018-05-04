@@ -28,7 +28,7 @@ class Articles extends Migrator
      */
     public function change()
     {
-        $table = $this->table('articles',array('engine'=>'InnoDB'));
+        $table = $this->table('articles',array('engine'=>'MyISAM'));
         $table->addColumn('content', 'string',array('default'=>'','comment'=>'文章内容'))
             ->addColumn('title', 'string',array('limit' => 32,'default'=>'','comment'=>'文章标题'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))

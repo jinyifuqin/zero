@@ -28,7 +28,7 @@ class ArticleTypes extends Migrator
      */
     public function change()
     {
-        $table = $this->table('article_types',array('engine'=>'InnoDB'));
+        $table = $this->table('article_types',array('engine'=>'MyISAM'));
         $table->addColumn('name', 'string',array('limit' => 32,'default'=>0,'comment'=>'类型名称'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
             ->create();

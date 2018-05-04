@@ -28,7 +28,7 @@ class Users extends Migrator
      */
     public function change()
     {
-        $table = $this->table('users');
+        $table = $this->table('users',array('engine'=>'MyISAM'));
         $table
             ->addColumn('username', 'string',array('limit' => 64,'default'=>'','comment'=>'用户名，登陆使用'))
             ->addColumn('nickname', 'string',array('default'=>'','comment'=>'昵称'))

@@ -28,7 +28,7 @@ class Discounts extends Migrator
      */
     public function change()
     {
-        $table = $this->table('discount');
+        $table = $this->table('discount',array('engine'=>'MyISAM'));
         $table->addColumn('number', 'integer',array('limit' => 32,'default'=>0,'comment'=>'优惠券号码'))
             ->create();
     }

@@ -28,7 +28,7 @@ class Cats extends Migrator
      */
     public function change()
     {
-        $table = $this->table('cats',array('engine'=>'InnoDB'));
+        $table = $this->table('cats',array('engine'=>'MyISAM'));
         $table->addColumn('name', 'string',array('limit' => 15,'default'=>'','comment'=>'分类名称'))
             ->addIndex(array('name'), array('unique' => true))
             ->create();

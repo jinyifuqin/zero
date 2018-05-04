@@ -1,5 +1,6 @@
 <?php
 namespace app\index\controller;
+use app\admin\model\Brands;
 use app\index\model\Addrs;
 use app\weixin\controller\Wechat;
 use app\index\model\Users;
@@ -29,14 +30,21 @@ class Index
         $user = Users::where('id',$userid)->find();
         $_SESSION['userinfo'] = $user;
         $addr = Addrs::where('id',$user->address)->find();
+        $item->brandName = Brands::where('id',$item->brand_id)->value('name');
+//        echo "<pre>";var_dump($item);exit;
         $data['item'] = $item;
         $data['userinfo'] = $userinfo;
-        $addr->desc = preg_replace('/%2C/',' ',$addr->desc);
-        $data['addr'] = $addr;
+
+//        echo "<pre>";var_dump($addr);exit;
+        if($addr){
+            $addr->desc = preg_replace('/%2C/',' ',$addr->desc);
+            $data['addr'] = $addr;
+        }
+
 
 
 //        unset($_SESSION['userinfo']);
-//        echo "<pre>";var_dump($addr);exit;
+//        echo "<pre>";var_dump($data);exit;
         return view("index@item/buying",['data'=>$data]);
     }
 

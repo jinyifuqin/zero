@@ -12,13 +12,35 @@
 		<script type="text/javascript" src="/public/indexsource/js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
 		<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
-
+		<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+		<link href="/public/indexsource/css/css2.css" type="text/css" rel="stylesheet">
+		<link href="/public/indexsource/css/css_yan.css" type="text/css" rel="stylesheet">
 	</head>
+<style type="text/css">
+	.buynum{
+		background: transparent;
+		outline: none;
+		border: none;width: 90%;
+		overflow: hidden;font-size: 12px;
 
+	}
+	.drop{
+		line-height: 4rem;
+		background: transparent;
+		margin-top: 1.5rem;
+		height: 4rem;
+		margin-bottom: 6rem;
+	}
+</style>
 	<body class="bjhs1">
-		<div class="big_qb11">
+		<form method="post" action="/tradeCreate">
+
+
+		<div class="big_qb11" style="overflow: hidden;">
 			<div class="shdz">
-				{if condition="($data.addr =='')"}
+				{if condition="(!array_key_exists('addr',$data))"}
 				<div class="tjddb1">
 					<a href="/addAddr">
 						<span>您还没有收货地址，</span>
@@ -29,64 +51,71 @@
 				</div>
 				{else/}
 				<a href="/addAddr">
-				<div class="shdz1">
-					<font>{$data.addr.name}</font><span>{$data.addr.phone_num}</span></div>
-				<img src="/public/indexsource/images/jian1.jpg" class="jiantou" />
-				<div class="shdz2">
-					<span>地址：{$data.addr.desc}</span>
-				</div>
-				<div class="shdz3"></div>
+					<div class="shdz1">
+						<font>{$data.addr.name}</font><span>{$data.addr.phone_num}</span></div>
+					<img src="/public/indexsource/images/jian1.jpg" class="jiantou" />
+					<div class="shdz2">
+						<span>地址：{$data.addr.desc}</span>
+					</div>
+					<div class="shdz3"></div>
+					<input type="hidden" name="name" value="{$data.addr.name}">
+					<input type="hidden" name="address" value="{$data.addr.desc}">
+					<input type="hidden" name="phone_num" value="{$data.addr.phone_num}">
 				</a>
 				{/if}
 			</div>
+			<!--<div class="yidakuai">-->
+				<!--<div class="tjddb3">-->
+					<!--<div class="tjddb31">-->
+						<!--<h3>江山时代</h3>-->
+					<!--</div>-->
+					<!--<div class="tjddb32">-->
+						<!--<dl>-->
+							<!--<dt><img src="/public/indexsource/images/zz5.jpg"/></dt>-->
+							<!--<dd class="tjddb34">-->
+								<!--<h4>整合渠道营销</h4><span>x1</span></dd>-->
+							<!--<dd class="tjddb35">-->
+								<!--<b>¥4500</b>-->
+								<!--<div class="tjddb33">-->
+									<!--<ul>-->
+										<!--<li class="tjddb36">+</li>-->
+										<!--<li class="tjddb37">1</li>-->
+										<!--<li class="tjddb38">-</li>-->
+									<!--</ul>-->
+								<!--</div>-->
+							<!--</dd>-->
+							<!--<div class="cl"></div>-->
+						<!--</dl>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="tjddb39">-->
+					<!--<a href="#">-->
+						<!--<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>-->
+						<!--<font class="yxyz">已选一张</font>-->
+					<!--</a>-->
+				<!--</div>-->
+			<!--</div>-->
+
 			<div class="yidakuai">
 				<div class="tjddb3">
 					<div class="tjddb31">
-						<h3>江山时代</h3>
+						<h3>品牌：{$data.item.brandName} </h3>
+						<input type="hidden" name="itemid" value="{$data.item.id}">
+						<!--<input id="inpB" type="hidden" name="buynum" value="">-->
+						<input id="inpP" type="hidden" name="totalprice" value="{$data.item.price}">
 					</div>
 					<div class="tjddb32">
 						<dl>
-							<dt><img src="/public/indexsource/images/zz5.jpg"/></dt>
+							<dt><img src="/public/uploads/{$data.item.pic}"/></dt>
 							<dd class="tjddb34">
-								<h4>整合渠道营销</h4><span>x1</span></dd>
+								<h4>{$data.item.name}</h4><span>x1</span></dd>
 							<dd class="tjddb35">
-								<b>¥4500</b>
+								<b>¥{$data.item.price}</b>
 								<div class="tjddb33">
 									<ul>
-										<li class="tjddb36">+</li>
-										<li class="tjddb37">1</li>
-										<li class="tjddb38">-</li>
-									</ul>
-								</div>
-							</dd>
-							<div class="cl"></div>
-						</dl>
-					</div>
-				</div>
-				<div class="tjddb39">
-					<a href="#">
-						<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>
-						<font class="yxyz">已选一张</font>
-					</a>
-				</div>
-			</div>
-			<div class="yidakuai">
-				<div class="tjddb3">
-					<div class="tjddb31">
-						<h3>盈科律师事务所</h3>
-					</div>
-					<div class="tjddb32">
-						<dl>
-							<dt><img src="/public/indexsource/images/zz5.jpg"/></dt>
-							<dd class="tjddb34">
-								<h4>常年法律顾问</h4><span>x1</span></dd>
-							<dd class="tjddb35">
-								<b>¥4500</b>
-								<div class="tjddb33">
-									<ul>
-										<li class="tjddb36">+</li>
-										<li class="tjddb37">1</li>
-										<li class="tjddb38">-</li>
+										<li class="tjddb36 plus">+</li>
+										<li class="tjddb37 num"><input id="inpB" type="number" value="1" placeholder="1" name="buynum" class="buynum inputNum"/></li>
+										<li class="tjddb38 reduce">-</li>
 									</ul>
 								</div>
 							</dd>
@@ -95,95 +124,138 @@
 					</div>
 
 				</div>
-				<div class="tjddb39">
-					<a href="#">
-						<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>
-						<font class="yxyz">已选一张</font>
-					</a>
-				</div>
+				<!--<div class="tjddb39">-->
+					<!--<a href="#">-->
+						<!--<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>-->
+						<!--<font class="yxyz">已选一张</font>-->
+					<!--</a>-->
+				<!--</div>-->
 			</div>
+			<div class="oneprice" style="display: none;" oneprice="{$data.item.price}"></div>
 			<div class="tjddb40">
 				<span>共1件商品 </span>
-				<font>小计：</font><b>¥4500</b>
+				<font>小计：</font><b>¥{$data.item.price}</b>
 			</div>
-			<div class="huise1"></div>
-			<div class="tjddb39">
-				<a href="#">
-					<h3 class="xiaoziti">发票</h3><span>普通发票-个人<img src="/public/indexsource/images/jian1.jpg"/></span>
+			<!--<div class="huise1"></div>-->
+			<!--<div class="tjddb39">-->
+				<!--<a href="#">-->
+					<!--<h3 class="xiaoziti">发票</h3><span>普通发票-个人<img src="/public/indexsource/images/jian1.jpg"/></span>-->
 
-				</a>
-			</div>
-			<div class="huise1"></div>
-			<div class="tjddb39">
-				<a href="#">
-					<h3>代金券</h3><span>-¥100.00<img src="/public/indexsource/images/jian1.jpg"/></span>
-				<font class="yxyz">已选一张</font>
-				</a>
-			</div>
-			<div class="tjddb41">
-				<h3>买家留言：</h3>
-				<input type="text" class="mjly" placeholder="请和买家协商确认" />
-			</div>
-			<div class="tjddb42">
-				<div class="tjddb421">
-					<h3>使用预存款支付</h3><span>（当前可用余额：¥7005.95）</span></div>
-				<div class="tjddb422">
-					<label class="switch-btn circle-style">
-            <input class="checked-switch" type="checkbox" />
-            <span class="text-switch"></span>
-            <span class="toggle-btn"></span>
-        </label></div>
-
+				<!--</a>-->
+			<!--</div>-->
+			<!--<div class="huise1"></div>-->
+			<!--<div class="tjddb39">-->
+				<!--<a href="#">-->
+					<!--<h3>代金券</h3><span>-¥100.00<img src="/public/indexsource/images/jian1.jpg"/></span>-->
+				<!--<font class="yxyz">已选一张</font>-->
+				<!--</a>-->
+			<!--</div>-->
+			<!--<div class="tjddb41">-->
+				<!--<h3>买家留言：</h3>-->
+				<!--<input type="text" class="mjly" placeholder="请和买家协商确认" />-->
+			<!--</div>-->
+			<!--<div class="huise1"></div>-->
+			<div class="jifen5" style="background: gainsboro">
+				<div class="jifen5_1">
+					<span>订单创建成功等待<i>服务中心</i>发货</span>
+				</div>
+				<div>
+					<button type="button" class="button1"><a href="#">确定</a></button>
+					<!--<button type="button" class="button2"><a href="#">取消</a></button>-->
+				</div>
 			</div>
 			<div class="tjddb43">
 				<div class="tjddb44">
-					<font>共<i>1</i>件</font><span>合计支付：</span><b>¥4500.00</b>
+					<font>共<i>1</i>件</font><span>合计支付：</span><b>¥{$data.item.price}</b>
 				</div>
 				<div class="tjddb45">
-					<a href="#">提交订单</a>
+					<a href="#" id="sub">提交订单</a>
 				</div>
 			</div>
 		</div>
+		</form>
+	<script>
+		function set(num,oneAllPrice){
+            var numtag = $('.tjddb44 font');
+            var numtag1 = $('.tjddb40 span');
+            var numtag2 = $('.tjddb34 span');
+            var smallTotal = $('.tjddb40 b');
+            var smallTotal1 = $('.tjddb35 b');
+            var allTotal = $('.tjddb44 b');
+            $('.inputNum').val(num);
+            numtag.html("共<i>"+num+"</i>件");
+            numtag1.html("共"+num+"件商品");
+            numtag2.html("x"+num);
+            smallTotal.html("¥"+oneAllPrice);
+            smallTotal1.html("¥"+oneAllPrice);
+            allTotal.html("¥"+oneAllPrice);
+            $('#inpB').val(num);
+            $('#inpP').val(oneAllPrice);
+		}
 
-		<!--底部-->
-		<!--<div class="APPbtn">
-			<div class="APPbtn1">
-				<a href="#">
-					<div class="APPbtn1_img">
-						<img src="images/Appbottom11.png" alt="" />
-						<img src="images/Appbottom1.png" alt="" />
-					</div>
-				</a>
-				<a href="#">店铺首页</a>
-			</div>
-			<div class="APPbtn1">
-				<a href="#">
-					<div class="APPbtn1_img">
-						<img src="images/z2.png" alt="" />
-						<img src="images/z22.png" alt="" />
-					</div>
-				</a>
-				<a href="#">全部服务</a>
-			</div>
-			<div class="APPbtn1">
-				<a href="#">
-					<div class="APPbtn1_img">
-						<img src="images/z33.png" alt="" />
-						<img src="images/z3.png" alt="" />
-					</div>
-				</a>
-				<a href="#">精彩案例</a>
-			</div>
-			<div class="APPbtn1">
-				<a href="#">
-					<div class="APPbtn1_img">
-						<img src="images/z44.png" alt="" />
-						<img src="images/z4.png" alt="" />
-					</div>
-				</a>
-				<a href="#">店铺资料</a>
-			</div>
-		</div>-->
+		$(function(){
+            var num = $('.inputNum').val();
+            var onePrice = $('.oneprice').attr('oneprice');
+            $('.inputNum').blur(function(){
+                var reg = /^[1-9][0-9]*$/;
+                num = $(this).val();
+                console.log(num);
+                var check = reg.test(num);
+                if(!check){
+                    $('.inputNum').val(1);
+                    set(1,1*onePrice);
+                    layer.msg('请填写正确的数量!',{icon:2,time:1000});
+                    return false;
+				}
+                var oneAllPrice = onePrice*num;
+				set(num,oneAllPrice);
+			});
+            $('.plus').click(function(){
+                var reg = /^[1-9][1-9]*$/;
+                var check = reg.test(num);
+                if(!check){
+					return false;
+				}
+                num = parseInt(num)+1;
+                var oneAllPrice = onePrice*num;
+                set(num,oneAllPrice);
+			});
+            $('.reduce').click(function(){
+                var reg = /^[1-9][1-9]*$/;
+                var check = reg.test(num);
+                if(!check){
+                    return false;
+                }
+                if(parseInt(num)>1)
+                num = parseInt(num)-1;
+                var oneAllPrice = onePrice*num;
+                set(num,oneAllPrice);
+            });
+
+            $('#sub').click(function(e){
+				e.preventDefault();
+				var url = $('form').attr('action');
+				var data = $('form').serialize();
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    dataType: "json",
+                    success: function(result){
+                        result = JSON.parse(result);
+                        if(result.type == 'success')
+                            $(".jifen5").css("display", "block");
+                    }
+                });
+
+			})
+
+            $(".button1").click(function() {
+                $(".jifen5").css("display", "none");
+                window.location.href="/";
+            })
+		})
+	</script>
 	</body>
 
 </html>
