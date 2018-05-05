@@ -18,9 +18,13 @@ class Trades extends Model
 
     public function getCheckTypeAttr($value)
     {
-//        echo "xx";exit;
         $checktype = [0=>'未通过',1=>'已通过'];
         return $checktype[$value];
+    }
+
+    public function getAdminCheckTypeAttr($value){
+        $admincheck = [0=>'管理员未通过',1=>'管理员已通过'];
+        return $admincheck[$value];
     }
 
 //    public function items(){
