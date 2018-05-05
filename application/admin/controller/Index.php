@@ -71,6 +71,9 @@ class Index extends Controller
             ->find();
         if($re){
             $_SESSION['adminUserInfo'] = $re;
+            $ip = getIp();
+            $time = date('Y-m-d H:i:s');
+            Adminusers::update(['id' => $re->id, 'last_login_ip' => $ip , 'last_login_time'=>$time]);
             $url = url('admin/index/index');
             $msg = array(
                 "url"=>$url,

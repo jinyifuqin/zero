@@ -16,6 +16,23 @@ use think\Request;
 
 class Item  extends Controller
 {
+    public function __construct(Request $request = null)
+    {
+        session_start();
+//        unset($_SESSION['adminUserInfo']);
+        parent::__construct($request);
+    }
+
+    protected $beforeActionList = [
+        'check_login',
+    ];
+
+    public function check_login(){
+        $check = array_key_exists('adminUserInfo',$_SESSION);
+        if(!$check)
+            $this->redirect('/admin/login');
+    }
+
     public function index(){
         $items = Items::all();
         foreach ($items as $k=>&$v){
