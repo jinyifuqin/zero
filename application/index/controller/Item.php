@@ -137,7 +137,7 @@ class Item extends Controller
             'address'  =>  $post['address'],
             'item_id'  =>  $post['itemid'],
             'user_id'  =>  $userid,
-            'type'  =>  0,
+            'check_type'  =>  0,
             'buy_num'  =>  $post['buynum'],
             'buy_price' => $post['totalprice'],
             'phone_num'  =>  $post['phone_num'],

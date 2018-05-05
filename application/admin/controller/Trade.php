@@ -21,10 +21,14 @@ class Trade extends Controller
     public function index(){
         $trades = Trades::all();
         $delimiter = urlencode(',');
+
         foreach ($trades as $k=>&$v){
             $v['item_name'] = Items::where('id',$v['item_id'])->value('name');
             $v['address'] = preg_replace("/$delimiter/",' ',$v['address']);
+            $v['trade_status'] = $v->getData('check_type');   //审核状态
+//            echo "<pre>";var_dump($v['check_type']);exit;
         }
+
 
         return view("admin@trade/index",['trades'=>$trades]);
     }
@@ -33,10 +37,10 @@ class Trade extends Controller
         $id = $request->param('id');
         $trade = Trades::get($id);
 
-        if($trade->getData('type') == 0){
-            $trade->type = 1;
+        if($trade->getData('check_type') == 0){
+            $trade->check_type = 1;
         }else{
-            $trade->type = 0;
+            $trade->check_type = 0;
         }
         $result = $trade->save();
         if($request){

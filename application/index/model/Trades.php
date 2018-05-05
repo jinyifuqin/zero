@@ -16,10 +16,11 @@ class Trades extends Model
         return $time;
     }
 
-    public function getTypeAttr($value)
+    public function getCheckTypeAttr($value)
     {
-        $type = [0=>'未发货',1=>'已发货'];
-        return $type[$value];
+//        echo "xx";exit;
+        $checktype = [0=>'未通过',1=>'已通过'];
+        return $checktype[$value];
     }
 
 //    public function items(){
