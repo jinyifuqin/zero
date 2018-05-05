@@ -12,5 +12,8 @@ use think\Model;
 
 class Points extends Model
 {
-
+    public function getCreateTimeAttr($time)
+    {
+        return $time;
+    }
 }
