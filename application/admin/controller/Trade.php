@@ -13,6 +13,7 @@ use app\admin\model\Cats;
 use app\admin\model\Items;
 use app\index\model\Addrs;
 use app\index\model\Trades;
+use app\index\controller\Point;
 use \think\Controller;
 use think\Request;
 
@@ -68,8 +69,26 @@ class Trade extends Controller
             }
         }
 
+
+
         $result = $trade->save();
+
         if($request){
+//            echo "<pre>";var_dump($trade);exit;
+            if($type){
+                if($trade->getData('admin_check_type') == 1){
+                    $giveDiscount['userId'] = $trade->user_id;
+                    $giveDiscount['pointCount'] = $trade->buy_price;
+                    $giveDiscount['type'] = 1;
+                    $giveDiscount['trade_number'] = $trade->trade_number;
+                    $pointObj = new Point();
+                    $pointObj->addPointByBuy($giveDiscount);
+
+                }else{
+                    $pointObj = new Point();
+                    $pointObj->delPointByTradeId($trade->trade_number);
+                }
+            }
             $msg = array('status'=>'Success');
         }else{
             $msg = array('status'=>'fails');

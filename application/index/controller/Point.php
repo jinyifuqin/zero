@@ -30,34 +30,31 @@ class Point  extends Controller
         parent::__construct($request);
     }
 
-    public function addDiscountByBuy($giveDiscount){
+    public function addPointByBuy($giveDiscount){
         $this->userId = $giveDiscount['userId'];
         $this->pointCount = $giveDiscount['pointCount'];
         $this->type = $giveDiscount['type'];
+        $this->trade_number = $giveDiscount['trade_number'];
 
         $point = Points::create([
             'count'  =>  $this->pointCount,
             'user_id' =>  $this->userId,
-            'type' =>   $this->type
+            'type' =>   $this->type,
+            'trade_number' => $this->trade_number,
+            'future_count' => $this->pointCount*2
         ]);
 
-        $surpluspoint = SurplusPoints::create([
-            'userid' =>  $this->userId,
-            'point_count' =>   $this->pointCount,
-        ]);
-
-
+//        $surpluspoint = SurplusPoints::create([
+//            'userid' =>  $this->userId,
+//            'point_count' =>   $this->pointCount,
+//            'trade_number' => $this->trade_number,
+//        ]);
 
     }
 
-    public function startUpDiscount(){
-        ignore_user_abort(); //即使Client断开(如关掉浏览器)，PHP脚本也可以继续执行.
-        set_time_limit(0); // 执行时间为无限制，php默认执行时间是30秒，可以让程序无限制的执行下去
-        $interval=24*60*60; // 每隔一天运行一次
-//        do{
-//            sleep($interval); // 按设置的时间等待一小时循环执行
-//            $sql="update blog set time=now()";
-//            ...... //其他操作
-//        }while(true);
+    public function delPointByTradeId($trade_number){
+        Points::destroy(['trade_number' => $trade_number]);
     }
+
+
 }

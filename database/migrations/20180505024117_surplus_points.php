@@ -31,6 +31,7 @@ class SurplusPoints extends Migrator
         $table = $this->table('surplus_points',array('engine'=>'MyISAM'));
         $table->addColumn('userid', 'string',array('limit' => 32,'default'=>0,'comment'=>'类型名称'))
             ->addColumn('point_count', 'integer',array('default'=>0,'comment'=>'剩余积分'))
+            ->addColumn('trade_number', 'string',array('default'=>"",'comment'=>'订单号'))
             ->create();
     }
 }

@@ -93,15 +93,7 @@ class Index
         if($re){
             $_SESSION['userinfo'] = $re;
             return true;
-//            header("Location:/admin");
         }else{
-//            $nic = $get_user_info['nickname'];
-//            $js = json_encode($nic);
-//            urlencode($js);
-//                    echo "<pre>";var_dump($js);
-//            var_dump(urlencode($js));
-//            var_dump(htmlspecialchars($js));
-//            exit;
             $data['openid'] = $get_user_info['openid'];
             $data['sex'] = $get_user_info['sex'];
             $pic = download($get_user_info['headimgurl']);
