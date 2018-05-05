@@ -32,7 +32,7 @@ class Points extends Migrator
         $table->addColumn('count', 'integer',array('limit' => 32,'default'=>0,'comment'=>'积分数'))
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
             ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'类型add/del'))
-            ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式'))
+            ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式')) //0购买获取积分，1赠送获取积分
             ->addColumn('frozen_flag', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'冻结标识'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
             ->create();
