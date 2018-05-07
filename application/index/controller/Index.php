@@ -117,13 +117,15 @@ class Index
     public function user_info(){
         $userInfo = $_SESSION['userinfo'];
         $userId = $userInfo->id;
-        $nickname = json_decode(urldecode($userInfo->getData('nickname')));
-        $userInfo->nickname = $nickname;
+        $userRe = Users::get($userId);
+        $nickname = json_decode(urldecode($userRe->getData('nickname')));
+        $userRe->nickname = $nickname;
+//        echo "<pre>";var_dump($nickname);exit;
         $allPoint = round(getPoint($userId),6);
-
-        $userInfo->allPoint = $allPoint;
+        $userRe->allPoint = $allPoint;
         $curl = "userinfo";
-        $re = ['footType'=>$curl,'userinfo'=>$userInfo];
+        $re = ['footType'=>$curl,'userinfo'=>$userRe];
+
         return view("index@index/userInfo",['re'=>$re]);
     }
 
