@@ -131,7 +131,7 @@
 								<div class="tjddb33">
 									<ul>
 										<li class="tjddb36 plus">+</li>
-										<li class="tjddb37 num"><input id="inpB" type="number" value="1" placeholder="1" name="buynum" class="buynum inputNum"/></li>
+										<li class="tjddb37 num"><input style=" text-align: center;line-height: 1rem;" id="inpB" type="number" value="1" placeholder="1" name="buynum" class="buynum inputNum"/></li>
 										<li class="tjddb38 reduce">-</li>
 									</ul>
 								</div>
@@ -264,8 +264,12 @@
                     dataType: "json",
                     success: function(result){
                         result = JSON.parse(result);
-                        if(result.type == 'success')
+                        if(result.type == 'success'){
                             $(".jifen5").css("display", "block");
+						}else{
+                            layer.msg(result.msg,{icon:0,time:2000});
+						}
+
                     }
                 });
 

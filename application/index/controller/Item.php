@@ -23,6 +23,7 @@ class Item extends Controller
     }
 
     public function itemList(){
+//        echo "<pre>";var_dump($_SESSION);exit;
         $re = Items::all();
         $curl = "itemList";
         $re = ['footType'=>$curl,'itemList'=>$re];
@@ -41,6 +42,7 @@ class Item extends Controller
 
     public function addAddr(){
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+//        echo "<pre>";var_dump($_SESSION);exit;
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
         $addr = Addrs::all(['user_id'=>$userid]);
