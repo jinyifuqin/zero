@@ -51,8 +51,10 @@ class Index
         return view("index@item/buying",['data'=>$data]);
     }
 
-    public function wxLogin(Request $request){
-        $_SESSION['itemid'] = $request->param('id');
+    public function wxLogin(Request $request=null){
+        if($request){
+            $_SESSION['itemid'] = $request->param('id');
+        }
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
 //        unset($_SESSION['userinfo']);
         if(array_key_exists('userinfo',$_SESSION)){
@@ -62,7 +64,13 @@ class Index
         $url = $this->wxObj->get_authorize_url(1);
 //        unset($_SESSION['getinfo']);
 //        unset($_SESSION['get_access_token']);
-        return redirect($url);
+//        echo "<pre>";var_dump($url);exit;
+        if($request){
+            return redirect($url);
+        }else{
+            return $url;
+        }
+//
     }
 
     public function getInfo(Request $request){
@@ -115,7 +123,13 @@ class Index
     }
 
     public function user_info(){
-        $userInfo = $_SESSION['userinfo'];
+        if(array_key_exists('userinfo',$_SESSION)){
+            $userInfo = $_SESSION['userinfo'];
+        }else{
+            $url = $this->wxLogin();
+            return redirect($url);
+        }
+//        echo "<pre>";var_dump($_SESSION);exit;
         $userId = $userInfo->id;
         $userRe = Users::get($userId);
         $nickname = json_decode(urldecode($userRe->getData('nickname')));
