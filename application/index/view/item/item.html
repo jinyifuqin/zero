@@ -75,16 +75,16 @@
     <!--产品介绍-->
     <div class="cpjs">
         <div class="cpjs_img">
-            <a href="#"><img src="/public/uploads/{$re.pic}" alt=""/></a>
+            <a href="#"><img src="/public/uploads/{$re.itemInfo.pic}" alt=""/></a>
         </div>
         <div class="cpjs_text">
-            <a class="cpjs_text1" href="#">{$re.name}</a>
+            <a class="cpjs_text1" href="#">{$re.itemInfo.name}</a>
             <a class="cpjs_text2" href="#">
-                {$re.desc}
+                {$re.itemInfo.desc}
             </a>
             <div class="cpjs_text3">
-                <span class="cpjs_text31">价格：<b>￥{$re.price}</b></span>
-                <a class="cpjs_text32" href="/wxlogin/{$re.id}">购买</a>
+                <span class="cpjs_text31">价格：<b>￥{$re.itemInfo.price}</b></span>
+                <a class="cpjs_text32" href="/wxlogin/{$re.itemInfo.id}">购买</a>
             </div>
         </div>
     </div>

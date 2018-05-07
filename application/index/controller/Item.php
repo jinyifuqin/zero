@@ -31,7 +31,10 @@ class Item extends Controller
 
     public function item(Request $request){
         $id = $request->param('id');
-        $re = Items::get(['id' => $id]);
+        $result = Items::get(['id' => $id]);
+//        echo "<pre>";var_dump($re);exit;
+        $curl = "itemInfo";
+        $re = ['footType'=>$curl,'itemInfo'=>$result];
 //        echo "<pre>";var_dump($re);exit;
         return view("index@item/item",['re'=>$re]);
     }
