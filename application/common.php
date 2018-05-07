@@ -105,3 +105,39 @@ function getIp() {
                     $ip = "unknown";
     return ($ip);
 }
+
+function getPoint($userId){
+    $re = \app\index\model\Points::all(['user_id'=>$userId]);
+    $allPoint = 0;  //总积分
+//    $nowStamp = strtotime(date('Y-m-d',time()))+60*60*24*1+60*60;
+    $nowStamp = time();
+    foreach($re as $k=>$v){
+        $t = $v->create_time;   //创建订单时间
+        $time = strtotime($t);
+        $t2 = date('Y-m-d',$time);
+        $tomorrow = strtotime($t2)+60*60*24;    // 该订单的第二天凌晨
+//            $now = time();
+        $oneday = 60*60*24;
+        $point = $v->count; //该订单积分数额
+        if($nowStamp >= $tomorrow){
+            $shijiancha = $nowStamp-$tomorrow;
+            $point+=$point*0.0001;
+            $x = floor($shijiancha/$oneday);    //超过下订单的次日凌晨几天
+            for($i=0;$i<$x;$i++){
+                $point+=$point*0.0001;
+            }
+            $allPoint+=$point;
+        }else{
+            $allPoint+=$point;
+        }
+        $v->count = $point;
+        $v->save();
+//        echo "<pre>";var_dump($point);
+//        echo "<pre>";var_dump($v->create_time);
+//        echo "<pre>";var_dump('-----------');
+////            echo "<pre>";var_dump($x."现在的时间".date('Y-m-d H:i:s',$nowStamp).$point);exit;
+//        echo "<pre>";var_dump($x."现在的时间".date('Y-m-d H:i:s',$nowStamp));
+    }
+    return $allPoint;
+
+}

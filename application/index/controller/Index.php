@@ -117,36 +117,10 @@ class Index
         $userId = $userInfo->id;
         $nickname = json_decode(urldecode($userInfo->getData('nickname')));
         $userInfo->nickname = $nickname;
-        $re = Points::all(['user_id'=>$userId]);
-        foreach($re as $k=>$v){
-            $t = $v->create_time;
-            $time = strtotime($t);
-            $t2 = date('Y-m-d',$time);
-            $tomorrow = strtotime($t2)+60*60*24;    // 该订单的第二天凌晨
-//            $now = time();
-            $nowStamp = strtotime(date('Y-m-d',time()))+60*60*24*2+60*60;
-//            $nowStamp = strtotime($now);
-            $oneday = 60*60*24;
-            $point = $v->count;
-//            echo "<pre>";var_dump($point);exit;
-            if($nowStamp >= $tomorrow){
-                $shijiancha = $nowStamp-$tomorrow;
-                $point+=$point*0.0001;
-                $x = floor($shijiancha/$oneday);
-                for($i=0;$i<$x;$i++){
-                    $point+=$point*0.0001;
-                }
+        $allPoint = round(getPoint($userId),2);
 
-//                $a += 1;
-            }
-
-                $cha = date('H:i:s',$tomorrow-$t);
-
-//            $actionTime = strtotime("+1 ")
-
-            echo "<pre>";var_dump($x."现在的时间".date('Y-m-d H:i:s',$nowStamp).$point);exit;
-        }
-
+        $userInfo->allPoint = $allPoint;
+//        exit;
         return view("index@index/userInfo",['re'=>$userInfo]);
     }
 
