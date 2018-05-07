@@ -30,10 +30,10 @@ class Index extends Controller
 
     public function index()
     {
-
-        if(!isset($_SESSION['adminUserInfo'])){
+        if(!array_key_exists('adminUserInfo',$_SESSION)){
             $this->redirect('/admin/login');
         }
+
 //        echo "<pre>";var_dump($_SESSION);exit;
         $admin = $_SESSION['adminUserInfo'];
         return view("admin@index/index",['admin'=>$admin]);

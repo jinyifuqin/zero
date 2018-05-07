@@ -52,6 +52,29 @@ class Trade extends Controller
         return view("admin@trade/index",['data'=>$data]);
     }
 
+    public function trade_del_by_id(Request $request){
+        $id = $request->param('id');
+        $trade = Trades::get($id);
+        $re = $trade->delete();
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function trade_del_all(Request $request){
+        $ids = $request->param()['ids'];
+        $re = Trades::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
     public function billSend(Request $request){
         $id = $request->param('id');
         $trade = Trades::get($id);
