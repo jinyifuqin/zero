@@ -27,6 +27,18 @@ class Trades extends Model
         return $admincheck[$value];
     }
 
+    public function getGetBillTypeAttr($value)
+    {
+        $checktype = [0=>'未确认发票',1=>'已确认发票'];
+        return $checktype[$value];
+    }
+
+    public function getAdminGetBillTypeAttr($value)
+    {
+        $checktype = [0=>'管理员未确认发票',1=>'管理员已确认发票'];
+        return $checktype[$value];
+    }
+
 //    public function items(){
 //        return $this->hasOne('app\admin\model\Items','id','item_id');
 //    }

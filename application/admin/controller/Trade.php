@@ -37,8 +37,10 @@ class Trade extends Controller
             $v['address'] = preg_replace("/$delimiter/",' ',$v['address']);
             if($type == 1){
                 $v['trade_status'] = $v->getData('admin_check_type');   //管理员审核状态
+                $v['admin_get_bill_status'] = $v->getData('admin_get_bill_type');
             }else{
                 $v['trade_status'] = $v->getData('check_type');   //服务中心审核状态
+                $v['get_bill_status'] = $v->getData('get_bill_type');   //服务中心审核状态
             }
 //            echo "<pre>";var_dump($v['check_type']);exit;
         }
@@ -50,13 +52,45 @@ class Trade extends Controller
         return view("admin@trade/index",['data'=>$data]);
     }
 
+    public function billSend(Request $request){
+        $id = $request->param('id');
+        $trade = Trades::get($id);
+        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+        if($type){
+            if($trade->getData('admin_get_bill_type') == 0){
+                $trade->admin_get_bill_type = 1;
+            }else{
+                $trade->admin_get_bill_type = 0;
+            }
+        }else{
+            if($trade->getData('get_bill_type') == 0){
+                $trade->get_bill_type = 1;
+            }else{
+                $trade->get_bill_type = 0;
+            }
+        }
+        $result = $trade->save();
+        if($result){
+            $msg = array('status'=>'Success');
+            return json_encode($msg);
+        }else{
+            $msg = array('status'=>'fails');
+            return json_encode($msg);
+        }
+
+    }
+
     public function send(Request $request){
         $id = $request->param('id');
         $trade = Trades::get($id);
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
 //        echo "<pre>";var_dump($type);exit;
         if($type){
-            if($trade->getData('admin_check_type') == 0){
+            if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 0){
+                $msg = array('status'=>'fails');
+                return json_encode($msg);
+            }
+            if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 1){
                 $trade->admin_check_type = 1;
             }else{
                 $trade->admin_check_type = 0;
@@ -69,10 +103,8 @@ class Trade extends Controller
             }
         }
 
-
-
         $result = $trade->save();
-
+//        echo "<pre>";var_dump(6);exit;
         if($request){
 //            echo "<pre>";var_dump($trade);exit;
             if($type){
@@ -90,10 +122,12 @@ class Trade extends Controller
                 }
             }
             $msg = array('status'=>'Success');
+            return json_encode($msg);
         }else{
             $msg = array('status'=>'fails');
+            json_encode($msg);
         }
-        echo json_encode($msg);
+//        echo json_encode($msg);
     }
 
 }
