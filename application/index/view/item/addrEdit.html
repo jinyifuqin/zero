@@ -1,39 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
-	<title>修改收货地址</title>
-	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
-	<meta content="yes" name="apple-mobile-web-app-capable">
-	<meta content="black" name="apple-mobile-web-app-status-bar-style">
-	<meta content="telephone=no" name="format-detection">
-	<link rel="stylesheet" href="/public/indexsource/address/css/ydui.css?rev=@@hash">
-	<link rel="stylesheet" href="/public/indexsource/address/css/demo.css">
-	<!--<script src="/public/indexsource/address/js/ydui.flexible.js"></script>-->
+	<meta name="robots" content="index,follow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<title>新建收货地址</title>
 	<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
 	<link href="/public/indexsource/css/css2.css" type="text/css" rel="stylesheet">
 	<link href="/public/indexsource/css/css_yan.css" type="text/css" rel="stylesheet">
-	<style>
-		.key{
-			width: 26%;
-			height: 4rem;
-			line-height: 4rem;
-			font-size: 1rem;
-			color: #333333;
-			padding-left: 5%;
-			display: inline-block;
-			vertical-align: middle;
-		}
-		.value{
-			outline: none;
-			background: transparent;
-			border: none;
-			font-size: .95rem;
-			width: 54%;
-			vertical-align: middle;
-		}
-	</style>
+	<script type="text/javascript" src="/public/indexsource/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
+	<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
+
+	<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
 </head>
+
 <body class="bjhs2">
 <!--这是头部-->
 <div class="APPtop">
@@ -60,121 +44,211 @@
 		<p>会员中心</p>
 	</a>
 </ul>
-
-<section class="g-flexview">
-	<form method="post" id="formSub" action="/saveAddr">
-	<section class="g-scrollview">
-		<div class="fapiao1"><span>收货人</span><input type="text" value="{$re.name}" name="name" placeholder="请填写收货人姓名"></div>
-		<div class="huixian"></div>
-		<div class="fapiao1 "><span>联系方式</span><input type="text" value="{$re.phone_num}" name="phone_num" placeholder="请填写收货人联系方式"></div>
-
-		<div class="huixian"></div>
-		<input type="hidden" name="addrId" value="{$re.id}"/>
-		<!--<div class="m-celltitle">默认调用</div>-->
-		<div class="m-cell ">
-			<div class="cell-item">
-				<div class="cell-left key">所在地区：</div>
-				<div class="cell-right cell-arrow">
-					<input value="{$re.desc}" type="text" name="desc" class="cell-input value" readonly id="J_Address" placeholder="请选择收货地址">
+<form method="post" id="formSub" action="/saveAddr">
+	<div class="big_qb">
+		<div class="fapiao">
+			<div class="fapiao1"><span>收货人</span><input type="text" value="{$re.name}" name="name" placeholder="请填写收货人姓名"></div>
+			<div class="huixian"></div>
+			<div class="fapiao1 "><span>联系方式</span><input type="text" value="{$re.phone_num}" name="phone_num" placeholder="请填写收货人联系方式"></div>
+			<div class="huixian"></div>
+			<div class="fapiao">
+				<input type="hidden" name="addrId" value="{$re.id}"/>
+				<div class="fapiao1 szym21 huixian">
+					<a href="#"><span>所在地区</span>
+						<font><i href="#" class="btn btn-info btn-lg active" role="button" id="sel_city"><input name="desc" value="{$re.desc}"  type="text" placeholder="请填写地址"><img src="/public/indexsource/images/jian1.jpg" /></i></font>
+					</a>
 				</div>
+				<div class="huixian"></div>
+				<div class="fapiao1"><span>详细地址</span><input type="text" value="{$re.desc1}" name="desc1" placeholder="请填写详细地址"> </div>
 			</div>
 		</div>
-		<div class="huixian"></div>
-		<div class="fapiao">
-			<div class="fapiao1"><span>详细地址</span><input type="text" value="{$re.desc1}" name="desc1" placeholder="请填写详细地址"></div>
-		</div>
-		<!--<div class="m-celltitle">设置默认值</div>-->
-		<!--<div class="m-cell">-->
-			<!--<div class="cell-item">-->
-				<!--<div class="cell-left">所在地区：</div>-->
-				<!--<div class="cell-right cell-arrow">-->
-					<!--<input type="text" class="cell-input" readonly id="J_Address2" value="新疆 乌鲁木齐市 天山区" placeholder="请选择收货地址">-->
-				<!--</div>-->
-			<!--</div>-->
-		<!--</div>-->
 		<div class="huixian"></div>
 		<div class="mrdz">
+
 			<span>设为默认地址<br><font>注：每次下单时会使用该地址</font></span>
-			<div class="mrdz1" id="changeBox">
-				<label class="switch-btn1 circle-style1" style="top: 18.5rem;">
-					<input name="default" value="0" class="checked-switch1" type="checkbox"  />
+			<div class="mrdz1">
+				<label class="switch-btn1 circle-style1">
+					<input name="default" value="1" class="checked-switch1" type="checkbox"  />
 					<span class="text-switch1"></span>
 					<span class="toggle-btn1"></span>
-				</label>
-			</div>
+				</label></div>
 
 		</div>
-
 		<div class="shdz15"><a href="#" id="sub">保存并使用</a></div>
-	</section>
-	</form>
-</section>
+	</div>
+</form>
+<!--------------------------------------------------------------------------------------------------->
+<!--地区选择-->
+<div class="szd">
+	<div class="container">
 
-<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
-<script type="text/javascript" src="/public/indexsource/address/js/ydui.citys.js"></script>
-<script type="text/javascript" src="/public/indexsource/address/js/ydui.js"></script>
-<script type="text/javascript">
-	$(function(){
-	    $('#changeBox').click(function () {
-	        var input = $(this).find('input');
-	        if(input.val() == 1){
+		<div class="row main" style="margin-top:30px;">
+			<div class="col-md-12">
+				<div class="row" style="line-height: 36px; text-align: center;font-size:18px;">
+					<!--<a href="#" class="btn btn-info btn-lg active" role="button" id="sel_city">点击选取省市区县</a>-->
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<script src="/public/indexsource/js/picker.min.js"></script>
+	<script src="/public/indexsource/js/city.js"></script>
+
+</div>
+<script>
+    $(function(){
+        $('#changeBox').click(function () {
+            var input = $(this).find('input');
+            if(input.val() == 1){
                 input.prop('checked',false);
                 input.val(0);
-			}else{
+            }else{
                 input.prop('checked',true);
                 input.val(1);
-			}
+            }
 
         });
 
-	    var sub = $('#sub');
-	    sub.click(function(e){
-	        e.preventDefault();
-	        var form = $('#formSub');
-	        form.submit();
-		})
-	})
-    /**
-     * 默认调用
-     */
-    !function () {
-        var $target = $('#J_Address');
+        var sub = $('#sub');
+        sub.click(function(e){
+            e.preventDefault();
+            var form = $('#formSub');
+            form.submit();
+        })
+    })
 
-        $target.citySelect();
+    var nameEl = document.getElementById('sel_city');
 
-        $target.on('click', function (event) {
-            event.stopPropagation();
-            $target.citySelect('open');
-        });
+    var first = []; /* 省，直辖市 */
+    var second = []; /* 市 */
+    var third = []; /* 镇 */
 
-        $target.on('done.ydui.cityselect', function (ret) {
-            $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
-        });
-    }();
-    /**
-     * 设置默认值
-     */
-    !function () {
-        var $target = $('#J_Address2');
+    var selectedIndex = [0, 0, 0]; /* 默认选中的地区 */
 
-        $target.citySelect({
-            provance: '新疆',
-            city: '乌鲁木齐市',
-            area: '天山区'
-        });
+    var checked = [0, 0, 0]; /* 已选选项 */
 
-        $target.on('click', function (event) {
-            event.stopPropagation();
-            $target.citySelect('open');
-        });
+    function creatList(obj, list) {
+        obj.forEach(function(item, index, arr) {
+            var temp = new Object();
+            temp.text = item.name;
+            temp.value = index;
+            list.push(temp);
+        })
+    }
 
-        $target.on('done.ydui.cityselect', function (ret) {
-            console.log(ret);
-            $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
-        });
-    }();
+    creatList(city, first);
+
+    if(city[selectedIndex[0]].hasOwnProperty('sub')) {
+        creatList(city[selectedIndex[0]].sub, second);
+    } else {
+        second = [{
+            text: '',
+            value: 0
+        }];
+    }
+
+    if(city[selectedIndex[0]].sub[selectedIndex[1]].hasOwnProperty('sub')) {
+        creatList(city[selectedIndex[0]].sub[selectedIndex[1]].sub, third);
+    } else {
+        third = [{
+            text: '',
+            value: 0
+        }];
+    }
+
+    var picker = new Picker({
+        data: [first, second, third],
+        selectedIndex: selectedIndex,
+        title: '地址选择'
+    });
+
+    picker.on('picker.select', function(selectedVal, selectedIndex) {
+        var text1 = first[selectedIndex[0]].text;
+        var text2 = second[selectedIndex[1]].text;
+        var text3 = third[selectedIndex[2]] ? third[selectedIndex[2]].text : '';
+        // console.log(nameEl);
+        // nameEl.innerText = text1 + ' ' + text2 + ' ' + text3;
+        $('#sel_city').find('input').val(text1 + ' ' + text2 + ' ' + text3);
+    });
+
+    picker.on('picker.change', function(index, selectedIndex) {
+        if(index === 0) {
+            firstChange();
+        } else if(index === 1) {
+            secondChange();
+        }
+
+        function firstChange() {
+            second = [];
+            third = [];
+            checked[0] = selectedIndex;
+            var firstCity = city[selectedIndex];
+            if(firstCity.hasOwnProperty('sub')) {
+                creatList(firstCity.sub, second);
+
+                var secondCity = city[selectedIndex].sub[0]
+                if(secondCity.hasOwnProperty('sub')) {
+                    creatList(secondCity.sub, third);
+                } else {
+                    third = [{
+                        text: '',
+                        value: 0
+                    }];
+                    checked[2] = 0;
+                }
+            } else {
+                second = [{
+                    text: '',
+                    value: 0
+                }];
+                third = [{
+                    text: '',
+                    value: 0
+                }];
+                checked[1] = 0;
+                checked[2] = 0;
+            }
+
+            picker.refillColumn(1, second);
+            picker.refillColumn(2, third);
+            picker.scrollColumn(1, 0)
+            picker.scrollColumn(2, 0)
+        }
+
+        function secondChange() {
+            third = [];
+            checked[1] = selectedIndex;
+            var first_index = checked[0];
+            if(city[first_index].sub[selectedIndex].hasOwnProperty('sub')) {
+                var secondCity = city[first_index].sub[selectedIndex];
+                creatList(secondCity.sub, third);
+                picker.refillColumn(2, third);
+                picker.scrollColumn(2, 0)
+            } else {
+                third = [{
+                    text: '',
+                    value: 0
+                }];
+                checked[2] = 0;
+                picker.refillColumn(2, third);
+                picker.scrollColumn(2, 0)
+            }
+        }
+
+    });
+
+    picker.on('picker.valuechange', function(selectedVal, selectedIndex) {
+        console.log(selectedVal);
+        console.log(selectedIndex);
+    });
+
+    nameEl.addEventListener('click', function() {
+        picker.show();
+    });
 </script>
 
-</body>
-</html>
 
+</body>
+
+</html>

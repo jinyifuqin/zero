@@ -93,7 +93,7 @@ class Item extends Controller
         }else{
             $default = 0;
         }
-
+//        echo "<pre>";var_dump($request->param());exit;
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
         $postInfo = [
