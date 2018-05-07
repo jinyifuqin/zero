@@ -119,7 +119,7 @@ class Index
         $userId = $userInfo->id;
         $nickname = json_decode(urldecode($userInfo->getData('nickname')));
         $userInfo->nickname = $nickname;
-        $allPoint = round(getPoint($userId),2);
+        $allPoint = round(getPoint($userId),6);
 
         $userInfo->allPoint = $allPoint;
         $curl = "userinfo";

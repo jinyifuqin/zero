@@ -32,6 +32,7 @@ class Points extends Migrator
         $table->addColumn('count', 'string',array('default'=>'','comment'=>'积分数'))
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
             ->addColumn('future_count', 'integer',array('limit' => 32,'default'=>0,'comment'=>'理应获得积分数'))
+            ->addColumn('true_count', 'string',array('default'=>'','comment'=>'真实积分数'))
             ->addColumn('trade_number', 'string',array('default'=>"",'comment'=>'订单号'))
             ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'类型add/del'))
             ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式')) //0购买获取积分，1赠送获取积分

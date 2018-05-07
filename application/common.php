@@ -109,7 +109,7 @@ function getIp() {
 function getPoint($userId){ // 获取用户总积分
     $re = \app\index\model\Points::all(['user_id'=>$userId]);
     $allPoint = 0;  //总积分
-//    $nowStamp = strtotime(date('Y-m-d',time()))+60*60*24*1+60*60;
+//    $nowStamp = strtotime(date('Y-m-d',time()))+60*60*24*2+60*60;
     $nowStamp = time();
     foreach($re as $k=>$v){
         $t = $v->create_time;   //创建订单时间
@@ -118,7 +118,9 @@ function getPoint($userId){ // 获取用户总积分
         $tomorrow = strtotime($t2)+60*60*24;    // 该订单的第二天凌晨
         $oneday = 60*60*24;
         $point = $v->count; //该订单积分数额
-        if($nowStamp >= $tomorrow){
+        $adminGetBillType = \app\index\model\Trades::where('trade_number',$v->trade_number)->value('admin_get_bill_type');
+//        echo "<pre>";var_dump($tradeRe);
+        if($nowStamp >= $tomorrow && $adminGetBillType){
             $shijiancha = $nowStamp-$tomorrow;
             $point+=$point*0.0001;
             $x = floor($shijiancha/$oneday);    //超过下订单的次日凌晨几天
@@ -129,12 +131,10 @@ function getPoint($userId){ // 获取用户总积分
         }else{
             $allPoint+=$point;
         }
-        $v->count = $point;
+
+        $v->true_count = $point;
         $v->save();
-//        echo "<pre>";var_dump($point);
-//        echo "<pre>";var_dump($v->create_time);
 //        echo "<pre>";var_dump('-----------');
-////            echo "<pre>";var_dump($x."现在的时间".date('Y-m-d H:i:s',$nowStamp).$point);exit;
 //        echo "<pre>";var_dump($x."现在的时间".date('Y-m-d H:i:s',$nowStamp));
     }
     return $allPoint;
