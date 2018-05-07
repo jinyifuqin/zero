@@ -24,6 +24,8 @@ class Item extends Controller
 
     public function itemList(){
         $re = Items::all();
+        $curl = "itemList";
+        $re = ['footType'=>$curl,'itemList'=>$re];
         return view("index@item/index",['re'=>$re]);
     }
 

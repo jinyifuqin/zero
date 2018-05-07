@@ -19,6 +19,8 @@ class Index
     public function index()
     {
         $re = Items::all();
+        $curl = "index";
+        $re = ['footType'=>$curl,'itemInfo'=>$re];
 //        echo password(123,456);exit;
         return view("index@index/index",['re'=>$re]);
     }
@@ -120,8 +122,9 @@ class Index
         $allPoint = round(getPoint($userId),2);
 
         $userInfo->allPoint = $allPoint;
-//        exit;
-        return view("index@index/userInfo",['re'=>$userInfo]);
+        $curl = "userinfo";
+        $re = ['footType'=>$curl,'userinfo'=>$userInfo];
+        return view("index@index/userInfo",['re'=>$re]);
     }
 
 

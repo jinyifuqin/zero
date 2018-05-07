@@ -106,7 +106,7 @@ function getIp() {
     return ($ip);
 }
 
-function getPoint($userId){
+function getPoint($userId){ // 获取用户总积分
     $re = \app\index\model\Points::all(['user_id'=>$userId]);
     $allPoint = 0;  //总积分
 //    $nowStamp = strtotime(date('Y-m-d',time()))+60*60*24*1+60*60;
@@ -116,7 +116,6 @@ function getPoint($userId){
         $time = strtotime($t);
         $t2 = date('Y-m-d',$time);
         $tomorrow = strtotime($t2)+60*60*24;    // 该订单的第二天凌晨
-//            $now = time();
         $oneday = 60*60*24;
         $point = $v->count; //该订单积分数额
         if($nowStamp >= $tomorrow){

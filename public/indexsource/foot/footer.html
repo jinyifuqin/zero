@@ -1,0 +1,74 @@
+<!--底部-->
+<div class="APPbtn">
+    <div class="APPbtn1 APPbtnbj">
+        <a href="/"><div class="APPbtn1_img">
+            {eq name="$re.footType" value="index"}
+            <img src="/public/indexsource/images/Appbottom11.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom1.png" alt=""/>
+            {else/}
+            <img src="/public/indexsource/images/Appbottom1.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom11.png" alt=""/>
+            {/eq}
+        </div>
+        </a>
+        {eq name="$re.footType" value="index"}
+        <a href="/">首页</a>
+        {else/}
+        <a style="color: #999999!important;" href="/">首页</a>
+        {/eq}
+
+    </div>
+    <div class="APPbtn1">
+        <a href="itemList"><div class="APPbtn1_img">
+            {eq name="$re.footType" value="itemList"}
+            <img src="/public/indexsource/images/Appbottom2.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom22.png" alt=""/>
+            {else/}
+            <img src="/public/indexsource/images/Appbottom22.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom2.png" alt=""/>
+            {/eq}
+        </div>
+        </a>
+        {eq name="$re.footType" value="itemList"}
+        <a style="color: #faa73f!important;" href="itemList">商城</a>
+        {else/}
+        <a href="itemList">商城</a>
+        {/eq}
+    </div>
+    <div class="APPbtn1">
+        <a href="#">
+            <div class="APPbtn1_img">
+                <img src="/public/indexsource/images/Appbottom33.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom3.png" alt=""/>
+            </div>
+        </a>
+        <a href="#">社区</a>
+    </div>
+    <div class="APPbtn1">
+        <a href="#">
+            <div class="APPbtn1_img">
+                <img src="/public/indexsource/images/Appbottom44.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom4.png" alt=""/>
+            </div>
+        </a>
+        <a href="#">分享</a>
+    </div>
+    <div class="APPbtn1">
+        <a href="/userInfo">
+            <div class="APPbtn1_img">
+                {eq name="$re.footType" value="userinfo"}
+                <img src="/public/indexsource/images/Appbottom5.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom55.png" alt=""/>
+                {else/}
+                <img src="/public/indexsource/images/Appbottom55.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom5.png" alt=""/>
+                {/eq}
+            </div>
+        </a>
+        {eq name="$re.footType" value="userinfo"}
+        <a style="color: #faa73f!important" href="/userInfo">会员中心</a>
+        {else/}
+        <a href="/userInfo">会员中心</a>
+        {/eq}
+    </div>
+</div>
