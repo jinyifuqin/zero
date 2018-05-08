@@ -122,7 +122,13 @@ class Item extends Controller
         $create_time = date("Y-m-d H:i:s");
 
         $numMatch = preg_match('/^\d+$/',$post['buynum']);
-        $phoneMatch = preg_match('/^1[34578]\d{9}$/',$post['phone_num']);
+        if(array_key_exists('phone_num',$post)){
+            $phoneMatch = preg_match('/^1[34578]\d{9}$/',$post['phone_num']);
+        }else{
+            $data = ['msg'=>"请添加收货信息！",'type'=>"error"];
+            return  json_encode($data);
+        }
+
         if(!$numMatch){
             $data = ['msg'=>"请输入正确的数量！",'type'=>"error"];
             return  json_encode($data);
