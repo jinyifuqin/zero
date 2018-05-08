@@ -183,10 +183,16 @@ function billaction(t,id) {
             url: 'billsend/'+id,
             dataType: 'json',
             success: function(data){
-                $(t).parents("tr").remove();
+                // $(t).parents("tr").remove();
+                data = JSON.parse(data);
+                if(data.status =='Success'){
+                    layer.msg('状态已更改!',{icon:1,time:1000});
+                    window.location.reload();
+				}else{
+                    layer.msg('服务中心未确认，状态无法改变!',{icon:2,time:3000});
+                    setTimeout(function(){window.location.reload()},3000);
+				}
 
-                layer.msg('状态已更改!',{icon:1,time:1000});
-                window.location.reload();
             },
             error:function(data) {
                 console.log(data.msg);
@@ -202,9 +208,8 @@ function action(t,id) {
             url: 'send/'+id,
             dataType: 'json',
             success: function(data){
-                $(t).parents("tr").remove();
+                // $(t).parents("tr").remove();
                 data = JSON.parse(data);
-                // console.log(data);return;
                 if(data.status =='Success'){
                     layer.msg('状态已更改!',{icon:1,time:1000});
                     window.location.reload();
@@ -212,7 +217,6 @@ function action(t,id) {
                     layer.msg('服务中心未确认，状态无法改变!',{icon:2,time:3000});
                     setTimeout(function(){window.location.reload()},3000);
 				}
-                // console.log(data);return;
 
             },
             error:function(data) {

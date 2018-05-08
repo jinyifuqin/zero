@@ -80,7 +80,11 @@ class Trade extends Controller
         $trade = Trades::get($id);
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
         if($type){
-            if($trade->getData('admin_get_bill_type') == 0){
+            if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 0){
+                $msg = array('status'=>'fails');
+                return json_encode($msg);
+            }
+            if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 1){
                 $trade->admin_get_bill_type = 1;
             }else{
                 $trade->admin_get_bill_type = 0;
@@ -129,7 +133,6 @@ class Trade extends Controller
         $result = $trade->save();
 //        echo "<pre>";var_dump(6);exit;
         if($request){
-//            echo "<pre>";var_dump($trade);exit;
             if($type){
                 if($trade->getData('admin_check_type') == 1){
                     $giveDiscount['userId'] = $trade->user_id;
