@@ -34,6 +34,7 @@ class Trades extends Migrator
             ->addColumn('name', 'string',array('default'=>'','comment'=>'用户名'))
             ->addColumn('address', 'string',array('null'=>true,'comment'=>'收货地址'))
             ->addColumn('check_type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'服务中心审核状态1通过0未通过'))
+            ->addColumn('trade_type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'订单状态0未发货1已发货2完成订单'))
             ->addColumn('admin_check_type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'管理员审核状态1通过0未通过'))
             ->addColumn('get_bill_type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'服务中心确认发票1通过0未通过'))
             ->addColumn('admin_get_bill_type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'管理员审核发票状态1通过0未通过'))

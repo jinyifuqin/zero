@@ -3,6 +3,7 @@ namespace app\index\controller;
 use app\admin\model\Brands;
 use app\index\model\Addrs;
 use app\index\model\Points;
+use app\index\model\Trades;
 use app\weixin\controller\Wechat;
 use app\index\model\Users;
 use app\admin\model\Items;
@@ -123,24 +124,54 @@ class Index
     }
 
     public function user_info(){
+        $userRe = $this->get_user_info();
+        $curl = "userinfo";
+        $re = ['footType'=>$curl,'userinfo'=>$userRe];
+
+        return view("index@index/userInfo",['re'=>$re]);
+    }
+
+    public function get_user_info(){
         if(array_key_exists('userinfo',$_SESSION)){
             $userInfo = $_SESSION['userinfo'];
         }else{
             $url = $this->wxLogin();
             return redirect($url);
         }
-//        echo "<pre>";var_dump($_SESSION);exit;
         $userId = $userInfo->id;
         $userRe = Users::get($userId);
         $nickname = json_decode(urldecode($userRe->getData('nickname')));
         $userRe->nickname = $nickname;
-//        echo "<pre>";var_dump($nickname);exit;
         $allPoint = round(getPoint($userId),6);
         $userRe->allPoint = $allPoint;
-        $curl = "userinfo";
-        $re = ['footType'=>$curl,'userinfo'=>$userRe];
+        return $userRe;
+    }
 
-        return view("index@index/userInfo",['re'=>$re]);
+    public function user_trade(Request $request){
+//        echo "<pre>";var_dump($request->param());exit;
+        $tradeType = $request->param('type');
+
+        $userRe = $this->get_user_info();
+        if(isset($tradeType)){
+            if($tradeType == 'pd'){ // 待发货
+                $trades = Trades::all(['user_id'=>$userRe->id,'trade_type'=>0]);
+            }elseif($tradeType == 'as'){// 已发货Already shipped
+                $trades = Trades::all(['user_id'=>$userRe->id,'trade_type'=>1]);
+            }elseif($tradeType == 'finish'){//已完成
+                $trades = Trades::all(['user_id'=>$userRe->id,'trade_type'=>2]);
+            }
+        }else{
+            $trades = Trades::all(['user_id'=>$userRe->id]);
+        }
+//        echo "<pre>";var_dump($tradeType);exit;
+
+        $curl = "userinfo";
+        foreach ($trades as $k=>&$v){
+            $v->item_name = Items::where('id',$v->item_id)->value('name');
+        }
+//        echo "<pre>";var_dump($trades);exit;
+        $re = ['footType'=>$curl,'userinfo'=>$userRe,'trade'=>$trades,'trade_type'=>$tradeType];
+        return view("index@index/trade",['re'=>$re]);
     }
 
 

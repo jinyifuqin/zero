@@ -38,9 +38,11 @@ class Trade extends Controller
             if($type == 1){
                 $v['trade_status'] = $v->getData('admin_check_type');   //管理员审核状态
                 $v['admin_get_bill_status'] = $v->getData('admin_get_bill_type');
+                $v['trade_type_status'] = $v->getData('trade_type');
             }else{
                 $v['trade_status'] = $v->getData('check_type');   //服务中心审核状态
                 $v['get_bill_status'] = $v->getData('get_bill_type');   //服务中心审核状态
+                $v['trade_type_status'] = $v->getData('trade_type');
             }
 //            echo "<pre>";var_dump($v['check_type']);exit;
         }
@@ -125,8 +127,10 @@ class Trade extends Controller
         }else{
             if($trade->getData('check_type') == 0){
                 $trade->check_type = 1;
+                $trade->trade_type = 1;
             }else{
                 $trade->check_type = 0;
+                $trade->trade_type = 0;
             }
         }
 

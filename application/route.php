@@ -74,6 +74,7 @@ Route::group('',[
     'changeAddr' => ['item/change_addr', ['method' => 'post']],
     'addrEdit/:id' => ['item/addr_edit', ['method' => 'get']],
     'userInfo' => ['user_info', ['method' => 'get']],
+    'myTrade/[:type]' => ['user_trade', ['method' => 'get']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

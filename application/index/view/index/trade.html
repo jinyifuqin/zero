@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>我的订单(测试)</title>
+    <link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
+    <script src="/public/indexsource/js/jquery.min.js"></script>
+    <script src="/public/indexsource/js/pic.js"></script>
+</head>
+<body>
+<!--这是头部-->
+<!--<div class="APPtop user_top">-->
+    <!--<a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>-->
+    <!--<p class="page">永之泰俱乐部</p>-->
+    <!--&lt;!&ndash;<img class="applogo" src="/public/indexsource/images/applogo.png" alt="" />&ndash;&gt;-->
+    <!--<img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />-->
+<!--</div>-->
+<!--<div class="rbj"></div>-->
+<!--<ul class="menuS">-->
+    <!--<a href="index.html"><p>首页</p></a>-->
+    <!--<a href="#"><p>商城</p></a>-->
+    <!--<a href="#"><p>社区</p></a>-->
+    <!--<a href="#"><p>分享</p></a>-->
+    <!--<a href="#"><p>会员中心</p></a>-->
+<!--</ul>-->
+{include file="public/indexsource/head/header.html" /}
+
+
+<!--这是最外边的div，用来隔开与底部栏目的高度-->
+<div class="Cmain">
+  <div class="user_bj">
+       <div class="user_info">
+           <div class="user_info_img"><img src="/public/uploads/{$re.userinfo.pic}" alt=""/></div>
+           <span class="user_info_name">{$re.userinfo.nickname}</span>
+       </div>
+       <div class="user_jifen">{$re.userinfo.allPoint}积分</div>
+  </div>
+  <ul class="tap">
+      {eq name="$re.trade_type" value=""}
+        <li class="tapbj">
+      {else/}
+        <li>
+      {/eq}
+         <a  href="/myTrade">全部</a>
+     </li>
+      <!--<li>-->
+          <!--<a href="/myTrade">待付款</a>-->
+      <!--</li>-->
+      {eq name="$re.trade_type" value="as"}
+      <li class="tapbj">
+          {else/}
+      <li>
+          {/eq}
+          <a href="/myTrade/as">已发货</a>
+      </li>
+      {eq name="$re.trade_type" value="pd"}
+      <li class="tapbj">
+          {else/}
+      <li>
+          {/eq}
+
+          <a href="/myTrade/pd">待发货</a>
+      </li>
+      <!--<li>-->
+          <!--<a href="/myTrade/">待收货</a>-->
+      <!--</li>-->
+      {eq name="$re.trade_type" value="finish"}
+      <li class="tapbj">
+          {else/}
+      <li>
+          {/eq}
+          <a href="/myTrade/finish">已完成</a>
+      </li>
+  </ul>
+
+    <ul class="order_list">
+        {foreach $re.trade as $vo}
+        <li>
+            <div class="order_list1">
+                <div class="order_list1_img">
+                    <img src="/public/indexsource/images/sp1.jpg" alt=""/>
+                </div>
+                <div class="order_list1_text">
+                    <p class="order_list1_text1">{$vo.item_name}</p>
+                    <p class="order_list1_text2">{$vo.buy_price}元</p>
+                </div>
+            </div>
+            <div class="order_list2">共{$vo.buy_num}件商品 合计{$vo.buy_price}元 &nbsp;</div>
+            <div class="order_list3">
+                <!--<a class="order_list31" href="#">查看物流</a>-->
+                <a class="order_list31" href="#">删除订单</a>
+                <a class="order_list32" href="#">确认收货</a>
+            </div>
+        </li>
+        {/foreach}
+
+    </ul>
+
+</div>
+
+
+
+
+
+
+<!--底部-->
+{include file="public/indexsource/foot/footer.html" /}
+</body>
+</html>
