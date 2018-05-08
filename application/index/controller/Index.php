@@ -7,13 +7,16 @@ use app\index\model\Trades;
 use app\weixin\controller\Wechat;
 use app\index\model\Users;
 use app\admin\model\Items;
+use think\Db;
 use think\Request;
 class Index
 {
     public $wxObj;
+    public $pagesize = 2;
     public function __construct()
     {
         session_start();
+
         $this->wxObj = new Wechat();
     }
 
@@ -149,29 +152,82 @@ class Index
 
     public function user_trade(Request $request){
 //        echo "<pre>";var_dump($request->param());exit;
+        $tradeObj = new Trades();
         $tradeType = $request->param('type');
-
-        $userRe = $this->get_user_info();
-        if(isset($tradeType)){
-            if($tradeType == 'pd'){ // 待发货
-                $trades = Trades::all(['user_id'=>$userRe->id,'trade_type'=>0]);
-            }elseif($tradeType == 'as'){// 已发货Already shipped
-                $trades = Trades::all(['user_id'=>$userRe->id,'trade_type'=>1]);
-            }elseif($tradeType == 'finish'){//已完成
-                $trades = Trades::all(['user_id'=>$userRe->id,'trade_type'=>2]);
-            }
-        }else{
-            $trades = Trades::all(['user_id'=>$userRe->id]);
+        if($tradeType == null){
+            $tradeType = "all";
         }
-//        echo "<pre>";var_dump($tradeType);exit;
+        $userRe = $this->get_user_info();
+
+            if($tradeType == 'pd'){ // 待发货
+                $trades = $tradeObj->where('user_id='.$userRe->id)
+                    ->where('trade_type',0)
+                    ->limit($this->pagesize)
+                    ->select();
+            }elseif($tradeType == 'as'){// 已发货Already shipped
+                $trades = $tradeObj->where('user_id',$userRe->id)
+                    ->where('trade_type',1)
+                    ->limit($this->pagesize)
+                    ->select();
+            }elseif($tradeType == 'finish'){//已完成
+                $trades = $tradeObj->where('user_id',$userRe->id)
+                    ->where('trade_type',2)
+                    ->limit($this->pagesize)
+                    ->select();
+
+            }else{
+                $trades = $tradeObj->where('user_id',$userRe->id)
+                    ->limit($this->pagesize)
+                    ->select();
+            }
+
+//        echo "<pre>";var_dump($trades);exit;
 
         $curl = "userinfo";
         foreach ($trades as $k=>&$v){
             $v->item_name = Items::where('id',$v->item_id)->value('name');
         }
-//        echo "<pre>";var_dump($trades);exit;
+//
         $re = ['footType'=>$curl,'userinfo'=>$userRe,'trade'=>$trades,'trade_type'=>$tradeType];
+//        echo "<pre>";var_dump($re);exit;
         return view("index@index/trade",['re'=>$re]);
+    }
+
+    public function ajax_get_trade(Request $request){
+        $post = $request->param();
+        $macth = ['pd'=>0,'as'=>1,'finish'=>2,'all'=>null];
+        $tradeObj = new Trades();
+        $type = $macth[$post['type']];
+        $userid = $post['userid'];
+        $page = $post['page'];
+        $pagesize = $this->pagesize;
+        $start = ($page+1-1)*$pagesize;
+
+        $page+=1;
+        if($macth[$post['type']] !== null){
+            $trades = $tradeObj
+                ->where('user_id',$userid)
+                ->where('trade_type',$type)
+                ->limit($start,$pagesize)
+                ->select();
+        }else{
+            $trades = $tradeObj
+                ->where('user_id',$userid)
+                ->limit($start,$pagesize)
+                ->select();
+        }
+
+        foreach ($trades as $k=>&$v){
+            $v->item_name = Items::where('id',$v->item_id)->value('name');
+        }
+//        echo "<pre>";var_dump($trades);exit;
+//        echo "<pre>";var_dump($page);exit;
+        $data = ['page'=>$page,'trades'=>$trades];
+        echo  json_encode($data);
+//        echo "<pre>";var_dump($data);exit;
+//        echo "<pre>";var_dump(json_encode($data));
+
+
     }
 
 

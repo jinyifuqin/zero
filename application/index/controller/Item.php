@@ -156,6 +156,7 @@ class Item extends Controller
             'phone_num'  =>  $post['phone_num'],
             'trade_number'  =>  $tradeNum,
             'create_time'  =>  $create_time,
+            'update_time'  =>  $create_time,
         ];
         $trade->data($all);
         $re = $trade->save();

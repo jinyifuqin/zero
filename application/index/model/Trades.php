@@ -13,7 +13,12 @@ class Trades extends Model
 {
     public function getCreateTimeAttr($time)
     {
-        return $time;
+        return strtotime($time);
+    }
+
+    public function getUpdateTimeAttr($time)
+    {
+        return strtotime($time);
     }
 
     public function getCheckTypeAttr($value)

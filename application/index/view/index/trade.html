@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
     <script src="/public/indexsource/js/jquery.min.js"></script>
     <script src="/public/indexsource/js/pic.js"></script>
+    <!--分割线-->
+    <link rel="stylesheet" href="/public/indexsource/pull/css/reset.css" />
+    <link rel="stylesheet" href="/public/indexsource/pull/css/pullToRefresh.css" />
+    <script src="/public/indexsource/pull/js/iscroll.js"></script>
+    <script src="/public/indexsource/pull/js/pullToRefresh.js"></script>
+    <script src="/public/indexsource/pull/js/colorful.js"></script>
+    <script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
 </head>
 <body>
 <!--这是头部-->
@@ -35,6 +42,7 @@
            <span class="user_info_name">{$re.userinfo.nickname}</span>
        </div>
        <div class="user_jifen">{$re.userinfo.allPoint}积分</div>
+      <div id="userid" data="{$re.userinfo.id}" style="display: none"></div>
   </div>
   <ul class="tap">
       {eq name="$re.trade_type" value=""}
@@ -42,7 +50,7 @@
       {else/}
         <li>
       {/eq}
-         <a  href="/myTrade">全部</a>
+         <a  href="/myTrade/all">全部</a>
      </li>
       <!--<li>-->
           <!--<a href="/myTrade">待付款</a>-->
@@ -73,8 +81,8 @@
           <a href="/myTrade/finish">已完成</a>
       </li>
   </ul>
-
-    <ul class="order_list">
+    <div id="wrapper">
+    <ul class="order_list" >
         {foreach $re.trade as $vo}
         <li>
             <div class="order_list1">
@@ -94,14 +102,127 @@
             </div>
         </li>
         {/foreach}
-
+        <div id="type" data="{$re.trade_type}" style="display: none;"></div>
+        <div id="page" data="1" style="display: none;"></div>
     </ul>
-
+    </div>
 </div>
 
 
 
+<script>
+    // for (var i = 0; i < document.querySelectorAll("#wrapper ul li").length; i++) {
+    //     document.querySelectorAll("#wrapper ul li")[i].colorfulBg();
+    // }
+    refresher.init({
+        id: "wrapper",//<------------------------------------------------------------------------------------┐
+        pullDownAction: Refresh,
+        pullUpAction: Load
+    });
+    var generatedCount = 0;
+    function Refresh() {
+        setTimeout(function () {
+            var el, li, i;
+            el = document.querySelector("#wrapper ul");
+            var page = 0;
+            var url = "/ajaxGetTrade";
+            var type = $('#type').attr('data');
+            var userid = $('#userid').attr('data');
+            var data = {'page':page,'type':type,'userid':userid};
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    console.log(data);
+                    if(data.trades.length){
+                        $('#page').attr('data',1);
+                        $('.order_list li').remove();
+                        $.each(data.trades,function (index,ele) {
+                            xx = "<li> <div class=\"order_list1\">\n" +
+                                "                <div class=\"order_list1_img\">\n" +
+                                "                    <img src=\"/public/indexsource/images/sp1.jpg\" alt=\"\"/>\n" +
+                                "                </div>\n" +
+                                "                <div class=\"order_list1_text\">\n" +
+                                "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
+                                "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
+                                "                </div>\n" +
+                                "            </div>\n" +
+                                "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
+                                "            <div class=\"order_list3\">\n" +
+                                "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
+                                "                <a class=\"order_list32\" href=\"#\">确认收货</a>\n" +
+                                "            </div>" +
+                                "</li>";
+                            $("#wrapper ul").append(xx, el.childNodes[0]);
 
+                        });
+                    }else{
+                        // layer.msg("没有更多了",{icon:0,time:2000});
+                    }
+
+                    // location.reload();
+                }
+            });
+            wrapper.refresh();/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+            // for (var i = 0; i < document.querySelectorAll("#wrapper ul li").length; i++) {
+            //     document.querySelectorAll("#wrapper ul li")[i].colorfulBg();
+            // }
+        }, 1000);
+
+    }
+
+    function Load() {
+        setTimeout(function () {
+            var el, li, i;
+            el = document.querySelector("#wrapper ul");
+            var page = $('#page').attr('data');
+            var url = "/ajaxGetTrade";
+            var type = $('#type').attr('data');
+            var userid = $('#userid').attr('data');
+            var data = {'page':page,'type':type,'userid':userid};
+
+            // console.log(page);return;
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    console.log(data);
+                    if(data.trades.length){
+                        $('#page').attr('data',data.page);
+                        $.each(data.trades,function (index,ele) {
+                            xx = "<li> <div class=\"order_list1\">\n" +
+                                "                <div class=\"order_list1_img\">\n" +
+                                "                    <img src=\"/public/indexsource/images/sp1.jpg\" alt=\"\"/>\n" +
+                                "                </div>\n" +
+                                "                <div class=\"order_list1_text\">\n" +
+                                "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
+                                "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
+                                "                </div>\n" +
+                                "            </div>\n" +
+                                "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
+                                "            <div class=\"order_list3\">\n" +
+                                "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
+                                "                <a class=\"order_list32\" href=\"#\">确认收货</a>\n" +
+                                "            </div>" +
+                                "</li>";
+                            $("#wrapper ul").append(xx, el.childNodes[0]);
+
+                        });
+                    }else{
+                        layer.msg("没有更多了",{icon:0,time:2000});
+                    }
+
+                    // location.reload();
+                }
+            });
+            wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+        }, 1000);
+    }
+</script>
 
 
 <!--底部-->
