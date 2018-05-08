@@ -27,8 +27,9 @@ class Trade extends Controller
 
     public function index(){
         $trades = Trades::all();
+        $count = Trades::count();
         $delimiter = urlencode(',');
-//        echo "<pre>";var_dump($_SESSION);exit;
+//        echo "<pre>";var_dump($count);exit;
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
 
 //        echo "<pre>";var_dump($type);exit;
@@ -47,7 +48,7 @@ class Trade extends Controller
 //            echo "<pre>";var_dump($v['check_type']);exit;
         }
         
-        $data = ['type'=>$type,'trades'=>$trades];
+        $data = ['type'=>$type,'trades'=>$trades,'count'=>$count];
 
 
 
