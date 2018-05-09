@@ -127,11 +127,22 @@ class Index
     }
 
     public function user_info(){
-        $userRe = $this->get_user_info();
-        $curl = "userinfo";
-        $re = ['footType'=>$curl,'userinfo'=>$userRe];
+        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+        if(array_key_exists('userinfo',$_SESSION)){
+            $userRe = $this->get_user_info();
+            $curl = "userinfo";
+            $re = ['footType'=>$curl,'userinfo'=>$userRe];
+            return view("index@index/userInfo",['re'=>$re]);
+        }
+        $url = $this->wxObj->get_authorize_url(1);
+        return redirect($url);
 
-        return view("index@index/userInfo",['re'=>$re]);
+//        分割线
+//        $userRe = $this->get_user_info();
+//        $curl = "userinfo";
+//        $re = ['footType'=>$curl,'userinfo'=>$userRe];
+//
+//        return view("index@index/userInfo",['re'=>$re]);
     }
 
     public function get_user_info(){

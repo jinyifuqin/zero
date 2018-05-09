@@ -16,6 +16,10 @@
 	<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
 
 	<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
+	<style type="text/css">
+		.picker .picker-panel .picker-choose .confirm{right: 3% !important;}
+		.picker .picker-panel .picker-choose .cancel{left: 3% !important;}
+	</style>
 </head>
 
 <body class="bjhs2">
@@ -54,7 +58,12 @@
 		<div class="fapiao">
 			<div class="fapiao1 szym21 huixian">
 				<a href="#"><span>所在地区</span>
-					<font><i href="#" class="btn btn-info btn-lg active" role="button" id="sel_city"><input name="desc"  type="text" placeholder="请填写地址"><img src="/public/indexsource/images/jian1.jpg" /></i></font>
+					<font>
+						<i href="#" style="position: relative;" class="btn btn-info btn-lg active" role="button" id="sel_city">
+						<input name="desc" readonly="readonly" type="text" placeholder="请填写地址">
+						<img style="position: absolute;top:0px;" src="/public/indexsource/images/jian1.jpg" />
+						</i>
+					</font>
 				</a>
 			</div>
 			<div class="huixian"></div>

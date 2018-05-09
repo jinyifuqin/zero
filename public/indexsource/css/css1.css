@@ -973,7 +973,7 @@ footer p a:hover{color:#51555C}
 /*编辑发票信息*/
 .fapiao{background: #fff;width: 100%;}
 .fapiao1 span{width: 26%;height: 4rem;line-height: 4rem;font-size: 1rem;color: #333333;padding-left: 5%;display: inline-block;vertical-align: middle;}
-.fapiao1 input{outline: none;background: transparent;border: none;font-size: .95rem;width: 54%;vertical-align: middle;}
+.fapiao1 input{outline: none;background: transparent;border: none;font-size: .95rem;width: 50%;vertical-align: middle;}
 .fapiao1 img{width: 1.7rem;text-align: right;vertical-align:middle;margin-left: 5%;}
 .fapiao2{width: 80%;margin-left: 10%; font-size: 1.1rem;padding: .2rem 0;background: #4190fa;height: 2.5rem;line-height: 2.5rem;border-radius: 1.7rem;margin-top: 3rem;}
 .fapiao2 a{color: #fff;display: block;text-align: center;}
