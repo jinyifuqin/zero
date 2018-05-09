@@ -60,8 +60,9 @@ class Index
             $_SESSION['itemid'] = $request->param('id');
         }
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+//        echo "<pre>";var_dump($_SESSION);exit;
 //        unset($_SESSION['userinfo']);
-        if(array_key_exists('userinfo',$_SESSION)){
+        if(array_key_exists('userinfo',$_SESSION) && $_SESSION['userinfo'] != null){
 
             return redirect('/buy');
         }
