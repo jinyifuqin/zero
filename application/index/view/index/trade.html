@@ -116,6 +116,10 @@
     // for (var i = 0; i < document.querySelectorAll("#wrapper ul li").length; i++) {
     //     document.querySelectorAll("#wrapper ul li")[i].colorfulBg();
     // }
+    refresher.info.pullingDownLable = "释放重置数据...";
+    refresher.info.pullDownLable = "下拉重置数据...";
+    refresher.info.pullUpLable = "上拉获取更多...";
+    refresher.info.pullingUpLable = "释放加载更多...";
     refresher.init({
         id: "wrapper",//<------------------------------------------------------------------------------------┐
         pullDownAction: Refresh,
@@ -233,6 +237,7 @@
                             wrapper.refresh();
                         });
                     }else{
+                        $('.pullUp').css('display','none');
                         layer.msg("没有更多了",{icon:0,time:2000});
                         wrapper.refresh();
                     }
