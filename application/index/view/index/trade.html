@@ -35,7 +35,7 @@
 
 
 <!--这是最外边的div，用来隔开与底部栏目的高度-->
-<div class="Cmain">
+<div class="Cmain" style="margin-bottom: 0;">
   <div class="user_bj">
        <div class="user_info">
            <div class="user_info_img"><img src="/public/uploads/{$re.userinfo.pic}" alt=""/></div>
@@ -81,7 +81,10 @@
           <a href="/myTrade/finish">已完成</a>
       </li>
   </ul>
-    <div id="wrapper">
+
+</div>
+<div style="position:relative;height:340px;">
+<div id="wrapper">
     <ul class="order_list" >
         {foreach $re.trade as $vo}
         <li>
@@ -104,12 +107,11 @@
         {/foreach}
 
     </ul>
-    </div>
 </div>
-
+</div>
 <div id="type" data="{$re.trade_type}" style="display: none;"></div>
 <div id="page" data="1" style="display: none;"></div>
-
+<!--<div style="height:50px;background: red">222222</div>-->
 <script>
     // for (var i = 0; i < document.querySelectorAll("#wrapper ul li").length; i++) {
     //     document.querySelectorAll("#wrapper ul li")[i].colorfulBg();
@@ -122,6 +124,7 @@
     var generatedCount = 0;
     function Refresh() {
         setTimeout(function () {
+
             var el, li, i;
             el = document.querySelector("#wrapper ul");
             var page = 0;
@@ -159,13 +162,14 @@
 
                         });
                     }else{
-                        // layer.msg("没有更多了",{icon:0,time:2000});
+                        layer.msg("没有更多了",{icon:0,time:2000});
+                        wrapper.refresh();
                     }
 
-                    // location.reload();
+                    location.reload();
                 }
             });
-            wrapper.refresh();/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+            // wrapper.refresh();/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
             // for (var i = 0; i < document.querySelectorAll("#wrapper ul li").length; i++) {
             //     document.querySelectorAll("#wrapper ul li")[i].colorfulBg();
             // }
@@ -175,6 +179,22 @@
 
     function Load() {
         setTimeout(function () {
+            // var el, li, i;
+            // el = document.querySelector("#wrapper ul");
+            // el.innerHTML = '';
+            // for (i = 0; i < 11; i++) {
+            //
+            //     li = document.createElement('li');
+            //     li.appendChild(document.createTextNode('async row ' + (++generatedCount)));
+            //     el.insertBefore(li, el.childNodes[0]);
+            //
+            // }
+            // wrapper.refresh();/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+            // for (var i = 0; i < document.querySelectorAll("#wrapper ul li").length; i++) {
+            //
+            //     document.querySelectorAll("#wrapper ul li")[i].colorfulBg();
+            //
+            // }
             var el, li, i;
             el = document.querySelector("#wrapper ul");
             var page = $('#page').attr('data');
@@ -210,16 +230,17 @@
                                 "            </div>" +
                                 "</li>";
                             $("#wrapper ul").append(xx, el.childNodes[0]);
-
+                            wrapper.refresh();
                         });
                     }else{
                         layer.msg("没有更多了",{icon:0,time:2000});
+                        wrapper.refresh();
                     }
 
                     // location.reload();
                 }
             });
-            wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+            // wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
         }, 1000);
     }
 </script>
