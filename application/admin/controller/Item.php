@@ -110,6 +110,7 @@ class Item  extends Controller
 
     public function itemSave(Request $request){
         $data = $request->param();
+        unset($data['/admin/itemSave']);
         unset($data['uploadfile']);
         $data['create_time'] = date('Y-m-d H:i:s',time());
         $file = $request->file('file-2');
@@ -120,7 +121,7 @@ class Item  extends Controller
             if($result)
                 return  redirect('/admin/items');
         }
-//        echo "<pre>";var_dump($re);exit;
+
         if($re->getError() == ''){
             $end = htmlspecialchars($re->getSaveName());
             $data['pic'] = $end;
