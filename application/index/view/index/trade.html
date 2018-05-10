@@ -90,7 +90,7 @@
         <li>
             <div class="order_list1">
                 <div class="order_list1_img">
-                    <img src="/public/indexsource/images/sp1.jpg" alt=""/>
+                    <img src="/public/uploads/{$vo.pic}" alt=""/>
                 </div>
                 <div class="order_list1_text">
                     <p class="order_list1_text1">{$vo.item_name}</p>
@@ -149,7 +149,7 @@
                         $.each(data.trades,function (index,ele) {
                             xx = "<li> <div class=\"order_list1\">\n" +
                                 "                <div class=\"order_list1_img\">\n" +
-                                "                    <img src=\"/public/indexsource/images/sp1.jpg\" alt=\"\"/>\n" +
+                                "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
                                 "                </div>\n" +
                                 "                <div class=\"order_list1_text\">\n" +
                                 "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
@@ -220,7 +220,7 @@
                         $.each(data.trades,function (index,ele) {
                             xx = "<li> <div class=\"order_list1\">\n" +
                                 "                <div class=\"order_list1_img\">\n" +
-                                "                    <img src=\"/public/indexsource/images/sp1.jpg\" alt=\"\"/>\n" +
+                                "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
                                 "                </div>\n" +
                                 "                <div class=\"order_list1_text\">\n" +
                                 "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
