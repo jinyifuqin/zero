@@ -33,7 +33,7 @@ class Items extends Migrator
             ->addColumn('pic', 'string',array('limit' => 64,'default'=>'','comment'=>'商品图'))
             ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'商品名称'))
             ->addColumn('desc', 'string',array('limit' => 32,'default'=>'','comment'=>'品牌描述'))
-            ->addColumn('content', 'string', array('default'=>'','comment'=>'产品详情'))
+            ->addColumn('content', 'text', array('default'=>'','comment'=>'产品详情'))
             ->addColumn('price', 'integer',array('limit' => 32,'default'=>0,'signed'=>false,'comment'=>'商品价格'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'创建时间'))
             ->addColumn('status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'状态'))

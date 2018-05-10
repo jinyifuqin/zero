@@ -71,6 +71,8 @@ class Item  extends Controller
     }
 
     public function itemUpdate(Request $request){
+//        echo "<pre>";var_dump($request->file());exit;
+//        echo "<pre>";var_dump($request->param());exit;
         if($request->file('file-2')){
             $file = $request->file('file-2');
             $fileRe = upload($file);
@@ -81,13 +83,15 @@ class Item  extends Controller
         }
         $pic = $request->param('logopath');
         $check = strrpos($pic,'uploads');
+        $prepareConten = $request->param('content');
 
+//        echo"<pre>";var_dump($content);exit;
         $item = new Items();
         $creatTime = date('Y-m-d H:i:s',time());
         $id = $request->param('id');
         $name = $request->param('name');
         $desc = $request->param('desc');
-        $content = $request->param('content');
+        $content = htmlspecialchars($prepareConten);
         $price = $request->param('price');
         $status = $request->param('status');
         $catid = $request->param('cat_id');
@@ -110,11 +114,15 @@ class Item  extends Controller
 
     public function itemSave(Request $request){
         $data = $request->param();
+//        echo"<pre>";var_dump($data);exit;
         unset($data['/admin/itemSave']);
         unset($data['uploadfile']);
+        $data['content'] = $data['editorValue'];
+        unset($data['editorValue']);
         $data['create_time'] = date('Y-m-d H:i:s',time());
         $file = $request->file('file-2');
         $re = upload($file);
+
         if($re == null){
             $itemObj = new Items($data);
             $result = $itemObj->save();
