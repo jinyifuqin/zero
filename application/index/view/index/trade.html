@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <title>我的订单(测试)</title>
     <link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
+    <link rel="stylesheet" href="/public/indexsource/css/css1.css"/>
+    <link rel="stylesheet" href="/public/indexsource/css/css2.css"/>
     <script src="/public/indexsource/js/jquery.min.js"></script>
     <script src="/public/indexsource/js/pic.js"></script>
     <!--分割线-->
@@ -14,6 +16,11 @@
     <script src="/public/indexsource/pull/js/pullToRefresh.js"></script>
     <script src="/public/indexsource/pull/js/colorful.js"></script>
     <script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+    <style>
+        .APPbtn .APPbtn1{
+            width: 20%;
+        }
+    </style>
 </head>
 <body>
 <!--这是头部-->
@@ -100,8 +107,12 @@
             <div class="order_list2">共{$vo.buy_num}件商品 合计{$vo.buy_price}元 &nbsp;</div>
             <div class="order_list3">
                 <!--<a class="order_list31" href="#">查看物流</a>-->
+                {eq name="$vo.trade_status" value="2"}
+                <span>订单已完成!</span>
+                {else/}
                 <a class="order_list31" href="#">删除订单</a>
-                <a class="order_list32" href="#">确认收货</a>
+                <a class="order_list32 getTrue" tradeid="{$vo.id}" href="#">确认收货</a>
+                {/eq}
             </div>
         </li>
         {/foreach}
@@ -111,11 +122,56 @@
 </div>
 <div id="type" data="{$re.trade_type}" style="display: none;"></div>
 <div id="page" data="1" style="display: none;"></div>
+<div class="jifen5">
+    <div class="jifen5_1">
+        <span style="text-align: center">你确定<i>收货</i>吗？</span>
+    </div>
+    <div>
+        <button type="button" class="button1"><a href="#">确定</a></button>
+        <button type="button" class="button2"><a href="#">取消</a></button>
+    </div>
+</div>
 <!--<div style="height:50px;background: red">222222</div>-->
 <script>
-    // for (var i = 0; i < document.querySelectorAll("#wrapper ul li").length; i++) {
-    //     document.querySelectorAll("#wrapper ul li")[i].colorfulBg();
-    // }
+    $(function(){
+
+        $('#wrapper').on('click','.getTrue',function(){
+            var tradeId = $(this).attr('tradeid');
+            var index = $(this).parents('li').index();
+            $(".jifen5").css("display", "block").attr('tradeid',tradeId).attr('index',index);
+        })
+
+
+        $(".button1").on('click',function() {
+            var tradeId = $(".jifen5").attr('tradeid');
+            var index = $(".jifen5").attr('index');
+            var url = '/trueGet';
+            var data = {'tradeId':tradeId};
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    if(data.status == "Success"){
+                        layer.msg("确认订单成功！",{icon:0,time:2000});
+                        $('.order_list').find('li').eq(index).find('.order_list3').html('<span>订单已完成！</span>');
+                    }else{
+                        layer.msg("确认订单失败！",{icon:0,time:2000});
+                    }
+
+                    // location.reload();
+                }
+            });
+            $(".jifen5").css("display", "none");
+        })
+        $(".button2").click(function() {
+            $(".jifen5").css("display", "none");
+        })
+    })
+</script>
+<script>
     refresher.info.pullingDownLable = "释放重置数据...";
     refresher.info.pullDownLable = "下拉重置数据...";
     refresher.info.pullUpLable = "上拉获取更多...";
@@ -147,30 +203,46 @@
                         $('#page').attr('data',1);
                         $('.order_list li').remove();
                         $.each(data.trades,function (index,ele) {
-                            xx = "<li> <div class=\"order_list1\">\n" +
-                                "                <div class=\"order_list1_img\">\n" +
-                                "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
-                                "                </div>\n" +
-                                "                <div class=\"order_list1_text\">\n" +
-                                "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
-                                "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
-                                "                </div>\n" +
-                                "            </div>\n" +
-                                "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
-                                "            <div class=\"order_list3\">\n" +
-                                "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
-                                "                <a class=\"order_list32\" href=\"#\">确认收货</a>\n" +
-                                "            </div>" +
-                                "</li>";
-                            $("#wrapper ul").append(xx, el.childNodes[0]);
+                            if(ele.trade_type == "已完成"){
+                                xx = "<li> <div class=\"order_list1\">\n" +
+                                    "                <div class=\"order_list1_img\">\n" +
+                                    "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"order_list1_text\">\n" +
+                                    "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
+                                    "                </div>\n" +
+                                    "            </div>\n" +
+                                    "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list3\">\n" +
+                                    "<span>订单已完成！</span>"+
+                                    "            </div>" +
+                                    "</li>";
+                            }else {
 
+                                xx = "<li> <div class=\"order_list1\">\n" +
+                                    "                <div class=\"order_list1_img\">\n" +
+                                    "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"order_list1_text\">\n" +
+                                    "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                </div>\n" +
+                                    "            </div>\n" +
+                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list3\">\n" +
+                                    "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
+                                    "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
+                                    "            </div>" +
+                                    "</li>";
+                            }
+                            $("#wrapper ul").append(xx, el.childNodes[0]);
                         });
                     }else{
                         layer.msg("没有更多了",{icon:0,time:2000});
-                        wrapper.refresh();
-                    }
 
-                    location.reload();
+                    }
+                    wrapper.refresh();
                 }
             });
             // wrapper.refresh();/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
@@ -214,34 +286,49 @@
                 data: data,
                 dataType: "json",
                 success: function(data){
-                    console.log(data);
                     if(data.trades.length){
                         $('#page').attr('data',data.page);
                         $.each(data.trades,function (index,ele) {
-                            xx = "<li> <div class=\"order_list1\">\n" +
-                                "                <div class=\"order_list1_img\">\n" +
-                                "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
-                                "                </div>\n" +
-                                "                <div class=\"order_list1_text\">\n" +
-                                "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
-                                "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
-                                "                </div>\n" +
-                                "            </div>\n" +
-                                "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
-                                "            <div class=\"order_list3\">\n" +
-                                "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
-                                "                <a class=\"order_list32\" href=\"#\">确认收货</a>\n" +
-                                "            </div>" +
-                                "</li>";
+                            if(ele.trade_type == "已完成"){
+                                xx = "<li> <div class=\"order_list1\">\n" +
+                                    "                <div class=\"order_list1_img\">\n" +
+                                    "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"order_list1_text\">\n" +
+                                    "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
+                                    "                </div>\n" +
+                                    "            </div>\n" +
+                                    "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list3\">\n" +
+                                    "<span>订单已完成！</span>"+
+                                    "            </div>" +
+                                    "</li>";
+                            }else {
+
+                                xx = "<li> <div class=\"order_list1\">\n" +
+                                    "                <div class=\"order_list1_img\">\n" +
+                                    "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"order_list1_text\">\n" +
+                                    "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                </div>\n" +
+                                    "            </div>\n" +
+                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list3\">\n" +
+                                    "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
+                                    "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
+                                    "            </div>" +
+                                    "</li>";
+                            }
                             $("#wrapper ul").append(xx, el.childNodes[0]);
-                            wrapper.refresh();
                         });
                     }else{
                         $('.pullUp').css('display','none');
                         layer.msg("没有更多了",{icon:0,time:2000});
-                        wrapper.refresh();
                     }
-
+                    wrapper.refresh();
                     // location.reload();
                 }
             });

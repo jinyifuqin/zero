@@ -199,6 +199,7 @@ class Index
         foreach ($trades as $k=>&$v){
             $v->item_name = Items::where('id',$v->item_id)->value('name');
             $v->pic = Items::where('id',$v->item_id)->value('pic');
+            $v->trade_status = $v->getData('trade_type');
         }
 //
         $re = ['footType'=>$curl,'userinfo'=>$userRe,'trade'=>$trades,'trade_type'=>$tradeType];
@@ -234,17 +235,22 @@ class Index
             $v->item_name = Items::where('id',$v->item_id)->value('name');
             $v->pic = Items::where('id',$v->item_id)->value('pic');
         }
-//        echo "<pre>";var_dump($trades);exit;
-//        echo "<pre>";var_dump($page);exit;
         $data = ['page'=>$page,'trades'=>$trades];
         echo  json_encode($data);
-//        echo "<pre>";var_dump($data);exit;
-//        echo "<pre>";var_dump(json_encode($data));
-
-
     }
 
-
+    public function trade_true_get(Request $request){
+        $tradeId = $request->param('tradeId');
+        $re = Trades::where('id', $tradeId)
+            ->update(['trade_type' => 2]);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+//        echo "<pre>";var_dump($tradeId);exit;
+    }
 
 
     public function ajax()
