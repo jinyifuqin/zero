@@ -66,6 +66,8 @@ class Item  extends Controller
         $brand = Brands::all();
         $cat = Cats::all();
         $data = ['brand'=>$brand,'cat'=>$cat,'item'=>$item];
+        $item->content = htmlspecialchars_decode($item->content);
+//        echo "<pre>";var_dump($item->content);exit;
         $item->pic = preg_replace('/\\\\/','/',$item->pic);
         return view("admin@index/itemEdit",['data'=>$data]);
     }
