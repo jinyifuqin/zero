@@ -52,6 +52,7 @@ Route::group('admin',[
     'addDiscount' => ['admin/index/add_discount', ['method' => 'get']],
     'discountDel' => ['admin/index/del_discount', ['method' => 'get']],
     'discountDelAll' => ['admin/index/del_discount_all', ['method' => 'get']],
+    'qrcode' => ['admin/index/qrcode', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

@@ -36,6 +36,7 @@ class Users extends Migrator
             ->addColumn('openid', 'string',array('default'=>'','comment'=>'OpenId'))
             ->addColumn('pic', 'string',array('default'=>'','comment'=>'头像'))
             ->addColumn('phone_number', 'integer',array('limit' => 15,'default'=>0,'comment'=>'手机号'))
+            ->addColumn('service_cent_id', 'integer',array('limit' => 15,'default'=>0,'comment'=>'服务中心推广人'))
             ->addColumn('referee_id', 'integer',array('limit' => 15,'default'=>0,'comment'=>'推荐人'))
             ->addColumn('sex', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'性别'))
             ->addColumn('status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'0普通会员1服务中心'))

@@ -20,13 +20,31 @@ class Index
         $this->wxObj = new Wechat();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $re = Items::all();
-        $curl = "index";
-        $re = ['footType'=>$curl,'itemInfo'=>$re];
-//        echo password(123,456);exit;
-        return view("index@index/index",['re'=>$re]);
+//        session_destroy();
+        $_SESSION['url'] = $_SERVER['HTTP_HOST'];
+        $serviceuserid = $request->param('userid');
+        if(isset($userid)){
+            $_SESSION['adminUserId'] = $serviceuserid;
+        }
+
+//        echo "<pre>";var_dump($_SESSION);exit;
+        if(array_key_exists('userinfo',$_SESSION)){
+            $id = $_SESSION['userinfo']->id;
+            $userObj = Users::get($id);
+            $userObj->service_cent_id = $serviceuserid;
+            $userObj->save();
+            $re = Items::all();
+            $curl = "index";
+            $re = ['footType'=>$curl,'itemInfo'=>$re];
+            return view("index@index/index",['re'=>$re]);
+        }
+        $url = $this->wxObj->get_authorize_url(1);
+        return redirect($url);
+
+//        echo "<pre>";var_dump($request->param());exit;
+
     }
 
     public function buy(){
@@ -82,7 +100,7 @@ class Index
         $get = $request->param();
         $_SESSION['getinfo'] = $get;
         $code = $get['code'];
-//        echo "<pre>";var_dump($get);exit;
+
         if(!array_key_exists('get_access_token',$_SESSION) || $_SESSION['get_access_token'] == false){
             $get_access_token = $this->wxObj->get_access_token($code);
             $_SESSION['get_access_token'] = $get_access_token;
@@ -100,12 +118,16 @@ class Index
         }
 
         $re = $this->createUser($get_user_info);
-
-        return redirect($_SESSION['url']);
+//        echo "<pre>";var_dump($_SESSION);exit;
+        return redirect('/userInfo');
     }
 
     public function createUser($get_user_info){
         $re = Users::where('openid',$get_user_info['openid'])->find();
+        if(array_key_exists('adminUserId',$_SESSION)){
+            $serviceCentId = $_SESSION['adminUserId'];
+        }
+//        echo "<pre>";var_dump($serviceCentId);exit;
         if($re){
             $_SESSION['userinfo'] = $re;
             return true;
@@ -114,6 +136,9 @@ class Index
             $data['sex'] = $get_user_info['sex'];
             $pic = download($get_user_info['headimgurl']);
             $data['pic'] = $pic;
+            if(array_key_exists('adminUserId',$_SESSION)){
+                $data['service_cent_id'] = $serviceCentId;
+            }
             $data['username'] = uniqid();
             $data['nickname'] = urlencode(json_encode($get_user_info['nickname']));
             $data['password'] = $get_user_info['openid'];
@@ -128,7 +153,7 @@ class Index
     }
 
     public function user_info(){
-        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+//        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
         if(array_key_exists('userinfo',$_SESSION)){
             $userRe = $this->get_user_info();
             $curl = "userinfo";

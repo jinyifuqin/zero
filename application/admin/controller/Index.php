@@ -295,5 +295,15 @@ class Index extends Controller
         echo json_encode($msg);
     }
 
+    public function qrcode(){
+        $userid = $_SESSION['adminUserInfo']->id;
+        $url = "http://".$_SERVER['HTTP_HOST']."?userid=$userid";
+//        $url = "http://192.168.5.88?userid=$userid";
+        $link = "http://qr.liantu.com/api.php?text=$url";
+//        $link =  'http://qr.liantu.com/api.php?text=http://'.$_SERVER['HTTP_HOST'].'?openid='.$userid.'';
+//        echo "<pre>";var_dump($link);exit;
+        return view("admin@index/qrcode",['link'=>$link]);
+    }
+
 
 }
