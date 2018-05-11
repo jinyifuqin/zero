@@ -163,13 +163,18 @@ class Index
                 $wxObj = new Weixins;
                 $wxObj->save($data,['id' => $id]);
             }else{
-
+                $get_access_token = $this->wxObj->get_access_token($code);
+                $openid = $get_access_token['openid'];
+                $access_token = $get_access_token['access_token'];
                 $data = $wx;
+                $_SESSION['openid'] = $openid;
+                $data['access_token'] = $access_token;
             }
 //            echo "<pre>";var_dump($wx);exit;
         }
 
         $get_user_info = $this->wxObj->get_user_info($data['access_token'],$_SESSION['openid']);
+//        echo "<pre>";var_dump($get_user_info);exit;
         $re = $this->createUser($get_user_info);
 //        $dataAll = $this->get_signature($data['ticket']);
 //        $_SESSION['signature'] = $dataAll['signature'];
