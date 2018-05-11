@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use app\admin\model\Brands;
 use app\index\model\Addrs;
+use app\index\model\Weixins;
 use app\index\model\Points;
 use app\index\model\Trades;
 use app\weixin\controller\Wechat;
@@ -23,21 +24,54 @@ class Index
     public function index(Request $request)
     {
 //        session_destroy();
+//        echo "<pre>";var_dump($_SESSION);exit;
         $_SESSION['url'] = $_SERVER['HTTP_HOST'];
         $serviceuserid = $request->param('userid');
-        if(isset($userid)){
+        $memberid = $request->param('memberid');
+        if(isset($serviceuserid)){
             $_SESSION['adminUserId'] = $serviceuserid;
         }
+        if(isset($memberid)){
+            $_SESSION['share_member_id'] = $memberid;
+        }
 
-//        echo "<pre>";var_dump($_SESSION);exit;
+
         if(array_key_exists('userinfo',$_SESSION)){
             $id = $_SESSION['userinfo']->id;
             $userObj = Users::get($id);
-            $userObj->service_cent_id = $serviceuserid;
+            if(isset($serviceuserid)){
+                $userObj->service_cent_id = $serviceuserid;
+            }
+//            echo "<pre>";var_dump($memberid);exit;
+            if(isset($memberid)){
+                $userObj->share_member_id = $memberid;
+            }
             $userObj->save();
             $re = Items::all();
             $curl = "index";
-            $re = ['footType'=>$curl,'itemInfo'=>$re];
+
+            $appid = WX_APPID;
+            $wxObj = Weixins::all();
+            $ticket = $wxObj[0]->ticket;
+            $access_token_true = $wxObj[0]->access_token_true;
+//            $timestamp = $_SESSION['timestamp'];
+            $signatureRe = $this->get_signature($ticket);
+//            echo "1";exit;
+            $signature = $signatureRe['signature'];
+            $noncestr = $signatureRe['noncestr'];
+//            echo "<pre>";var_dump($signatureRe);exit;
+            $url = "http://".$_SERVER['HTTP_HOST'].'?memberid='.$id;
+            $weixin = array(
+                'appid'=>$appid,
+                'access_token_true'=>$access_token_true,
+                'ticket'=>$ticket,
+                'timestamp'=>$signatureRe['timestamp'],
+                'noncestr'=>$noncestr,
+                'signature'=>$signature,
+                'url'=>$url
+            );
+            $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin];
+//            echo "<pre>";var_dump($weixin);exit;
             return view("index@index/index",['re'=>$re]);
         }
         $url = $this->wxObj->get_authorize_url(1);
@@ -100,32 +134,90 @@ class Index
         $get = $request->param();
         $_SESSION['getinfo'] = $get;
         $code = $get['code'];
+        $wx = Weixins::all();
 
-        if(!array_key_exists('get_access_token',$_SESSION) || $_SESSION['get_access_token'] == false){
-            $get_access_token = $this->wxObj->get_access_token($code);
-            $_SESSION['get_access_token'] = $get_access_token;
-//            echo "<pre>";var_dump($get_access_token);exit;
+        if($wx == null){
+            $result = $this->getWxAccessToken($code);
+            $_SESSION['openid'] = $result['openid'];
+            $data = array(
+                'access_token'=>$result['access_token'],
+                'access_token_true'=>$result['access_token_true'],
+                'ticket'=>$result['ticket'],
+                'create_time'=>date('Y-m-d H:i:s',time()+7000)
+            );
+            $wxObj = new Weixins($data);
+            $wxObj->save();
         }else{
-            $get_access_token = $_SESSION['get_access_token'];
+            $wx = $wx[0];
+            $id = $wx->id;
+            $create_time = $wx->create_time;
+            if($create_time < time()){
+                $result = $this->getWxAccessToken($code);
+                $_SESSION['openid'] = $result['openid'];
+                $data = array(
+                    'access_token'=>$result['access_token'],
+                    'access_token_true'=>$result['access_token_true'],
+                    'ticket'=>$result['ticket'],
+                    'create_time'=>date('Y-m-d H:i:s',time()+7000)
+                );
+                $wxObj = new Weixins;
+                $wxObj->save($data,['id' => $id]);
+            }else{
+
+                $data = $wx;
+            }
+//            echo "<pre>";var_dump($wx);exit;
         }
 
-        if(!array_key_exists('get_user_info',$_SESSION) || $_SESSION['get_user_info'] == false){
-//            echo "<pre>";var_dump(22);exit;
-            $get_user_info = $this->wxObj->get_user_info($get_access_token['access_token'],$get_access_token['openid']);
-            $_SESSION['get_user_info'] = $get_user_info;
-        }else{
-            $get_user_info = $_SESSION['get_user_info'];
-        }
-
+        $get_user_info = $this->wxObj->get_user_info($data['access_token'],$_SESSION['openid']);
         $re = $this->createUser($get_user_info);
-//        echo "<pre>";var_dump($_SESSION);exit;
+//        $dataAll = $this->get_signature($data['ticket']);
+//        $_SESSION['signature'] = $dataAll['signature'];
+//        $_SESSION['noncestr'] = $dataAll['noncestr'];
+//        echo "<pre>";var_dump(222);exit;
+
         return redirect('/userInfo');
+    }
+
+    public function get_signature($ticket){
+        $noncestr = $this->wxObj->randcode();
+        $timestamp = time();
+        $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+//        $string = sprintf("jsapi_ticket=%s&noncestr=%s×tamp=%s&url=%s", $ticket, $noncestr, $timestamp, $url);
+//        $signature = sha1($string);
+
+        $signature='jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url.'';
+        $signature = sha1( $signature );
+
+        $data = ['noncestr'=>$noncestr,'signature'=>$signature,'timestamp'=>$timestamp];
+        return $data;
+    }
+
+    public function getWxAccessToken($code){
+        $get_access_token = $this->wxObj->get_access_token($code);
+        $openid = $get_access_token['openid'];
+        $access_token = $get_access_token['access_token'];
+        $token = $this->wxObj->wx_get_token();  //JS
+        $ticket = $this->wxObj->wx_get_jsapi_ticket($token);
+        $data = [
+            'get_access_token'=>$get_access_token,
+            'openid'=>$openid,
+            'access_token'=>$access_token,
+            'access_token_true'=>$token,
+            'ticket'=>$ticket
+        ];
+        return $data;
     }
 
     public function createUser($get_user_info){
         $re = Users::where('openid',$get_user_info['openid'])->find();
         if(array_key_exists('adminUserId',$_SESSION)){
             $serviceCentId = $_SESSION['adminUserId'];
+        }
+
+        if(array_key_exists('share_member_id',$_SESSION)){
+            $share_member_id = $_SESSION['share_member_id'];
         }
 //        echo "<pre>";var_dump($serviceCentId);exit;
         if($re){
@@ -138,6 +230,9 @@ class Index
             $data['pic'] = $pic;
             if(array_key_exists('adminUserId',$_SESSION)){
                 $data['service_cent_id'] = $serviceCentId;
+            }
+            if(array_key_exists('share_member_id',$_SESSION)){
+                $data['share_member_id'] = $share_member_id;
             }
             $data['username'] = uniqid();
             $data['nickname'] = urlencode(json_encode($get_user_info['nickname']));

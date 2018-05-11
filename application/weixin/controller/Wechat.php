@@ -111,4 +111,43 @@ class Wechat {
         return array($http_code, $response);
     }
 
+    public function wx_get_jsapi_ticket($token){
+        $url = sprintf("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi", $token);
+        $res = $this->http($url,'GET');
+        $res = json_decode($res[1], true);
+        //这里应该把access_token缓存起来，至于要怎么缓存就看各位了，有效期是7200s
+        $_SESSION['ticket'] = $res['ticket'];
+        return $res['ticket'];
+    }
+
+    //获取微信公从号access_token
+    public function wx_get_token() {
+        $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$this->app_id.'&secret='.$this->app_secret;
+        $res = $this->http($url,'GET');
+        if($res[0] == 200){
+            $res = json_decode($res[1],true);
+        }
+//        echo "<pre>";var_dump($res);exit;
+//        $res = json_decode($res, true);
+        //这里应该把access_token缓存起来，至于要怎么缓存就看各位了，有效期是7200s
+        $_SESSION['access_token_true'] = $res['access_token'];
+        return $res['access_token'];
+    }
+
+    public function randcode($num = 6)
+    {
+        $array = array(
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','y','z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            '0','1','2','3','4','5','6','7','8','9'
+        );
+        $tmpstr = '';
+        $max = count($array);
+        for ($i=0; $i <$num ; $i++) {
+            $key= rand(0,$max-1);
+            $tmpstr .= $array[$key];
+        }
+        return $tmpstr;
+    }
+
 }
