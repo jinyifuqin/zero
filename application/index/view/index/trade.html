@@ -110,7 +110,7 @@
                 {eq name="$vo.trade_status" value="2"}
                 <span>订单已完成!</span>
                 {else/}
-                <a class="order_list31" href="#">删除订单</a>
+                <a class="order_list31 deltrade" tradeid="{$vo.id}" href="#">删除订单</a>
                 <a class="order_list32 getTrue" tradeid="{$vo.id}" href="#">确认收货</a>
                 {/eq}
             </div>
@@ -131,6 +131,15 @@
         <button type="button" class="button2"><a href="#">取消</a></button>
     </div>
 </div>
+<div class="jifendel5">
+    <div class="jifendel5_1">
+        <span style="text-align: center">你确定<i>删除订单</i>吗？</span>
+    </div>
+    <div>
+        <button type="button" class="button1"><a href="#">确定</a></button>
+        <button type="button" class="button2"><a href="#">取消</a></button>
+    </div>
+</div>
 <!--<div style="height:50px;background: red">222222</div>-->
 <script>
     $(function(){
@@ -141,8 +150,41 @@
             $(".jifen5").css("display", "block").attr('tradeid',tradeId).attr('index',index);
         })
 
+        $('#wrapper').on('click','.deltrade',function(){
+            var tradeId = $(this).attr('tradeid');
+            var index = $(this).parents('li').index();
+            $(".jifendel5").css("display", "block").attr('tradeid',tradeId).attr('index',index);
+        })
 
-        $(".button1").on('click',function() {
+        $(".jifendel5 .button1").on('click',function() {
+            var tradeId = $(".jifendel5").attr('tradeid');
+            var index = $(".jifendel5").attr('index');
+            var url = '/tradeDel';
+            var data = {'tradeId':tradeId};
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    if(data.status == "Success"){
+                        layer.msg("订单删除成功！",{icon:0,time:2000});
+                        $('.order_list').find('li').eq(index).remove();
+                    }else{
+                        layer.msg("订单删除失败！",{icon:0,time:2000});
+                    }
+                    // location.reload();
+                }
+            });
+            $(".jifendel5").css("display", "none");
+        })
+        $(".jifendel5 .button2").click(function() {
+            $(".jifendel5").css("display", "none");
+        })
+
+
+        $(".jifen5_1 .button1").on('click',function() {
             var tradeId = $(".jifen5").attr('tradeid');
             var index = $(".jifen5").attr('index');
             var url = '/trueGet';
@@ -160,7 +202,6 @@
                     }else{
                         layer.msg("确认订单失败！",{icon:0,time:2000});
                     }
-
                     // location.reload();
                 }
             });
@@ -231,7 +272,7 @@
                                     "            </div>\n" +
                                     "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
-                                    "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
+                                    "                <a class=\"order_list31 deltrade\" tradeid=\" " + ele.id + " \" href=\"#\">删除订单</a>\n" +
                                     "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
                                     "            </div>" +
                                     "</li>";
@@ -317,7 +358,7 @@
                                     "            </div>\n" +
                                     "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
-                                    "                <a class=\"order_list31\" href=\"#\">删除订单</a>\n" +
+                                    "                <a class=\"order_list31 deltrade\" tradeid=\" " + ele.id + " \" href=\"#\">删除订单</a>\n" +
                                     "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
                                     "            </div>" +
                                     "</li>";

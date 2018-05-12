@@ -78,6 +78,7 @@ Route::group('',[
     'myTrade/[:type]' => ['user_trade', ['method' => 'get']],
     'ajaxGetTrade' => ['ajax_get_trade', ['method' => 'post']],
     'trueGet' => ['trade_true_get', ['method' => 'get']],
+    'tradeDel' => ['trade_del', ['method' => 'get']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

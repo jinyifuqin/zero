@@ -334,6 +334,9 @@
 .jifen5{width: 80%;height: 14rem;position: absolute;left: 10%; top: 16rem;z-index: 99999;display: none;background: #fff;text-align: center;}
 .jifen5_1 span{font-size: 1.1rem;color: #333;display: block;margin-top: 2rem;text-align: left;margin-left: 10%;line-height: 2rem;padding-right: 5%;}
 .jifen5_1 i{font-style: normal;font-size: 1rem;margin-left: 2%;display: inline-block;color: #88abda;padding-right: .5rem;}
+.jifendel5{width: 80%;height: 14rem;position: absolute;left: 10%; top: 16rem;z-index: 99999;display: none;background: #fff;text-align: center;}
+.jifendel5_1 span{font-size: 1.1rem;color: #333;display: block;margin-top: 2rem;text-align: left;margin-left: 10%;line-height: 2rem;padding-right: 5%;}
+.jifendel5_1 i{font-style: normal;font-size: 1rem;margin-left: 2%;display: inline-block;color: #88abda;padding-right: .5rem;}
 .button1{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-top: 1.5rem;color: #fff;background: #7ecef4;border:none;}
 .button2{width: 30%;font-size: 1rem;height: 2rem;line-height: 2rem;margin-left: 5%;margin-top: 1.5rem;color: #fff;background: #91cd9e;border:none;}
 .button1 a{color: #fff;display: block;}

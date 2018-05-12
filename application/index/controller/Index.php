@@ -383,6 +383,17 @@ class Index
 //        echo "<pre>";var_dump($tradeId);exit;
     }
 
+    public function trade_del(Request $request){
+        $tradeId = $request->param('tradeId');
+        $re = Trades::destroy($tradeId);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
 
     public function ajax()
     {
