@@ -137,8 +137,9 @@ function getPoint($userId){ // 获取用户总积分
             $allPoint += $sum * 0.0001*$x;
 //            echo "<pre>";var_dump($allPoint);
         }else{
-            $allPoint = $trueCount;
+            $allPoint = 0;
         }
+//        echo "<pre>";var_dump($allPoint);
         $showMony += $allPoint;
         $v->true_count = $allPoint;
         $v->save();
