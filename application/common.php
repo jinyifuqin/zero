@@ -108,38 +108,42 @@ function getIp() {
 
 function getPoint($userId){ // 获取用户总积分
     $re = \app\index\model\Points::all(['user_id'=>$userId]);
-
-//    $nowStamp = strtotime(date('Y-m-d',time()))+60*60*24*2+60*60;
     $nowStamp = time();
     $prevAllCount = \app\index\model\Points::where('user_id',$userId)->sum('count');
+//    $mintime = \think\Db::query('select *  from yzt_points where user_id=? and create_time=(
+//                  SELECT MIN(create_time) from yzt_points
+//                )',[$userId]);
+//    $mintime = $mintime[0]['create_time'];
     $showMony = 0;
     foreach($re as $k=>$v){
+        $tmp[]=$v->count;
         $allPoint = 0;  //总余额
-        $t = $v->create_time;   //创建订单时间
+        $t = $v->create_time;   //生成积分时间
         $trueCount = $v->true_count;
         $time = strtotime($t);
         $t2 = date('Y-m-d',$time);
         $tomorrow = strtotime($t2)+60*60*24;    // 该订单的第二天凌晨
         $oneday = 60*60*24;
         $point = $v->count; //该订单积分数额
-        $adminGetBillType = \app\index\model\Trades::where('trade_number',$v->trade_number)->value('admin_get_bill_type');
+//        $adminGetBillType = \app\index\model\Trades::where('trade_number',$v->trade_number)->value('admin_get_bill_type');
 //        echo "<pre>";var_dump($tradeRe);
-        if($nowStamp >= $tomorrow && $adminGetBillType && $trueCount < $point){
+        if($nowStamp >= $tomorrow && $point > 0){
             $shijiancha = $nowStamp-$tomorrow;
-            $allPoint+=$prevAllCount*0.0001;
-            $x = floor($shijiancha/$oneday);    //超过下订单的次日凌晨几天
-            for($i=0;$i<$x;$i++){
-                $allPoint+=$prevAllCount*0.0001;
+            $x = floor($shijiancha/$oneday)+1;    //超过下订单的次日凌晨几天
+            $sum=0;
+            foreach($tmp as $kk=>$vv){
+                $sum += $vv;
             }
+            $allPoint += $sum * 0.0001*$x;
+//            echo "<pre>";var_dump($allPoint);
         }else{
             $allPoint = $trueCount;
         }
         $showMony += $allPoint;
         $v->true_count = $allPoint;
         $v->save();
-//        echo "<pre>";var_dump('-----------');
-//        echo "<pre>";var_dump($x."现在的时间".date('Y-m-d H:i:s',$nowStamp));
     }
+
     $arr = ['pointAll'=>$prevAllCount,'true_cont'=>$showMony];
     return $arr;
 

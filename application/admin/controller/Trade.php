@@ -12,6 +12,7 @@ use app\admin\model\Brands;
 use app\admin\model\Cats;
 use app\admin\model\Items;
 use app\index\model\Addrs;
+use app\index\model\Points;
 use app\index\model\Trades;
 use app\index\controller\Point;
 use \think\Controller;
@@ -87,10 +88,18 @@ class Trade extends Controller
                 $msg = array('status'=>'fails');
                 return json_encode($msg);
             }
+            $trade_number = $trade->trade_number;
+            $futureCount = Points::where('trade_number',$trade_number)->value('future_count');
             if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 1){
                 $trade->admin_get_bill_type = 1;
+                Points::where('trade_number', $trade_number)
+                    ->update(['count' => $futureCount]);
+//                Points::get(['trade_number' => $trade_number]);
+//                $pointObj->addPointByBuy($giveDiscount);
             }else{
                 $trade->admin_get_bill_type = 0;
+                Points::where('trade_number', $trade_number)
+                    ->update(['count' => $futureCount/2]);
             }
         }else{
             if($trade->getData('get_bill_type') == 0){
