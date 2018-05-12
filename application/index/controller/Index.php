@@ -23,7 +23,6 @@ class Index
 
     public function index(Request $request)
     {
-
 //        session_destroy();
 //        echo "<pre>";var_dump($_SESSION);exit;
         $_SESSION['url'] = $_SERVER['HTTP_HOST'];
@@ -48,7 +47,11 @@ class Index
             if(isset($memberid)){
                 $userObj->share_member_id = $memberid;
             }
-            $userObj->save();
+
+            if(isset($memberid) || isset($serviceuserid) && $userObj->service_cent_id == 0){
+                $userObj->save();
+            }
+
             $re = Items::all();
             $curl = "index";
 
@@ -59,7 +62,6 @@ class Index
 //            echo "<pre>";var_dump($_SESSION);exit;
 //            $timestamp = $_SESSION['timestamp'];
             $signatureRe = $this->get_signature($ticket);
-//            echo "1";exit;
             $signature = $signatureRe['signature'];
             $noncestr = $signatureRe['noncestr'];
 //            echo "<pre>";var_dump($signatureRe);exit;
@@ -76,10 +78,10 @@ class Index
             $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin];
 //            echo "<pre>";var_dump($weixin);exit;
             return view("index@index/index",['re'=>$re]);
+        }else{
+            $url = $this->wxObj->get_authorize_url(1);
+            return redirect($url);
         }
-        $url = $this->wxObj->get_authorize_url(1);
-        return redirect($url);
-
 //        echo "<pre>";var_dump($request->param());exit;
 
     }
