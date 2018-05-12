@@ -3,6 +3,8 @@ namespace app\Admin\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
+use app\index\model\Addrs;
+use app\index\model\Users;
 use \think\Controller;
 use think\Request;
 
@@ -201,7 +203,18 @@ class Index extends Controller
     }
 
     public function member_list(){
-        return view("admin@index/memberList");
+        $id = $_SESSION['adminUserInfo']->id;
+        $memberList = Users::all(['service_cent_id'=>$id]);
+        foreach ($memberList as $k=>&$v){
+            $v->nickname = json_decode(urldecode($v->nickname));
+            if(isset($v->address)){
+                $addr = Addrs::where('id',$v->address)->value('desc');
+                $addr = preg_replace('/%2C/',' ',$addr);
+                $v->address = $addr;
+            }
+        }
+//                echo "<pre>";var_dump($addr);exit;
+        return view("admin@index/memberList",['re'=>$memberList]);
     }
 
     public function member_add(){
