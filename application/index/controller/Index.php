@@ -23,6 +23,7 @@ class Index
 
     public function index(Request $request)
     {
+
 //        session_destroy();
 //        echo "<pre>";var_dump($_SESSION);exit;
         $_SESSION['url'] = $_SERVER['HTTP_HOST'];
@@ -39,7 +40,8 @@ class Index
         if(array_key_exists('userinfo',$_SESSION)){
             $id = $_SESSION['userinfo']->id;
             $userObj = Users::get($id);
-            if(isset($serviceuserid)){
+//            echo "<pre>";var_dump($userObj->service_cent_id);exit;
+            if(isset($serviceuserid) && $userObj->service_cent_id == 0){
                 $userObj->service_cent_id = $serviceuserid;
             }
 //            echo "<pre>";var_dump($memberid);exit;
@@ -54,6 +56,7 @@ class Index
             $wxObj = Weixins::all();
             $ticket = $wxObj[0]->ticket;
             $access_token_true = $wxObj[0]->access_token_true;
+//            echo "<pre>";var_dump($_SESSION);exit;
 //            $timestamp = $_SESSION['timestamp'];
             $signatureRe = $this->get_signature($ticket);
 //            echo "1";exit;
@@ -181,7 +184,7 @@ class Index
 //        $_SESSION['noncestr'] = $dataAll['noncestr'];
 //        echo "<pre>";var_dump(222);exit;
 
-        return redirect('/userInfo');
+        return redirect('/');
     }
 
     public function get_signature($ticket){
@@ -282,8 +285,11 @@ class Index
         $userRe = Users::get($userId);
         $nickname = json_decode(urldecode($userRe->getData('nickname')));
         $userRe->nickname = $nickname;
-        $allPoint = round(getPoint($userId),6);
+        $re = getPoint($userId);
+        $true_count = round($re['true_cont'],6);
+        $allPoint = $re['pointAll'];
         $userRe->allPoint = $allPoint;
+        $userRe->allReturnMony = $true_count;
         return $userRe;
     }
 
