@@ -116,7 +116,7 @@ class Wechat {
         $res = $this->http($url,'GET');
         $res = json_decode($res[1], true);
         //这里应该把access_token缓存起来，至于要怎么缓存就看各位了，有效期是7200s
-        $_SESSION['ticket'] = $res['ticket'];
+//        $_SESSION['ticket'] = $res['ticket'];
         return $res['ticket'];
     }
 
@@ -130,7 +130,7 @@ class Wechat {
 //        echo "<pre>";var_dump($res);exit;
 //        $res = json_decode($res, true);
         //这里应该把access_token缓存起来，至于要怎么缓存就看各位了，有效期是7200s
-        $_SESSION['access_token_true'] = $res['access_token'];
+//        $_SESSION['access_token_true'] = $res['access_token'];
         return $res['access_token'];
     }
 
