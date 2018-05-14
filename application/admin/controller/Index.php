@@ -264,6 +264,7 @@ class Index extends Controller
         $post = $request->param();
         $ip = getIp();
         $data = [
+            'nickname'=>$post['nickname'],
             'username'=>$post['adminName'],
             'password'=>$post['password'],
             'sex'=>$post['sex'],

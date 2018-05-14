@@ -30,6 +30,7 @@ class Adminusers extends Migrator
     {
         $table = $this->table('adminusers',array('engine'=>'MyISAM'));
         $table->addColumn('username', 'string',array('limit' => 15,'default'=>'','comment'=>'用户名，登陆使用'))
+            ->addColumn('nickname', 'string',array('default'=>'','comment'=>'会员名称'))
             ->addColumn('password', 'string',array('limit' => 32,'default'=>md5('123456'),'comment'=>'用户密码'))
             ->addColumn('login_status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'登陆状态'))
             ->addColumn('sex', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'性别'))
