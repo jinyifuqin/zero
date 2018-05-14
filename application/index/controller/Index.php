@@ -288,10 +288,11 @@ class Index
         $nickname = json_decode(urldecode($userRe->getData('nickname')));
         $userRe->nickname = $nickname;
         $re = getPoint($userId);
-        $true_count = round($re['true_cont'],6);
-        $allPoint = $re['pointAll'];
-        $userRe->allPoint = $allPoint;
-        $userRe->allReturnMony = $true_count;
+        $canUse = $re['canUse'];
+        $noUse = $re['noUse'];
+//        echo "<pre>";var_export($noUse);var_export("<br>");var_export($canUse);exit;
+        $userRe->allPoint = $noUse;
+        $userRe->allReturnMony = $canUse;
         return $userRe;
     }
 

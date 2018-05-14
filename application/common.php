@@ -107,45 +107,113 @@ function getIp() {
 }
 
 function getPoint($userId){ // 获取用户总积分
-    $re = \app\index\model\Points::all(['user_id'=>$userId]);
+    $re = \app\index\model\Points::all([
+        'user_id'=>$userId,
+        'frozen_flag'=>0,
+        'type'=>1,
+    ]);
     $nowStamp = time();
-    $prevAllCount = \app\index\model\Points::where('user_id',$userId)->sum('count');
-//    $mintime = \think\Db::query('select *  from yzt_points where user_id=? and create_time=(
-//                  SELECT MIN(create_time) from yzt_points
-//                )',[$userId]);
-//    $mintime = $mintime[0]['create_time'];
-    $showMony = 0;
-    foreach($re as $k=>$v){
-        $tmp[]=$v->count;
-        $allPoint = 0;  //总余额
-        $t = $v->create_time;   //生成积分时间
-        $trueCount = $v->true_count;
-        $time = strtotime($t);
-        $t2 = date('Y-m-d',$time);
-        $tomorrow = strtotime($t2)+60*60*24;    // 该订单的第二天凌晨
-        $oneday = 60*60*24;
-        $point = $v->count; //该订单积分数额
-//        $adminGetBillType = \app\index\model\Trades::where('trade_number',$v->trade_number)->value('admin_get_bill_type');
-//        echo "<pre>";var_dump($tradeRe);
-        if($nowStamp >= $tomorrow && $point > 0){
-            $shijiancha = $nowStamp-$tomorrow;
-            $x = floor($shijiancha/$oneday)+1;    //超过下订单的次日凌晨几天
-            $sum=0;
-            foreach($tmp as $kk=>$vv){
-                $sum += $vv;
+    $mintime = \think\Db::query('select *  from yzt_points where user_id=? ORDER BY create_time limit 1',[$userId]);
+    $minId = $mintime[0]['id'];
+    $pointObj = new \app\index\model\Points();
+    $nowYMD = date('Y-m-d H:i:s',strtotime(date('Y-m-d',$nowStamp)));
+
+    $flag = \app\index\model\Points::get([
+        'user_id' => $userId,
+        'create_time'=>$nowYMD,
+        'get_type'=>2,
+        'type'=>1,
+        'frozen_flag'=>1
+    ]);
+
+    $noUseAdd = \app\index\model\Points::where([
+        'user_id' => $userId,
+        'get_type'=>0,
+        'type'=>1,
+        'frozen_flag'=>0
+    ])->sum('count');
+
+    $noUseDel = \app\index\model\Points::where([
+        'user_id' => $userId,
+        'get_type'=>2,
+        'type'=>0,
+        'frozen_flag'=>0
+    ])->sum('count');
+
+    $noUseEnd = $noUseAdd-$noUseDel;
+
+    $canUse = 0;
+//    echo "<pre>";var_export($flag); echo "=========<br>";
+    if(!$flag){
+        \app\index\model\Points::destroy([
+            'user_id' => $userId,
+            'get_type'=>2,
+            'type'=>1,
+            'frozen_flag'=>1
+        ]);
+        foreach($re as $k=>$v){
+
+            $t = $v->create_time;   //生成积分时间
+            $time = strtotime($t);
+            $t2 = date('Y-m-d',$time);
+            $point = $v->count; //该订单积分数额
+            $oneday = 60*60*24;
+            if($v->id == $minId){
+                $tomorrow = strtotime($t2)+60*60*24;    // 该订单的第二天凌晨
+
+                if($nowStamp >= $tomorrow && $point > 0){
+                    $shijiancha = $nowStamp-$tomorrow;
+                    $x = floor($shijiancha/$oneday)+1;    //超过下订单的次日凌晨几天
+                }
+            }else{
+                $tomorrow = strtotime($t2);    // 该订单的凌晨
+                if($nowStamp >= $tomorrow && $point > 0){
+                    $shijiancha = $nowStamp-$tomorrow;
+                    $x = floor($shijiancha/$oneday)+1;    //超过下订单的当日凌晨几天
+                }
             }
-            $allPoint += $sum * 0.0001*$x;
-//            echo "<pre>";var_dump($allPoint);
-        }else{
-            $allPoint = 0;
+
+//        echo "<pre>";var_export(date('Y-m-d H:i:s',$tomorrow));
+            for($i=0;$i<$x;$i++){
+                $givePoint[$i]['user_id'] = $userId;
+                $givePoint[$i]['count'] = $point*0.001;
+                $givePoint[$i]['type'] = 1;
+                $givePoint[$i]['get_type'] = 2;
+                $givePoint[$i]['frozen_flag'] = 1;
+                $givePoint[$i]['create_time'] = date('Y-m-d H:i:s',$tomorrow+60*60*24*$i);
+                $givePoint[$i]['trade_number'] = $v->trade_number;
+//            $a[$i]=$givePoint;
+                $delPoint[$i]['user_id'] = $userId;
+                $delPoint[$i]['count'] = $point*0.001;
+                $delPoint[$i]['type'] = 0;
+                $delPoint[$i]['get_type'] = 2;
+                $delPoint[$i]['frozen_flag'] = 0;
+                $delPoint[$i]['create_time'] = date("Y-m-d H:i:s",$tomorrow+60*60*24*$i);
+                $delPoint[$i]['trade_number'] = $v->trade_number;
+                $canUse += $point*0.001;
+            }
+//        $pointObj->data($givePoint);
+//        $pointObj->saveAll
+            $list = array_merge($givePoint,$delPoint);
+            $pointObj->saveAll($list);
+
+            unset($givePoint);
+            unset($delPoint);
+//        echo "<pre>";var_export(date('Y-m-d H:i:s',$tomorrow));
         }
-//        echo "<pre>";var_dump($allPoint);
-        $showMony += $allPoint;
-        $v->true_count = $allPoint;
-        $v->save();
+    }else{
+        $canUse = \app\index\model\Points::where([
+            'user_id' => $userId,
+            'get_type'=>2,
+            'type'=>1,
+            'frozen_flag'=>1
+        ])->sum('count');
     }
 
-    $arr = ['pointAll'=>$prevAllCount,'true_cont'=>$showMony];
+
+//    exit;
+
+    $arr = ['canUse'=>$canUse,'noUse'=>$noUseEnd];
     return $arr;
 
 }

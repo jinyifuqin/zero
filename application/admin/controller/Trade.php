@@ -88,18 +88,24 @@ class Trade extends Controller
                 $msg = array('status'=>'fails');
                 return json_encode($msg);
             }
-            $trade_number = $trade->trade_number;
-            $futureCount = Points::where('trade_number',$trade_number)->value('future_count');
             if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 1){
                 $trade->admin_get_bill_type = 1;
-                Points::where('trade_number', $trade_number)
-                    ->update(['count' => $futureCount]);
+                $giveDiscount['user_id'] = $trade->user_id;
+                $giveDiscount['count'] = $trade->buy_price;
+                $giveDiscount['type'] = 1;
+                $giveDiscount['get_type'] = 0;
+                $giveDiscount['frozen_flag'] = 0;
+                $giveDiscount['create_time'] = date('Y-m-d H:i:s',time());
+                $giveDiscount['trade_number'] = $trade->trade_number;
+                $pointObj = new Points();
+                $pointObj->data($giveDiscount);
+                $pointObj->save();
 //                Points::get(['trade_number' => $trade_number]);
 //                $pointObj->addPointByBuy($giveDiscount);
             }else{
                 $trade->admin_get_bill_type = 0;
-                Points::where('trade_number', $trade_number)
-                    ->update(['count' => $futureCount/2]);
+                $obj = Points::get(['user_id' => $trade->user_id]);
+                $obj->delete();
             }
         }else{
             if($trade->getData('get_bill_type') == 0){
@@ -149,16 +155,21 @@ class Trade extends Controller
         if($request){
             if($type){
                 if($trade->getData('admin_check_type') == 1){
-                    $giveDiscount['userId'] = $trade->user_id;
-                    $giveDiscount['pointCount'] = $trade->buy_price;
+                    $giveDiscount['user_id'] = $trade->user_id;
+                    $giveDiscount['count'] = $trade->buy_price;
                     $giveDiscount['type'] = 1;
+                    $giveDiscount['get_type'] = 0;
+                    $giveDiscount['frozen_flag'] = 0;
+                    $giveDiscount['create_time'] = date('Y-m-d H:i:s',time());
                     $giveDiscount['trade_number'] = $trade->trade_number;
-                    $pointObj = new Point();
-                    $pointObj->addPointByBuy($giveDiscount);
+                    $pointObj = new Points();
+                    $pointObj->data($giveDiscount);
+                    $pointObj->save();
 
                 }else{
-                    $pointObj = new Point();
-                    $pointObj->delPointByTradeId($trade->trade_number);
+                    $obj = Points::get(['user_id' => $trade->user_id]);
+                    $obj->delete();
+//                    $pointObj->delPointByTradeId($trade->trade_number);
                 }
             }
             $msg = array('status'=>'Success');
