@@ -24,7 +24,7 @@ class Index
     public function index(Request $request)
     {
 //        session_destroy();
-//        echo "<pre>";var_dump($_SESSION);exit;
+
         $_SESSION['url'] = $_SERVER['HTTP_HOST'];
         $serviceuserid = $request->param('userid');
         $memberid = $request->param('memberid');
@@ -42,16 +42,16 @@ class Index
 //            echo "<pre>";var_dump($userObj->service_cent_id);exit;
             if(isset($serviceuserid) && $userObj->service_cent_id == 0){
                 $userObj->service_cent_id = $serviceuserid;
+
             }
-//            echo "<pre>";var_dump($memberid);exit;
             if(isset($memberid)){
                 $userObj->share_member_id = $memberid;
             }
 
-            if(isset($memberid) || isset($serviceuserid) && $userObj->service_cent_id == 0){
+            if(isset($memberid) || isset($serviceuserid)){
                 $userObj->save();
             }
-
+//            echo "<pre>";var_dump($userObj->id);exit;
             $re = Items::all();
             $curl = "index";
 
