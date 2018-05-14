@@ -22,7 +22,7 @@
 			</a>
 		</span>
 		<span class="r">共有数据：<strong>54</strong> 条</span> </div>
-	<table class="table table-border table-bordered table-bg">
+	<table class="table table-border table-bordered table-bg" id="DataTables_Table_0">
 		<thead>
 			<tr>
 				<th scope="col" colspan="9">员工列表</th>
@@ -39,6 +39,52 @@
 				<th width="100">操作</th>
 			</tr>
 		</thead>
+		<script>
+            function datadel(){
+                var table = $('#DataTables_Table_0');
+                var checkBox = table.find("input:checkbox");
+                checkBox.splice(0,1);
+                var arr = [];
+                checkBox.each(function(){
+                    var checked = $(this).prop('checked');
+                    if(checked){
+                        var id = $(this).parent().next().html();
+                        arr.push(id);
+                    }
+
+                })
+				// console.log(arr);return;
+                $.ajax({
+                    type: "GET",
+                    url: "{:url('/admin/adminDelAll')}",
+                    data: {ids:arr},
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == "Success"){
+                            location.reload();
+                        }
+                    }
+                });
+                // console.log(arr);
+
+            }
+
+            function active_del(dom,id){
+                data = {'id':id};
+                $.ajax({
+                    type: "GET",
+                    url: "{:url('/admin/adminDelById')}",
+                    data: data,
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == "Success"){
+                            location.reload();
+                        }
+
+                    }
+                });
+            }
+		</script>
 		<tbody>
 		{foreach $re as $vo}
 			<tr class="text-c">
@@ -57,7 +103,7 @@
 					<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','/admin/adminEdit/{$vo.id}','{$vo.id}','800','500')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a>
-					<a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
+					<a title="删除" href="javascript:;" onclick="active_del(this,'{$vo.id}')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
 				</td>
@@ -69,7 +115,7 @@
 {include file="public/admins/foot/foot.html" /}
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="/public/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="/public/lib/My97DatePicker/foureight/WdatePicker.js"></script> 
 <script type="text/javascript" src="/public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="/public/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">

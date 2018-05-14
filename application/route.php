@@ -46,6 +46,8 @@ Route::group('admin',[
     'memberAdd' => ['admin/index/member_add', ['method' => 'get']],
     'adminList' => ['admin/index/admin_list', ['method' => 'get']],
     'adminAdd' => ['admin/index/admin_add', ['method' => 'get']],
+    'adminDelAll' => ['admin/index/admin_del_all', ['method' => 'get']],
+    'adminDelById' => ['admin/index/admin_del', ['method' => 'get']],
     'saveAdmin' => ['admin/index/save_admin', ['method' => 'post']],
     'adminEdit/:id' => ['admin/index/admin_edit', ['method' => 'get']],
     'discount' => ['admin/index/discount', ['method' => 'get']],

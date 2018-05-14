@@ -121,15 +121,18 @@ $(function(){
 				success: function(data){
 
 					layer.msg('添加成功!',{icon:1,time:1000});
+                    location.reload();
+                    window.parent.location.reload();//刷新父页面
 				},
                 error: function(XmlHttpRequest, textStatus, errorThrown){
 					layer.msg('添加失败!',{icon:1,time:1000});
+                    location.reload();
+                    window.parent.location.reload();//刷新父页面
 				}
 			});
             // var index = parent.layer.getFrameIndex(window.name);
 
-            location.reload();
-            window.parent.location.reload();//刷新父页面
+
             // parent.layer.close(index);
 
 		}

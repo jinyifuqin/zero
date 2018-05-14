@@ -236,6 +236,30 @@ class Index extends Controller
         return view("admin@index/adminEdit",['re'=>$re]);
     }
 
+    public function admin_del(Request $request){
+        $id = $request->param("id");
+        $admin = Adminusers::get($id);
+        $re = $admin->delete();
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function admin_del_all(Request $request){
+        $ids = $request->param()['ids'];
+//        echo "<pre>";var_dump($ids);exit;
+        $re = Adminusers::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
     public function save_admin(Request $request){
         $post = $request->param();
         $ip = getIp();
