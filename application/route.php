@@ -43,6 +43,7 @@ Route::group('admin',[
     'send/:id' => ['admin/trade/send', ['method' => 'get']],
     'billsend/:id' => ['admin/trade/billSend', ['method' => 'get']],
     'memberList' => ['admin/index/member_list', ['method' => 'get']],
+    'unMemberList' => ['admin/index/un_member_list', ['method' => 'get']],
     'memberAdd' => ['admin/index/member_add', ['method' => 'get']],
     'adminList' => ['admin/index/admin_list', ['method' => 'get']],
     'adminAdd' => ['admin/index/admin_add', ['method' => 'get']],
