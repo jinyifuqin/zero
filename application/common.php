@@ -126,13 +126,6 @@ function getPoint($userId){ // 获取用户总积分
     }
 
 //    echo "<pre>";var_dump($x);exit;
-
-
-
-
-
-
-
     $canUse = 0;
     if(!$flag && !empty($mintime) && $x){
         \app\index\model\Points::destroy([
@@ -160,16 +153,12 @@ function getPoint($userId){ // 获取用户总积分
     ])->sum('count');
 
     $noUseEnd = $noUseAdd-$noUseDel;
-
     $canUse = \app\index\model\Points::where([
         'user_id' => $userId,
         'get_type'=>2,
         'type'=>1,
         'frozen_flag'=>1
     ])->sum('count');
-
-
-//    exit;
 
     $arr = ['canUse'=>round($canUse,3),'noUse'=>round($noUseEnd,3)];
     return $arr;
@@ -186,13 +175,6 @@ function call_self($userId,$x,$mmtime,$pointObj){
         ->where('type',1)
         ->where('frozen_flag',0)
         ->sum('count');
-//    echo "<pre>";var_dump($noUseAdd);exit;
-//    $noUseAdd = \app\index\model\Points::where([
-//        'user_id' => $userId,
-//        'get_type'=>0,
-//        'type'=>1,
-//        'frozen_flag'=>0
-//    ])->sum('count');
 
     $noUseDel = \app\index\model\Points::where([
         'user_id' => $userId,
@@ -208,7 +190,6 @@ function call_self($userId,$x,$mmtime,$pointObj){
     $givePoint['frozen_flag'] = 1;
     $givePoint['create_time'] = date('Y-m-d H:i:s',$mmtime+60*60*24*($i+1));
 
-//            $a[$i]=$givePoint;
     $delPoint['user_id'] = $userId;
     $delPoint['count'] = $true*0.001;
     $delPoint['type'] = 0;
