@@ -178,7 +178,7 @@ function getPoint($userId){ // 获取用户总积分
 
 function call_self($userId,$x,$mmtime,$pointObj){
     static $i=0;
-    $y = $mmtime+60*60*24*($i+1);
+    $y = $mmtime+60*60*24*($i+2);
     $noUseAdd = \think\Db::table('yzt_points')
         ->where('create_time','<',date('Y-m-d H:i:s',$y))
         ->where('user_id',$userId)
@@ -186,7 +186,7 @@ function call_self($userId,$x,$mmtime,$pointObj){
         ->where('type',1)
         ->where('frozen_flag',0)
         ->sum('count');
-
+//    echo "<pre>";var_dump($noUseAdd);exit;
 //    $noUseAdd = \app\index\model\Points::where([
 //        'user_id' => $userId,
 //        'get_type'=>0,

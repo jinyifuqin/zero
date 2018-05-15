@@ -104,7 +104,10 @@ class Trade extends Controller
 //                $pointObj->addPointByBuy($giveDiscount);
             }else{
                 $trade->admin_get_bill_type = 0;
-                $obj = Points::get(['user_id' => $trade->user_id]);
+                $obj = Points::get([
+                    'user_id' => $trade->user_id,
+                    'trade_number'=>$trade->trade_number
+                ]);
                 $obj->delete();
             }
         }else{
@@ -167,9 +170,11 @@ class Trade extends Controller
                     $pointObj->save();
 
                 }else{
-                    $obj = Points::get(['user_id' => $trade->user_id]);
+                    $obj = Points::get([
+                        'user_id' => $trade->user_id,
+                        'trade_number'=>$trade->trade_number
+                    ]);
                     $obj->delete();
-//                    $pointObj->delPointByTradeId($trade->trade_number);
                 }
             }
             $msg = array('status'=>'Success');
