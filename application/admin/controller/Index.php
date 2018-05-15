@@ -324,20 +324,23 @@ class Index extends Controller
     }
 
     public function discount(){
-        $disList = Discounts::all();
+        $adminId = $_SESSION['adminUserInfo']->id;
+        $disList = Discounts::all(['service_cent_id'=>$adminId]);
         return view("admin@index/discount",['disList'=>$disList]);
     }
 
     public function add_discount(){
+        $adminId = $_SESSION['adminUserInfo']->id;
         $str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $len = 30;
+        $len = 12;
         $content = "";
-        for($i=0;$i<30;$i++){
+        for($i=0;$i<$len;$i++){
             $num = mt_rand(0,strlen($str)-1);
             $content .= substr($str,$num,1);
         }
         $dis = new Discounts([
             'number'  =>  $content,
+            'service_cent_id' => $adminId
         ]);
         $re = $dis->save();
         if($re){
