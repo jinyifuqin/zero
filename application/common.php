@@ -225,8 +225,26 @@ function call_self($userId,$x,$mmtime,$pointObj){
         $i++;
         call_self($userId,$x,$mmtime,$pointObj);
     }
+}
 
 
-
-
+function getQrcodePic($str){
+    $userid = $_SESSION['adminUserInfo']->id;
+    $url = "http://".$_SERVER['HTTP_HOST']."?userid=$userid";
+    $link = "http://qr.liantu.com/api.php?text=$url";
+    $src_path = $link;
+    $img = imagecreatefrompng($src_path);// 加载已有图像
+    list($width,$height)=getimagesize($src_path);
+    $canvas = imagecreatetruecolor($width,$height+50);
+    $white=imagecolorallocate($canvas,255,255,255);
+    $black=imagecolorallocate($canvas,0,2,22);
+    imagecolortransparent($canvas,$white); //3.设置透明色
+    imagefill($canvas,0,0,$white);
+    imagecopyresampled($canvas,$img,0,0,0,0,$width,$height,$width,$height);
+    imagestring($img,6,5,5,5,5);
+    $font = 'public'.DS.'admins'.DS.'font'.DS.'abc.ttf';
+    imagettftext($canvas,20,0,50,$height+20,$black,$font,$str);
+    header('Content-Type: image/png');
+    imagepng($canvas);
+    imagedestroy($canvas);
 }
