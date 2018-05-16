@@ -5,6 +5,7 @@ use app\admin\model\Brands;
 use app\admin\model\Discounts;
 use app\index\model\Addrs;
 use app\index\model\Users;
+use think\Config;
 use \think\Controller;
 use think\Db;
 use think\db\Query;
@@ -13,6 +14,7 @@ use think\Request;
 class Index extends Controller
 {
     public $logo;
+    private $configPath;
 
     protected $beforeActionList = [
         'check_login' =>  ['except'=>'get_captcha,login,check_user'],
@@ -28,7 +30,9 @@ class Index extends Controller
     public function __construct(Request $request = null)
     {
         session_start();
-//        unset($_SESSION['adminUserInfo']);
+        $configName = 'config.xml';
+        $this->configPath = APP_PATH.'admin'.DS.'config'.DS.$configName;
+        Config::load($this->configPath);
         parent::__construct($request);
     }
 
@@ -38,7 +42,6 @@ class Index extends Controller
             $this->redirect('/admin/login');
         }
 
-//        echo "<pre>";var_dump($_SESSION);exit;
         $admin = $_SESSION['adminUserInfo'];
         return view("admin@index/index",['admin'=>$admin]);
     }
@@ -244,8 +247,6 @@ class Index extends Controller
             }
         }
 
-
-
         return view("admin@index/memberList",['re'=>$memberList]);
     }
 
@@ -383,6 +384,31 @@ class Index extends Controller
     public function qrcode(){
         $str = $_SESSION['adminUserInfo']->nickname;
         getQrcodePic($str);exit;
+    }
+
+    public function point_set(){
+        $config = config('setPointCount');
+        $dbconfig = config('setDoublePointCount');
+        $all = ['config'=>$config,'dbconfig'=>$dbconfig];
+        return view("admin@index/pointSet",['all'=>$all]);
+    }
+    
+    public function save_point_set(Request $request){
+        $config = $request->param('pointCount');
+        $dbconfig = $request->param('pointDoubleCount');
+        $path = $this->configPath;
+        $content = file_get_contents($path);
+        $replace = "/(?<=\<setPointCount\>)(\d+)(?=\<\/setPointCount\>)/";
+        $dbreplace = "/(?<=\<setDoublePointCount\>)(\d+)(?=\<\/setDoublePointCount\>)/";
+        $str = preg_replace($replace,$config,$content);
+        $str = preg_replace($dbreplace,$dbconfig,$str);
+        $re = file_put_contents($this->configPath,$str);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
     }
 
 

@@ -52,6 +52,8 @@ Route::group('admin',[
     'saveAdmin' => ['admin/index/save_admin', ['method' => 'post']],
     'adminEdit/:id' => ['admin/index/admin_edit', ['method' => 'get']],
     'discount' => ['admin/index/discount', ['method' => 'get']],
+    'pointSet' => ['admin/index/point_set', ['method' => 'get']],
+    'savePointSet' => ['admin/index/save_point_set', ['method' => 'post']],
     'addDiscount' => ['admin/index/add_discount', ['method' => 'get']],
     'discountDel' => ['admin/index/del_discount', ['method' => 'get']],
     'discountDelAll' => ['admin/index/del_discount_all', ['method' => 'get']],

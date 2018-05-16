@@ -22,6 +22,7 @@ define('WX_APPSCRET', '189d920d5fde1fcca4c123af3e54c58f');
 //require __DIR__ . '/../thinkphp/start.php';
 
 
+
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/application/');
 // 开启调试模式

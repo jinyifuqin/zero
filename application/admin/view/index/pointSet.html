@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/public/indexsource/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+</head>
+<body>
+<form action="/admin/savePointSet" id="form-cat-add" method="post">
+    <table>
+        <tr>
+            <td>赠送积分设置：</td>
+            <td><input type="text" value="{$all.config}" name="pointCount"/><br/></td>
+        </tr>
+        <tr>
+            <td>确认发票赠送积分设置：</td>
+            <td><input type="text" value="{$all.dbconfig}" name="pointDoubleCount"/><br/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input id="submit" type="submit" value="提交"></td>
+        </tr>
+
+    </table>
+
+
+</form>
+<script>
+    $('#submit').click(function(e){
+        e.preventDefault();
+        var form = $("#form-cat-add");
+        var url = form.attr('action');
+        var data = form.serialize();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dataType: "json",
+            success: function(data){
+                var index = parent.layer.getFrameIndex(window.name);
+                layer.msg('恭喜你修改成功！',{icon:1,time:3000});
+                setTimeout(function(){window.location.reload()},3000);
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -15,6 +15,7 @@ use app\index\model\Addrs;
 use app\index\model\Points;
 use app\index\model\Trades;
 use app\index\controller\Point;
+use think\Config;
 use \think\Controller;
 use think\Request;
 
@@ -24,6 +25,9 @@ class Trade extends Controller
     {
         session_start();
         parent::__construct($request);
+        $configName = 'config.xml';
+        $this->configPath = APP_PATH.'admin'.DS.'config'.DS.$configName;
+        Config::load($this->configPath);
     }
 
     public function index(){
@@ -80,6 +84,7 @@ class Trade extends Controller
     }
 
     public function billSend(Request $request){
+        $setDoublePointCount = config('setDoublePointCount');
         $id = $request->param('id');
         $trade = Trades::get($id);
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
@@ -91,7 +96,7 @@ class Trade extends Controller
             if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 1){
                 $trade->admin_get_bill_type = 1;
                 $giveDiscount['user_id'] = $trade->user_id;
-                $giveDiscount['count'] = $trade->buy_price;
+                $giveDiscount['count'] = $setDoublePointCount;
                 $giveDiscount['type'] = 1;
                 $giveDiscount['get_type'] = 0;
                 $giveDiscount['frozen_flag'] = 0;
@@ -103,12 +108,14 @@ class Trade extends Controller
 //                Points::get(['trade_number' => $trade_number]);
 //                $pointObj->addPointByBuy($giveDiscount);
             }else{
+                $pObj = new Points();
+                $obj = $pObj->where('user_id', $trade->user_id)
+                    ->where('trade_number', $trade->trade_number)
+                    ->where('count', $setDoublePointCount)
+                    ->limit(1)
+                    ->select();
+                $obj[0]->delete();
                 $trade->admin_get_bill_type = 0;
-                $obj = Points::get([
-                    'user_id' => $trade->user_id,
-                    'trade_number'=>$trade->trade_number
-                ]);
-                $obj->delete();
             }
         }else{
             if($trade->getData('get_bill_type') == 0){
@@ -129,37 +136,43 @@ class Trade extends Controller
     }
 
     public function send(Request $request){
+        $setPointCount = config('setPointCount');
         $id = $request->param('id');
         $trade = Trades::get($id);
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
-//        echo "<pre>";var_dump($type);exit;
+
         if($type){
             if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 0){
                 $msg = array('status'=>'fails');
                 return json_encode($msg);
             }
             if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 1){
-                $trade->admin_check_type = 1;
+                $admin_check_type = 1;
             }else{
-                $trade->admin_check_type = 0;
+                $admin_check_type = 0;
             }
         }else{
             if($trade->getData('check_type') == 0){
-                $trade->check_type = 1;
-                $trade->trade_type = 1;
+                $check_type = 1;
+                $trade_type = 1;
             }else{
-                $trade->check_type = 0;
-                $trade->trade_type = 0;
+                $check_type = 0;
+                $trade_type = 0;
             }
+            $trade->check_type = $check_type;
+            $trade->trade_type = $trade_type;
+
         }
+        $trade->admin_check_type = $admin_check_type;
 
         $result = $trade->save();
 //        echo "<pre>";var_dump(6);exit;
         if($request){
             if($type){
                 if($trade->getData('admin_check_type') == 1){
+
                     $giveDiscount['user_id'] = $trade->user_id;
-                    $giveDiscount['count'] = $trade->buy_price;
+                    $giveDiscount['count'] = $setPointCount;
                     $giveDiscount['type'] = 1;
                     $giveDiscount['get_type'] = 0;
                     $giveDiscount['frozen_flag'] = 0;
@@ -170,13 +183,17 @@ class Trade extends Controller
                     $pointObj->save();
 
                 }else{
-                    $obj = Points::get([
-                        'user_id' => $trade->user_id,
-                        'trade_number'=>$trade->trade_number
-                    ]);
-                    $obj->delete();
+
+                    $pObj = new Points();
+                    $obj = $pObj->where('user_id', $trade->user_id)
+                        ->where('trade_number', $trade->trade_number)
+                        ->where('count', $setPointCount)
+                        ->limit(1)
+                        ->select();
+                    $obj[0]->delete();
                 }
             }
+//            echo "<pre>";var_dump($giveDiscount);exit;
             $msg = array('status'=>'Success');
             return json_encode($msg);
         }else{
