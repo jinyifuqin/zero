@@ -19,7 +19,7 @@ class Points extends Model
 
     public function getGetTypeAttr($value)
     {
-        $checktype = [0=>'购买获得',1=>'赠送获得',2=>'返利'];
+        $checktype = [0=>'购买获得',1=>'赠送获得',2=>'赠送'];
         return $checktype[$value];
     }
 
