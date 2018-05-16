@@ -374,8 +374,13 @@ class Index
 
     public function trade_true_get(Request $request){
         $tradeId = $request->param('tradeId');
-        $re = Trades::where('id', $tradeId)
-            ->update(['trade_type' => 2]);
+        $tradeInfo = Trades::get(['id' => $tradeId]);
+        $re = false;
+        if($tradeInfo->getData('trade_type') != 0){
+            $re = Trades::where('id', $tradeId)
+                ->update(['trade_type' => 2]);
+        }
+
         if($re){
             $msg = array('status'=>'Success');
         }else{
