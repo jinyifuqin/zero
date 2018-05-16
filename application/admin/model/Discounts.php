@@ -15,4 +15,10 @@ class Discounts extends Model
     {
         return $time;
     }
+
+    public function adminusers()
+    {
+        return $this->hasOne('adminusers','id','service_cent_id');
+    }
+
 }

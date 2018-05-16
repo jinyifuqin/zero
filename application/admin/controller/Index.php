@@ -7,6 +7,7 @@ use app\index\model\Addrs;
 use app\index\model\Users;
 use \think\Controller;
 use think\Db;
+use think\db\Query;
 use think\Request;
 
 class Index extends Controller
@@ -325,8 +326,20 @@ class Index extends Controller
 
     public function discount(){
         $adminId = $_SESSION['adminUserInfo']->id;
-        $disList = Discounts::all(['service_cent_id'=>$adminId]);
-        return view("admin@index/discount",['disList'=>$disList]);
+        $adminUsername = $_SESSION['adminUserInfo']->username;
+        if($adminUsername == "admin"){
+            $disList = Discounts::all();
+            foreach($disList as &$v){
+                $nameobj = $v->adminusers->username;
+                $v->service_cent_name = $nameobj;
+            }
+            $flag = true;
+        }else{
+            $disList = Discounts::all(['service_cent_id'=>$adminId]);
+            $flag = false;
+        }
+
+        return view("admin@index/discount",['disList'=>$disList,'flag'=>$flag]);
     }
 
     public function add_discount(){
