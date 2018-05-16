@@ -193,13 +193,8 @@ class Index
         $noncestr = $this->wxObj->randcode();
         $timestamp = time();
         $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-
-//        $string = sprintf("jsapi_ticket=%s&noncestr=%s×tamp=%s&url=%s", $ticket, $noncestr, $timestamp, $url);
-//        $signature = sha1($string);
-
         $signature='jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url.'';
         $signature = sha1( $signature );
-
         $data = ['noncestr'=>$noncestr,'signature'=>$signature,'timestamp'=>$timestamp];
         return $data;
     }
@@ -299,14 +294,11 @@ class Index
         ]);
         $curl = "userinfo";
         $re = ['footType'=>$curl,'list'=>$list];
-//        echo "<pre>";var_dump($list);exit;
         return view("index@index/showPointList",['re'=>$re]);
-//        echo "<pre>";var_dump($list);exit;
 
     }
 
     public function user_trade(Request $request){
-//        echo "<pre>";var_dump($request->param());exit;
         $tradeObj = new Trades();
         $tradeType = $request->param('type');
         if($tradeType == null){
@@ -335,8 +327,6 @@ class Index
                     ->limit($this->pagesize)
                     ->select();
             }
-
-//        echo "<pre>";var_dump($trades);exit;
 
         $curl = "userinfo";
         foreach ($trades as $k=>&$v){
