@@ -16,4 +16,11 @@ class Points extends Model
     {
         return $time;
     }
+
+    public function getGetTypeAttr($value)
+    {
+        $checktype = [0=>'购买获得',1=>'赠送获得',2=>'返利'];
+        return $checktype[$value];
+    }
+
 }

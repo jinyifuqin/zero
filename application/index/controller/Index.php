@@ -267,13 +267,6 @@ class Index
         }
         $url = $this->wxObj->get_authorize_url(1);
         return redirect($url);
-
-//        分割线
-//        $userRe = $this->get_user_info();
-//        $curl = "userinfo";
-//        $re = ['footType'=>$curl,'userinfo'=>$userRe];
-//
-//        return view("index@index/userInfo",['re'=>$re]);
     }
 
     public function get_user_info(){
@@ -294,6 +287,22 @@ class Index
         $userRe->allPoint = $noUse;
         $userRe->allReturnMony = $canUse;
         return $userRe;
+    }
+
+    public function show_point_list(){
+        $userId = $_SESSION['userinfo']->id;
+        $list = \app\index\model\Points::all([
+            'user_id' => $userId,
+            'get_type'=>2,
+//            'type'=>1,
+            'frozen_flag'=>1
+        ]);
+        $curl = "userinfo";
+        $re = ['footType'=>$curl,'list'=>$list];
+//        echo "<pre>";var_dump($list);exit;
+        return view("index@index/showPointList",['re'=>$re]);
+//        echo "<pre>";var_dump($list);exit;
+
     }
 
     public function user_trade(Request $request){
