@@ -90,7 +90,11 @@ class Trade extends Controller
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
         if($type){
             if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 0){
-                $msg = array('status'=>'fails');
+                $msg = array('status'=>'fails','msg'=>'服务中心未确认，状态无法改变!');
+                return json_encode($msg);
+            }
+            if($trade->getData('admin_check_type') == 0){
+                $msg = array('status'=>'fails','msg'=>'订单未确认，状态无法改变!');
                 return json_encode($msg);
             }
             if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 1){
@@ -129,7 +133,7 @@ class Trade extends Controller
             $msg = array('status'=>'Success');
             return json_encode($msg);
         }else{
-            $msg = array('status'=>'fails');
+            $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
             return json_encode($msg);
         }
 
@@ -143,21 +147,27 @@ class Trade extends Controller
 
         if($type){
             if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 0){
-                $msg = array('status'=>'fails');
+                $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
                 return json_encode($msg);
             }
             if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 1){
                 $admin_check_type = 1;
-            }else{
+            }elseif($trade->getData('admin_check_type') == 1 && $trade->getData('admin_get_bill_type') != 1){
                 $admin_check_type = 0;
+            }else{
+                $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                return json_encode($msg);
             }
         }else{
             if($trade->getData('check_type') == 0){
                 $check_type = 1;
                 $trade_type = 1;
-            }else{
+            }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
                 $check_type = 0;
                 $trade_type = 0;
+            }else{
+                $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                return json_encode($msg);
             }
             $trade->check_type = $check_type;
             $trade->trade_type = $trade_type;

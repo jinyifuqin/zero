@@ -197,7 +197,7 @@ function billaction(t,id) {
                     layer.msg('状态已更改!',{icon:1,time:1000});
                     window.location.reload();
 				}else{
-                    layer.msg('服务中心未确认，状态无法改变!',{icon:2,time:3000});
+                    layer.msg(data.msg,{icon:2,time:3000});
                     setTimeout(function(){window.location.reload()},3000);
 				}
 
@@ -223,7 +223,7 @@ function action(t,id,msg) {
                     layer.msg('状态已更改!',{icon:1,time:1000});
                     window.location.reload();
 				}else{
-                    layer.msg('服务中心未确认，状态无法改变!',{icon:2,time:3000});
+                    layer.msg(data.msg,{icon:2,time:3000});
                     setTimeout(function(){window.location.reload()},3000);
 				}
 
