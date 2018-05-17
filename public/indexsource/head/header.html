@@ -1,12 +1,16 @@
 <div class="APPtop user_top">
+    {if condition="(isset($re.url))"}
+    <a href="{$re.url}"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>
+    {else /}
     <a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>
+    {/if}
     <p class="page">永之泰俱乐部</p>
     <!--<img class="applogo" src="/public/indexsource/images/applogo.png" alt="" />-->
     <img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />
 </div>
 <div class="rbj"></div>
 <ul class="menuS">
-    <a href="index.html"><p>首页</p></a>
+    <a href="/"><p>首页</p></a>
     <a href="#"><p>商城</p></a>
     <a href="#"><p>社区</p></a>
     <a href="#"><p>分享</p></a>

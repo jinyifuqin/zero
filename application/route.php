@@ -85,6 +85,9 @@ Route::group('',[
     'trueGet' => ['trade_true_get', ['method' => 'get']],
     'tradeDel' => ['trade_del', ['method' => 'get']],
     'showPointList' => ['show_point_list', ['method' => 'get']],
+    'selfInfo' => ['User/self_info', ['method' => 'get']],
+    'saveHead' => ['User/save_head', ['method' => 'post']],
+    'saveAddrJs' => ['User/save_addr', ['method' => 'post']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

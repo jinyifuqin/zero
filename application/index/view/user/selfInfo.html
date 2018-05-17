@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=10" />
+		<title>资料编辑</title>
+		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/public/indexsource/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/css2.css" />
+		<script src="/public/indexsource/js/pic.js"></script>
+
+		<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+	</head>
+
+	<body class="bjhs2" style="height: inherit;">
+	{include file="public/indexsource/head/header.html" /}
+		<div class="big_qb">
+			<div class="szym">
+				<div class="zlbj">
+					<a href="#">
+						<div class="zlbj1"  onclick="javascript:openBrowse();">
+							<div class="zlbj2">
+								<span class="spanspan">头像</span></div>
+							<div class="zlbj3"><img id="headPic" src="/public/uploads/{$re.userInfo.pic}"/></div>
+							<div class="zlbj4"><img src="/public/indexsource/images/jian1.jpg" /></div>
+						</div>
+						<input type="file" id="file" multiple accept="image/*" style="display:none;" onchange="handleFiles(this.files)">
+						<!--<a href="#" id="fileSelect">Select some files</a>-->
+						<div class="cl"></div>
+					</a>
+				</div>
+				<div class="szym2">
+					<div class="szym21">
+						<a href="#">
+							<span class="spanspan">用户名</span>
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg1" />
+							<font>{$re.userInfo.username}</font>
+						</a>
+					</div>
+					<div class="szym21">
+						<a href="#">
+							<span class="spanspan">用户昵称</span>
+
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<font>{$re.userInfo.nickname}</font>
+						</a>
+					</div>
+					<!--<div class="szym21">-->
+						<!--<a href="#">-->
+							<!--<span class="spanspan">真实姓名 </span>-->
+
+							<!--<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />-->
+							<!--<font>请设置</font>-->
+						<!--</a>-->
+					<!--</div>-->
+				</div>
+				<div class="szym2 szym22">
+					<div class="szym21">
+						<a href="#">
+							<span class="spanspan">性别</span>
+
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<font>{$re.userInfo.sex}</font>
+						</a>
+					</div>
+					<div class="szym21">
+						<a href="#">
+							<span class="spanspan">银行卡/支付宝账号</span>
+
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<font>1992.01.01</font>
+						</a>
+					</div>
+					<div class="szym21">
+						<a href="#">
+							<span class="spanspan">联系方式</span>
+
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<font>{$re.userInfo.phone_number}</font>
+						</a>
+					</div>
+					<div class="fapiao1 szym21 huixian" style="    padding-left: 0;">
+						<a href="#"><span>所在地区</span>
+							<font>
+								<i href="#" class="btn btn-info btn-lg active" role="button" id="sel_city">
+									{if condition="(isset($re.userInfo.ssqdesc))"}
+									<input style="width:60%" name="desc" readonly="readonly" type="text" placeholder="{$re.userInfo.ssqdesc}">
+									<img  src="/public/indexsource/images/jian1.jpg" />
+									{else /}
+									<input style="width:60%" name="desc" readonly="readonly" type="text" placeholder="请填写地址">
+									<img  src="/public/indexsource/images/jian1.jpg" />
+									{/if}
+								</i>
+							</font>
+						</a>
+					</div>
+					<div class="szym21">
+						<a href="#">
+							<span class="spanspan">详细地址</span>
+							{if condition="(isset($re.userInfo.desc))"}
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<font>{$re.userInfo.desc}</font>
+							{else /}
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<font>请填写详细地址</font>
+							{/if}
+						</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!--地区选择-->
+		<div class="szd">
+			<div class="container">
+
+				<div class="row main" style="margin-top:30px;">
+					<div class="col-md-12">
+						<div class="row" style="line-height: 36px; text-align: center;font-size:18px;">
+							<!--<a href="#" class="btn btn-info btn-lg active" role="button" id="sel_city">点击选取省市区县</a>-->
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+			<script src="/public/indexsource/js/picker.min.js"></script>
+			<script src="/public/indexsource/js/city.js"></script>
+
+		</div>
+
+		<script>
+            function openBrowse(){
+                var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false;
+                if(ie){
+                    document.getElementById("file").click();
+                }else{
+                    var a=document.createEvent("MouseEvents");//FF的处理
+                    a.initEvent("click", true, true);
+                    document.getElementById("file").dispatchEvent(a);
+                }
+            }
+
+            function handleFiles(e){
+                var formData = new FormData();
+                formData.append('file',e[0]);
+                var url = '/saveHead';
+                var head = $('#headPic');
+                $.ajax({
+                    type: 'post',
+                    url: url,
+                    data: formData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                }).success(function (data) {
+                    data = JSON.parse(data);
+					head.attr('src','/public/uploads/'+data.path);
+                    layer.msg('头像上传成功！',{icon:1,time:1000});
+                }).error(function () {
+                    layer.msg('头像上传失败！',{icon:1,time:1000});
+                });
+
+			}
+
+		</script>
+		<script>
+            $(function(){
+                $('#changeBox').click(function () {
+                    var input = $(this).find('input');
+                    if(input.val() == 1){
+                        input.prop('checked',false);
+                        input.val(0);
+                    }else{
+                        input.prop('checked',true);
+                        input.val(1);
+                    }
+
+                });
+
+                var sub = $('#sub');
+                sub.click(function(e){
+                    e.preventDefault();
+                    var form = $('#formSub');
+                    form.submit();
+                })
+            })
+
+            var nameEl = document.getElementById('sel_city');
+
+            var first = []; /* 省，直辖市 */
+            var second = []; /* 市 */
+            var third = []; /* 镇 */
+
+            var selectedIndex = [0, 0, 0]; /* 默认选中的地区 */
+
+            var checked = [0, 0, 0]; /* 已选选项 */
+
+            function creatList(obj, list) {
+                obj.forEach(function(item, index, arr) {
+                    var temp = new Object();
+                    temp.text = item.name;
+                    temp.value = index;
+                    list.push(temp);
+                })
+            }
+
+            creatList(city, first);
+
+            if(city[selectedIndex[0]].hasOwnProperty('sub')) {
+                creatList(city[selectedIndex[0]].sub, second);
+            } else {
+                second = [{
+                    text: '',
+                    value: 0
+                }];
+            }
+
+            if(city[selectedIndex[0]].sub[selectedIndex[1]].hasOwnProperty('sub')) {
+                creatList(city[selectedIndex[0]].sub[selectedIndex[1]].sub, third);
+            } else {
+                third = [{
+                    text: '',
+                    value: 0
+                }];
+            }
+
+            var picker = new Picker({
+                data: [first, second, third],
+                selectedIndex: selectedIndex,
+                title: '地址选择'
+            });
+
+            picker.on('picker.select', function(selectedVal, selectedIndex) {
+                var text1 = first[selectedIndex[0]].text;
+                var text2 = second[selectedIndex[1]].text;
+                var text3 = third[selectedIndex[2]] ? third[selectedIndex[2]].text : '';
+                // console.log(nameEl);
+                // nameEl.innerText = text1 + ' ' + text2 + ' ' + text3;
+                $('#sel_city').find('input').val(text1 + ' ' + text2 + ' ' + text3);
+                var str = text1 + ' ' + text2 + ' ' + text3;
+                var data = {'addr':str,'type':'before'};
+                $.ajax({
+                    type: "POST",
+                    url: "/saveAddrJs",
+                    data: data,
+                    dataType: "json",
+                    success: function(data){
+                        console.log(data);return;
+                        if(data.error){
+                            alert(data.error);
+                        }else if(data.url){
+                            window.location.href=data.url;
+                        }
+
+                    }
+                });
+                console.log(123);
+            });
+
+            picker.on('picker.change', function(index, selectedIndex) {
+                if(index === 0) {
+                    firstChange();
+                } else if(index === 1) {
+                    secondChange();
+                }
+
+                function firstChange() {
+                    second = [];
+                    third = [];
+                    checked[0] = selectedIndex;
+                    var firstCity = city[selectedIndex];
+                    if(firstCity.hasOwnProperty('sub')) {
+                        creatList(firstCity.sub, second);
+
+                        var secondCity = city[selectedIndex].sub[0]
+                        if(secondCity.hasOwnProperty('sub')) {
+                            creatList(secondCity.sub, third);
+                        } else {
+                            third = [{
+                                text: '',
+                                value: 0
+                            }];
+                            checked[2] = 0;
+                        }
+                    } else {
+                        second = [{
+                            text: '',
+                            value: 0
+                        }];
+                        third = [{
+                            text: '',
+                            value: 0
+                        }];
+                        checked[1] = 0;
+                        checked[2] = 0;
+                    }
+
+                    picker.refillColumn(1, second);
+                    picker.refillColumn(2, third);
+                    picker.scrollColumn(1, 0)
+                    picker.scrollColumn(2, 0)
+                }
+
+                function secondChange() {
+                    third = [];
+                    checked[1] = selectedIndex;
+                    var first_index = checked[0];
+                    if(city[first_index].sub[selectedIndex].hasOwnProperty('sub')) {
+                        var secondCity = city[first_index].sub[selectedIndex];
+                        creatList(secondCity.sub, third);
+                        picker.refillColumn(2, third);
+                        picker.scrollColumn(2, 0)
+                    } else {
+                        third = [{
+                            text: '',
+                            value: 0
+                        }];
+                        checked[2] = 0;
+                        picker.refillColumn(2, third);
+                        picker.scrollColumn(2, 0)
+                    }
+                }
+
+            });
+
+            picker.on('picker.valuechange', function(selectedVal, selectedIndex) {
+                console.log(selectedVal);
+                console.log(selectedIndex);
+            });
+
+            nameEl.addEventListener('click', function() {
+                picker.show();
+            });
+		</script>
+	</body>
+
+</html>
