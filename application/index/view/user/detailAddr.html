@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=10" />
+		<title>资料编辑姓名</title>
+		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/public/indexsource/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/css2.css" />
+		<script src="/public/indexsource/js/pic.js"></script>
+		<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+	</head>
+
+	<body class="bjhs2">
+	{include file="public/indexsource/head/header.html" /}
+	<form action="/saveDetaiAddr" method="post">
+		<div class="big_qb">
+			<div class="qq_qb">
+				<span>详细地址：</span>
+				{if condition="(isset($re.detail))"}
+				<input type="text" style="width:95%" class="shuru" name="detaiAddr" placeholder="{$re.detail}"></input>
+				{else /}
+				<input type="text" style="width:95%" class="shuru" name="detaiAddr" placeholder="这里输入"></input>
+				{/if}
+				<font>请输入省市区后的详细地址</font>
+			</div>
+			<div class="quedingan"><a href="#">确定</a></div>
+		</div>
+	</form>
+	</body>
+
+<script>
+	$(function(){
+	    $('.quedingan a').click(function(e){
+	        e.preventDefault();
+	        var form = $('form');
+	        var url = form.attr('action');
+	        var data = form.serialize();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    if(data.status == 'fails'){
+                        layer.msg(data.msg,{icon:2,time:1000});
+                    }else if(data.url){
+                        window.location.href=data.url;
+                    }
+
+                }
+            });
+	        // $('form').submit();
+		})
+	})
+</script>
+
+</html>

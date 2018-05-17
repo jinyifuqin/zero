@@ -48,6 +48,7 @@ class Item extends Controller
         $addr = Addrs::all(['user_id'=>$userid]);
         $data['userid'] = $userid;
         foreach ($addr as $k=>&$v){
+            $v['name'] = json_decode(urldecode($v['name']));
             $v['desc'] = preg_replace('/%2C/',' ',$v->desc);
         }
 
@@ -79,22 +80,24 @@ class Item extends Controller
         $id = $request->param('id');
         $addr = Addrs::get($id);
         $delimiter = urlencode(',');
-        $addrArr = explode($delimiter,$addr->desc);
-        $addr->desc1 = $addrArr[count($addrArr)-1];
-        array_pop($addrArr);
-        $addr->desc = implode(' ',$addrArr);
+        $addr->name = json_decode(urldecode($addr->name ));
+        $addr->desc = preg_replace("/$delimiter/",' ',$addr->desc);
+        $addr->desc1 = $addr->detail_desc;
 
         return view("index@item/addrEdit",['re'=>$addr]);
     }
 
     public function saveAddr(Request $request){
+        $desc = $request->param('desc');
+        $detailDesc = $request->param('desc1');
         $delimiter = urlencode(',');
-        $desc = implode($delimiter,explode(' ',$request->param('desc'))).$delimiter.$request->param('desc1');
+        $desc = implode($delimiter,explode(' ',$desc));
         if($request->param('default')){
             $default = 1;
         }else{
             $default = 0;
         }
+
 //        echo "<pre>";var_dump($request->param());exit;
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
@@ -102,11 +105,18 @@ class Item extends Controller
             'user_id'=>$userid,
             'name'=>$request->param('name'),
             'desc'=>$desc,
+            'detail_desc'=>$detailDesc,
             'phone_num'=>$request->param('phone_num'),
         ];
         if(array_key_exists('addrId',$request->param())){
             $postInfo['addrid']=$request->param('addrId');
+            $AddrObj = Addrs::get($postInfo['addrid']);
+            if($AddrObj){
+                $default = $AddrObj->default;
+            }
         }
+//        echo "<pre>";var_dump($postInfo);exit;
+
 
         $addrsObj = new Addrs();
         $addrsObj->saveAddr($userid,$postInfo,$default);

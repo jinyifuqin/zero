@@ -80,7 +80,7 @@
 						</a>
 					</div>
 					<div class="szym21">
-						<a href="#">
+						<a href="/phoneNum">
 							<span class="spanspan">联系方式</span>
 
 							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
@@ -92,10 +92,10 @@
 							<font>
 								<i href="#" class="btn btn-info btn-lg active" role="button" id="sel_city">
 									{if condition="(isset($re.userInfo.ssqdesc))"}
-									<input style="width:60%" name="desc" readonly="readonly" type="text" placeholder="{$re.userInfo.ssqdesc}">
+									<input style="width:60%;text-align: right;" name="desc" readonly="readonly" type="text" placeholder="{$re.userInfo.ssqdesc}">
 									<img  src="/public/indexsource/images/jian1.jpg" />
 									{else /}
-									<input style="width:60%" name="desc" readonly="readonly" type="text" placeholder="请填写地址">
+									<input style="width:60%;text-align: right;" name="desc" readonly="readonly" type="text" placeholder="请填写地址">
 									<img  src="/public/indexsource/images/jian1.jpg" />
 									{/if}
 								</i>
@@ -103,7 +103,7 @@
 						</a>
 					</div>
 					<div class="szym21">
-						<a href="#">
+						<a href="/detaiAddr">
 							<span class="spanspan">详细地址</span>
 							{if condition="(isset($re.userInfo.desc))"}
 							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />

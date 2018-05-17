@@ -32,13 +32,13 @@ class User extends Controller
             $user = $_SESSION['userinfo'];
         }
         $userObj = Users::get($user->id);
-        $desc = Addrs::where('id',$user->address)->value('desc');
-        $desc = explode('%2C',$desc);
-        $ssqdesc = array_filter($desc);
-        $desc = array_pop($ssqdesc);
-        $ssqdesc = implode(' ',$ssqdesc);
-        $userObj->ssqdesc = $ssqdesc;
-        $userObj->desc = $desc;
+        $desc = Addrs::get(['id'=>$userObj->address]);
+        if($desc != null){
+            $ssq = preg_replace('/%2C/',' ',$desc->desc);
+            $detailDesc = $desc->detail_desc;
+            $userObj->ssqdesc = $ssq;
+            $userObj->desc = $detailDesc;
+        }
         $userObj->nickname = json_decode(urldecode($userObj->nickname));
         $url = url('/userInfo');
         $re['url'] = $url;
@@ -67,28 +67,87 @@ class User extends Controller
 
     public function save_addr(Request $request){
         $userId = $_SESSION['userinfo']->id;
-        $addrId = $_SESSION['userinfo']->address;
+        $userObj = Users::get($userId);
+        $addrId = $userObj->address;
         $addrObj = Addrs::get(['id' => $addrId,'default'=>1]);
-        $addrSql = $addrObj->desc;
-        $type = $request->param('type');
-        $addr = explode(' ',$request->param('addr'));
         $delimiter = urlencode(',');
-        if($type == 'before'){
-            $addrArr = array_filter(explode('%2C',$addrSql));
-            $jtAddr = end($addrArr);
-            $addr[] = $jtAddr;
-            $addrStr = implode($delimiter,$addr);
-            $addrObj->desc = $addrStr;
+        $addr = explode(' ',$request->param('addr'));
+        $addr = implode($delimiter,array_filter($addr));
+        if($addrObj == null){
+            $addrObj = new Addrs();
+            $name = $_SESSION['userinfo']->nickname;
+            $addrObj->name = $name;
+            $addrObj->desc = $addr;
+            $addrObj->user_id = $userId;
+            $addrObj->default = 1;
             $re = $addrObj->save();
+            $userObj = Users::get($userId);
+            $userObj->address = $addrObj->id;
+            $userObj->save();
         }else{
-
+            $addrObj->desc = $addr;
+            $re = $addrObj->save();
         }
         if($re){
             $msg = array('status'=>'Success');
             echo json_encode($msg);
         }
-//        echo "<pre>";var_dump($addr);
-//        echo "<pre>";var_dump($addrStr);
+    }
+
+    public function self_detail_addr(){
+        $addrId = $_SESSION['userinfo']->address;
+        $addrObj = Addrs::get(['id' => $addrId,'default'=>1]);
+
+        if($addrObj != null){
+            $detaiDesc = $addrObj->detail_desc;
+        }else{
+            $detaiDesc = '';
+        }
+        $url = url('/selfInfo');
+        $re = ['url'=>$url,'detail'=>$detaiDesc];
+
+        return view("index@user/detailAddr",['re'=>$re]);
+    }
+
+    public function save_detail_addr(Request $request){
+        $detailAddr = $request->param('detaiAddr');
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get($userId);
+        $addrId = $userObj->address;
+        $addrObj = Addrs::get(['id' => $addrId,'default'=>1]);
+        if($addrObj == null){
+            $msg = array('status'=>'fails','msg'=>'请先选择省市区！');
+            echo json_encode($msg);
+        }else{
+            $addrObj->detail_desc = $detailAddr;
+            $re = $addrObj->save();
+            if($re){    //selfInfo
+                $msg = array('status'=>'Success','url'=>'/selfInfo');
+                echo json_encode($msg);
+            }
+        }
+
+    }
+
+    public function phone_num(){
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $url = url('/selfInfo');
+        $re = ['url'=>$url,'phoneNum'=>$userObj->phone_number];
+
+        return view("index@user/phoneNum",['re'=>$re]);
+    }
+
+    public function save_phone_num(Request $request){
+        $phoneNum = $request->param('phoneNum');
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $userObj->phone_number = $phoneNum;
+        $re = $userObj->save();
+        if($re){
+            $this->redirect('/selfInfo');
+        }
+//        echo "<pre>";var_dump($userObj);
     }
 
 }

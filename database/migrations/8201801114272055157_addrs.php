@@ -30,8 +30,9 @@ class Addrs extends Migrator
     {
         $table = $this->table('addrs',array('engine'=>'MyISAM'));
         $table->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
-            ->addColumn('name', 'string',array('limit' => 32,'default'=>'','comment'=>'收货人名字'))
+            ->addColumn('name', 'string',array('default'=>'','comment'=>'收货人名字'))
             ->addColumn('desc', 'string',array('default'=>'','comment'=>'收货地址'))
+            ->addColumn('detail_desc', 'string',array('default'=>'','comment'=>'收货详细地址'))
             ->addColumn('phone_num', 'string',array('default'=>'','null'=>true,'comment'=>'手机号'))
             ->addColumn('default', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'默认标识'))
             ->create();

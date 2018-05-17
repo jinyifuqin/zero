@@ -23,26 +23,32 @@ class Addrs extends Model
         if($re == null){
             $default = 1;
         }
+
         if(array_key_exists('addrid',$postInfo)){
             $addrId = $postInfo['addrid'];
-//            echo "<pre>";var_dump($postInfo);exit;
             if(count($postInfo) == 1){
                 $this->save([
                     'default'  => $default,
                 ],['id' => $addrId]);
             }else{
-                $this->save([
+                $postInfo['name'] = urlencode(json_encode($postInfo['name']));
+                $data = [
                     'default'  => $default,
                     'name'=>$postInfo['name'],
                     'desc'=>$postInfo['desc'],
                     'phone_num'=>$postInfo['phone_num'],
-                ],['id' => $addrId]);
+                    'detail_desc'=>$postInfo['detail_desc']
+                ];
+
+                $this->save($data,['id' => $addrId]);
             }
 
         }else{
-            $this->data['name'] = $postInfo['name'];
+
+            $this->data['name'] = urlencode(json_encode($postInfo['name']));
             $this->phone_num = $postInfo['phone_num'];
             $this->user_id = $userid;
+            $this->detail_desc = $postInfo['detail_desc'];
             $this->desc = $postInfo['desc'];
             $this->default = $default;
 //        echo "<pre>";var_dump($this);exit;

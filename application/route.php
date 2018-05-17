@@ -88,6 +88,10 @@ Route::group('',[
     'selfInfo' => ['User/self_info', ['method' => 'get']],
     'saveHead' => ['User/save_head', ['method' => 'post']],
     'saveAddrJs' => ['User/save_addr', ['method' => 'post']],
+    'detaiAddr' => ['User/self_detail_addr', ['method' => 'get']],
+    'saveDetaiAddr' => ['User/save_detail_addr', ['method' => 'post']],
+    'phoneNum' => ['User/phone_num', ['method' => 'get']],
+    'savePhoneNum' => ['User/save_phone_num', ['method' => 'post']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

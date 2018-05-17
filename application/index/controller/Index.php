@@ -96,10 +96,13 @@ class Index
         $addr = Addrs::where('id',$user->address)->find();
         $item->brandName = Brands::where('id',$item->brand_id)->value('name');
 //        echo "<pre>";var_dump($item);exit;
+        $addr->name = json_decode(urldecode($addr->name));
+//        echo "<pre>";var_dump($addr->name);exit;
         $data['item'] = $item;
-        $data['userinfo'] = $userinfo;
+        $data['userinfo'] = $user;
 
-//        echo "<pre>";var_dump($addr);exit;
+//        echo "<pre>";var_dump($user);exit;
+
         if($addr){
             $addr->desc = preg_replace('/%2C/',' ',$addr->desc);
             $data['addr'] = $addr;
@@ -108,7 +111,7 @@ class Index
 
 
 //        unset($_SESSION['userinfo']);
-//        echo "<pre>";var_dump($data);exit;
+//        echo "<pre>";var_dump($data['addr']->desc);exit;
         return view("index@item/buying",['data'=>$data]);
     }
 
@@ -273,6 +276,7 @@ class Index
         }
         $userId = $userInfo->id;
         $userRe = Users::get($userId);
+//        echo "<pre>";var_dump($userRe);exit;
         $nickname = json_decode(urldecode($userRe->getData('nickname')));
         $userRe->nickname = $nickname;
         $re = getPoint($userId);
