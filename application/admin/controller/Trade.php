@@ -122,6 +122,14 @@ class Trade extends Controller
                 $trade->admin_get_bill_type = 0;
             }
         }else{
+            if($trade->getData('get_bill_type') == 0 && $trade->getData('check_type') == 0){
+                $msg = array('status'=>'fails','msg'=>'订单未确认，状态无法改变!');
+                return json_encode($msg);
+            }
+            if($trade->getData('get_bill_type') == 1 && ($trade->getData('admin_get_bill_type') == 1 || $trade->getData('admin_check_type') == 1)){
+                $msg = array('status'=>'fails','msg'=>'总管理已审核，状态无法改变!');
+                return json_encode($msg);
+            }
             if($trade->getData('get_bill_type') == 0){
                 $trade->get_bill_type = 1;
             }else{
@@ -158,6 +166,7 @@ class Trade extends Controller
                 $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
                 return json_encode($msg);
             }
+            $trade->admin_check_type = $admin_check_type;
         }else{
             if($trade->getData('check_type') == 0){
                 $check_type = 1;
@@ -173,7 +182,7 @@ class Trade extends Controller
             $trade->trade_type = $trade_type;
 
         }
-        $trade->admin_check_type = $admin_check_type;
+
 
         $result = $trade->save();
 //        echo "<pre>";var_dump(6);exit;
