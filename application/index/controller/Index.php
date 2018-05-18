@@ -105,11 +105,11 @@ class Index
         $addr = Addrs::where('id',$user->address)->find();
 //        echo "<pre>";var_dump($addr);exit;
         $item->brandName = Brands::where('id',$item->brand_id)->value('name');
-        $addr->name = json_decode(urldecode($addr->name));
         $data['item'] = $item;
         $data['userinfo'] = $user;
 
         if($addr){
+            $addr->name = json_decode(urldecode($addr->name));
             $addr->desc = preg_replace('/%2C/',' ',$addr->desc);
             $data['addr'] = $addr;
         }
