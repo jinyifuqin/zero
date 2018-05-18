@@ -258,11 +258,28 @@ class Index
     }
 
     public function user_info(){
-//        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
         if(array_key_exists('userinfo',$_SESSION)){
             $userRe = $this->get_user_info();
+            $flag = Points::get(['user_id'=>$userRe->id]);
+            if($flag){
+                $allPoint = 500000000;
+                $pO = new Points();
+                $noUse = $pO->where('type',"=",1)
+                    ->where('frozen_flag',"=",0)
+                    ->sum('count');
+                $shareGet = $pO->where('type',"=",1)
+                    ->where('get_type',"=",3)
+                    ->where('frozen_flag',"=",1)
+                    ->sum('count');
+                $prepareCount = $noUse + $shareGet;
+                $userRe->allSystemCount = $allPoint;
+                $userRe->prepareCount = $prepareCount;
+                $userRe->surplusCount = $allPoint - $prepareCount;
+            }
+
+//            echo "<pre>";var_dump($prepareCount);exit;
             $curl = "userinfo";
-            $re = ['footType'=>$curl,'userinfo'=>$userRe];
+            $re = ['footType'=>$curl,'userinfo'=>$userRe,'flag'=>$flag];
             return view("index@index/userInfo",['re'=>$re]);
         }
         $url = $this->wxObj->get_authorize_url(1);

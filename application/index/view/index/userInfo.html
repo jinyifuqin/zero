@@ -68,6 +68,15 @@
       </li>
   </ul>
 
+    {if condition="($re.flag)"}
+    <div style="background:white;text-align: center ;line-height: 2rem;color: #666666;">
+        系统总积分数：{$re.userinfo.allSystemCount}<br/>
+        已发放：{$re.userinfo.prepareCount}积分<br/>
+        剩余：{$re.userinfo.surplusCount}积分
+    </div>
+    {/if}
+
+
 </div>
 
 
