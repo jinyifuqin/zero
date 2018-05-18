@@ -389,19 +389,24 @@ class Index extends Controller
     public function point_set(){
         $config = config('setPointCount');
         $dbconfig = config('setDoublePointCount');
-        $all = ['config'=>$config,'dbconfig'=>$dbconfig];
+        $sharePointFilterConfig = config('sharePointFilterConfig');
+        $all = ['config'=>$config,'dbconfig'=>$dbconfig,'sharePointFilterConfig'=>$sharePointFilterConfig];
         return view("admin@index/pointSet",['all'=>$all]);
     }
     
     public function save_point_set(Request $request){
         $config = $request->param('pointCount');
         $dbconfig = $request->param('pointDoubleCount');
+        $sharePointFilterConfig = $request->param('sharePointFilterConfig');
         $path = $this->configPath;
         $content = file_get_contents($path);
         $replace = "/(?<=\<setPointCount\>)(\d+)(?=\<\/setPointCount\>)/";
         $dbreplace = "/(?<=\<setDoublePointCount\>)(\d+)(?=\<\/setDoublePointCount\>)/";
+        $shfreplace = "/(?<=\<sharePointFilterConfig\>)(\d+)(?=\<\/sharePointFilterConfig\>)/";
         $str = preg_replace($replace,$config,$content);
         $str = preg_replace($dbreplace,$dbconfig,$str);
+        $str = preg_replace($shfreplace,$sharePointFilterConfig,$str);
+//        echo "<pre>";var_dump($str);exit;
         $re = file_put_contents($this->configPath,$str);
         if($re){
             $msg = array('status'=>'Success');

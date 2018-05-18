@@ -63,7 +63,7 @@
 			<thead>
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
-					<th width="80">ID</th>
+					<th width="50">ID</th>
 					<th width="120">订单号</th>
 					<!--<th width="50">用户ID</th>-->
 					<th width="80">名字</th>
@@ -217,7 +217,6 @@ function action(t,id,msg) {
             url: 'send/'+id,
             dataType: 'json',
             success: function(data){
-                // $(t).parents("tr").remove();
                 data = JSON.parse(data);
                 if(data.status =='Success'){
                     layer.msg('状态已更改!',{icon:1,time:1000});

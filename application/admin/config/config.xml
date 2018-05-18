@@ -1,4 +1,5 @@
 <config>
-    <setPointCount>1101</setPointCount>
+    <setPointCount>1102</setPointCount>
     <setDoublePointCount>2202</setDoublePointCount>
+    <sharePointFilterConfig>108</sharePointFilterConfig>
 </config>

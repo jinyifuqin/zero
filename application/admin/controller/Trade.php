@@ -15,6 +15,7 @@ use app\index\model\Addrs;
 use app\index\model\Points;
 use app\index\model\Trades;
 use app\index\controller\Point;
+use app\index\model\Users;
 use think\Config;
 use \think\Controller;
 use think\Request;
@@ -148,11 +149,23 @@ class Trade extends Controller
     }
 
     public function send(Request $request){
+        $sharePointFilterConfig = config('sharePointFilterConfig');
         $setPointCount = config('setPointCount');
         $id = $request->param('id');
         $trade = Trades::get($id);
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
-
+        $memberId = $trade->user_id;
+        $memObj = Users::get($memberId);
+        $shareId = $memObj->share_member_id;
+        if($shareId != 0){
+//            $shareObj = Users::get($shareId);
+            $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
+            if($shareBuyPrice >= $sharePointFilterConfig){
+                $flag = true;
+            }else{
+                $flag = false;
+            }
+        }
         if($type){
             if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 0){
                 $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
@@ -171,6 +184,17 @@ class Trade extends Controller
             if($trade->getData('check_type') == 0){
                 $check_type = 1;
                 $trade_type = 1;
+                if($flag){
+                    $giveSharePoint['user_id'] = $shareId;
+                    $giveSharePoint['count'] = $trade->buy_price*0.01;
+                    $giveSharePoint['type'] = 1;
+                    $giveSharePoint['get_type'] = 3;
+                    $giveSharePoint['frozen_flag'] = 1;
+                    $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                    $pointObj = new Points();
+                    $pointObj->data($giveSharePoint);
+                    $pointObj->save();
+                }
             }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
                 $check_type = 0;
                 $trade_type = 0;
@@ -190,15 +214,15 @@ class Trade extends Controller
             if($type){
                 if($trade->getData('admin_check_type') == 1){
 
-                    $giveDiscount['user_id'] = $trade->user_id;
-                    $giveDiscount['count'] = $setPointCount;
-                    $giveDiscount['type'] = 1;
-                    $giveDiscount['get_type'] = 0;
-                    $giveDiscount['frozen_flag'] = 0;
-                    $giveDiscount['create_time'] = date('Y-m-d H:i:s',time());
-                    $giveDiscount['trade_number'] = $trade->trade_number;
+                    $givePoint['user_id'] = $trade->user_id;
+                    $givePoint['count'] = $setPointCount;
+                    $givePoint['type'] = 1;
+                    $givePoint['get_type'] = 0;
+                    $givePoint['frozen_flag'] = 0;
+                    $givePoint['create_time'] = date('Y-m-d H:i:s',time());
+                    $givePoint['trade_number'] = $trade->trade_number;
                     $pointObj = new Points();
-                    $pointObj->data($giveDiscount);
+                    $pointObj->data($givePoint);
                     $pointObj->save();
 
                 }else{

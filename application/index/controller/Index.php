@@ -292,14 +292,21 @@ class Index
 
     public function show_point_list(){
         $userId = $_SESSION['userinfo']->id;
-        $list = \app\index\model\Points::all([
-            'user_id' => $userId,
-            'get_type'=>2,
-//            'type'=>1,
-            'frozen_flag'=>1
-        ]);
+        $pObj = new \app\index\model\Points();
+        $list = $pObj->where('user_id', $userId)
+            ->where('get_type', '>',0)
+            ->where('frozen_flag', 1)
+            ->select();
+
+//        $list = \app\index\model\Points::all([
+//            'user_id' => $userId,
+//            'get_type'=>2,
+////            'type'=>1,
+//            'frozen_flag'=>1
+//        ]);
         $curl = "userinfo";
         $re = ['footType'=>$curl,'list'=>$list];
+//        echo "<pre>";var_dump($list);exit;
         return view("index@index/showPointList",['re'=>$re]);
 
     }

@@ -153,12 +153,19 @@ function getPoint($userId){ // 获取用户总积分
     ])->sum('count');
 
     $noUseEnd = $noUseAdd-$noUseDel;
-    $canUse = \app\index\model\Points::where([
-        'user_id' => $userId,
-        'get_type'=>2,
-        'type'=>1,
-        'frozen_flag'=>1
-    ])->sum('count');
+//    $canUse = \app\index\model\Points::where([
+//        'user_id' => $userId,
+//        'get_type'=>2,
+//        'type'=>1,
+//        'frozen_flag'=>1
+//    ])->sum('count');
+
+    $pO = new \app\index\model\Points();
+    $canUse = $pO->where('user_id',"=",$userId)
+        ->where('get_type',">",0)
+        ->where('type',"=",1)
+        ->where('frozen_flag',"=",1)
+        ->sum('count');
 
     $arr = ['canUse'=>round($canUse,3),'noUse'=>round($noUseEnd,3)];
     return $arr;
