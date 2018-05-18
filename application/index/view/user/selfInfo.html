@@ -53,6 +53,13 @@
 							<font>{$re.userInfo.nickname}</font>
 						</a>
 					</div>
+					<div class="szym21">
+						<a href="/myQrcode">
+							<span class="spanspan">我的二维码</span>
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+
+						</a>
+					</div>
 					<!--<div class="szym21">-->
 						<!--<a href="#">-->
 							<!--<span class="spanspan">真实姓名 </span>-->
@@ -66,11 +73,17 @@
 					<div class="szym21">
 						<a href="#">
 							<span class="spanspan">性别</span>
-
-							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg1" />
 							<font>{$re.userInfo.sex}</font>
 						</a>
 					</div>
+					<!--<div class="szym21">-->
+						<!--<a href="#">-->
+							<!--<span class="spanspan">性别</span>-->
+							<!--&lt;!&ndash;<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />&ndash;&gt;-->
+							<!--<font>{$re.userInfo.sex}</font>-->
+						<!--</a>-->
+					<!--</div>-->
 					<div class="szym21">
 						<a href="/accountNumber">
 							<span class="spanspan">银行卡/支付宝账号</span>
@@ -168,7 +181,7 @@
 					head.attr('src','/public/uploads/'+data.path);
                     layer.msg('头像上传成功！',{icon:1,time:1000});
                 }).error(function () {
-                    layer.msg('头像上传失败！',{icon:1,time:1000});
+                    layer.msg('头像上传失败！',{icon:2,time:1000});
                 });
 
 			}

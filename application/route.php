@@ -96,6 +96,7 @@ Route::group('',[
     'saveServiceCent' => ['User/save_service_cent', ['method' => 'post']],
     'accountNumber' => ['User/account_number', ['method' => 'get']],
     'saveCollections' => ['User/save_account_number', ['method' => 'post']],
+    'myQrcode' => ['User/my_qrcode', ['method' => 'get']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

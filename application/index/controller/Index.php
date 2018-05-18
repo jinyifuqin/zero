@@ -25,7 +25,6 @@ class Index
     public function index(Request $request)
     {
 //        session_destroy();
-
         $_SESSION['url'] = $_SERVER['HTTP_HOST'];
         $serviceuserid = $request->param('userid');
         $memberid = $request->param('memberid');
