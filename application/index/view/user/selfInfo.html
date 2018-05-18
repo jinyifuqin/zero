@@ -72,11 +72,11 @@
 						</a>
 					</div>
 					<div class="szym21">
-						<a href="#">
+						<a href="/accountNumber">
 							<span class="spanspan">银行卡/支付宝账号</span>
 
 							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
-							<font>1992.01.01</font>
+							<font class="formart">{$re.userInfo.collections}</font>
 						</a>
 					</div>
 					<div class="szym21">
@@ -84,7 +84,7 @@
 							<span class="spanspan">联系方式</span>
 
 							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
-							<font>{$re.userInfo.phone_number}</font>
+							<font class="formart">{$re.userInfo.phone_number}</font>
 						</a>
 					</div>
 					<div class="fapiao1 szym21 huixian" style="    padding-left: 0;">
@@ -176,6 +176,17 @@
 		</script>
 		<script>
             $(function(){
+				var formart = $('.formart');
+
+				formart.each(function (i,v) {
+				    var str = $(this).html();
+				    var len = str.length;
+				    if(len>0 && str != '0'){
+                        var newStr = str.substring(0,9)+'...';
+					}
+              		$(this).html(newStr);
+                })
+
                 $('#changeBox').click(function () {
                     var input = $(this).find('input');
                     if(input.val() == 1){

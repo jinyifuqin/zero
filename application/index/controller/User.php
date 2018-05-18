@@ -76,7 +76,7 @@ class User extends Controller
         $addr = implode($delimiter,array_filter($addr));
         if($addrObj == null){
             $addrObj = new Addrs();
-            $name = $_SESSION['userinfo']->nickname;
+            $name = $userObj->nickname;
             $addrObj->name = $name;
             $addrObj->desc = $addr;
             $addrObj->user_id = $userId;
@@ -130,6 +130,26 @@ class User extends Controller
 
     }
 
+    public function account_number(){
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $accountNumber = $userObj->collections;
+        $url = url('/selfInfo');
+        $re = ['url'=>$url,'collections'=>$accountNumber];
+        return view("index@user/accountNumber",['re'=>$re]);
+    }
+
+    public function save_account_number(Request $request){
+        $collections = $request->param('collections');
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $userObj->collections = $collections;
+        $re = $userObj->save();
+        if($re){
+            $this->redirect('/selfInfo');
+        }
+    }
+
     public function phone_num(){
         $userId = $_SESSION['userinfo']->id;
         $userObj = Users::get(['id' => $userId]);
@@ -145,13 +165,26 @@ class User extends Controller
         $userObj = Users::get(['id' => $userId]);
         $userObj->phone_number = $phoneNum;
         $addrObj = Addrs::get(['user_id'=>$userId,'default'=>1]);
-        $addrObj->phone_num = $phoneNum;
-        $addrObj->save();
+        if($addrObj != null){
+            $addrObj->phone_num = $phoneNum;
+            $addrObj->save();
+        }else{
+            $addrObj = new Addrs();
+            $addrObj->phone_num = $phoneNum;
+            $addrObj->user_id = $userId;
+            $addrObj->default = 1;
+            $addrObj->name = $userObj->nickname;
+            $re = $addrObj->save();
+            $userObj->address = $addrObj->id;
+            if($re){    //selfInfo
+                $msg = array('status'=>'Success','url'=>'/selfInfo');
+                echo json_encode($msg);
+            }
+        }
         $re = $userObj->save();
         if($re){
             $this->redirect('/selfInfo');
         }
-//        echo "<pre>";var_dump($userObj);
     }
 
     public function choose_service_cent(){
@@ -174,7 +207,6 @@ class User extends Controller
             $msg = array('status'=>'error');
             echo json_encode($msg);
         }
-
     }
 
 }

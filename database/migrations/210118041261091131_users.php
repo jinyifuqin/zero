@@ -43,7 +43,7 @@ class Users extends Migrator
             ->addColumn('status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'0普通会员1服务中心'))
             ->addColumn('id_card', 'integer',array('limit' => 18,'default'=>0,'comment'=>'身份证'))
             ->addColumn('address', 'string',array('default'=>'','comment'=>'收货地址'))
-            ->addColumn('collections', 'integer',array('limit' => 15,'default'=>0,'comment'=>'收款账号'))
+            ->addColumn('collections', 'string',array('default'=>0,'comment'=>'收款账号'))
             ->addColumn('login_status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'登陆状态'))
             ->addColumn('login_code', 'string',array('limit' => 32,'default'=>0,'comment'=>'排他性登陆标识'))
             ->addColumn('last_login_time', 'datetime',array('default'=>0,'comment'=>'最后登录时间'))

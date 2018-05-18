@@ -103,6 +103,7 @@ class Index
 //        echo "<pre>";var_dump($service_cent_id);exit;
         $_SESSION['userinfo'] = $user;
         $addr = Addrs::where('id',$user->address)->find();
+//        echo "<pre>";var_dump($addr);exit;
         $item->brandName = Brands::where('id',$item->brand_id)->value('name');
         $addr->name = json_decode(urldecode($addr->name));
         $data['item'] = $item;
