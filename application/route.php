@@ -92,6 +92,8 @@ Route::group('',[
     'saveDetaiAddr' => ['User/save_detail_addr', ['method' => 'post']],
     'phoneNum' => ['User/phone_num', ['method' => 'get']],
     'savePhoneNum' => ['User/save_phone_num', ['method' => 'post']],
+    'choose_service_cent' => ['User/choose_service_cent', ['method' => 'get']],
+    'saveServiceCent' => ['User/save_service_cent', ['method' => 'post']],
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

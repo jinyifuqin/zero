@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>选择服务中心</title>
+    <link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+    <link href="/public/indexsource/css/css2.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/public/indexsource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
+    <script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
+
+    <script src="/public/indexsource/js/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div class="selectbox">
+    <div class="all">
+
+
+        <div class="selemediv"> <div class="selemenu">请选择服务中心给您服务</div>
+            <DIV class="citylist">
+                {foreach $list as $vo}
+                    <span data="{$vo.id}">{$vo.nickname}</span>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="button123"><a href="#">确定</a></button>
+</div>
+
+    <script>
+        $(function(){
+            $('.button123').click(function(){
+                var id = $('.selemenu').attr('data');
+                var data = {'id':id};
+                var url = '/saveServiceCent';
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    dataType: "json",
+                    success: function(result){
+                        if(result.status == 'Success'){
+                            var index = parent.layer.getFrameIndex(window.name);
+                            window.parent.location.reload();//刷新父页面
+                            parent.layer.close(index);
+                        }else{
+                            layer.msg(result.msg,{icon:0,time:2000});
+                        }
+
+                    }
+                });
+            })
+        })
+        $(".selemenu").click(function(){
+            $(this).next().slideToggle();
+            $(this).parents().siblings().find(".citylist,.citylist2").slideUp();
+        })
+        $(".citylist span").click(function(){
+            var text=$(this).text();
+            var id = $(this).attr('data');
+            $(this).parent().prev().html(text);
+            $(this).parent().prev().css("color","#666");
+            $(this).parent().fadeOut();
+            $(this).parent().prev().attr('data',id);
+
+        })
+        $(".shangquan li").click(function(){
+            $(".shangquan li").removeClass("active")
+            $(this).addClass("active")
+            var text1=$(this).text();
+            $(".sqinput").html(text1)
+        })
+        $(".chengshi li").click(function(){
+            $(".chengshi li").removeClass("active")
+            $(this).addClass("active")
+            var text2=$(this).text();
+            $(".csinput").html("-"+text2)
+            $(".citylist2").slideUp();
+        })
+        $(function(){
+            $(document).not($(".selectbox")).click(function(){
+                $(".citylist,.citylist2").slideUp();
+            })
+            $(".selectbox").click(function(event){
+                event.stopPropagation();
+            })
+        })
+    </script>
+
+
+</body>
+</html>
+

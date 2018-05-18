@@ -7,6 +7,7 @@
  */
 
 namespace app\index\controller;
+use app\admin\model\Adminusers;
 use app\admin\model\Items;
 use app\index\model\Addrs;
 use app\index\model\Users;
@@ -126,6 +127,10 @@ class Item extends Controller
 
     public function tradeCreate(Request $request){
         $userid = $_SESSION['userinfo']->id;
+        $userObj = Users::get($userid);
+        $service_cent_id = $userObj->service_cent_id;
+        $adminObj = Adminusers::get($service_cent_id);
+        $service_cent_name = $adminObj->nickname;
         $post = $request->param();
         $trade = new Trades();
         $tradeNum = date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
@@ -171,7 +176,7 @@ class Item extends Controller
         $trade->data($all);
         $re = $trade->save();
         if($re){
-            $data = ['msg'=>"订单生成成功！请等待服务中心发货",'type'=>"success"];
+            $data = ['msg'=>"订单生成成功！请等待服务中心发货",'type'=>"success",'cent_name'=>$service_cent_name];
             return json_encode($data);
         }else{
             $data = ['msg'=>"订单生成失败！",'type'=>"error"];

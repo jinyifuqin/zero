@@ -1,5 +1,6 @@
 <?php
 namespace app\index\controller;
+use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\index\model\Addrs;
 use app\index\model\Weixins;
@@ -92,26 +93,27 @@ class Index
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
         $user = Users::where('id',$userid)->find();
+        $service_cent_id = $user->service_cent_id;
+        if($service_cent_id == 0){
+            $flag = 'error';
+        }else{
+            $flag = 'success';
+        }
+        
+//        echo "<pre>";var_dump($service_cent_id);exit;
         $_SESSION['userinfo'] = $user;
         $addr = Addrs::where('id',$user->address)->find();
         $item->brandName = Brands::where('id',$item->brand_id)->value('name');
-//        echo "<pre>";var_dump($item);exit;
         $addr->name = json_decode(urldecode($addr->name));
-//        echo "<pre>";var_dump($addr->name);exit;
         $data['item'] = $item;
         $data['userinfo'] = $user;
-
-//        echo "<pre>";var_dump($user);exit;
 
         if($addr){
             $addr->desc = preg_replace('/%2C/',' ',$addr->desc);
             $data['addr'] = $addr;
         }
-
-
-
-//        unset($_SESSION['userinfo']);
-//        echo "<pre>";var_dump($data['addr']->desc);exit;
+        $data['flag'] = $flag;
+//        echo "<pre>";var_dump($data['service_list']);exit;
         return view("index@item/buying",['data'=>$data]);
     }
 

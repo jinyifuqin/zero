@@ -7,6 +7,7 @@
  */
 
 namespace app\index\controller;
+use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\index\model\Addrs;
 use app\index\model\Weixins;
@@ -151,6 +152,29 @@ class User extends Controller
             $this->redirect('/selfInfo');
         }
 //        echo "<pre>";var_dump($userObj);
+    }
+
+    public function choose_service_cent(){
+        $service_list = Adminusers::all();
+        return view("index@user/chooseServiceCent",['list'=>$service_list]);
+    }
+
+    public function save_service_cent(Request $request){
+        $id = $request->param('id');
+        if(array_key_exists('userinfo',$_SESSION)){
+            $userId = $_SESSION['userinfo']->id;
+        }
+        $userObj = Users::get($userId);
+        $userObj->service_cent_id = $id;
+        $re = $userObj->save();
+        if($re){
+            $msg = array('status'=>'Success');
+            echo json_encode($msg);
+        }else{
+            $msg = array('status'=>'error');
+            echo json_encode($msg);
+        }
+
     }
 
 }

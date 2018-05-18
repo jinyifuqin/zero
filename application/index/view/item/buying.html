@@ -81,38 +81,6 @@
 				</a>
 				{/if}
 			</div>
-			<!--<div class="yidakuai">-->
-				<!--<div class="tjddb3">-->
-					<!--<div class="tjddb31">-->
-						<!--<h3>江山时代</h3>-->
-					<!--</div>-->
-					<!--<div class="tjddb32">-->
-						<!--<dl>-->
-							<!--<dt><img src="/public/indexsource/images/zz5.jpg"/></dt>-->
-							<!--<dd class="tjddb34">-->
-								<!--<h4>整合渠道营销</h4><span>x1</span></dd>-->
-							<!--<dd class="tjddb35">-->
-								<!--<b>¥4500</b>-->
-								<!--<div class="tjddb33">-->
-									<!--<ul>-->
-										<!--<li class="tjddb36">+</li>-->
-										<!--<li class="tjddb37">1</li>-->
-										<!--<li class="tjddb38">-</li>-->
-									<!--</ul>-->
-								<!--</div>-->
-							<!--</dd>-->
-							<!--<div class="cl"></div>-->
-						<!--</dl>-->
-					<!--</div>-->
-				<!--</div>-->
-				<!--<div class="tjddb39">-->
-					<!--<a href="#">-->
-						<!--<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>-->
-						<!--<font class="yxyz">已选一张</font>-->
-					<!--</a>-->
-				<!--</div>-->
-			<!--</div>-->
-
 			<div class="yidakuai">
 				<div class="tjddb3">
 					<div class="tjddb31">
@@ -143,40 +111,16 @@
 					</div>
 
 				</div>
-				<!--<div class="tjddb39">-->
-					<!--<a href="#">-->
-						<!--<h3>店铺通用券</h3><span>-¥50.00<img src="/public/indexsource/images/jian1.jpg"/></span>-->
-						<!--<font class="yxyz">已选一张</font>-->
-					<!--</a>-->
-				<!--</div>-->
 			</div>
 			<div class="oneprice" style="display: none;" oneprice="{$data.item.price}"></div>
 			<div class="tjddb40">
 				<span>共1件商品 </span>
 				<font>小计：</font><b>¥{$data.item.price}</b>
 			</div>
-			<!--<div class="huise1"></div>-->
-			<!--<div class="tjddb39">-->
-				<!--<a href="#">-->
-					<!--<h3 class="xiaoziti">发票</h3><span>普通发票-个人<img src="/public/indexsource/images/jian1.jpg"/></span>-->
-
-				<!--</a>-->
-			<!--</div>-->
-			<!--<div class="huise1"></div>-->
-			<!--<div class="tjddb39">-->
-				<!--<a href="#">-->
-					<!--<h3>代金券</h3><span>-¥100.00<img src="/public/indexsource/images/jian1.jpg"/></span>-->
-				<!--<font class="yxyz">已选一张</font>-->
-				<!--</a>-->
-			<!--</div>-->
-			<!--<div class="tjddb41">-->
-				<!--<h3>买家留言：</h3>-->
-				<!--<input type="text" class="mjly" placeholder="请和买家协商确认" />-->
-			<!--</div>-->
-			<!--<div class="huise1"></div>-->
 			<div class="jifen5" style="background: gainsboro">
 				<div class="jifen5_1">
-					<span>订单创建成功等待<i>服务中心</i>发货</span>
+					<span>订单创建成功，请向<i style="display: inline">服务中心<b></b></i>付款，并等待发货</span>
+					<span></span>
 				</div>
 				<div>
 					<button type="button" class="button1"><a href="#">确定</a></button>
@@ -256,7 +200,14 @@
             });
 
             $('#sub').click(function(e){
-				e.preventDefault();
+                e.preventDefault();
+                var flag = "<?php echo $data['flag'] ?>";
+                if(flag == 'error'){
+                    alert_choose_service('选择服务中心','/choose_service_cent','10001');
+                    return;
+				}
+				// console.log(flag);return;
+
 				var url = $('form').attr('action');
 				var data = $('form').serialize();
                 $.ajax({
@@ -267,6 +218,8 @@
                     success: function(result){
                         result = JSON.parse(result);
                         if(result.type == 'success'){
+                            $centName = result.cent_name;
+                            $('.jifen5_1 b').html($centName);
                             $(".jifen5").css("display", "block");
 						}else{
                             layer.msg(result.msg,{icon:0,time:2000});
@@ -281,6 +234,15 @@
                 $(".jifen5").css("display", "none");
                 window.location.href="/";
             })
+
+            function alert_choose_service(title,url,w,h){
+                var index = layer.open({
+                    type: 2,
+                    title: title,
+                    content: url
+                });
+                layer.full(index);
+            }
 		})
 	</script>
 	</body>

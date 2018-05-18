@@ -1052,3 +1052,32 @@ a:hover{text-decoration: none;}
 .tjddb43 .tjddb44 b{font-size: 1.1rem;color: #ff5250;margin-right: 5%;}
 .tjddb43 .tjddb45{width: 35%;float: left;text-align: center;background: #ff5250;border-radius: .3rem;}
 .tjddb43 .tjddb45 a{color: #fff;font-size: 1rem;display:block;}
+.selectbox{ height:auto width:100%; clear:both; margin:auto; background:#f7f7f7}
+
+.selemediv{ width:80%; height:2rem; float:left; margin-top:30px; margin-left:20%; position:relative }
+.selemenu{ width:80%; height:2rem; background:#fff; color:#999; text-indent:10px; border:none; /*background:url(../images/xiala.png) 150px right no-repeat #fff;*/background-size: 1.3rem; vertical-align: middle;}
+.selemenu{ font-size:1.2rem; line-height:2rem;vertical-align: middle;border: 1px solid #d9dadc;}
+.citylist span{ display:block; clear:both; cursor:pointer;font-size: 1rem;}
+.citylist span:hover{ background:#eee;}
+.citylist{ display:none; line-height:35px; background:#fff; text-indent:10px; font-size:12px; position:absolute; left:0; top:35px; width:80%; box-shadow:0px 5px 5px #ccc;border: 1px solid #d9dadc;}
+.citylist2{box-shadow:0px 5px 5px #ccc;; font-size:14px; color:#666; padding:20px 40px; position:absolute; top:35px; left:0; background:#fff;border-bottom:1px solid #f6f6f6; display:none;}
+.citylist2 ul{ float:left; width:930px;line-height:54px;;} 
+.citylist2 ul li{ float:left; cursor:pointer}
+.citylist2 ul li:hover{ color:#ff4400}
+.citylist2 .shangquan li{ width:11%;}
+.citylist2 .chengshi li{ width:20%;}
+.citylist2 .leibie{ width:100px; float:left;line-height:54px;  }
+ul,li{ list-style:none;}
+.xzk{ width:1030px; overflow:hidden; clear: both}
+.citylist2 .active{ color:#ff4400}
+.all{width: 100%;}
+.button123{    border: 0;
+    width: 50%;
+    height: 2rem;
+    background: #479bfc;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-left: 25%;
+    border-radius: .9rem;margin-top: 12rem;}
+ .button123 a{    color: #fff;
+    display: block;}
