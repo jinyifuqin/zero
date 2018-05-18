@@ -143,6 +143,9 @@ class User extends Controller
         $userId = $_SESSION['userinfo']->id;
         $userObj = Users::get(['id' => $userId]);
         $userObj->phone_number = $phoneNum;
+        $addrObj = Addrs::get(['user_id'=>$userId,'default'=>1]);
+        $addrObj->phone_num = $phoneNum;
+        $addrObj->save();
         $re = $userObj->save();
         if($re){
             $this->redirect('/selfInfo');
