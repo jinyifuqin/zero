@@ -69,6 +69,7 @@ class User extends Controller
             $data['phone_number'] = $post['username'];
             $data['nickname'] = urlencode(json_encode($post['nickname']));
             $data['sex'] = $post['sex'];
+            $data['openid'] = $post['username'];
             $userObj = new Users();
             $userObj->data($data);
             $re = $userObj->save();
