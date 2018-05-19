@@ -97,6 +97,14 @@ Route::group('',[
     'accountNumber' => ['User/account_number', ['method' => 'get']],
     'saveCollections' => ['User/save_account_number', ['method' => 'post']],
     'myQrcode' => ['User/my_qrcode', ['method' => 'get']],
+    'loginCheck' => ['User/login_check', ['method' => 'post']],
+    'weiXinLogin' => ['User/weixin_login', ['method' => 'get']],
+    'register' => ['User/register', ['method' => 'get']],
+    'captcha' => ['User/register_captcha', ['method' => 'get']],
+    'saveUser' => ['User/save_user', ['method' => 'post']],
+    'exitLogin' => ['User/exit_login', ['method' => 'get']],
+
+
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
 //return [

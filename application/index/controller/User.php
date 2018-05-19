@@ -25,7 +25,69 @@ class User extends Controller
     public function __construct(Request $request = null)
     {
         session_start();
+        $this->wxObj = new Wechat();
         parent::__construct($request);
+    }
+
+    public function login_check(Request $request){
+        $username = $request->param('username');
+        $password = $request->param('password');
+        $userObj = Users::get(['username'=>$username,'password'=>$password]);
+        if($userObj){
+            $_SESSION['userinfo'] = $userObj;
+            $msg = array('status'=>'Success','url'=>'/');
+            echo json_encode($msg);
+        }else{
+            $msg = array('status'=>'error','msg'=>'账号密码错误，请重新输入！');
+            echo json_encode($msg);
+        }
+    }
+
+    public function register(){
+        $url = '/';
+        $re['url'] = $url;
+        return view("index@user/register",['re'=>$re]);
+    }
+
+    public function register_captcha(){
+        return getCaptcha(120,40,20,30);
+    }
+
+    public function exit_login(){
+        session_destroy();
+        $this->redirect('/userInfo');
+    }
+
+    public function save_user(Request $request){
+        $post = $request->param();
+        if($_SESSION['captcha'] != $post['captcha']){
+            $msg = array('status'=>'error','msg'=>'验证码输入错误，请重新输入！');
+            echo json_encode($msg);
+        }else{
+            $data['username'] = $post['username'];
+            $data['password'] = $post['password'];
+            $data['phone_number'] = $post['username'];
+            $data['nickname'] = urlencode(json_encode($post['nickname']));
+            $data['sex'] = $post['sex'];
+            $userObj = new Users();
+            $userObj->data($data);
+            $re = $userObj->save();
+            $_SESSION['userinfo'] = $userObj;
+            if($re){
+                $msg = array('status'=>'Success','msg'=>'恭喜您注册成功！','url'=>'/');
+                echo json_encode($msg);
+            }else{
+                $msg = array('status'=>'Success','msg'=>'注册失败！');
+                echo json_encode($msg);
+            }
+        }
+
+//        echo "<pre>";var_dump($_SESSION);
+    }
+
+    public function weixin_login(){
+        $url = $this->wxObj->get_authorize_url(1);
+        return redirect($url);
     }
 
     public function self_info(Request $request){
@@ -44,6 +106,7 @@ class User extends Controller
         $url = url('/userInfo');
         $re['url'] = $url;
         $re['userInfo'] = $userObj;
+//        echo "<pre>";var_dump($re);exit;
         return view("index@user/selfInfo",['re'=>$re]);
     }
 

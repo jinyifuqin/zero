@@ -18,7 +18,6 @@ class Index
     public function __construct()
     {
         session_start();
-
         $this->wxObj = new Wechat();
     }
 
@@ -34,15 +33,13 @@ class Index
         if(isset($memberid)){
             $_SESSION['share_member_id'] = $memberid;
         }
-
-
+        $re = Items::all();
+        $curl = "index";
         if(array_key_exists('userinfo',$_SESSION)){
             $id = $_SESSION['userinfo']->id;
             $userObj = Users::get($id);
-//            echo "<pre>";var_dump($userObj->service_cent_id);exit;
             if(isset($serviceuserid) && $userObj->service_cent_id == 0){
                 $userObj->service_cent_id = $serviceuserid;
-
             }
             if(isset($memberid)){
                 $userObj->share_member_id = $memberid;
@@ -52,15 +49,10 @@ class Index
                 $userObj->save();
             }
 //            echo "<pre>";var_dump($userObj->id);exit;
-            $re = Items::all();
-            $curl = "index";
-
             $appid = WX_APPID;
             $wxObj = Weixins::all();
             $ticket = $wxObj[0]->ticket;
             $access_token_true = $wxObj[0]->access_token_true;
-//            echo "<pre>";var_dump($_SESSION);exit;
-//            $timestamp = $_SESSION['timestamp'];
             $signatureRe = $this->get_signature($ticket);
             $signature = $signatureRe['signature'];
             $noncestr = $signatureRe['noncestr'];
@@ -76,13 +68,14 @@ class Index
                 'url'=>$url
             );
             $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin];
-//            echo "<pre>";var_dump($weixin);exit;
             return view("index@index/index",['re'=>$re]);
         }else{
-            $url = $this->wxObj->get_authorize_url(1);
-            return redirect($url);
+            $re = ['footType'=>$curl,'itemInfo'=>$re];
+            return view("index@index/index",['re'=>$re]);
+//            $url = $this->wxObj->get_authorize_url(1);
+//            return redirect($url);
+
         }
-//        echo "<pre>";var_dump($request->param());exit;
 
     }
 
@@ -127,16 +120,18 @@ class Index
         if(array_key_exists('userinfo',$_SESSION) && $_SESSION['userinfo'] != null){
 
             return redirect('/buy');
+        }else{
+            return redirect('/userInfo');
         }
-        $url = $this->wxObj->get_authorize_url(1);
+//        $url = $this->wxObj->get_authorize_url(1);
 //        unset($_SESSION['getinfo']);
 //        unset($_SESSION['get_access_token']);
 //        echo "<pre>";var_dump($url);exit;
-        if($request){
-            return redirect($url);
-        }else{
-            return $url;
-        }
+//        if($request){
+//            return redirect($url);
+//        }else{
+//            return $url;
+//        }
 //
     }
 
@@ -258,6 +253,7 @@ class Index
     }
 
     public function user_info(){
+//        echo "<pre>";var_dump($_SESSION);exit;
         if(array_key_exists('userinfo',$_SESSION)){
             $userRe = $this->get_user_info();
             $flag = Points::get(['user_id'=>$userRe->id]);
@@ -281,9 +277,13 @@ class Index
             $curl = "userinfo";
             $re = ['footType'=>$curl,'userinfo'=>$userRe,'flag'=>$flag];
             return view("index@index/userInfo",['re'=>$re]);
+        }else{
+            $url = '/';
+            $re['url'] = $url;
+            return view("index@index/login",['re'=>$re]);
         }
-        $url = $this->wxObj->get_authorize_url(1);
-        return redirect($url);
+//        $url = $this->wxObj->get_authorize_url(1);
+//        return redirect($url);
     }
 
     public function get_user_info(){

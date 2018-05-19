@@ -26,10 +26,18 @@
 			<div class="szym">
 				<div class="zlbj">
 					<a href="#">
-						<div class="zlbj1"  onclick="javascript:openBrowse();">
+						<div class="zlbj1" onclick="javascript:openBrowse();">
 							<div class="zlbj2">
 								<span class="spanspan">头像</span></div>
-							<div class="zlbj3"><img id="headPic" src="/public/uploads/{$re.userInfo.pic}"/></div>
+							{if condition="($re.userInfo.pic == ' ')  OR ($re.userInfo.pic  == '')"}
+								<div class="zlbj3">
+									<img id="headPic" src="/public/indexsource/images/head.jpg"/>
+								</div>
+							{else /}
+								<div class="zlbj3">
+									<img id="headPic" src="/public/uploads/{$re.userInfo.pic}"/>
+								</div>
+							{/if}
 							<div class="zlbj4"><img src="/public/indexsource/images/jian1.jpg" /></div>
 						</div>
 						<input type="file" id="file" multiple accept="image/*" style="display:none;" onchange="handleFiles(this.files)">

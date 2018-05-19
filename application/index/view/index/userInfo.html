@@ -10,20 +10,7 @@
 </head>
 <body>
 <!--这是头部-->
-<div class="APPtop user_top">
-    <a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>
-    <p class="page">永之泰俱乐部</p>
-    <!--<img class="applogo" src="images/applogo.png" alt="" />-->
-    <img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />
-</div>
-<div class="rbj"></div>
-<ul class="menuS">
-    <a href="index.html"><p>首页</p></a>
-    <a href="#"><p>商城</p></a>
-    <a href="#"><p>社区</p></a>
-    <a href="#"><p>分享</p></a>
-    <a href="#"><p>会员中心</p></a>
-</ul>
+{include file="public/indexsource/head/header.html" /}
 
 
 
@@ -31,7 +18,11 @@
 <div class="Cmain">
   <div class="user_bj">
        <div class="user_info">
+           {if condition="($re.userinfo.pic == ' ')  OR ($re.userinfo.pic  == '')"}
+           <div class="user_info_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
+           {else /}
            <div class="user_info_img"><img src="/public/uploads/{$re.userinfo.pic}" alt=""/></div>
+           {/if}
            <span class="user_info_name">{$re.userinfo.nickname}</span>
        </div>
        <div class="user_jifen" style="bottom:4rem">冻结积分：{$re.userinfo.allPoint}</div>
@@ -65,6 +56,10 @@
       <li>
           <div class="user_img"><a href="#"><img src="/public/indexsource/images/user7.jpg" alt=""/></a></div>
           <a class="user_text" href="#">积分获赠</a>
+      </li>
+      <li>
+          <div class="user_img"><a href="/exitLogin"><img src="/public/indexsource/images/account.png" alt=""/></a></div>
+          <a class="user_text" href="#">退出登录</a>
       </li>
   </ul>
 

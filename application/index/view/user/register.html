@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=10" />
+		<title>注册页面</title>
+		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/style2.css" />
+
+	</head>
+	<script type="text/javascript" src="/public/indexsource/js/jquery.min.js"></script>
+	<script src="/public/indexsource/js/pic.js"></script>
+	<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+
+	<body style="background: white;">
+		<!--这是头部-->
+		{include file="public/indexsource/head/header.html" /}
+
+		<div class="tm_big" style="margin-top: 5rem;">
+			<form method="post" action="/saveUser">
+			<div class="dlym">
+				<div class="dlimg11 dlimg"><span>手机号</span><input name="username" type="text" placeholder="请输入手机号 " /></div>
+				<div class="tm_bottom"></div>
+				<!--<div class="dlimg11 dlimg"><span>手机验证码</span><input type="text" placeholder="请输入手机验证码 " /><i>|</i><b><a href="#">  发送验证码</a> </b></div>-->
+				<!--<div class="tm_bottom"></div>-->
+				<div class="dlimg11 dlimg"><span>登录密码</span><input id="psw" name="password" type="password" placeholder="请输入登录密码 " /></div>
+				<div class="tm_bottom"></div>
+				<div class="dlimg11 dlimg"><span>确定登录密码</span><input id="dbpsw" name="checkpassword" type="password" placeholder="请确定登录密码 " /></div>
+				<div class="tm_bottom"></div>
+				<div class="dlimg11 dlimg"><span>姓名/昵称</span><input name="nickname" type="text" placeholder="请输入姓名/昵称 " /></div>
+
+			</div>
+			<div class="nannv">
+				<span>性别</span>
+				<input type="radio" checked name="sex" value="1" id="male" />
+				<label for="male">男</label>
+				<input type="radio" name="sex" id="female" value="0"/>
+				<label for="female">女</label>
+			</div>
+			<div class="dlym" style="margin-top:0">
+				<div class="tm_bottom" style="margin: 0 0 1.5rem 0;"></div>
+				<div class="dlimg11 dlimg">
+					<span id="captcha" style="display:inline">
+						<img style="width: inherit;" src="/captcha" />
+					</span>
+					<input name="captcha" style="width: 33%;" type="text" placeholder="请输入验证码 " /></div>
+				<div class="tm_bottom"></div>
+			</div>
+			<div class="last_mm1">
+				<div class="button-holder">
+					<input type="checkbox" id="radio-1-1" name="radio-1-set" class="regular-radio" />
+					<label for="radio-1-1"></label>
+				</div>
+				<label for="radio-1-1">
+				<div class="ty_text">同意并愿意遵守《永之泰服务协议》</div>
+				</label>
+			</div>
+			<button type="button" class="last_button"><a href="#">注册</a></button>
+			</form>
+		</div>
+	<script>
+		$(function(){
+            $('#captcha').click(function(){
+                var src = '/captcha';
+                $('#captcha img').attr('src',src);
+            })
+
+			$('.last_button').click(function(){
+			    var form = $('form');
+			    var url = form.attr('action');
+			    var data = form.serialize();
+			    var status = $('#radio-1-1').prop('checked');
+			    if(status){
+			        if($('#psw').val() == $('#dbpsw').val()){
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: data,
+                            dataType: "json",
+                            success: function(data){
+                                if(data.status == "Success"){
+                                    layer.msg("注册成功！",{icon:1,time:2000});
+                                    setTimeout(function(){window.location.href=data.url},3000);
+                                }else{
+                                    layer.msg(data.msg,{icon:0,time:2000});
+                                }
+                            }
+                        });
+					}else{
+                        layer.msg('两次密码不一致！',{icon:0,time:2000});
+					}
+				}
+			    // console.log($('#psw').val() == $('#dbpsw').val());
+			})
+
+
+
+
+		})
+	</script>
+
+	</body>
+
+</html>

@@ -15,31 +15,32 @@ function password($password, $password_salt){
     return md5(md5($password) . md5($password_salt));
 }
 
-function getCaptcha(){
-//    session_start();
-    $image = imagecreatetruecolor(100, 30);
+function getCaptcha($imgW=100,$imgH=30,$fontsize=15,$fontH=25){
+    $fontFile = 'public'.DS.'admins'.DS.'font'.DS.'abc.ttf';
+    $image = imagecreatetruecolor($imgW, $imgH);
     $bgcolor = imagecolorallocate($image, 255, 255, 255);
     imagefill($image, 0, 0, $bgcolor);
     $content = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     $captcha = "";
     for ($i = 0; $i < 4; $i++) {
-        $fontsize = 10;
+//        $fontsize = $fontsize;
         $fontcolor = imagecolorallocate($image, mt_rand(0, 120), mt_rand(0, 120), mt_rand(0, 120));
-        $fontcontent = substr($content, mt_rand(0, strlen($content)), 1);
+        $fontcontent = substr($content, mt_rand(0, strlen($content)-1), 1);
         $captcha .= $fontcontent;
         $x = ($i * 100 / 4) + mt_rand(5, 10);
-        $y = mt_rand(5, 10);
-        imagestring($image, $fontsize, $x, $y, $fontcontent, $fontcolor);
+        $y = mt_rand(20, 25);
+        $angle = mt_rand(-15,15);
+        imagefttext($image,$fontsize,$angle,$x,$fontH,$fontcolor,$fontFile,$fontcontent);
         $captcha = strtolower($captcha);
         $_SESSION["captcha"] = $captcha;
     }
         for ($i = 0; $i < 200; $i++) {
             $pointcolor = imagecolorallocate($image, mt_rand(50, 200), mt_rand(50, 200), mt_rand(50, 200));
-            imagesetpixel($image, mt_rand(1, 99), mt_rand(1, 29), $pointcolor);
+            imagesetpixel($image, mt_rand(1, $imgW-1), mt_rand(1, $imgH-1), $pointcolor);
         }
         for ($i = 0; $i < 3; $i++) {
             $linecolor = imagecolorallocate($image, mt_rand(50, 200), mt_rand(50, 200), mt_rand(50, 200));
-            imageline($image, mt_rand(1, 99), mt_rand(1, 29), mt_rand(1, 99), mt_rand(1, 29), $linecolor);
+            imageline($image, mt_rand(1, $imgW-1), mt_rand(1, $imgH-1), mt_rand(1, $imgW-1), mt_rand(1, $imgH-1), $linecolor);
         }
 
     header('content-type:image/png');
