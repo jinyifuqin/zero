@@ -73,7 +73,7 @@ class User extends Controller
             $userObj = new Users();
             $userObj->data($data);
             $re = $userObj->save();
-            $_SESSION['userinfo'] = $userObj;
+            $_SESSION['userinfo'] = Users::get($userObj->id);
             if($re){
                 $msg = array('status'=>'Success','msg'=>'恭喜您注册成功！','url'=>'/');
                 echo json_encode($msg);
@@ -160,6 +160,7 @@ class User extends Controller
     }
 
     public function self_detail_addr(){
+//        echo "<pre>";var_dump($_SESSION);exit;
         $addrId = $_SESSION['userinfo']->address;
         $addrObj = Addrs::get(['id' => $addrId,'default'=>1]);
 
