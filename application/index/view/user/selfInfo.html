@@ -31,11 +31,11 @@
 								<span class="spanspan">头像</span></div>
 							{if condition="($re.userInfo.pic == ' ')  OR ($re.userInfo.pic  == '')"}
 								<div class="zlbj3">
-									<img id="headPic" src="/public/indexsource/images/head.jpg"/>
+									<img style="height:5rem;width:5rem;" id="headPic" src="/public/indexsource/images/head.jpg"/>
 								</div>
 							{else /}
 								<div class="zlbj3">
-									<img id="headPic" src="/public/uploads/{$re.userInfo.pic}"/>
+									<img style="height:5rem;width:5rem;" id="headPic" src="/public/uploads/{$re.userInfo.pic}"/>
 								</div>
 							{/if}
 							<div class="zlbj4"><img src="/public/indexsource/images/jian1.jpg" /></div>
