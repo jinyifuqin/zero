@@ -366,7 +366,7 @@ class Index
         }
 //
         $re = ['footType'=>$curl,'userinfo'=>$userRe,'trade'=>$trades,'trade_type'=>$tradeType];
-//        echo "<pre>";var_dump($re);exit;
+//        echo "<pre>";var_dump($trades);exit;
         return view("index@index/trade",['re'=>$re]);
     }
 

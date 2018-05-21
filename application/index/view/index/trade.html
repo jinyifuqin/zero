@@ -45,7 +45,11 @@
 <div class="Cmain" style="margin-bottom: 0;">
   <div class="user_bj">
        <div class="user_info">
+           {if condition="($re.userinfo.pic == ' ')  OR ($re.userinfo.pic  == '')"}
+           <div class="user_info_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
+           {else /}
            <div class="user_info_img"><img src="/public/uploads/{$re.userinfo.pic}" alt=""/></div>
+           {/if}
            <span class="user_info_name">{$re.userinfo.nickname}</span>
        </div>
        <div class="user_jifen" style="bottom:4rem">冻结积分：{$re.userinfo.allPoint}</div>
@@ -105,13 +109,15 @@
                     <p class="order_list1_text2">{$vo.buy_price}元</p>
                 </div>
             </div>
-            <div class="order_list2">共{$vo.buy_num}件商品 合计{$vo.buy_price}元 &nbsp;</div>
+            <div class="order_list2">共{$vo.buy_num}件商品{$vo.trade_type} 合计{$vo.buy_price}元 &nbsp;</div>
             <div class="order_list3">
                 <!--<a class="order_list31" href="#">查看物流</a>-->
                 {eq name="$vo.trade_status" value="2"}
                 <span>订单已完成!</span>
                 {else/}
+                {eq name="$vo.trade_type" value="未发货"}
                 <a class="order_list31 deltrade" tradeid="{$vo.id}" href="#">删除订单</a>
+                {/eq}
                 <a class="order_list32 getTrue" tradeid="{$vo.id}" href="#">确认收货</a>
                 {/eq}
             </div>
@@ -260,7 +266,22 @@
                                     "<span>订单已完成！</span>"+
                                     "            </div>" +
                                     "</li>";
-                            }else {
+                            }else if(ele.trade_type == "已发货"){
+                                xx = "<li> <div class=\"order_list1\">\n" +
+                                    "                <div class=\"order_list1_img\">\n" +
+                                    "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"order_list1_text\">\n" +
+                                    "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                </div>\n" +
+                                    "            </div>\n" +
+                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list3\">\n" +
+                                    "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
+                                    "            </div>" +
+                                    "</li>";
+                            }else{
 
                                 xx = "<li> <div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +
@@ -346,7 +367,22 @@
                                     "<span>订单已完成！</span>"+
                                     "            </div>" +
                                     "</li>";
-                            }else {
+                            }else if(ele.trade_type == "已发货"){
+                                xx = "<li> <div class=\"order_list1\">\n" +
+                                    "                <div class=\"order_list1_img\">\n" +
+                                    "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
+                                    "                </div>\n" +
+                                    "                <div class=\"order_list1_text\">\n" +
+                                    "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                </div>\n" +
+                                    "            </div>\n" +
+                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list3\">\n" +
+                                    "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
+                                    "            </div>" +
+                                    "</li>";
+                            }else{
 
                                 xx = "<li> <div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +

@@ -41,6 +41,8 @@ Route::group('admin',[
     'tradeDelById/:id' => ['admin/trade/trade_del_by_id', ['method' => 'get']],
     'tradeDelAll' => ['admin/trade/trade_del_all', ['method' => 'get']],
     'send/:id' => ['admin/trade/send', ['method' => 'get']],
+    'sendMore' => ['admin/trade/send_more', ['method' => 'post']],
+    'billSendMore' => ['admin/trade/bill_send_more', ['method' => 'post']],
     'billsend/:id' => ['admin/trade/billSend', ['method' => 'get']],
     'memberList' => ['admin/index/member_list', ['method' => 'get']],
     'unMemberList' => ['admin/index/un_member_list', ['method' => 'get']],

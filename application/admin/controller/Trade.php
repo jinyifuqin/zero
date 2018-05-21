@@ -152,6 +152,75 @@ class Trade extends Controller
         echo json_encode($msg);
     }
 
+    public function bill_send_more(Request $request){
+        $setDoublePointCount = config('setDoublePointCount');
+        $arr = $request->param();
+        $post = $arr['arr'];
+        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+        foreach($post as $k=>$v){
+            $trade = Trades::get($v);
+            if($type){
+                if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 0){
+                    $msg = array('status'=>'fails','msg'=>'服务中心未确认，状态无法改变!');
+                    return json_encode($msg);
+                }
+                if($trade->getData('admin_check_type') == 0){
+                    $msg = array('status'=>'fails','msg'=>'订单未确认，状态无法改变!');
+                    return json_encode($msg);
+                }
+                if($trade->getData('admin_get_bill_type') == 0 && $trade->getData('get_bill_type') == 1){
+                    $trade->admin_get_bill_type = 1;
+                    $giveDiscount['user_id'] = $trade->user_id;
+                    $giveDiscount['count'] = $setDoublePointCount;
+                    $giveDiscount['type'] = 1;
+                    $giveDiscount['get_type'] = 0;
+                    $giveDiscount['frozen_flag'] = 0;
+                    $giveDiscount['create_time'] = date('Y-m-d H:i:s',time());
+                    $giveDiscount['trade_number'] = $trade->trade_number;
+                    $pointObj = new Points();
+                    $pointObj->data($giveDiscount);
+                    $pointObj->save();
+                    unset($giveDiscount);
+//                Points::get(['trade_number' => $trade_number]);
+//                $pointObj->addPointByBuy($giveDiscount);
+                }else{
+                    $pObj = new Points();
+                    $obj = $pObj->where('user_id', $trade->user_id)
+                        ->where('trade_number', $trade->trade_number)
+                        ->where('count', $setDoublePointCount)
+                        ->limit(1)
+                        ->select();
+                    $obj[0]->delete();
+                    $trade->admin_get_bill_type = 0;
+                }
+            }else{
+                if($trade->getData('get_bill_type') == 0 && $trade->getData('check_type') == 0){
+                    $msg = array('status'=>'fails','msg'=>'订单未确认，状态无法改变!');
+                    return json_encode($msg);
+                }
+                if($trade->getData('get_bill_type') == 1 && ($trade->getData('admin_get_bill_type') == 1 || $trade->getData('admin_check_type') == 1)){
+                    $msg = array('status'=>'fails','msg'=>'总管理已审核，状态无法改变!');
+                    return json_encode($msg);
+                }
+                if($trade->getData('get_bill_type') == 0){
+                    $trade->get_bill_type = 1;
+                }else{
+                    $trade->get_bill_type = 0;
+                }
+            }
+            $result = $trade->save();
+            if(!$result){
+                $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                return json_encode($msg);
+            }
+        }
+        $msg = array('status'=>'Success');
+        return json_encode($msg);
+//        echo "<pre>";var_dump($post);exit;
+
+
+    }
+
     public function billSend(Request $request){
         $setDoublePointCount = config('setDoublePointCount');
         $id = $request->param('id');
@@ -216,6 +285,100 @@ class Trade extends Controller
 
     }
 
+    public function send_more(Request $request){
+        $arr = $request->param();
+        $post = $arr['arr'];
+        $sharePointFilterConfig = config('sharePointFilterConfig');
+        $setPointCount = config('setPointCount');
+        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+        foreach($post as $k=>$v){
+            $trade = Trades::get($v);
+            $memberId = $trade->user_id;
+            $memObj = Users::get($memberId);
+            $shareId = $memObj->share_member_id;
+            if($shareId != 0){
+                $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
+                if($shareBuyPrice >= $sharePointFilterConfig){
+                    $flag = true;
+                }else{
+                    $flag = false;
+                }
+            }else{
+                $flag = false;
+            }
+
+            if($type){
+                if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 0){
+                    $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                    return json_encode($msg);
+                }
+                if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 1){
+                    $admin_check_type = 1;
+                }elseif($trade->getData('admin_check_type') == 1 && $trade->getData('admin_get_bill_type') != 1){
+                    $admin_check_type = 0;
+                }else{
+                    $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                    return json_encode($msg);
+                }
+                $trade->admin_check_type = $admin_check_type;
+            }else{
+                if($trade->getData('check_type') == 0){
+                    $check_type = 1;
+                    $trade_type = 1;
+                    if($flag){
+                        $giveSharePoint['user_id'] = $shareId;
+                        $giveSharePoint['count'] = $trade->buy_price*0.01;
+                        $giveSharePoint['type'] = 1;
+                        $giveSharePoint['get_type'] = 3;
+                        $giveSharePoint['frozen_flag'] = 1;
+                        $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                        $pointObj = new Points();
+                        $pointObj->data($giveSharePoint);
+                        $pointObj->save();
+                        unset($giveSharePoint);
+                    }
+                }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
+                    $check_type = 0;
+                    $trade_type = 0;
+                }else{
+                    $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                    return json_encode($msg);
+                }
+                $trade->check_type = $check_type;
+                $trade->trade_type = $trade_type;
+            }
+            $result = $trade->save();
+            if($type){
+                if($trade->getData('admin_check_type') == 1){
+
+                    $givePoint['user_id'] = $trade->user_id;
+                    $givePoint['count'] = $trade->buy_price*$setPointCount*0.01;
+                    $givePoint['type'] = 1;
+                    $givePoint['get_type'] = 0;
+                    $givePoint['frozen_flag'] = 0;
+                    $givePoint['create_time'] = date('Y-m-d H:i:s',time());
+                    $givePoint['trade_number'] = $trade->trade_number;
+                    $pointObj = new Points();
+                    $pointObj->data($givePoint);
+                    $pointObj->save();
+                    unset($givePoint);
+
+                }else{
+                    $pObj = new Points();
+                    $obj = $pObj->where('user_id', $trade->user_id)
+                        ->where('trade_number', $trade->trade_number)
+                        ->where('count', $trade->buy_price*$setPointCount*0.01)
+                        ->limit(1)
+                        ->select();
+                    $obj[0]->delete();
+                }
+            }
+
+        }
+        $msg = array('status'=>'Success');
+        return json_encode($msg);
+    }
+
     public function send(Request $request){
         $sharePointFilterConfig = config('sharePointFilterConfig');
         $setPointCount = config('setPointCount');
@@ -227,7 +390,6 @@ class Trade extends Controller
         $shareId = $memObj->share_member_id;
 //        echo "<pre>";var_dump($shareId);var_dump($sharePointFilterConfig);exit;
         if($shareId != 0){
-//            $shareObj = Users::get($shareId);
             $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
             if($shareBuyPrice >= $sharePointFilterConfig){
                 $flag = true;
@@ -287,7 +449,7 @@ class Trade extends Controller
                 if($trade->getData('admin_check_type') == 1){
 
                     $givePoint['user_id'] = $trade->user_id;
-                    $givePoint['count'] = $setPointCount;
+                    $givePoint['count'] = $trade->buy_price*$setPointCount*0.01;
                     $givePoint['type'] = 1;
                     $givePoint['get_type'] = 0;
                     $givePoint['frozen_flag'] = 0;
@@ -302,20 +464,18 @@ class Trade extends Controller
                     $pObj = new Points();
                     $obj = $pObj->where('user_id', $trade->user_id)
                         ->where('trade_number', $trade->trade_number)
-                        ->where('count', $setPointCount)
+                        ->where('count', $trade->buy_price*$setPointCount*0.01)
                         ->limit(1)
                         ->select();
                     $obj[0]->delete();
                 }
             }
-//            echo "<pre>";var_dump($giveDiscount);exit;
             $msg = array('status'=>'Success');
             return json_encode($msg);
         }else{
             $msg = array('status'=>'fails');
             json_encode($msg);
         }
-//        echo json_encode($msg);
     }
 
 }

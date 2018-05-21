@@ -25,8 +25,83 @@
                 }
             }
         });
-        // console.log(arr);
+    }
 
+    function billSendMore() {
+        layer.confirm('确认批量更改吗？',function(index){
+			var table = $('#DataTables_Table_0');
+			var checkBox = table.find("input:checkbox");
+			checkBox.splice(0,1);
+			var arr = [];
+			checkBox.each(function(){
+				var checked = $(this).prop('checked');
+				if(checked){
+					var id = $(this).parent().next().html();
+					arr.push(id);
+				}
+
+			})
+			var info = {'arr':arr};
+			$.ajax({
+				type: 'post',
+				url: '/admin/billSendMore/',
+				data: info,
+				dataType: 'json',
+				success: function(data){
+					data = JSON.parse(data);
+					// console.log(data);return;
+					if(data.status =='Success'){
+						layer.msg('状态已更改!',{icon:1,time:1000});
+						window.location.reload();
+					}else{
+						layer.msg(data.msg,{icon:2,time:3000});
+						setTimeout(function(){window.location.reload()},3000);
+					}
+
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+        });
+    }
+
+    function sendMore() {
+        layer.confirm('确认批量更改吗？',function(index){
+			var table = $('#DataTables_Table_0');
+			var checkBox = table.find("input:checkbox");
+			checkBox.splice(0,1);
+			var arr = [];
+			checkBox.each(function(){
+				var checked = $(this).prop('checked');
+				if(checked){
+					var id = $(this).parent().next().html();
+					arr.push(id);
+				}
+
+			})
+			var info = {'arr':arr};
+			$.ajax({
+				type: 'post',
+				url: '/admin/sendMore/',
+				data: info,
+				dataType: 'json',
+				success: function(data){
+					data = JSON.parse(data);
+					if(data.status =='Success'){
+						layer.msg('状态已更改!',{icon:1,time:1000});
+						window.location.reload();
+					}else{
+						layer.msg(data.msg,{icon:2,time:3000});
+						setTimeout(function(){window.location.reload()},3000);
+					}
+
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+        });
     }
 </script>
 </head>
@@ -53,10 +128,25 @@
 			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
 				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
 			</a>
-			<!--<a class="btn btn-primary radius" data-title="添加资讯" data-href="article-add.html" onclick="Hui_admin_tab(this)" href="javascript:;">-->
-				<!--<i class="Hui-iconfont">&#xe600;</i>-->
-				<!--添加资讯-->
-			<!--</a>-->
+		{eq name="$data.type" value="1"}
+			<a class="btn btn-primary radius" data-title="审核" onclick="sendMore()" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i>
+				批量修改审核
+			</a>
+			<a class="btn btn-primary radius" data-title="审核" onclick="billSendMore()" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i>
+				总部批量修改发票审核
+			</a>
+		{else/}
+			<a class="btn btn-primary radius" data-title="发货" onclick="sendMore()" href="javascript:;">
+				<i class="Hui-iconfont">&#xe602;</i>
+				批量修改发货
+			</a>
+			<a class="btn btn-primary radius" data-title="审核" onclick="billSendMore()" href="javascript:;">
+				<i class="Hui-iconfont">&#xe600;</i>
+				批量修改发票审核
+			</a>
+		{/eq}
 		</span> <span class="r">共有数据：<strong>{$data.count}</strong> 条</span> </div>
 	<div class="mt-20">
 		<table id="DataTables_Table_0" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
