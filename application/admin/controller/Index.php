@@ -48,7 +48,14 @@ class Index extends Controller
 
     public function welcome()
     {
-        return view("admin@index/welcome");
+        if(array('adminUserInfo',$_SESSION)){
+            $adminObj = $_SESSION['adminUserInfo'];
+        }
+        $adminCount = Adminusers::where('type',0)->count();
+        $userCount = Users::count();
+        $re = ['adminInfo'=>$adminObj,'adminCount'=>$adminCount,'userCount'=>$userCount];
+//        echo "<pre>";var_dump($_SESSION);exit;
+        return view("admin@index/welcome",['re'=>$re]);
     }
 
     public function login()
