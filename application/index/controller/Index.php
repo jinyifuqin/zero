@@ -287,6 +287,7 @@ class Index
     }
 
     public function get_user_info(){
+//        session_destroy();
         if(array_key_exists('userinfo',$_SESSION)){
             $userInfo = $_SESSION['userinfo'];
         }else{
@@ -295,7 +296,6 @@ class Index
         }
         $userId = $userInfo->id;
         $userRe = Users::get($userId);
-//        echo "<pre>";var_dump($userRe);exit;
         $nickname = json_decode(urldecode($userRe->getData('nickname')));
         $userRe->nickname = $nickname;
         $re = getPoint($userId);

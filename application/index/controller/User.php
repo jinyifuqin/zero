@@ -253,7 +253,8 @@ class User extends Controller
     }
 
     public function choose_service_cent(){
-        $service_list = Adminusers::all();
+        $service_list = Adminusers::all(['type'=>0]);
+
         return view("index@user/chooseServiceCent",['list'=>$service_list]);
     }
 

@@ -1,0 +1,40 @@
+﻿{include file="public/admins/head/head.html" /}
+<title>资讯列表</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯管理 <span class="c-gray en">&gt;</span> 资讯列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c">
+	 <span class="select-box inline">
+		请选择服务中心：
+		<select name="" class="select">
+			<option value="0">全部分类</option>
+			{foreach $data.service as $vo}
+			<option value="{$vo.id}">{$vo.nickname}</option>
+			{/foreach}
+		</select>
+		<button name="" onclick="service_show('显示订单')" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+	</div>
+
+
+</div>
+{include file="public/admins/foot/foot.html" /}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/admins/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+/*资讯-添加*/
+function service_show(title){
+    var serviceId = $('.select').val();
+    // console.log(serviceId);return;
+    var url = 'serviceTrade/'+serviceId;
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+
+</script> 
+</body>
+</html>

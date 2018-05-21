@@ -58,6 +58,8 @@ Route::group('admin',[
     'discountDel' => ['admin/index/del_discount', ['method' => 'get']],
     'discountDelAll' => ['admin/index/del_discount_all', ['method' => 'get']],
     'qrcode' => ['admin/index/qrcode', ['method' => 'get']],
+    'chooseService' => ['admin/trade/choose_service', ['method' => 'get']],
+    'serviceTrade/:id' => ['admin/trade/service_trade', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

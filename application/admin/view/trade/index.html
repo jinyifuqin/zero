@@ -94,10 +94,10 @@
 					<td>{$vo.buy_num}</td>
 
 					{eq name="$data.type" value="1"}
-						{eq name="$vo.trade_status" value="1"}
-						<td class="td-status"><span class="label label-success radius">{$vo.admin_check_type}</span></td>
+						{eq name="$vo.admin_check_type" value="1"}
+						<td class="td-status"><span class="label label-success radius">{$vo.trade_status}</span></td>
 						{else/}
-						<td class="td-status"><span class="label label-default radius">{$vo.admin_check_type}</span></td>
+						<td class="td-status"><span class="label label-default radius">{$vo.trade_status}</span></td>
 						{/eq}
 					{else/}
 						<!--{eq name="$vo.trade_status" value="1"}-->
@@ -106,25 +106,24 @@
 						<!--<td class="td-status"><span class="label label-default radius">{$vo.check_type}</span></td>-->
 						<!--{/eq}-->
 					{/eq}
-					{eq name="$vo.trade_type_status" value="1"}
-					<td class="td-status"><span class="label label-success radius">{$vo.trade_type}</span></td>
+					{eq name="$vo.trade_type" value="1"}
+					<td class="td-status"><span class="label label-success radius">{$vo.trade_type_status}</span></td>
 					{else/}
-					<td class="td-status"><span class="label label-default radius">{$vo.trade_type}</span></td>
+					<td class="td-status"><span class="label label-default radius">{$vo.trade_type_status}</span></td>
 
 					{/eq}
-					<td><?php echo date('Y-m-d',$vo->create_time) ?></td>
-
+					<td>{$vo.create_time}</td>
 					{eq name="$data.type" value="1"}
-					{eq name="$vo.admin_get_bill_status" value="1"}
-					<td class="td-status"><span class="label label-success radius">{$vo.admin_get_bill_type}</span></td>
+					{eq name="$vo.admin_get_bill_type" value="1"}
+					<td class="td-status"><span class="label label-success radius">{$vo.admin_get_bill_status}</span></td>
 					{else/}
-					<td class="td-status"><span class="label label-default radius">{$vo.admin_get_bill_type}</span></td>
+					<td class="td-status"><span class="label label-default radius">{$vo.admin_get_bill_status}</span></td>
 					{/eq}
 					{else/}
-					{eq name="$vo.get_bill_status" value="1"}
-					<td class="td-status"><span class="label label-success radius">{$vo.get_bill_type}</span></td>
+					{eq name="$vo.get_bill_type" value="1"}
+					<td class="td-status"><span class="label label-success radius">{$vo.get_bill_status}</span></td>
 					{else/}
-					<td class="td-status"><span class="label label-default radius">{$vo.get_bill_type}</span></td>
+					<td class="td-status"><span class="label label-default radius">{$vo.get_bill_status}</span></td>
 					{/eq}
 					{/eq}
 
@@ -188,7 +187,7 @@ function billaction(t,id) {
     layer.confirm('确认更改发票审核状态？',function(index){
         $.ajax({
             type: 'get',
-            url: 'billsend/'+id,
+            url: '/admin/billsend/'+id,
             dataType: 'json',
             success: function(data){
                 // $(t).parents("tr").remove();
@@ -214,7 +213,7 @@ function action(t,id,msg) {
     layer.confirm(msg,function(index){
         $.ajax({
             type: 'get',
-            url: 'send/'+id,
+            url: '/admin/send/'+id,
             dataType: 'json',
             success: function(data){
                 data = JSON.parse(data);

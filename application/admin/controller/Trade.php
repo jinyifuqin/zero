@@ -18,6 +18,7 @@ use app\index\controller\Point;
 use app\index\model\Users;
 use think\Config;
 use \think\Controller;
+use think\Db;
 use think\Request;
 
 class Trade extends Controller
@@ -31,33 +32,100 @@ class Trade extends Controller
         Config::load($this->configPath);
     }
 
-    public function index(){
-        $trades = Trades::all();
-        $count = Trades::count();
-        $delimiter = urlencode(',');
-//        echo "<pre>";var_dump($count);exit;
-        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+    public function choose_service(){
+        $service = Adminusers::all(['type'=>0]);
+        $data = ['service'=>$service];
+        return view("admin@trade/choose_service",['data'=>$data]);
+    }
 
-//        echo "<pre>";var_dump($type);exit;
-        foreach ($trades as $k=>&$v){
-            $v['item_name'] = Items::where('id',$v['item_id'])->value('name');
-            $v['address'] = preg_replace("/$delimiter/",' ',$v['address']);
-            if($type == 1){
-                $v['trade_status'] = $v->getData('admin_check_type');   //管理员审核状态
-                $v['admin_get_bill_status'] = $v->getData('admin_get_bill_type');
-                $v['trade_type_status'] = $v->getData('trade_type');
-            }else{
-                $v['trade_status'] = $v->getData('check_type');   //服务中心审核状态
-                $v['get_bill_status'] = $v->getData('get_bill_type');   //服务中心审核状态
-                $v['trade_type_status'] = $v->getData('trade_type');
-            }
-//            echo "<pre>";var_dump($v['check_type']);exit;
+    public function service_trade(Request $request){
+        $id = $request->param('id');
+        if($id == 0){
+            $users = Users::all();
+        }else{
+            $users = Users::all(['service_cent_id'=>$id]);
         }
-        
-        $data = ['type'=>$type,'trades'=>$trades,'count'=>$count];
+        $keys = [];
+        foreach($users as $v){
+            $keys[] = $v->id;
+        }
 
+        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+        $delimiter = urlencode(',');
+        $keys = implode(',',$keys);
+        $tr = Db::table('yzt_trades')->where('user_id','IN',$keys)->select();
+        foreach ($tr as &$val){
+            $val['item_name'] = Items::where('id',$val['item_id'])->value('name');
+            $val['address'] = preg_replace("/$delimiter/",' ',$val['address']);
 
+            if($type == 1){
+                $val['trade_status'] = $val['admin_check_type'] == 1?"通过":"未通过";   //管理员审核状态
+                $val['admin_get_bill_status'] = $val['admin_get_bill_type'] == 1?"通过":"未通过";
+                if($val['trade_type'] == 1){
+                    $val['trade_type_status'] = '已发货';
+                }elseif($val['trade_type'] == 2){
+                    $val['trade_type_status'] = '已完成';
+                }else{
+                    $val['trade_type_status'] = '未发货';
+                }
 
+            }else{
+                $val['trade_status'] = $val['check_type'] == 1?"通过":"未通过";   //服务中心审核状态
+                $val['get_bill_status'] = $val['get_bill_type'] == 1?"通过":"未通过";  //服务中心审核状态
+                if($val['trade_type'] == 1){
+                    $val['trade_type_status'] = '已发货';
+                }elseif($val['trade_type'] == 2){
+                    $val['trade_type_status'] = '已完成';
+                }else{
+                    $val['trade_type_status'] = '未发货';
+                }
+            }
+        }
+//        echo "<pre>";var_dump($tr);exit;
+        $count = count($tr);
+        $data = ['type'=>$type,'trades'=>$tr,'count'=>$count];
+//        echo "<pre>";var_dump($data['trades']);exit;
+        return view("admin@trade/index",['data'=>$data]);
+    }
+
+    public function index(){
+        $delimiter = urlencode(',');
+        $adminId = $_SESSION['adminUserInfo']->id;
+        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+        $users = Users::all(['service_cent_id'=>$adminId]);
+        $keys = [];
+        foreach($users as $v){
+            $keys[] = $v->id;
+        }
+        $keys = implode(',',$keys);
+        $tr = Db::table('yzt_trades')->where('user_id','IN',$keys)->select();
+        foreach ($tr as &$val){
+            $val['item_name'] = Items::where('id',$val['item_id'])->value('name');
+            $val['address'] = preg_replace("/$delimiter/",' ',$val['address']);
+            if($type == 1){
+                $val['trade_status'] = $val['admin_check_type'] == 1?"通过":"未通过";   //管理员审核状态
+                $val['admin_get_bill_status'] = $val['admin_get_bill_type'] == 1?"通过":"未通过";
+                if($val['trade_type'] == 1){
+                    $val['trade_type_status'] = '已发货';
+                }elseif($val['trade_type'] == 2){
+                    $val['trade_type_status'] = '已完成';
+                }else{
+                    $val['trade_type_status'] = '未发货';
+                }
+            }else{
+                $val['trade_status'] = $val['check_type'] == 1?"通过":"未通过";   //服务中心审核状态
+                $val['get_bill_status'] = $val['get_bill_type'] == 1?"通过":"未通过";  //服务中心审核状态
+                if($val['trade_type'] == 1){
+                    $val['trade_type_status'] = '已发货';
+                }elseif($val['trade_type'] == 2){
+                    $val['trade_type_status'] = '已完成';
+                }else{
+                    $val['trade_type_status'] = '未发货';
+                }
+            }
+        }
+        $count = count($tr);
+        $data = ['type'=>$type,'trades'=>$tr,'count'=>$count];
         return view("admin@trade/index",['data'=>$data]);
     }
 
@@ -157,6 +225,7 @@ class Trade extends Controller
         $memberId = $trade->user_id;
         $memObj = Users::get($memberId);
         $shareId = $memObj->share_member_id;
+//        echo "<pre>";var_dump($shareId);var_dump($sharePointFilterConfig);exit;
         if($shareId != 0){
 //            $shareObj = Users::get($shareId);
             $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
@@ -165,7 +234,10 @@ class Trade extends Controller
             }else{
                 $flag = false;
             }
+        }else{
+            $flag = false;
         }
+
         if($type){
             if($trade->getData('admin_check_type') == 0 && $trade->getData('check_type') == 0){
                 $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
