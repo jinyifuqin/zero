@@ -4,6 +4,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
 use app\index\model\Addrs;
+use app\index\model\Trades;
 use app\index\model\Users;
 use think\Config;
 use \think\Controller;
@@ -52,8 +53,9 @@ class Index extends Controller
             $adminObj = $_SESSION['adminUserInfo'];
         }
         $adminCount = Adminusers::where('type',0)->count();
+        $tradeCount = Trades::count();
         $userCount = Users::count();
-        $re = ['adminInfo'=>$adminObj,'adminCount'=>$adminCount,'userCount'=>$userCount];
+        $re = ['adminInfo'=>$adminObj,'tradeCount'=>$tradeCount,'adminCount'=>$adminCount,'userCount'=>$userCount];
 //        echo "<pre>";var_dump($_SESSION);exit;
         return view("admin@index/welcome",['re'=>$re]);
     }
