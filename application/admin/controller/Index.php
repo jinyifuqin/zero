@@ -360,14 +360,17 @@ class Index extends Controller
             $num = mt_rand(0,strlen($str)-1);
             $content .= substr($str,$num,1);
         }
-        return view("admin@index/alertDiscount",['number'=>$content]);
+        $serviceList = Adminusers::all(['type'=>0]);
+        $re = ['service'=>$serviceList,'number'=>$content];
+//        echo "<pre>";var_dump($re);exit;
+        return view("admin@index/alertDiscount",['re'=>$re]);
     }
 
     public function save_discount(Request $request){
-        $adminId = $_SESSION['adminUserInfo']->id;
+        $adminId = $request->param('service');
         $content = $request->param('number');
         $zk = $request->param('zk');
-//        echo "<prE>";var_dump($request->param());exit;
+//        echo "<prE>";var_dump($adminId);var_dump($content);var_dump($zk);exit;
         $dis = new Discounts([
             'number'  =>  $content,
             'service_cent_id' => $adminId,

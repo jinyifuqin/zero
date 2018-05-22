@@ -43,6 +43,7 @@
         }
 	</script>
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
+		{if condition="($flag)"}
 		<span class="l">
 			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
 				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
@@ -53,6 +54,7 @@
 				</i> 创建优惠券
 			</a>
 		</span>
+		{/if}
 		<span class="r">共有数据：<strong>54</strong> 条</span>
 	</div>
 	<table class="table table-border table-bordered table-bg" id="DataTables_Table_0">
@@ -69,7 +71,9 @@
 				<th width="200">优惠券号码</th>
 				<th width="200">优惠折扣</th>
 				<th width="200">创建时间</th>
+				{if condition="($flag)"}
 				<th width="100">操作</th>
+				{/if}
 			</tr>
 		</thead>
 		<tbody>
@@ -100,6 +104,7 @@
 				<td>{$vo.number}</td>
 				<td>{$vo.zk}折</td>
 				<td>{$vo.create_time}</td>
+				{if condition="($flag)"}
 				<td>
 					<a style="text-decoration:none" onClick="action(this,'{$vo.id}')" href="javascript:;" title="发货">
 						<i class="Hui-iconfont">&#xe6de;</i>
@@ -111,6 +116,7 @@
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
 				</td>
+				{/if}
 			</tr>
 		{/foreach}
 		</tbody>

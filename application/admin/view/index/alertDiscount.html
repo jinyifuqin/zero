@@ -9,8 +9,8 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>优惠券号码：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input disabled="disabled" type="text" id="name" class="input-text" value="{$number}" placeholder="">
-				<input type="hidden" value="{$number}" name="number">
+				<input disabled="disabled" type="text" id="name" class="input-text" value="{$re.number}" placeholder="">
+				<input type="hidden" value="{$re.number}" name="number">
 			</div>
 		</div>
 
@@ -22,6 +22,19 @@
 		</div>
 
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>请选择服务中心：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="select-box">
+				<select class="select" name="service">
+					{foreach $re.service as $vo}
+					<option value="{$vo.id}">{$vo.nickname}</option>
+					{/foreach}
+				</select>
+				</span>
+			</div>
+		</div>
+
+		<div class="row cl" style="margin-top:10px;">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 				<input id="submit" class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;确定&nbsp;&nbsp;">
 			</div>
