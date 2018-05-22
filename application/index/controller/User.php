@@ -292,4 +292,69 @@ class User extends Controller
 //        echo "<pre>";var_dump($_SERVER['HTTP_HOST']);exit;
     }
 
+    public function give_point(){
+        $return = url('/userInfo');
+        $curl = "userinfo";
+        $re = ['url'=>$return,'footType'=>$curl];
+        return view("index@user/givePoint",['re'=>$re]);
+    }
+
+    public function search_member(Request $request){
+        $number = $request->param('content');
+        $query = ['phone_number'=>$number];
+        $re = Users::get(['phone_number'=>$number]);
+        if($re){
+            $re->nickname = json_decode(urldecode($re->nickname));
+//            $userinfo =  json_encode($re);
+            $msg = ['type'=>'success','user'=>$re];
+            echo json_encode($msg);
+        }else{
+            $msg = ['type'=>'error'];
+            echo json_encode($msg);
+        }
+//        echo "<pre>";var_dump($re);exit;
+    }
+
+    public function give_point_member(Request $request){
+        $userId = $_SESSION['userinfo']->id;
+        $getId = $request->param('getId');
+        if($userId == $getId){
+            $msg = ['type'=>'error','msg'=>'无法赠送自己！'];
+            echo json_encode($msg);
+        }
+        $count = $request->param('number');
+        $pointObj = new Points();
+        $canUse = $pointObj->where('user_id',"=",$userId)
+            ->where('get_type',">",0)
+            ->where('type',"=",1)
+            ->where('frozen_flag',"=",1)
+            ->sum('count');
+        if($canUse >= $count){
+            $givePoint['user_id'] = $userId;
+            $givePoint['count'] = $count;
+            $givePoint['type'] = 0;
+            $givePoint['get_type'] = 1;
+            $givePoint['frozen_flag'] = 1;
+            $givePoint['create_time'] = date('Y-m-d H:i:s',time());
+            $getPoint['user_id'] = $getId;
+            $getPoint['count'] = $count;
+            $getPoint['type'] = 1;
+            $getPoint['get_type'] = 1;
+            $getPoint['frozen_flag'] = 1;
+            $getPoint['create_time'] = date('Y-m-d H:i:s',time());
+            $list[] = $givePoint;
+            $list[] = $getPoint;
+
+            $re = $pointObj->saveAll($list);
+            if($re){
+                $msg = ['type'=>'success','msg'=>'积分赠送成功！'];
+                echo json_encode($msg);
+            }
+        }else{
+            $msg = ['type'=>'error','msg'=>'抱歉，您的积分不足以赠送！'];
+            echo json_encode($msg);
+        }
+//        echo "<pre>";var_dump($canUse);exit;
+    }
+
 }

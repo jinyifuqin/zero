@@ -109,7 +109,9 @@ Route::group('',[
     'captcha' => ['User/register_captcha', ['method' => 'get']],
     'saveUser' => ['User/save_user', ['method' => 'post']],
     'exitLogin' => ['User/exit_login', ['method' => 'get']],
-
+    'givePoint' => ['User/give_point', ['method' => 'get']],
+    'searchMember' => ['User/search_member', ['method' => 'get']],
+    'givePointMember' => ['User/give_point_member', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
