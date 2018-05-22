@@ -73,6 +73,13 @@ class User extends Controller
             $userObj = new Users();
             $userObj->data($data);
             $re = $userObj->save();
+            $addrObj = new Addrs();
+            $addrObj->phone_num = $post['username'];
+            $addrObj->user_id = $userObj->id;
+            $addrObj->default = 1;
+            $addrObj->save();
+            $userObj->address = $addrObj->id;
+            $userObj->save();
             $_SESSION['userinfo'] = Users::get($userObj->id);
             if($re){
                 $msg = array('status'=>'Success','msg'=>'恭喜您注册成功！','url'=>'/');
