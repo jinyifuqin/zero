@@ -353,7 +353,6 @@ class Index extends Controller
     }
 
     public function add_discount(){
-        $adminId = $_SESSION['adminUserInfo']->id;
         $str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $len = 12;
         $content = "";
@@ -361,16 +360,26 @@ class Index extends Controller
             $num = mt_rand(0,strlen($str)-1);
             $content .= substr($str,$num,1);
         }
+        return view("admin@index/alertDiscount",['number'=>$content]);
+    }
+
+    public function save_discount(Request $request){
+        $adminId = $_SESSION['adminUserInfo']->id;
+        $content = $request->param('number');
+        $zk = $request->param('zk');
+//        echo "<prE>";var_dump($request->param());exit;
         $dis = new Discounts([
             'number'  =>  $content,
-            'service_cent_id' => $adminId
+            'service_cent_id' => $adminId,
+            'zk' => $zk
         ]);
         $re = $dis->save();
         if($re){
-            return view("admin@index/alertDiscount",['number'=>$content]);
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
         }
-//        echo "<pre>";var_dump($content);exit;
-
+        echo json_encode($msg);
     }
 
     public function del_discount(Request $request){

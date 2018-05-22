@@ -57,6 +57,7 @@ Route::group('admin',[
     'pointSet' => ['admin/index/point_set', ['method' => 'get']],
     'savePointSet' => ['admin/index/save_point_set', ['method' => 'post']],
     'addDiscount' => ['admin/index/add_discount', ['method' => 'get']],
+    'saveDiscount' => ['admin/index/save_discount', ['method' => 'post']],
     'discountDel' => ['admin/index/del_discount', ['method' => 'get']],
     'discountDelAll' => ['admin/index/del_discount_all', ['method' => 'get']],
     'qrcode' => ['admin/index/qrcode', ['method' => 'get']],

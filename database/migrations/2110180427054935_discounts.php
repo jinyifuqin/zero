@@ -32,6 +32,7 @@ class Discounts extends Migrator
         $table->addColumn('number', 'string',array('default'=>'','comment'=>'优惠券号码'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'创建时间'))
             ->addColumn('service_cent_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'服务中心ID'))
+            ->addColumn('zk', 'integer',array('default'=>10,'comment'=>'折扣数'))
             ->create();
     }
 }
