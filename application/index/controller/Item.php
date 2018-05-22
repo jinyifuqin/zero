@@ -174,7 +174,7 @@ class Item extends Controller
 //        return;
         $delimiter = urlencode(',');
         $post['address'] = implode($delimiter,explode(' ',$post['address']));
-//        echo "<pre>";var_dump($post['address']);exit;
+//        echo "<pre>";var_dump($post['totalprice']);exit;
         $all = [
             'name'  =>  $post['name'],
             'address'  =>  $post['address'],

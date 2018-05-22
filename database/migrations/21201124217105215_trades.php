@@ -40,7 +40,7 @@ class Trades extends Migrator
             ->addColumn('admin_get_bill_type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'管理员审核发票状态1通过0未通过'))
             ->addColumn('item_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'商品ID'))
             ->addColumn('buy_num', 'integer',array('null'=>true,'comment'=>'购买数量'))
-            ->addColumn('buy_price', 'integer',array('null'=>true,'comment'=>'订单金额'))
+            ->addColumn('buy_price', 'string',array('null'=>true,'comment'=>'订单金额'))
             ->addColumn('phone_num', 'string',array('default'=>'','null'=>true,'comment'=>'手机号'))
             ->addColumn('create_time', 'datetime',array('comment'=>'最后登录时间'))
             ->addColumn('update_time', 'datetime',array('comment'=>'更新时间'))

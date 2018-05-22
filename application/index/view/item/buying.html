@@ -154,6 +154,7 @@
 		</form>
 	<script>
 		function set(num,oneAllPrice){
+		    oneAllPrice = Math.round(oneAllPrice*100)/100;
             var numtag = $('.tjddb44 font');
             var numtag1 = $('.tjddb40 span');
             var numtag2 = $('.tjddb34 span');
@@ -189,7 +190,7 @@
                     data: data,
                     dataType: "json",
                     success: function(result){
-                        console.log(result);
+                        // console.log(result);
                         if(result.type == 'success'){
                             layer.msg('优惠券使用成功！',{icon:1,time:2000});
                             oldOnePrice = onePrice;

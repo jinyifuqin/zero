@@ -62,7 +62,7 @@
             // zk = parseInt(zk);
             var re = r.test(zk);
 			if(!re){
-                layer.msg('请输入正确的折扣!',{icon:2,time:1000});
+                return layer.msg('请输入正确的折扣!',{icon:2,time:1000});
 			}
             var form = $("form");
             var url = form.attr('action');
