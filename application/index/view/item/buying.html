@@ -20,6 +20,15 @@
 		<script src="/public/indexsource/js/pic.js"></script>
 	</head>
 <style type="text/css">
+	.fan{background: #fff;}
+	.fan i{font-style: normal;    font-size: 1.2rem;
+		margin-left: 4%;
+		display: inline-block;
+		float: left;
+		line-height: 4rem;
+		font-weight: 400;
+		font-family: "microsoft yahei";height: 4rem;}
+	.fan input{height: 1.5rem; line-height: 1.5rem;width: 50%;margin-top: 1.2rem;margin-left: 5%;}
 	.buynum{
 		background: transparent;
 		outline: none;
@@ -113,6 +122,11 @@
 				</div>
 			</div>
 			<div class="oneprice" style="display: none;" oneprice="{$data.item.price}"></div>
+			<div class="fan">
+				<a href="#">
+					<i>优惠券</i><input id="discount" type="text" placeholder="请输入优惠券号码" />
+				</a>
+			</div>
 			<div class="tjddb40">
 				<span>共1件商品 </span>
 				<font>小计：</font><b>¥{$data.item.price}</b>
@@ -127,6 +141,7 @@
 					<!--<button type="button" class="button2"><a href="#">取消</a></button>-->
 				</div>
 			</div>
+
 			<div class="tjddb43">
 				<div class="tjddb44">
 					<font>共<i>1</i>件</font><span>合计支付：</span><b>¥{$data.item.price}</b>
@@ -163,6 +178,38 @@
             addr.css('padding-top',height);
             var num = $('.inputNum').val();
             var onePrice = $('.oneprice').attr('oneprice');
+            var changeFlag = false;
+            var oldOnePrice = 0;
+            $('#discount').change(function(){
+                var disNum = $(this).val();
+                var data = {'discountNum':disNum};
+                $.ajax({
+                    type: "GET",
+                    url: '/item/checkDiscount',
+                    data: data,
+                    dataType: "json",
+                    success: function(result){
+                        console.log(result);
+                        if(result.type == 'success'){
+                            layer.msg('优惠券使用成功！',{icon:1,time:2000});
+                            oldOnePrice = onePrice;
+                            onePrice = onePrice*0.1*result.zk;
+                            oneAllPrice = num*onePrice;
+                            changeFlag = true;
+                            set(num,oneAllPrice);
+						}else{
+                            if(changeFlag){
+                                onePrice = oldOnePrice;
+                                oneAllPrice = num*onePrice;
+                                changeFlag = false;
+                                set(num,oneAllPrice);
+							}
+						}
+
+                    }
+                });
+
+			})
             $('.inputNum').blur(function(){
                 var reg = /^[1-9][0-9]*$/;
                 num = $(this).val();

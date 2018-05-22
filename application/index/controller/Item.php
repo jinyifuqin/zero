@@ -8,6 +8,7 @@
 
 namespace app\index\controller;
 use app\admin\model\Adminusers;
+use app\admin\model\Discounts;
 use app\admin\model\Items;
 use app\index\model\Addrs;
 use app\index\model\Users;
@@ -123,6 +124,20 @@ class Item extends Controller
         $addrsObj->saveAddr($userid,$postInfo,$default);
 
         return redirect('/addAddr');
+    }
+
+    public function check_discount(Request $request){
+        $discountNum = $request->param('discountNum');
+        $disObj = Discounts::get(['number'=>$discountNum]);
+        if($disObj){
+            $zk = $disObj->zk;
+            $msg = ['type'=>'success','zk'=>$zk];
+        }else{
+            $msg = ['type'=>'error'];
+        }
+        echo json_encode($msg);
+
+//        echo "<pre>";var_dump($zk);exit;
     }
 
     public function tradeCreate(Request $request){

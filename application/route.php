@@ -77,6 +77,7 @@ Route::group('',[
     'getInfo' => ['getInfo', ['method' => 'get']],
     'itemList' => ['item/itemList', ['method' => 'get']],
     'item/:id' => ['item/item', ['method' => 'get']],
+    'item/checkDiscount' => ['item/check_discount', ['method' => 'get']],
     'wxlogin/:id' => ['wxLogin', ['method' => 'get']],
     'buy' => ['buy', ['method' => 'get']],
     'addAddr' => ['item/addAddr', ['method' => 'get']],
