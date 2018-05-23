@@ -321,8 +321,9 @@ class Index
 ////            'type'=>1,
 //            'frozen_flag'=>1
 //        ]);
+        $url = '/userInfo';
         $curl = "userinfo";
-        $re = ['footType'=>$curl,'list'=>$list];
+        $re = ['footType'=>$curl,'list'=>$list,'url'=>$url];
 //        echo "<pre>";var_dump($list);exit;
         return view("index@index/showPointList",['re'=>$re]);
 
