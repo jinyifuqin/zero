@@ -111,7 +111,7 @@ function getPoint($userId){ // 获取用户总积分
 
     $flag = false;
     $nowStamp = time();
-    $mintime = \think\Db::query('select *  from yzt_points where user_id=? ORDER BY create_time limit 1',[$userId]);
+    $mintime = \think\Db::query('select *  from yzt_points where user_id=? AND frozen_flag=? ORDER BY create_time limit 1',[$userId,0]);
     if($mintime){
         $mmtime = strtotime(date('Y-m-d',strtotime($mintime[0]['create_time'])));
         $pointObj = new \app\index\model\Points();
@@ -126,7 +126,7 @@ function getPoint($userId){ // 获取用户总积分
         ]);
     }
 
-//    echo "<pre>";var_dump($x);exit;
+//    echo "<pre>";var_dump($flag);exit;
     $canUse = 0;
     if(!$flag && !empty($mintime) && $x){
         \app\index\model\Points::destroy([
