@@ -2,4 +2,5 @@
     <setPointCount>1</setPointCount>
     <setDoublePointCount>2202</setDoublePointCount>
     <sharePointFilterConfig>108</sharePointFilterConfig>
+    <setGivePointBrokerage>12</setGivePointBrokerage>
 </config>

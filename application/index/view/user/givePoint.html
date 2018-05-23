@@ -63,9 +63,11 @@
 				<!--<div class="tmtm"></div>-->
 			<!--</div>-->
 			<div class="jifen4">
+				<div class="brokerage" style="display: none;">{$re.brokerage}</div>
 				<span>赠送</span>
 				<input class="number" type="number" name="number"/>
-				<i>积分</i>
+				<i>积分</i><br>
+				<span style="margin-top:1rem;margin-left:17%;font-style: normal;font-size: 1rem;">需要手续费：<b id="brokerage">--</b><i>积分</i></span>
 				<div>
 				<button type="button" class="button1"><a href="#">确定</a></button>
 				<button type="button" class="button2"><a href="#">取消</a></button>
@@ -74,6 +76,17 @@
 		</div>
 		<script type="text/javascript">
 			$(function() {
+			    $('.number').keyup(function(){
+			        var num = $(this).val();
+			        if(parseInt(num) < 1 || num == ''){
+                        $('#brokerage').html('--');
+                        return false;
+                    }
+			        var brokerage = $('.brokerage').html();
+			        var brokerageNum = parseInt(num)*parseInt(brokerage)*0.01;
+                    brokerageNum = Math.round(brokerageNum*100)/100;
+			        $('#brokerage').html(brokerageNum);
+				})
 				$(".jifen3_1").click(function() {
 					$(".tmtm").css("display", "block");
 				})
@@ -86,7 +99,13 @@
 				$(".button1").click(function() {
 				    var number = $('.number').val();
                     var getId = $('.userId').html();
-				    var data = {'number':number,'getId':getId};
+                    var brokerageNum = $('#brokerage').html();
+				    var data = {'number':number,'getId':getId,'brokerageNum':brokerageNum};
+				    if(number == ''){
+                        layer.msg('请输入要赠送的积分数',{icon:0,time:2000});
+                        return false;
+                    }
+				    // console.log(data);return;
                     $.ajax({
                         type: "GET",
                         url: 'givePointMember',

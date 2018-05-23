@@ -16,6 +16,7 @@ use app\index\model\Trades;
 use app\weixin\controller\Wechat;
 use app\index\model\Users;
 use app\admin\model\Items;
+use think\Config;
 use think\Controller;
 use think\Db;
 use think\Request;
@@ -26,6 +27,9 @@ class User extends Controller
     {
         session_start();
         $this->wxObj = new Wechat();
+        $configName = 'config.xml';
+        $this->configPath = APP_PATH.'admin'.DS.'config'.DS.$configName;
+        Config::load($this->configPath);
         parent::__construct($request);
     }
 
@@ -293,9 +297,10 @@ class User extends Controller
     }
 
     public function give_point(){
+        $setGivePointBrokerage = config('setGivePointBrokerage');
         $return = url('/userInfo');
         $curl = "userinfo";
-        $re = ['url'=>$return,'footType'=>$curl];
+        $re = ['url'=>$return,'footType'=>$curl,'brokerage'=>$setGivePointBrokerage];
         return view("index@user/givePoint",['re'=>$re]);
     }
 
@@ -322,6 +327,8 @@ class User extends Controller
             $msg = ['type'=>'error','msg'=>'无法赠送自己！'];
             echo json_encode($msg);
         }
+        $brokerageNum = $request->param('brokerageNum');
+//        echo "<pre>";var_dump($brokerageNum);exit;
         $count = $request->param('number');
         $pointObj = new Points();
         $canUse = $pointObj->where('user_id',"=",$userId)
@@ -329,9 +336,9 @@ class User extends Controller
             ->where('type',"=",1)
             ->where('frozen_flag',"=",1)
             ->sum('count');
-        if($canUse >= $count){
+        if($canUse >= $count+$brokerageNum){
             $givePoint['user_id'] = $userId;
-            $givePoint['count'] = $count;
+            $givePoint['count'] = $count+$brokerageNum;
             $givePoint['type'] = 0;
             $givePoint['get_type'] = 1;
             $givePoint['frozen_flag'] = 1;

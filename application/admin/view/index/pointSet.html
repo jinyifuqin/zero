@@ -10,7 +10,7 @@
 <form action="/admin/savePointSet" id="form-cat-add" method="post">
     <table>
         <tr>
-            <td>赠送积分百分比设置：</td>
+            <td>推广购买赠送积分百分比设置：</td>
             <td><input type="text" value="{$all.config}" name="pointCount"/>%<br/></td>
         </tr>
         <tr>
@@ -20,6 +20,10 @@
         <tr>
             <td>推广赠积分门槛设置：</td>
             <td><input type="text" value="{$all.sharePointFilterConfig}" name="sharePointFilterConfig"/><br/></td>
+        </tr>
+        <tr>
+            <td>会员赠送手续百分比：</td>
+            <td><input type="text" value="{$all.setGivePointBrokerage}" name="setGivePointBrokerage"/>%<br/></td>
         </tr>
         <tr>
             <td></td>
