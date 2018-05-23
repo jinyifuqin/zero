@@ -63,6 +63,12 @@ Route::group('admin',[
     'qrcode' => ['admin/index/qrcode', ['method' => 'get']],
     'chooseService' => ['admin/trade/choose_service', ['method' => 'get']],
     'serviceTrade/:id' => ['admin/trade/service_trade', ['method' => 'get']],
+    'articleMenu' => ['admin/article/article_menu', ['method' => 'get']],
+    'addArticleMenus' => ['admin/article/add_article_menus', ['method' => 'get']],
+    'saveArticleMenus' => ['admin/article/save_article_menus', ['method' => 'post']],
+    'articleMenuEdit/:id' => ['admin/article/article_menu_edit', ['method' => 'get']],
+    'articleMenuDel/:id' => ['admin/article/article_menu_del', ['method' => 'get']],
+    'articleMenuDelAll' => ['admin/article/article_menu_del_all', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

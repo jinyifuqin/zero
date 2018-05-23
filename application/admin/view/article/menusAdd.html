@@ -1,0 +1,73 @@
+{include file="public/admins/head/head.html" /}
+	<title>分类添加</title>
+	<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+	<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+<article class="page-container">
+	<form enctype="multipart/form-data" action="/admin/saveArticleMenus" method="post" class="form form-horizontal" id="form-cat-add">
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>栏目名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" id="name" class="input-text" value="" placeholder="" name="name">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>排序：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" id="sort" class="input-text" value="" placeholder="" name="sort">
+			</div>
+		</div>
+
+
+
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input id="submit" class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+{include file="public/admins/foot/foot.html" /}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/admins/lib/My97DatePicker/foureight/WdatePicker.js"></script>
+<script type="text/javascript" src="/public/admins/lib/jquery.validation/oneonefourzero/jquery.validate.js"></script>
+<script type="text/javascript" src="/public/admins/lib/jquery.validation/oneonefourzero/validate-methods.js"></script>
+<script type="text/javascript" src="/public/admins/lib/jquery.validation/oneonefourzero/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $('#submit').click(function(e){
+            e.preventDefault();
+            var form = $("#form-cat-add");
+            var url = form.attr('action');
+            var data = form.serialize();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    // parent.$('.btn-refresh').click();
+                    window.parent.location.reload();//刷新父页面
+                    parent.layer.close(index);
+                }
+            });
+
+		});
+
+
+
+
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
