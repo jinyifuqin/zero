@@ -423,17 +423,14 @@ class Index extends Controller
     
     public function save_point_set(Request $request){
         $config = $request->param('pointCount');
-        $dbconfig = $request->param('pointDoubleCount');
         $sharePointFilterConfig = $request->param('sharePointFilterConfig');
         $setGivePointBrokerage = $request->param('setGivePointBrokerage');
         $path = $this->configPath;
         $content = file_get_contents($path);
         $replace = "/(?<=\<setPointCount\>)(\d+)(?=\<\/setPointCount\>)/";
-        $dbreplace = "/(?<=\<setDoublePointCount\>)(\d+)(?=\<\/setDoublePointCount\>)/";
         $shfreplace = "/(?<=\<sharePointFilterConfig\>)(\d+)(?=\<\/sharePointFilterConfig\>)/";
         $givereplace = "/(?<=\<setGivePointBrokerage\>)(\d+)(?=\<\/setGivePointBrokerage\>)/";
         $str = preg_replace($replace,$config,$content);
-        $str = preg_replace($dbreplace,$dbconfig,$str);
         $str = preg_replace($shfreplace,$sharePointFilterConfig,$str);
         $str = preg_replace($givereplace,$setGivePointBrokerage,$str);
 //        echo "<pre>";var_dump($str);exit;
