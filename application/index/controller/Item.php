@@ -152,7 +152,7 @@ class Item extends Controller
         $create_time = date("Y-m-d H:i:s");
 
         $numMatch = preg_match('/^\d+$/',$post['buynum']);
-        if(array_key_exists('phone_num',$post)){
+        if(array_key_exists('phone_num',$post) && $post['name'] != '' && $post['name'] != ' '){
             $phoneMatch = preg_match('/^1[34578]\d{9}$/',$post['phone_num']);
         }else{
             $data = ['msg'=>"请添加收货信息！",'type'=>"error"];
@@ -167,14 +167,14 @@ class Item extends Controller
             $data = ['msg'=>"请输入正确的手机号！",'type'=>"error"];
             return json_encode($data);
         }
-        if($post['address'] == ''){
+        if($post['address'] == '' || $post['address'] == ' '){
             $data = ['msg'=>"请添加收货地址！",'type'=>"error"];
             return json_encode($data);
         }
-//        return;
+//        echo "<pre>";var_dump(($phoneMatch));exit;
         $delimiter = urlencode(',');
         $post['address'] = implode($delimiter,explode(' ',$post['address']));
-//        echo "<pre>";var_dump($post['totalprice']);exit;
+
         $all = [
             'name'  =>  $post['name'],
             'address'  =>  $post['address'],

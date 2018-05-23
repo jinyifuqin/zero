@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
 
 	<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
 </head>
 
 <body class="bjhs2">
@@ -47,19 +48,19 @@
 <form method="post" id="formSub" action="/saveAddr">
 	<div class="big_qb">
 		<div class="fapiao">
-			<div class="fapiao1"><span>收货人</span><input type="text" value="{$re.name}" name="name" placeholder="请填写收货人姓名"></div>
+			<div class="fapiao1"><span>收货人</span><input class="getName" type="text" value="{$re.name}" name="name" placeholder="请填写收货人姓名"></div>
 			<div class="huixian"></div>
-			<div class="fapiao1 "><span>联系方式</span><input type="text" value="{$re.phone_num}" name="phone_num" placeholder="请填写收货人联系方式"></div>
+			<div class="fapiao1 "><span>联系方式</span><input class="phone" type="text" value="{$re.phone_num}" name="phone_num" placeholder="请填写收货人联系方式"></div>
 			<div class="huixian"></div>
 			<div class="fapiao">
 				<input type="hidden" name="addrId" value="{$re.id}"/>
 				<div class="fapiao1 szym21 huixian">
 					<a href="#"><span>所在地区</span>
-						<font><i href="#" class="btn btn-info btn-lg active" role="button" id="sel_city"><input name="desc" value="{$re.desc}"  type="text" placeholder="请填写地址"><img src="/public/indexsource/images/jian1.jpg" /></i></font>
+						<font><i href="#" class="btn btn-info btn-lg active" role="button" id="sel_city"><input class="ssq" name="desc" value="{$re.desc}"  type="text" placeholder="请填写地址"><img src="/public/indexsource/images/jian1.jpg" /></i></font>
 					</a>
 				</div>
 				<div class="huixian"></div>
-				<div class="fapiao1"><span>详细地址</span><input type="text" value="{$re.desc1}" name="desc1" placeholder="请填写详细地址"> </div>
+				<div class="fapiao1"><span>详细地址</span><input class="detailAddr" type="text" value="{$re.desc1}" name="desc1" placeholder="请填写详细地址"> </div>
 			</div>
 		</div>
 		<div class="huixian"></div>
@@ -113,6 +114,24 @@
         var sub = $('#sub');
         sub.click(function(e){
             e.preventDefault();
+            var name = $.trim($('.getName').val());
+            var phone = $.trim($('.phone').val());
+            var ssq = $('.ssq').val();
+            var detailAddr = $.trim($('.detailAddr').val());
+            switch (''){
+				case name:
+                    return layer.msg('请填写正确的名字!',{icon:2,time:1000});
+				    break;
+				case phone:
+                    return layer.msg('请填写正确的手机号!',{icon:2,time:1000});
+                    break;
+                case ssq:
+                    return layer.msg('请选择正确的省市区!',{icon:2,time:1000});
+                    break;
+                case detailAddr:
+                    return layer.msg('请填写正确的详细地址!',{icon:2,time:1000});
+                    break;
+			}
             var form = $('#formSub');
             form.submit();
         })
