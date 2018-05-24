@@ -260,14 +260,19 @@ class Index
             if($flag){
                 $allPoint = 500000000;
                 $pO = new Points();
-                $noUse = $pO->where('type',"=",1)
+                $noUseAdd = $pO->where('type',"=",1)
                     ->where('frozen_flag',"=",0)
                     ->sum('count');
-                $shareGet = $pO->where('type',"=",1)
-                    ->where('get_type',"=",3)
-                    ->where('frozen_flag',"=",1)
-                    ->sum('count');
-                $prepareCount = $noUse + $shareGet;
+
+//                $noUseDel = $pO->where('type',"=",0)
+//                    ->where('frozen_flag',"=",0)
+//                    ->sum('count');
+//                $shareGet = $pO->where('type',"=",1)
+//                    ->where('get_type',"=",3)
+//                    ->where('frozen_flag',"=",1)
+//                    ->sum('count');
+//                $prepareCount = $noUse + $shareGet;
+                $prepareCount = $noUseAdd;
                 $userRe->allSystemCount = $allPoint;
                 $userRe->prepareCount = $prepareCount;
                 $userRe->surplusCount = $allPoint - $prepareCount;
@@ -305,6 +310,21 @@ class Index
         $userRe->allPoint = $noUse;
         $userRe->allReturnMony = $canUse;
         return $userRe;
+    }
+
+    public function show_no_use_point_list(){
+        $userId = $_SESSION['userinfo']->id;
+        $pObj = new \app\index\model\Points();
+        $list = $pObj->where('user_id', $userId)
+//            ->where('get_type', '>',0)
+            ->where('frozen_flag', 0)
+            ->select();
+        $url = '/userInfo';
+        $curl = "userinfo";
+        $re = ['footType'=>$curl,'list'=>$list,'url'=>$url];
+//        echo "<pre>";var_dump($list);exit;
+        return view("index@index/showFrozenPointList",['re'=>$re]);
+
     }
 
     public function show_point_list(){

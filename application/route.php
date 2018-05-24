@@ -99,6 +99,7 @@ Route::group('',[
     'trueGet' => ['trade_true_get', ['method' => 'get']],
     'tradeDel' => ['trade_del', ['method' => 'get']],
     'showPointList' => ['show_point_list', ['method' => 'get']],
+    'showNoUsePointList' => ['show_no_use_point_list', ['method' => 'get']],
     'selfInfo' => ['User/self_info', ['method' => 'get']],
     'saveHead' => ['User/save_head', ['method' => 'post']],
     'saveAddrJs' => ['User/save_addr', ['method' => 'post']],

@@ -328,26 +328,31 @@ class User extends Controller
             echo json_encode($msg);
         }
         $brokerageNum = $request->param('brokerageNum');
-//        echo "<pre>";var_dump($brokerageNum);exit;
         $count = $request->param('number');
         $pointObj = new Points();
-        $canUse = $pointObj->where('user_id',"=",$userId)
-            ->where('get_type',">",0)
+        $noUseAdd = $pointObj->where('user_id',"=",$userId)
             ->where('type',"=",1)
-            ->where('frozen_flag',"=",1)
+            ->where('frozen_flag',"=",0)
             ->sum('count');
-        if($canUse >= $count+$brokerageNum){
+        $noUseDel = $pointObj->where('user_id',"=",$userId)
+            ->where('type',"=",0)
+            ->where('frozen_flag',"=",0)
+            ->sum('count');
+        $end = $noUseAdd - $noUseDel;
+//        echo "<pre>";var_dump($noUseDel);exit;
+
+        if($end >= $count+$brokerageNum){
             $givePoint['user_id'] = $userId;
             $givePoint['count'] = $count+$brokerageNum;
             $givePoint['type'] = 0;
             $givePoint['get_type'] = 1;
-            $givePoint['frozen_flag'] = 1;
+            $givePoint['frozen_flag'] = 0;
             $givePoint['create_time'] = date('Y-m-d H:i:s',time());
             $getPoint['user_id'] = $getId;
             $getPoint['count'] = $count;
             $getPoint['type'] = 1;
             $getPoint['get_type'] = 1;
-            $getPoint['frozen_flag'] = 1;
+            $getPoint['frozen_flag'] = 0;
             $getPoint['create_time'] = date('Y-m-d H:i:s',time());
             $list[] = $givePoint;
             $list[] = $getPoint;

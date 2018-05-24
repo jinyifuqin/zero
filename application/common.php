@@ -141,14 +141,12 @@ function getPoint($userId){ // 获取用户总积分
 
     $noUseAdd = \app\index\model\Points::where([
         'user_id' => $userId,
-        'get_type'=>0,
         'type'=>1,
         'frozen_flag'=>0
     ])->sum('count');
 
     $noUseDel = \app\index\model\Points::where([
         'user_id' => $userId,
-        'get_type'=>2,
         'type'=>0,
         'frozen_flag'=>0
     ])->sum('count');
