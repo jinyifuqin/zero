@@ -71,6 +71,9 @@ Route::group('admin',[
     'articleMenuDelAll' => ['admin/article/article_menu_del_all', ['method' => 'get']],
     'level' => ['admin/index/level', ['method' => 'get']],
     'lowHeightSave' => ['admin/index/low_height_save', ['method' => 'post']],
+    'selfInfo' => ['admin/index/server_self_info', ['method' => 'get']],
+    'saveQr' => ['admin/index/save_qr', ['method' => 'post']],
+    'serverPhoneSave' => ['admin/index/server_phone_save', ['method' => 'post']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

@@ -500,5 +500,49 @@ class Index extends Controller
         echo json_encode($msg);
     }
 
+    public function server_self_info(){
+        $info = $_SESSION['adminUserInfo'];
+        return view("admin@index/serverSelfInfo",['re'=>$info]);
+//        echo "<pre>";var_dump($info);
+    }
+
+    public function save_qr(Request $request){
+        $info = $_SESSION['adminUserInfo'];
+        $qrPic = $request->file('file');
+        $serverId = $info->id;
+//        echo "<pre>";var_dump($_SESSION);exit;
+        $re = upload($qrPic);
+        $end = htmlspecialchars($re->getSaveName());
+        if($re->getError() == ''){
+            $logo = $end;
+            $serObj = new Adminusers();
+            $result = $serObj->save([
+                'qrcode'  =>  $logo,
+            ],['id'=>$serverId]);
+            if($result){
+                $_SESSION['adminUserInfo']->qrcode = $logo;
+                $msg = array('status'=>'success','path'=>$logo);
+            }
+            echo json_encode($msg);
+        }
+    }
+
+    public function server_phone_save(Request $request){
+        $info = $_SESSION['adminUserInfo'];
+        $serverId = $info->id;
+        $serObj = new Adminusers();
+        $phone = $request->param('phone');
+        $result = $serObj->save([
+            'phone_number'  =>  $phone,
+        ],['id'=>$serverId]);
+        if($result){
+            $_SESSION['adminUserInfo']->phone_number = $phone;
+            $msg = array('status'=>'success');
+        }
+        echo json_encode($msg);
+
+
+    }
+
 
 }
