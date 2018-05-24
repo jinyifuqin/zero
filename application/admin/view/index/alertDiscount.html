@@ -22,6 +22,13 @@
 		</div>
 
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>可用次数：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="number" id="canUseCount" class="input-text" value="" placeholder="" name="canUseCount">
+			</div>
+		</div>
+
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>请选择服务中心：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<span class="select-box">
@@ -59,8 +66,13 @@
             e.preventDefault();
             var zk = $('#zk').val();
             var r = /^[1-9]$/;
-            // zk = parseInt(zk);
             var re = r.test(zk);
+            var canUseCount = $('#canUseCount').val();
+            var r1 = /^[1-9][0-9]*$/;
+            var re1 = r1.test(canUseCount);
+            if(!re1){
+                return layer.msg('请输入正确的使用次数!',{icon:2,time:1000});
+			}
 			if(!re){
                 return layer.msg('请输入正确的折扣!',{icon:2,time:1000});
 			}

@@ -124,7 +124,7 @@
 			<div class="oneprice" style="display: none;" oneprice="{$data.item.price}"></div>
 			<div class="fan">
 				<a href="#">
-					<i>优惠券</i><input id="discount" type="text" placeholder="请输入优惠券号码" />
+					<i>优惠券</i><input id="discount" name="discount" type="text" placeholder="请输入优惠券号码" />
 				</a>
 			</div>
 			<div class="tjddb40">
@@ -199,6 +199,7 @@
                             changeFlag = true;
                             set(num,oneAllPrice);
 						}else{
+                            layer.msg('优惠券无效，或者次数已尽！',{icon:0,time:2000});
                             if(changeFlag){
                                 onePrice = oldOnePrice;
                                 oneAllPrice = num*onePrice;

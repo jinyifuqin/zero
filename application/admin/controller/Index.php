@@ -370,11 +370,13 @@ class Index extends Controller
         $adminId = $request->param('service');
         $content = $request->param('number');
         $zk = $request->param('zk');
+        $canUseCount = $request->param('canUseCount');
 //        echo "<prE>";var_dump($adminId);var_dump($content);var_dump($zk);exit;
         $dis = new Discounts([
             'number'  =>  $content,
             'service_cent_id' => $adminId,
-            'zk' => $zk
+            'zk' => $zk,
+            'can_use_count' => $canUseCount
         ]);
         $re = $dis->save();
         if($re){

@@ -60,7 +60,7 @@
 	<table class="table table-border table-bordered table-bg" id="DataTables_Table_0">
 		<thead>
 			<tr>
-				<th scope="col" colspan="7">权限节点</th>
+				<th scope="col" colspan="9">权限节点</th>
 			</tr>
 			<tr class="text-c">
 				<th width="25"><input type="checkbox" name="" value=""></th>
@@ -70,6 +70,8 @@
 				{/if}
 				<th width="200">优惠券号码</th>
 				<th width="200">优惠折扣</th>
+				<th width="200">使用次数</th>
+				<th width="200">已用次数</th>
 				<th width="200">创建时间</th>
 				{if condition="($flag)"}
 				<th width="100">操作</th>
@@ -103,6 +105,8 @@
 				{/if}
 				<td>{$vo.number}</td>
 				<td>{$vo.zk}折</td>
+				<td>{$vo.can_use_count}次</td>
+				<td>{$vo.used_count}次</td>
 				<td>{$vo.create_time}</td>
 				{if condition="($flag)"}
 				<td>

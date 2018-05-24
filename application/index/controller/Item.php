@@ -129,7 +129,7 @@ class Item extends Controller
     public function check_discount(Request $request){
         $discountNum = $request->param('discountNum');
         $disObj = Discounts::get(['number'=>$discountNum]);
-        if($disObj){
+        if($disObj && $disObj->can_use_count > $disObj->used_count){
             $zk = $disObj->zk;
             $msg = ['type'=>'success','zk'=>$zk];
         }else{
@@ -147,6 +147,7 @@ class Item extends Controller
         $adminObj = Adminusers::get($service_cent_id);
         $service_cent_name = $adminObj->nickname;
         $post = $request->param();
+        $discount = $post['discount'];
         $trade = new Trades();
         $tradeNum = date('Ymd').str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
         $create_time = date("Y-m-d H:i:s");
@@ -190,11 +191,15 @@ class Item extends Controller
         ];
         $trade->data($all);
         $re = $trade->save();
-        if($re){
+        if($discount){
+            $disRe = Db::table('yzt_discounts')->where('number', $discount)->setInc('used_count');
+        }
+
+        if($re && $disRe){
             $data = ['msg'=>"订单生成成功！请等待服务中心发货",'type'=>"success",'cent_name'=>$service_cent_name];
             return json_encode($data);
         }else{
-            $data = ['msg'=>"订单生成失败！",'type'=>"error"];
+            $data = ['msg'=>"订单生成失败！请删除无效优惠券！",'type'=>"error"];
             return json_encode($data);
         }
 
