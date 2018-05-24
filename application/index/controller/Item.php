@@ -199,7 +199,7 @@ class Item extends Controller
             $data = ['msg'=>"订单生成成功！请等待服务中心发货",'type'=>"success",'cent_name'=>$service_cent_name];
             return json_encode($data);
         }else{
-            $data = ['msg'=>"订单生成失败！请删除无效优惠券！",'type'=>"error"];
+            $data = ['msg'=>"订单生成失败！",'type'=>"error"];
             return json_encode($data);
         }
 

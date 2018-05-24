@@ -200,6 +200,7 @@
                             set(num,oneAllPrice);
 						}else{
                             layer.msg('优惠券无效，或者次数已尽！',{icon:0,time:2000});
+                            $('#discount').val('');
                             if(changeFlag){
                                 onePrice = oldOnePrice;
                                 oneAllPrice = num*onePrice;
