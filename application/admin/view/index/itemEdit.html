@@ -64,6 +64,30 @@
             </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>服务中心A价格</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" id="a_price" class="input-text" value="{$data.item.a_price}" placeholder="" name="a_price">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>服务中心B价格</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" id="b_price" class="input-text" value="{$data.item.b_price}" placeholder="" name="b_price">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>服务中心C价格</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" id="c_price" class="input-text" value="{$data.item.c_price}" placeholder="" name="c_price">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>服务中心D价格</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" id="d_price" class="input-text" value="{$data.item.d_price}" placeholder="" name="d_price">
+            </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2">品牌：</label>
             <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
 			<select id="brandid" class="select" size="1" name="brand_id">
@@ -918,12 +942,31 @@
                             var sort = $('#sort').val();
                             var id = $('#iid').val();
                             var price = $('#price').val();
+                            var a_price = $('#a_price').val();
+                            var b_price = $('#b_price').val();
+                            var c_price = $('#c_price').val();
+                            var d_price = $('#d_price').val();
                             var status = $('#status input[name="status"]:checked ').val();
                             var catid = $('#catid').val();
                             var brandid = $('#brandid').val();
                             var desc = $('#desc').val();
                             var content = $('#ueditor_textarea_editorValue').val();
-                            var uu = {'logopath':logopath,'id':id,'sort':sort,'name':name,'desc':desc,'content':content,'price':price,'status':status,'brand_id':brandid,'cat_id':catid};
+                            var uu = {
+                                'logopath':logopath,
+                                'id':id,
+                                'sort':sort,
+                                'name':name,
+                                'desc':desc,
+                                'content':content,
+                                'price':price,
+                                'a_price':a_price,
+                                'b_price':b_price,
+                                'c_price':c_price,
+                                'd_price':d_price,
+                                'status':status,
+                                'brand_id':brandid,
+                                'cat_id':catid
+                            };
                             var form = $("#form-item-add");
                             var url = form.attr('action');
 

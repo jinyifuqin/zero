@@ -95,6 +95,10 @@ class Item  extends Controller
         $desc = $request->param('desc');
         $content = htmlspecialchars($prepareConten);
         $price = $request->param('price');
+        $a_price = $request->param('a_price');
+        $b_price = $request->param('b_price');
+        $c_price = $request->param('c_price');
+        $d_price = $request->param('d_price');
         $status = $request->param('status');
         $catid = $request->param('cat_id');
         $brandid = $request->param('brand_id');
@@ -106,7 +110,10 @@ class Item  extends Controller
 
         $result = $item->save(
             ['pic'=>$pic,'name'=>$name,'desc'=>$desc,'sort'=>$sort,'create_time'=>$creatTime,
-                'content'=>$content,'price'=>$price,'status'=>$status,'cat_id'=>$catid,'brand_id'=>$brandid],
+                'content'=>$content,'price'=>$price,
+                'a_price'=>$a_price,'b_price'=>$b_price,
+                'c_price'=>$c_price,'d_price'=>$d_price,
+                'status'=>$status,'cat_id'=>$catid,'brand_id'=>$brandid],
             ['id'=>$id]
         );
 
