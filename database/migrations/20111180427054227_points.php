@@ -33,7 +33,7 @@ class Points extends Migrator
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
             ->addColumn('trade_number', 'string',array('default'=>"",'comment'=>'订单号'))
             ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'类型add/del'))//0减少1增加
-            ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式')) //0购买获取积分，1赠送获取积分,2返利积分,3推广返利积分
+            ->addColumn('get_type', 'integer',array('limit' => 1,'default'=>0,'null'=>true,'comment'=>'获取方式')) //0购买获取积分，1赠送获取积分,2返利积分,3推广返利积分,4服务中心委托
             ->addColumn('frozen_flag', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'冻结标识'))//0冻结1非
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
 //            ->addIndex(array('trade_number'), array('unique' => true))

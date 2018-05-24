@@ -387,8 +387,65 @@ class User extends Controller
 //            echo "<pre>";var_dump($serviceInfo);exit;
             return view("index@user/showServiceInfo",['re'=>$re]);
         }
-//        echo "<pre>";var_dump($info);exit;
-//        return view("index@user/givePoint",['re'=>$re]);
+    }
+
+    public function entrust(){
+        $userInfo = $_SESSION['userinfo'];
+        $uId = $userInfo->id;
+        $info = Users::get($uId);
+        if($info->service_cent_id == 0){
+            $list = Adminusers::all(['type'=>0]);
+            $flag = 'true';
+            $re = ['list'=>$list,'flag'=>$flag];
+            return view("index@user/chooseServiceCent",['re'=>$re]);
+        }else{
+            $serviceId = $info->service_cent_id;
+            $serviceInfo = Adminusers::get($serviceId);
+            $return = url('/userInfo');
+            $curl = "userinfo";
+            $re = ['url'=>$return,'footType'=>$curl,'info'=>$serviceInfo];
+//            echo "<pre>";var_dump($serviceInfo);exit;
+            return view("index@user/entrust",['re'=>$re]);
+        }
+    }
+
+    public function give_point_service(Request $request){
+        $userInfo = $_SESSION['userinfo'];
+        $userId = $userInfo->id;
+//        $info = Users::get($userId);
+        $count = $request->param('number');
+        $serviceId = $request->param('getId');
+        $pObj = new Points();
+        $canUseAdd = $pObj->where('user_id',"=",$userId)
+            ->where('type',"=",1)
+            ->where('frozen_flag',"=",0)
+            ->sum('count');
+        $canUseDel = $pObj->where('user_id',"=",$userId)
+            ->where('type',"=",0)
+            ->where('frozen_flag',"=",0)
+            ->sum('count');
+        $canUse = round($canUseAdd-$canUseDel,3);
+        if($canUse > $count){
+            $givePoint['user_id'] = $userId;
+            $givePoint['count'] = $count;
+            $givePoint['type'] = 0;
+            $givePoint['get_type'] = 4;
+            $givePoint['frozen_flag'] = 0;
+            $givePoint['create_time'] = date('Y-m-d H:i:s',time());
+            $re = $pObj->save($givePoint);
+            if($re){
+                $msg = ['type'=>'success','msg'=>'恭喜你，申请委托成功，等待服务中心确认！'];
+                echo json_encode($msg);
+            }else{
+                $msg = ['type'=>'error','msg'=>'抱歉，申请委托失败！'];
+                echo json_encode($msg);
+            }
+        }else{
+            $msg = ['type'=>'error','msg'=>'抱歉，您的积分不足以委托！'];
+            echo json_encode($msg);
+        }
+//        echo "<pre>";var_dump($canUse);exit;
+
     }
 
 }
