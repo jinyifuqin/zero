@@ -271,7 +271,7 @@ class Index
 //                    ->where('get_type',"=",3)
 //                    ->where('frozen_flag',"=",1)
 //                    ->sum('count');
-//                $prepareCount = $noUse + $shareGet;
+//                $prepareCount = $noUse + $shareGet;buy
                 $prepareCount = $noUseAdd;
                 $userRe->allSystemCount = $allPoint;
                 $userRe->prepareCount = $prepareCount;

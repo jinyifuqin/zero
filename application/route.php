@@ -124,6 +124,7 @@ Route::group('',[
     'givePoint' => ['User/give_point', ['method' => 'get']],
     'searchMember' => ['User/search_member', ['method' => 'get']],
     'givePointMember' => ['User/give_point_member', ['method' => 'get']],
+    'serviceCent' => ['User/service_cent', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

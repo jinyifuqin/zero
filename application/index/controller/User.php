@@ -265,8 +265,8 @@ class User extends Controller
 
     public function choose_service_cent(){
         $service_list = Adminusers::all(['type'=>0]);
-
-        return view("index@user/chooseServiceCent",['list'=>$service_list]);
+        $re['list'] = $service_list;
+        return view("index@user/chooseServiceCent",['re'=>$re]);
     }
 
     public function save_service_cent(Request $request){
@@ -367,6 +367,28 @@ class User extends Controller
             echo json_encode($msg);
         }
 //        echo "<pre>";var_dump($canUse);exit;
+    }
+
+    public function service_cent(){
+        $userInfo = $_SESSION['userinfo'];
+        $uId = $userInfo->id;
+        $info = Users::get($uId);
+        if($info->service_cent_id == 0){
+            $list = Adminusers::all(['type'=>0]);
+            $flag = 'true';
+            $re = ['list'=>$list,'flag'=>$flag];
+            return view("index@user/chooseServiceCent",['re'=>$re]);
+        }else{
+            $serviceId = $info->service_cent_id;
+            $serviceInfo = Adminusers::get($serviceId);
+            $return = url('/userInfo');
+            $curl = "userinfo";
+            $re = ['url'=>$return,'footType'=>$curl,'info'=>$serviceInfo];
+//            echo "<pre>";var_dump($serviceInfo);exit;
+            return view("index@user/showServiceInfo",['re'=>$re]);
+        }
+//        echo "<pre>";var_dump($info);exit;
+//        return view("index@user/givePoint",['re'=>$re]);
     }
 
 }

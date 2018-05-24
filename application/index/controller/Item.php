@@ -195,7 +195,7 @@ class Item extends Controller
             $disRe = Db::table('yzt_discounts')->where('number', $discount)->setInc('used_count');
         }
 
-        if($re && $disRe){
+        if($re){
             $data = ['msg'=>"订单生成成功！请等待服务中心发货",'type'=>"success",'cent_name'=>$service_cent_name];
             return json_encode($data);
         }else{

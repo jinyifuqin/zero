@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>服务中心</title>
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/css2.css" />
+		<script src="/public/indexsource/js/jquery.min.js"></script>
+		<script src="/public/indexsource/js/pic.js"></script>
+	</head>
+
+	<body>
+		<!--这是头部-->
+		{include file="public/indexsource/head/header.html" /}
+
+		<!--这是最外边的div，用来隔开与底部栏目的高度-->
+		<div class="Cmain">
+			<!--这是用户个人中心的头部-->
+			<!--<div class="user_bj">-->
+				<!--<div class="user_info">-->
+					<!--<div class="user_info_img"><img src="/public/indexsource/images/head.jpg" alt="" /></div>-->
+					<!--<span class="user_info_name">永之泰</span>-->
+				<!--</div>-->
+				<!--<div class="user_jifen">126000积分</div>-->
+			<!--</div>-->
+			<div class="mh"></div>
+			<div class="title_line line_bottom"><span class="line"></span>服务中心</div>
+			<!--<div class="find_qb">-->
+				<!--<div class="find">-->
+					<!--<input type="submit" class="find2" value="" /><input type="text" class="find1" placeholder="搜索" />-->
+				<!--</div>-->
+			<!--</div>-->
+			<div class="jifen2">
+
+				<div class="jifen2_1"><span style="width: 34%;">手机号</span>
+					<i style="width: 60%;">{$re.info.phone_number}</i></div>
+				<div class="jifen2_1"><span style="width: 34%;">二维码</span>
+					</div>
+				<div class="jifen2_1" style="height: inherit;">
+						<img width="100%;" src="/public/uploads/{$re.info.qrcode}">
+				</div>
+				<!--<div class="jifen2_1" style="height: 8rem;border-top: 0.1rem solid #f0f0f0;"><span style="width: 34%;">微信二维码</span>-->
+					<!--<i style="width: 60%;"><img width="80%;" src="/public/uploads/{$re.info.qrcode}"></i></div>-->
+
+			</div>
+		</div>
+
+		<!--底部-->
+        {include file="public/indexsource/foot/footer.html" /}
+	</body>
+
+</html>
