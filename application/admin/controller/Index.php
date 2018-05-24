@@ -445,5 +445,60 @@ class Index extends Controller
         echo json_encode($msg);
     }
 
+    public function level(){
+        $list['ALow'] = config('setALow');
+        $list['BLow'] = config('setBLow');
+        $list['BHeight'] = config('setBHeight');
+        $list['CLow'] = config('setCLow');
+        $list['CHeight'] = config('setCHeight');
+        $list['DLow'] = config('setDLow');
+        $list['DHeight'] = config('setDHeight');
+//        echo "<pre>";var_dump($list);exit;
+        return view("admin@index/level",['list'=>$list]);
+    }
+
+    public function low_height_save(Request $request){
+        $path = $this->configPath;
+        $content = file_get_contents($path);
+        $post = $request->param();
+        $obj = $post['obj'];
+        if(array_key_exists('height',$post)){
+            $height = $post['height'];
+        }
+        $low = $post['low'];
+
+        switch ($obj){
+            case 'a':
+                $replace = "/(?<=\<setALow\>)(\d+)(?=\<\/setALow\>)/";
+                $str = preg_replace($replace,$low,$content);
+                break;
+            case 'b':
+                $lowReplace = "/(?<=\<setBLow\>)(\d+)(?=\<\/setBLow\>)/";
+                $heightReplace = "/(?<=\<setBHeight\>)(\d+)(?=\<\/setBHeight\>)/";
+                $str = preg_replace($lowReplace,$low,$content);
+                $str = preg_replace($heightReplace,$height,$str);
+                break;
+            case 'c':
+                $lowReplace = "/(?<=\<setCLow\>)(\d+)(?=\<\/setCLow\>)/";
+                $heightReplace = "/(?<=\<setCHeight\>)(\d+)(?=\<\/setCHeight\>)/";
+                $str = preg_replace($lowReplace,$low,$content);
+                $str = preg_replace($heightReplace,$height,$str);
+                break;
+            case 'd':
+                $lowReplace = "/(?<=\<setDLow\>)(\d+)(?=\<\/setDLow\>)/";
+                $heightReplace = "/(?<=\<setDHeight\>)(\d+)(?=\<\/setDHeight\>)/";
+                $str = preg_replace($lowReplace,$low,$content);
+                $str = preg_replace($heightReplace,$height,$str);
+                break;
+        }
+        $re = file_put_contents($this->configPath,$str);
+        if($re){
+            $msg = array('status'=>'success');
+        }else{
+            $msg = array('status'=>'error');
+        }
+        echo json_encode($msg);
+    }
+
 
 }

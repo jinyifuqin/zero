@@ -1,5 +1,12 @@
 <config>
     <setPointCount>2</setPointCount>
     <sharePointFilterConfig>101</sharePointFilterConfig>
-    <setGivePointBrokerage>3</setGivePointBrokerage>
+    <setGivePointBrokerage>12</setGivePointBrokerage>
+    <setALow>100</setALow>
+    <setBLow>90</setBLow>
+    <setBHeight>99</setBHeight>
+    <setCLow>80</setCLow>
+    <setCHeight>89</setCHeight>
+    <setDLow>70</setDLow>
+    <setDHeight>79</setDHeight>
 </config>
