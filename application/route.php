@@ -74,6 +74,8 @@ Route::group('admin',[
     'selfInfo' => ['admin/index/server_self_info', ['method' => 'get']],
     'saveQr' => ['admin/index/save_qr', ['method' => 'post']],
     'serverPhoneSave' => ['admin/index/server_phone_save', ['method' => 'post']],
+    'entrustMember' => ['admin/index/entrust_member', ['method' => 'get']],
+    'entrustAction' => ['admin/index/entrust_action', ['method' => 'post']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

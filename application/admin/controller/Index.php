@@ -3,7 +3,9 @@ namespace app\Admin\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
+use app\admin\model\Entrusts;
 use app\index\model\Addrs;
+use app\index\model\Points;
 use app\index\model\Trades;
 use app\index\model\Users;
 use think\Config;
@@ -540,6 +542,69 @@ class Index extends Controller
             $msg = array('status'=>'success');
         }
         echo json_encode($msg);
+    }
+
+    public function entrust_member(){
+        $info = $_SESSION['adminUserInfo'];
+        $serverId = $info->id;
+        $memList = Users::all(['service_cent_id'=>$serverId]);
+//        $idArr = array_column($memList,'id');
+        $pObj = new Points();
+        foreach ($memList as $k=>&$v){
+            $count = $pObj->where('user_id',"=",$v->id)
+                ->where('get_type',"=",4)
+                ->where('type',"=",0)
+                ->where('frozen_flag',"=",0)
+                ->sum('count');
+            if($count){
+                $v->entrustCount = $count;
+                $v->nickname = json_decode(urldecode($v->nickname));
+            }else{
+                unset($memList[$k]);
+            }
+
+
+        }
+//        echo "<pre>";var_dump($memList);exit;
+        return view("admin@index/entrustMember",['list'=>$memList]);
+    }
+
+    public function entrust_action(Request $request){
+        $post = $request->param();
+        $info = $_SESSION['adminUserInfo'];
+        $serverId = $info->id;
+        $memId = trim($post['memId']);
+        $entrustCount = trim($post['entrustCount']);
+        $type = $request->param('type');
+        if($type == 'add'){
+            $enObj = new Entrusts();
+            $enList['service_id'] = $serverId;
+            $enList['count'] = $entrustCount;
+            $enList['user_id'] = $memId;
+            $re = $enObj->save($enList);
+            if($re){
+                $msg = array('status'=>'success');
+                echo json_encode($msg);
+            }else{
+                $msg = array('status'=>'error');
+                echo json_encode($msg);
+            }
+        }else{
+            $entrust = Points::get([
+                'user_id'=>$memId,
+                'type'=>0,
+                'get_type'=>4,
+                'frozen_flag'=>0
+            ]);
+            $re = $entrust->delete();
+            if($re){
+                $msg = array('status'=>'success');
+                echo json_encode($msg);
+            }else{
+                $msg = array('status'=>'error');
+                echo json_encode($msg);
+            }
+        }
 
 
     }
