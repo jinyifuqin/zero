@@ -494,6 +494,55 @@ class User extends Controller
             echo json_encode($msg);
         }
 //        echo "<pre>";var_dump($canUse);exit;
+    }
+
+    public function put_forward(){
+        $return = url('/userInfo');
+        $re = ['url'=>$return];
+        return view("index@user/putForward",['re'=>$re]);
+    }
+
+    public function pf_action(Request $request){
+        $num = $request->param('num');
+        $brokerage = $request->param('brokerage');
+        $pfNum = $num+$brokerage;
+        $user = $_SESSION['userinfo'];
+        $userId = $user->id;
+        $canUseAdd = \think\Db::table('yzt_points')
+            ->where('user_id',$userId)
+            ->where('type',1)
+            ->where('frozen_flag',1)
+            ->sum('count');
+
+        $canUseDel = \think\Db::table('yzt_points')
+            ->where('user_id',$userId)
+            ->where('type',0)
+            ->where('frozen_flag',1)
+            ->sum('count');
+        $canUse = $canUseAdd - $canUseDel;
+//        echo "<pre>";var_dump($canUse);exit;
+        if($canUse >= $pfNum){
+            $pfPoint['user_id'] = $userId;
+            $pfPoint['count'] = $pfNum;
+            $pfPoint['type'] = 0;
+            $pfPoint['get_type'] = 5;
+            $pfPoint['frozen_flag'] = 1;
+            $pfPoint['create_time'] = date('Y-m-d H:i:s',time());
+            $pointObj = new Points();
+            $re = $pointObj->save($pfPoint);
+            if($re){
+                $msg = ['type'=>'error','msg'=>'提现成功！'];
+                echo json_encode($msg);
+            }else{
+                $msg = ['type'=>'error','msg'=>'提现失败！'];
+                echo json_encode($msg);
+            }
+        }else{
+            $msg = ['type'=>'error','msg'=>'您的积分不足以提现这么多！'];
+            echo json_encode($msg);
+        }
+
+
 
     }
 

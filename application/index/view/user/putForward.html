@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>积分1</title>
+    <link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
+     <link rel="stylesheet" href="/public/indexsource/css/css2.css"/>
+    <script src="/public/indexsource/js/jquery.min.js"></script>
+    <script src="/public/indexsource/js/pic.js"></script>
+    <script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+</head>
+<body>
+<!--这是头部-->
+{include file="public/indexsource/head/header.html" /}
+
+
+
+<!--这是最外边的div，用来隔开与底部栏目的高度-->
+<div class="Cmain">
+    <!--这是用户个人中心的头部-->
+    <div class="mh"></div>
+    <div class="title_line line_bottom"><span class="line"></span>积分操作</div>
+   <div class="jifen1">
+   	<span><a class="put" href="#">立即提现</a></span>
+   </div>
+</div>
+
+<div class="tmtm"></div>
+
+<div class="jifen4">
+    <div class="brokerage" style="display: none;"></div>
+    <span>请输入需要提现金额</span>
+    <input class="number" type="number" name="number"/>
+    <i>积分</i><br>
+    <span style="margin-top:0.1rem;margin-left:17%;font-style: normal;font-size: 1rem;">另需手续费：<b id="brokerage">--</b><i>积分</i></span>
+    <span style="margin-top:0.1rem;margin-left:17%;font-style: normal;font-size: 1rem;">1元/积分</span>
+    <div>
+        <button type="button" class="button1"><a href="#">确定</a></button>
+        <button type="button" class="button2"><a href="#">取消</a></button>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $('.put').click(function () {
+            $(".jifen4").css("display", "block");
+            $(".tmtm").css("display", "block");
+        })
+
+        $(".button1").click(function() {
+            var num = $('.number').val();
+            num = parseInt(num);
+            var brokerage = Math.round(num*0.15*100)/100;
+            if(num  < 100){
+                return layer.msg('必须大于100才可提现',{icon:0,time:2000});
+            }
+            var data = {'num':num,'brokerage':brokerage};
+            $.ajax({
+                type: "GET",
+                url: '/pfAction',
+                data: data,
+                dataType: "json",
+                success: function(result){
+                    if(result.type == 'success'){
+                        layer.msg(result.msg,{icon:1,time:2000});
+                    }else{
+                        layer.msg(result.msg,{icon:0,time:2000});
+                    }
+
+                }
+            });
+
+            $(".jifen4").css("display", "none");
+            $(".tmtm").css("display", "none");
+        })
+
+        $(".button2").click(function() {
+            $(".jifen4").css("display", "none");
+            $(".tmtm").css("display", "none");
+        })
+
+        $('.number').keyup(function(){
+            var num = $(this).val();
+            var data = {'pfNum':num};
+            if(num != ''){
+                num = parseInt(num);
+                var brokerage = Math.round(num*0.15*100)/100;
+                $('#brokerage').html(brokerage);
+            }else{
+                $('#brokerage').html('--');
+            }
+        })
+    })
+</script>
+
+
+
+</body>
+</html>

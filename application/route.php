@@ -135,6 +135,8 @@ Route::group('',[
     'saveTrueName' => ['User/save_true_name', ['method' => 'post']],
     'openbank' => ['User/openbank', ['method' => 'get']],
     'saveOpenBank' => ['User/save_open_bank', ['method' => 'post']],
+    'putForward' => ['User/put_forward', ['method' => 'get']],
+    'pfAction' => ['User/pf_action', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

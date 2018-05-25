@@ -25,8 +25,8 @@
            {/if}
            <span class="user_info_name">{$re.userinfo.nickname}</span>
        </div>
-       <a href="/showNoUsePointList"><div class="user_jifen" style="bottom:4rem">积分：{$re.userinfo.allPoint}</div></a>
-      <a href="/showPointList"><div class="user_jifen" style="bottom:1.4rem">可提现积分：{$re.userinfo.allReturnMony}</div></a>
+       <a href="/showNoUsePointList"><div class="user_jifen" style="bottom:4rem">可用积分：{$re.userinfo.allPoint}</div></a>
+      <a href="/putForward"><div class="user_jifen" style="bottom:1.4rem">薪金宝：{$re.userinfo.allReturnMony}</div></a>
   </div>
   <ul class="user">
       <li>
@@ -38,8 +38,8 @@
           <a class="user_text" href="/myTrade">我的订单</a>
       </li>
       <li>
-          <div class="user_img"><a href="/showNoUsePointList"><img src="/public/indexsource/images/user3.jpg" alt=""/></a></div>
-          <a class="user_text" href="/showNoUsePointList">积分钱包</a>
+          <div class="user_img"><a href="/showPointList"><img src="/public/indexsource/images/user3.jpg" alt=""/></a></div>
+          <a class="user_text" href="/showPointList">积分钱包</a>
       </li>
       <li>
           <div class="user_img"><a href="/entrust"><img src="/public/indexsource/images/user4.jpg" alt=""/></a></div>
