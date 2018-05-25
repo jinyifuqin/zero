@@ -78,6 +78,8 @@ Route::group('admin',[
     'entrustAction' => ['admin/index/entrust_action', ['method' => 'post']],
     'selfPoint' => ['admin/index/self_point', ['method' => 'get']],
     'itemPrice' => ['admin/item/item_price', ['method' => 'get']],
+    'putForward' => ['admin/index/put_forward', ['method' => 'get']],
+    'confirmPf' => ['admin/index/confirm_pf', ['method' => 'post']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

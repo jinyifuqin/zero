@@ -11,6 +11,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Entrusts;
 use app\index\model\Addrs;
+use app\index\model\PutForwards;
 use app\index\model\Weixins;
 use app\index\model\Points;
 use app\index\model\Trades;
@@ -530,6 +531,12 @@ class User extends Controller
             $pfPoint['create_time'] = date('Y-m-d H:i:s',time());
             $pointObj = new Points();
             $re = $pointObj->save($pfPoint);
+            $pfArr['point_id'] = $pointObj->id;
+            $pfArr['count'] = $num;
+            $pfArr['user_id'] = $userId;
+            $pfObj = new PutForwards();
+            $pfObj->data($pfArr);
+            $pfObj->save();
             if($re){
                 $msg = ['type'=>'error','msg'=>'提现成功！'];
                 echo json_encode($msg);

@@ -23,4 +23,9 @@ class Points extends Model
         return $checktype[$value];
     }
 
+    public function users()
+    {
+        return $this->hasOne('Users','id','user_id');
+    }
+
 }

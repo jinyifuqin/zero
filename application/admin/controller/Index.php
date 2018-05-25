@@ -6,6 +6,7 @@ use app\admin\model\Discounts;
 use app\admin\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\Points;
+use app\index\model\PutForwards;
 use app\index\model\Trades;
 use app\index\model\Users;
 use think\Config;
@@ -640,6 +641,37 @@ class Index extends Controller
         $re = ['count'=>$count,'belong'=>$belong];
         return view("admin@index/selfPoint",['re'=>$re]);
 //        echo "<pre>";var_dump($list);exit;
+    }
+    
+    public function put_forward(){
+        $pfObj = PutForwards::all();
+
+        foreach ($pfObj as $k=>&$v){
+            $trueName = $v->users->truename;
+            $phone = $v->users->phone_number;
+            $collections = $v->users->collections;
+            $open_bank = $v->users->open_bank;
+            $v['trueName'] = $trueName;
+            $v['phone_number'] = $phone;
+            $v['collections'] = $collections;
+            $v['open_bank'] = $open_bank;
+        }
+//        echo "<pre>";var_dump($pObj);exit;
+        return view("admin@index/putForward",['re'=>$pfObj]);
+    }
+
+    public function confirm_pf(Request $request){
+        $id = $request->param('id');
+        $pfObj = PutForwards::get($id);
+        $pfObj->type = 1;
+        $re = $pfObj->save();
+        if($re){
+            $msg = array('status'=>'success');
+            echo json_encode($msg);
+        }else{
+            $msg = array('status'=>'error');
+            echo json_encode($msg);
+        }
     }
 
 
