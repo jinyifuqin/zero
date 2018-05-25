@@ -83,52 +83,14 @@
 		</div>
 		<script type="text/javascript">
 			$(function() {
-			    $('.number').keyup(function(){
-			        var num = $(this).val();
-			        var brokerageNum = parseInt(num);
-                    brokerageNum = Math.round(brokerageNum*100)/100;
-				})
-				$(".jifen3_1").click(function() {
-					$(".tmtm").css("display", "block");
-				})
-				$(".jifen3_1").click(function() {
-					$(".jifen4").css("display", "block");
-				})
-				$(".button1").click(function() {
-					$(".tmtm").css("display", "none");
-				})
-				$(".button1").click(function() {
-				    var number = $('.number').val();
-                    var getId = $('.userId').html();
-				    var data = {'number':number,'getId':getId};
-				    if(number == ''){
-                        layer.msg('请输入要赠送的积分数',{icon:0,time:2000});
-                        return false;
-                    }
-				    // console.log(data);return;
-                    $.ajax({
-                        type: "GET",
-                        url: '/givePointService',
-                        data: data,
-                        dataType: "json",
-                        success: function(result){
-                            if(result.type == 'success'){
-                                layer.msg(result.msg,{icon:1,time:2000});
-                            }else{
-                                layer.msg(result.msg,{icon:0,time:2000});
-                            }
 
-                        }
-                    });
+				$(".jifen3_1").click(function() {
+				    window.location.href = '/entrustShow';
+                    // $(".tmtm").css("display", "block");
+                    // $(".jifen4").css("display", "block");
+				})
 
-					$(".jifen4").css("display", "none");
-				})
-				$(".button2").click(function() {
-					$(".tmtm").css("display", "none");
-				})
-				$(".button2").click(function() {
-					$(".jifen4").css("display", "none");
-				})
+
 
 			})
 		</script>

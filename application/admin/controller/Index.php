@@ -3,7 +3,7 @@ namespace app\Admin\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
-use app\admin\model\Entrusts;
+use app\index\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\Points;
 use app\index\model\PutForwards;
@@ -548,47 +548,34 @@ class Index extends Controller
     public function entrust_member(){
         $info = $_SESSION['adminUserInfo'];
         $serverId = $info->id;
-        $memList = Users::all(['service_cent_id'=>$serverId]);
+        $enList = Entrusts::all(['service_id'=>$serverId]);
 //        $idArr = array_column($memList,'id');
-        $pObj = new Points();
-        $enObj = new Entrusts();
-        foreach ($memList as $k=>&$v){
-            $count = $pObj->where('user_id',"=",$v->id)
-                ->where('get_type',"=",4)
-                ->where('type',"=",0)
-                ->where('frozen_flag',"=",0)
-                ->sum('count');
-            if($count){
-                $v->entrustCount = $count;
-                $v->nickname = json_decode(urldecode($v->nickname));
-            }else{
-                unset($memList[$k]);
-            }
-            $ens = Entrusts::get(['user_id'=>$v->id]);
-            if($ens){
+        foreach ($enList as $k=>&$v){
+
+            $v->trueName = $v->users->truename;
+            $v->phone_number = $v->users->phone_number;
+            if($v->type == '已接受' || $v->type == '已拒绝'){
                 $v->entrustType = true;
             }else{
                 $v->entrustType = false;
             }
 
         }
-//        echo "<pre>";var_dump($memList);exit;
-        return view("admin@index/entrustMember",['list'=>$memList]);
+//        echo "<pre>";var_dump($enList);exit;
+        return view("admin@index/entrustMember",['list'=>$enList]);
     }
 
     public function entrust_action(Request $request){
         $post = $request->param();
         $info = $_SESSION['adminUserInfo'];
-        $serverId = $info->id;
         $memId = trim($post['memId']);
-        $entrustCount = trim($post['entrustCount']);
+        $enId = $request->param('id');
         $type = $request->param('type');
+        $pId = $request->param('pointId');
         if($type == 'add'){
-            $enObj = new Entrusts();
-            $enList['service_id'] = $serverId;
-            $enList['count'] = $entrustCount;
-            $enList['user_id'] = $memId;
-            $re = $enObj->save($enList);
+            $enObj = Entrusts::get($enId);
+            $enObj->type = 1;
+            $re = $enObj->save();
             if($re){
                 $msg = array('status'=>'success');
                 echo json_encode($msg);
@@ -597,13 +584,11 @@ class Index extends Controller
                 echo json_encode($msg);
             }
         }else{
-            $entrust = Points::get([
-                'user_id'=>$memId,
-                'type'=>0,
-                'get_type'=>4,
-                'frozen_flag'=>0
-            ]);
-            $re = $entrust->delete();
+            $p = Points::get($pId);
+            $re = $p->delete();
+            $enObj = Entrusts::get($enId);
+            $enObj->type = 2;
+            $re = $enObj->save();
             if($re){
                 $msg = array('status'=>'success');
                 echo json_encode($msg);
@@ -626,6 +611,7 @@ class Index extends Controller
         $serverId = $info->id;
         $count = \think\Db::table('yzt_entrusts')
             ->where('service_id',$serverId)
+            ->where('type',1)
             ->sum('count');
         if($list['DLow'] <= $count && $count <= $list['DHeight']){
             $belong = "D级";

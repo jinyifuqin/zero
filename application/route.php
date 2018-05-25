@@ -139,6 +139,7 @@ Route::group('',[
     'saveOpenBank' => ['User/save_open_bank', ['method' => 'post']],
     'putForward' => ['User/put_forward', ['method' => 'get']],
     'pfAction' => ['User/pf_action', ['method' => 'get']],
+    'entrustShow' => ['User/entrust_show', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

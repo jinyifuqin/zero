@@ -9,7 +9,7 @@
 namespace app\index\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
-use app\admin\model\Entrusts;
+use app\index\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\PutForwards;
 use app\index\model\Weixins;
@@ -459,12 +459,20 @@ class User extends Controller
         }
     }
 
+    public function entrust_show(){
+        $return = url('/userInfo');
+        $curl = "userinfo";
+        $ens = Entrusts::all();
+        $re = ['url'=>$return,'footType'=>$curl,'list'=>$ens];
+        return view("index@user/entrustShow",['re'=>$re]);
+    }
+
     public function give_point_service(Request $request){
         $userInfo = $_SESSION['userinfo'];
         $userId = $userInfo->id;
-//        $info = Users::get($userId);
+        $info = Users::get($userId);
         $count = $request->param('number');
-        $serviceId = $request->param('getId');
+        $serviceId = $info->service_cent_id;
         $pObj = new Points();
         $canUseAdd = $pObj->where('user_id',"=",$userId)
             ->where('type',"=",1)
@@ -483,6 +491,13 @@ class User extends Controller
             $givePoint['frozen_flag'] = 0;
             $givePoint['create_time'] = date('Y-m-d H:i:s',time());
             $re = $pObj->save($givePoint);
+            $enObj = new Entrusts();
+            $enList['service_id'] = $serviceId;
+            $enList['count'] = $count;
+            $enList['user_id'] = $userId;
+            $enList['type'] = 0;
+            $enList['point_id'] = $pObj->id;
+            $re1 = $enObj->save($enList);
             if($re){
                 $msg = ['type'=>'success','msg'=>'恭喜你，申请委托成功，等待服务中心确认！'];
                 echo json_encode($msg);

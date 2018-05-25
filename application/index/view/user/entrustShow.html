@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>解除托管</title>
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/css2.css" />
+		<script src="/public/indexsource/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+		<script src="/public/indexsource/js/pic.js"></script>
+		<style>
+			body{
+				background: white;
+			}
+			.zdy{
+				float:left;width:40%;
+				text-align: center;
+				padding: 1rem 0 1rem 0;
+				background: #7ecef4;
+				margin-left:1rem;
+				margin-top:1rem;
+				color:white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--这是头部-->
+		{include file="public/indexsource/head/header.html" /}
+
+		<!--这是最外边的div，用来隔开与底部栏目的高度-->
+		<div class="Cmain">
+			<!--这是用户个人中心的头部-->
+
+			<div class="mh"></div>
+			<div class="title_line line_bottom"><span class="line"></span>委托操作</div>
+			<div class="tuoguan">
+				<div class="zdy wt">委托</div>
+				<div class="zdy jc" style="float:right;margin-right:1rem;background: #91cd9e">解除委托</div>
+			</div>
+
+
+
+
+
+			<div class="tmtm"></div>
+			<div class="jifen4">
+				<div class="brokerage" style="display: none;"></div>
+				<span>委托</span>
+				<input class="number" type="number" name="number"/>
+				<i>积分</i><br>
+				<!--<span style="margin-top:1rem;margin-left:17%;font-style: normal;font-size: 1rem;">需要手续费：<b id="brokerage">&#45;&#45;</b><i>积分</i></span>-->
+				<div>
+					<button type="button" class="button1"><a href="#">确定</a></button>
+					<button type="button" class="button2"><a href="#">取消</a></button>
+				</div>
+			</div>
+			<div class="tmtm"></div>
+		</div>
+		{foreach $re.list as $vo}
+		<div class="jifen2">
+			<div class="jifen2_1"><span>冻结{$vo.count}积分</span>
+				<i>{$vo.type}</i><font></font>
+			</div>
+		</div>
+		{/foreach}
+		<script type="text/javascript">
+			$(function() {
+                $(".wt").click(function() {
+                    $(".tmtm").css("display", "block");
+                    $(".jifen4").css("display", "block");
+                })
+
+                $(".button1").click(function() {
+                    $(".tmtm").css("display", "none");
+
+                    var number = $('.number').val();
+                    var getId = $('.userId').html();
+                    var data = {'number':number,'getId':getId};
+                    if(number == ''){
+                        layer.msg('请输入要赠送的积分数',{icon:0,time:2000});
+                        return false;
+                    }
+                    // console.log(data);return;
+                    $.ajax({
+                        type: "GET",
+                        url: '/givePointService',
+                        data: data,
+                        dataType: "json",
+                        success: function(result){
+                            if(result.type == 'success'){
+                                layer.msg(result.msg,{icon:1,time:2000});
+                                setTimeout(function(){window.location.reload()},1000);
+                            }else{
+                                layer.msg(result.msg,{icon:0,time:2000});
+                                setTimeout(function(){window.location.reload()},1000);
+                            }
+
+                        }
+                    });
+
+                    $(".jifen4").css("display", "none");
+                })
+
+                $(".button2").click(function() {
+                    $(".tmtm").css("display", "none");
+                    $(".jifen4").css("display", "none");
+                })
+
+
+
+			})
+		</script>
+
+		<!--底部-->
+		{include file="public/indexsource/foot/footer.html" /}
+	</body>
+
+</html>

@@ -26,23 +26,27 @@
 		{foreach $list as $vo}
 		<tr class="text-c">
 			<td class="memId">{$vo.id}</td>
-			<td>{$vo.nickname}</td>
+			<td>{$vo.trueName}</td>
 			<td class="entrustCount">
-				{$vo.entrustCount}
+				{$vo.count}
 			</td>
 			<td>
 				{$vo.phone_number}
 			</td>
 			<td class="f-14">
-				{if condition="($vo.entrustType == true)"}
+				{if condition="($vo.type == '已接受')"}
 				<span>
 					已接受委托
 				</span>
+				{elseif condition="$vo.type eq '已拒绝'"/}
+				<span>
+					已拒绝委托
+				</span>
 				{else /}
-				<a title="接受" href="javascript:;" onclick="entrustAction('接受',this,'add')" style="text-decoration:none">
+				<a title="接受" href="javascript:;" onclick="entrustAction('接受',this,'add','{$vo.id}','{$vo.user_id}','{$vo.point_id}')" style="text-decoration:none">
 					<i class="Hui-iconfont">&#xe615;</i>
 				</a>
-				<a title="拒绝" href="javascript:;" onclick="entrustAction('拒绝',this,'del')" style="text-decoration:none">
+				<a title="拒绝" href="javascript:;" onclick="entrustAction('拒绝',this,'del','{$vo.id}','{$vo.user_id}','{$vo.point_id}')" style="text-decoration:none">
 					<i class="Hui-iconfont">&#xe66b;</i>
 				</a>
 				{/if}
@@ -64,13 +68,11 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="/public/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-	function entrustAction(title,t,type){
+	function entrustAction(title,t,type,id,userId,pointId){
 	    var typeMsg = type == 'add'?'确认接受该用户委托吗？':'确认拒绝该用户委托吗？';
         layer.confirm(typeMsg,function(index){
             var p = $(t).parents('.text-c');
-            var memId = p.find('.memId').html();
-            var entrustCount = p.find('.entrustCount').html();
-            var data = {'memId':memId,'entrustCount':entrustCount,'type':type};
+            var data = {'id':id,'memId':userId,'type':type,'pointId':pointId};
             $.ajax({
                 type: "POST",
                 url: '/admin/entrustAction',

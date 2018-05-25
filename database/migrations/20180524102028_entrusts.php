@@ -31,7 +31,9 @@ class Entrusts extends Migrator
         $table = $this->table('entrusts',array('engine'=>'MyISAM'));
         $table->addColumn('count', 'string',array('default'=>'','comment'=>'委托积分数'))
             ->addColumn('service_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'服务中心ID'))
+            ->addColumn('point_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'积分ID'))
             ->addColumn('user_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'用户ID'))
+            ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'0未接受/1已接受'))//0未提现1已提现
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'时间'))
 //            ->addIndex(array('trade_number'), array('unique' => true))
             ->create();
