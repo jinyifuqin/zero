@@ -11,6 +11,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Cats;
 use app\admin\model\Items;
+use think\Config;
 use \think\Controller;
 use think\Request;
 
@@ -19,7 +20,9 @@ class Item  extends Controller
     public function __construct(Request $request = null)
     {
         session_start();
-//        unset($_SESSION['adminUserInfo']);
+        $configName = 'config.xml';
+        $this->configPath = APP_PATH.'admin'.DS.'config'.DS.$configName;
+        Config::load($this->configPath);
         parent::__construct($request);
     }
 
@@ -246,6 +249,38 @@ class Item  extends Controller
             $msg = array('status'=>'fails');
         }
         echo json_encode($msg);
+    }
+
+    public function item_price(){
+        $items = Items::all();
+        $list['ALow'] = config('setALow');
+        $list['BLow'] = config('setBLow');
+        $list['BHeight'] = config('setBHeight');
+        $list['CLow'] = config('setCLow');
+        $list['CHeight'] = config('setCHeight');
+        $list['DLow'] = config('setDLow');
+        $list['DHeight'] = config('setDHeight');
+        $info = $_SESSION['adminUserInfo'];
+        $serverId = $info->id;
+        $count = \think\Db::table('yzt_entrusts')
+            ->where('service_id',$serverId)
+            ->sum('count');
+
+        if($list['DLow'] <= $count && $count <= $list['DHeight']){
+            $belong = "D";
+        }elseif($list['CLow'] <= $count && $count <= $list['CHeight']){
+            $belong = "C";
+        }elseif($list['BLow'] <= $count && $count <= $list['BHeight']){
+            $belong = "B";
+        }elseif($list['ALow'] <= $count){
+            $belong = "A";
+        }else{
+            $belong = "null";
+        }
+        
+        $re = ['items'=>$items,'level'=>$belong];
+//        echo "<pre>";var_dump($list);exit;
+        return view("admin@index/itemPrice",['re'=>$re]);
     }
 
 }

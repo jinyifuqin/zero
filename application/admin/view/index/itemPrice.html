@@ -1,0 +1,121 @@
+{include file="public/admins/head/head.html" /}
+<script type="text/javascript" src="/public/indexsource/js/jquery.min.js"></script>
+<title>角色管理</title>
+</head>
+<body>
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i>
+	首页
+	<span class="c-gray en">&gt;</span>
+	管理员管理
+	<span class="c-gray en">&gt;</span>
+	价格
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray">
+
+		<!--<span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
+	<table class="table table-border table-bordered table-hover table-bg">
+		<thead>
+		<tr>
+			<th scope="col" colspan="6">商品价格</th>
+		</tr>
+		<tr class="text-c">
+			<!--<th width="25"><input type="checkbox" value="" name=""></th>-->
+			<th width="40">ID</th>
+			<th width="200">商品名称</th>
+			<!--<th>积分范围</th>-->
+			<th width="300">描述</th>
+			<th>商品价格</th>
+		</tr>
+		</thead>
+		<tbody>
+		{foreach $re.items as $vo}
+		<tr class="text-c">
+
+			<td>{$vo.id}</td>
+			<td>{$vo.name}</td>
+			<td>
+				<img style="width:30%;" src="/public/uploads/{$vo.pic}">
+			</td>
+			{switch name="$re.level" }
+			{case value="A" break="1"}<td>{$vo.a_price}元</td>{/case}
+			{case value="B" break="1"}<td>{$vo.b_price}元</td>{/case}
+			{case value="C" break="1"}<td>{$vo.c_price}元</td>{/case}
+			{case value="D" break="1"}<td>{$vo.d_price}元</td>{/case}
+			{default /}<td>{$vo.price}元</td>
+			{/switch}
+
+		</tr>
+		{/foreach}
+
+		</tbody>
+	</table>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/public/admins/lib/jquery/onenineone/jquery.min.js"></script>
+<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+<script type="text/javascript" src="/public/admins/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/public/admins/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+	function phoneSave(title,t){
+        var p = $(t).parents('.text-c');
+        var inp = p.find('input');
+        var ph = inp.val();
+        var data = {'phone':ph};
+        $.ajax({
+            type: "POST",
+            url: '/admin/serverPhoneSave',
+            data: data,
+            dataType: "json",
+            success: function(data){
+                if(data.status == 'success'){
+                    layer.msg('设置成功!',{icon:1,time:1000});
+                }else{
+                    layer.msg('设置失败!',{icon:2,time:1000});
+                }
+            }
+        });
+	}
+
+    function openBrowse(){
+        var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false;
+        if(ie){
+            document.getElementById("file").click();
+        }else{
+            var a=document.createEvent("MouseEvents");//FF的处理
+            a.initEvent("click", true, true);
+            document.getElementById("file").dispatchEvent(a);
+        }
+    }
+
+    function handleFiles(e){
+        var formData = new FormData();
+        formData.append('file',e[0]);
+        var url = '/admin/saveQr';
+        var qrPic = $('#qrPic');
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+        }).success(function (data) {
+            data = JSON.parse(data);
+            qrPic.attr('src','/public/uploads/'+data.path);
+            layer.msg('个人二维码上传成功！',{icon:1,time:1000});
+        }).error(function () {
+            layer.msg('个人二维码上传失败！',{icon:2,time:1000});
+        });
+
+    }
+</script>
+</body>
+</html>

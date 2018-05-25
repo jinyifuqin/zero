@@ -77,6 +77,7 @@ Route::group('admin',[
     'entrustMember' => ['admin/index/entrust_member', ['method' => 'get']],
     'entrustAction' => ['admin/index/entrust_action', ['method' => 'post']],
     'selfPoint' => ['admin/index/self_point', ['method' => 'get']],
+    'itemPrice' => ['admin/item/item_price', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
