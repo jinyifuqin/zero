@@ -9,6 +9,7 @@
 namespace app\index\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
+use app\admin\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\Weixins;
 use app\index\model\Points;
@@ -403,7 +404,16 @@ class User extends Controller
             $serviceInfo = Adminusers::get($serviceId);
             $return = url('/userInfo');
             $curl = "userinfo";
-            $re = ['url'=>$return,'footType'=>$curl,'info'=>$serviceInfo];
+            $enRe = Entrusts::get(['user_id'=>$uId]);
+            $wtFlag = Points::get(['user_id'=>$uId,'get_type'=>4]);
+            if($wtFlag && $enRe){
+                $msg = '已接收委托';
+            }elseif($wtFlag && !$enRe){
+                $msg = '等待接受';
+            }else{
+                $msg = '未申请';
+            }
+            $re = ['url'=>$return,'footType'=>$curl,'info'=>$serviceInfo,'msg'=>$msg];
 //            echo "<pre>";var_dump($serviceInfo);exit;
             return view("index@user/entrust",['re'=>$re]);
         }

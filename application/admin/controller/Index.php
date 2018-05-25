@@ -550,6 +550,7 @@ class Index extends Controller
         $memList = Users::all(['service_cent_id'=>$serverId]);
 //        $idArr = array_column($memList,'id');
         $pObj = new Points();
+        $enObj = new Entrusts();
         foreach ($memList as $k=>&$v){
             $count = $pObj->where('user_id',"=",$v->id)
                 ->where('get_type',"=",4)
@@ -562,7 +563,12 @@ class Index extends Controller
             }else{
                 unset($memList[$k]);
             }
-
+            $ens = Entrusts::get(['user_id'=>$v->id]);
+            if($ens){
+                $v->entrustType = true;
+            }else{
+                $v->entrustType = false;
+            }
 
         }
 //        echo "<pre>";var_dump($memList);exit;
@@ -605,8 +611,35 @@ class Index extends Controller
                 echo json_encode($msg);
             }
         }
+    }
 
-
+    public function self_point(){
+        $list['ALow'] = config('setALow');
+        $list['BLow'] = config('setBLow');
+        $list['BHeight'] = config('setBHeight');
+        $list['CLow'] = config('setCLow');
+        $list['CHeight'] = config('setCHeight');
+        $list['DLow'] = config('setDLow');
+        $list['DHeight'] = config('setDHeight');
+        $info = $_SESSION['adminUserInfo'];
+        $serverId = $info->id;
+        $count = \think\Db::table('yzt_entrusts')
+            ->where('service_id',$serverId)
+            ->sum('count');
+        if($list['DLow'] <= $count && $count <= $list['DHeight']){
+            $belong = "D级";
+        }elseif($list['CLow'] <= $count && $count <= $list['CHeight']){
+            $belong = "C级";
+        }elseif($list['BLow'] <= $count && $count <= $list['BHeight']){
+            $belong = "B级";
+        }elseif($list['ALow'] <= $count){
+            $belong = "A级";
+        }else{
+            $belong = "无等级（通过普通会员托管获取积分，提升等级）";
+        }
+        $re = ['count'=>$count,'belong'=>$belong];
+        return view("admin@index/selfPoint",['re'=>$re]);
+//        echo "<pre>";var_dump($list);exit;
     }
 
 

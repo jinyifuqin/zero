@@ -34,12 +34,20 @@
 				{$vo.phone_number}
 			</td>
 			<td class="f-14">
+				{if condition="($vo.entrustType == true)"}
+				<span>
+					已接受委托
+				</span>
+				{else /}
 				<a title="接受" href="javascript:;" onclick="entrustAction('接受',this,'add')" style="text-decoration:none">
 					<i class="Hui-iconfont">&#xe615;</i>
 				</a>
 				<a title="拒绝" href="javascript:;" onclick="entrustAction('拒绝',this,'del')" style="text-decoration:none">
 					<i class="Hui-iconfont">&#xe66b;</i>
 				</a>
+				{/if}
+
+
 			</td>
 		</tr>
 		{/foreach}

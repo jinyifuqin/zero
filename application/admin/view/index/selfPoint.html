@@ -1,0 +1,91 @@
+﻿{include file="public/admins/head/head.html" /}
+<script type="text/javascript" src="/public/indexsource/js/jquery.min.js"></script>
+<title>个人积分</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 个人积分 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray">
+
+		<span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<table class="table table-border table-bordered table-hover table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="6">服务中心</th>
+			</tr>
+			<tr class="text-c">
+				<th width="60%">个人积分数：</th>
+				<th>{$re.count}</th>
+			</tr>
+			<tr class="text-c">
+				<th width="60%">所属等级：</th>
+				<th>{$re.belong}</th>
+			</tr>
+		</thead>
+
+	</table>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/public/admins/lib/jquery/onenineone/jquery.min.js"></script>
+<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+<script type="text/javascript" src="/public/admins/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="/public/admins/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+/*管理员-角色-添加*/
+function lowHeightSave(title,i,obj){
+    var p = $(i).parents('.text-c');
+    var inp = p.find('input');
+    if(inp.length == 1){
+        var data = {'low':inp.val(),'obj':obj};
+	}else{
+        var data = {'low':inp.eq(0).val(),'height':inp.eq(1).val(),'obj':obj};
+	}
+	var url = '/admin/lowHeightSave';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "json",
+        success: function(data){
+            if(data.status == 'success'){
+                layer.msg('设置成功!',{icon:1,time:1000});
+            }else{
+                layer.msg('设置失败!',{icon:2,time:1000});
+            }
+            // setTimeout(function(){
+                // var index = parent.layer.getFrameIndex(window.name);
+                // parent.$('.btn-refresh').click();
+                // window.location.reload();
+                // parent.layer.close(index);
+            // },2000);
+
+        }
+    });
+}
+/*管理员-角色-编辑*/
+function admin_role_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+/*管理员-角色-删除*/
+function admin_role_del(obj,id){
+	layer.confirm('角色删除须谨慎，确认要删除吗？',function(index){
+		$.ajax({
+			type: 'POST',
+			url: '',
+			dataType: 'json',
+			success: function(data){
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+</script>
+</body>
+</html>

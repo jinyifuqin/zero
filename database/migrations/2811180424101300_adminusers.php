@@ -36,7 +36,7 @@ class Adminusers extends Migrator
             ->addColumn('sex', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'性别'))
             ->addColumn('type', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'账号类型0服务中心1超级管理员'))
             ->addColumn('phone_number', 'string',array('default'=>0,'comment'=>'手机号'))
-            ->addColumn('point_count', 'string',array('default'=>'','comment'=>'积分数'))
+            ->addColumn('point_count', 'string',array('default'=>'','comment'=>'积分数'))//预废弃
             ->addColumn('email', 'string',array('default'=>'','comment'=>'邮箱'))
             ->addColumn('qrcode', 'string',array('default'=>'','comment'=>'二维码'))
             ->addColumn('last_login_ip', 'string',array('default'=>'','comment'=>'最后登录IP'))
