@@ -207,6 +207,45 @@ class User extends Controller
 
     }
 
+    public function truename(){
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $url = url('/selfInfo');
+        $re = ['url'=>$url,'info'=>$userObj];
+        return view("index@user/truename",['re'=>$re]);
+    }
+
+    public function save_true_name(Request $request){
+        $name = $request->param('truename');
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $userObj->truename = $name;
+        $re = $userObj->save();
+        if($re){
+            $this->redirect('/selfInfo');
+        }
+    }
+    
+    public function openbank(){
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $url = url('/selfInfo');
+        $re = ['url'=>$url,'info'=>$userObj];
+//        echo "<pre>";var_dump($userObj);exit;
+        return view("index@user/openbank",['re'=>$re]);
+    }
+
+    public function save_open_bank(Request $request){
+        $name = $request->param('openbank');
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $userObj->open_bank = $name;
+        $re = $userObj->save();
+        if($re){
+            $this->redirect('/selfInfo');
+        }
+    }
+
     public function account_number(){
         $userId = $_SESSION['userinfo']->id;
         $userObj = Users::get(['id' => $userId]);

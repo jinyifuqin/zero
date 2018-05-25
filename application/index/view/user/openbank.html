@@ -16,20 +16,21 @@
 		<link rel="stylesheet" href="/public/indexsource/css/css2.css" />
 		<script src="/public/indexsource/js/pic.js"></script>
 		<script type="text/javascript" src="/public/indexsource/address/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
 	</head>
 
 	<body class="bjhs2">
 	{include file="public/indexsource/head/header.html" /}
-	<form action="/saveCollections" method="post">
+	<form action="/saveOpenBank" method="post">
 		<div class="big_qb">
 			<div class="qq_qb">
-				<span>银行卡号：</span>
-				{if condition="(isset($re.collections))"}
-				<input type="text" style="width:95%" class="shuru" name="collections" placeholder="{$re.collections}" value="{$re.collections}">
+				<span>开户行：</span>
+				{if condition="(isset($re.info.open_bank))"}
+				<input type="text" style="width:95%" class="shuru" name="openbank" placeholder="{$re.info.open_bank}" value="{$re.info.open_bank}"></input>
 				{else /}
-				<input type="text" style="width:95%" class="shuru" name="collections" placeholder="这里输入">
+				<input type="text" style="width:95%" class="shuru" name="openbank" placeholder="这里输入"></input>
 				{/if}
-				<font>请输入你的手机号</font>
+				<font>请输入您开户银行，方便收款</font>
 			</div>
 			<div class="quedingan"><a href="#">确定</a></div>
 		</div>
@@ -38,8 +39,10 @@
 
 <script>
 	$(function(){
-	    $('.quedingan a').click(function(){
-	        $('form').submit();
+        $('.quedingan a').click(function(e){
+	        e.preventDefault();
+	        var form = $('form');
+	        form.submit();
 		})
 	})
 </script>
