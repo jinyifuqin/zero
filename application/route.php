@@ -140,6 +140,7 @@ Route::group('',[
     'putForward' => ['User/put_forward', ['method' => 'get']],
     'pfAction' => ['User/pf_action', ['method' => 'get']],
     'entrustShow' => ['User/entrust_show', ['method' => 'get']],
+    'surePart' => ['User/sure_part', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

@@ -23,6 +23,14 @@
 				margin-top:1rem;
 				color:white;
 			}
+			.jifen5 span{
+				font-size: 1.3rem;
+				color: #faa73f;
+				display: block;
+				margin-top: 2rem;
+				text-align: left;
+				margin-left: 10%;
+			}
 		</style>
 	</head>
 
@@ -53,7 +61,15 @@
 				<i>积分</i><br>
 				<span style="margin-top:1rem;margin-left:17%;font-style: normal;font-size: 1rem;">需要手续费：<b id="brokerage">--</b><i>积分</i></span>
 				<div>
-					<button type="button" class="button1"><a href="#">确定</a></button>
+					<button type="button" class="button1 x"><a href="#">确定</a></button>
+					<button type="button" class="button2"><a href="#">取消</a></button>
+				</div>
+			</div>
+			<div class="jifen5">
+				<span>解除委托</span>
+				<span style="margin-top:1rem;margin-left:17%;font-style: normal;font-size: 1rem;">是否解除委托？</span>
+				<div>
+					<button type="button" class="button1 y"><a href="#">确定</a></button>
 					<button type="button" class="button2"><a href="#">取消</a></button>
 				</div>
 			</div>
@@ -85,7 +101,7 @@
                     $(".jifen4").css("display", "block");
                 })
 
-                $(".button1").click(function() {
+                $(".button1.x").click(function() {
                     $(".tmtm").css("display", "none");
 
                     var number = $('.number').val();
@@ -120,6 +136,33 @@
                 $(".button2").click(function() {
                     $(".tmtm").css("display", "none");
                     $(".jifen4").css("display", "none");
+                })
+
+				$('.jc').click(function(){
+                    $(".tmtm").css("display", "block");
+                    $(".jifen5").css("display", "block");
+				})
+
+                $(".button1.y").click(function() {
+                    $(".tmtm").css("display", "none");
+                    // console.log(data);return;
+                    $.ajax({
+                        type: "GET",
+                        url: '/surePart',
+                        dataType: "json",
+                        success: function(result){
+                            if(result.type == 'success'){
+                                layer.msg(result.msg,{icon:1,time:2000});
+                                setTimeout(function(){window.location.reload()},1000);
+                            }else{
+                                layer.msg(result.msg,{icon:0,time:2000});
+                                setTimeout(function(){window.location.reload()},1000);
+                            }
+
+                        }
+                    });
+
+                    $(".jifen5").css("display", "none");
                 })
 
 

@@ -568,9 +568,45 @@ class User extends Controller
             $msg = ['type'=>'error','msg'=>'您的积分不足以提现这么多！'];
             echo json_encode($msg);
         }
+    }
 
-
-
+    public function sure_part(){
+        $user = $_SESSION['userinfo'];
+        $userId = $user->id;
+        $e = new Entrusts();
+        $first = $e->where('user_id', $userId)
+            ->limit(1)
+            ->order('create_time', 'asc')
+            ->column('create_time');
+        $first = $first[0];
+        $checkTime = strtotime("+3 months", strtotime($first));
+        $count = $e->where('user_id',$userId)
+            ->where('type','in','0,1')
+            ->sum('count');
+//        echo "<pre>";var_dump($count);exit;
+        if($checkTime < time()){
+            $partPoint['user_id'] = $userId;
+            $partPoint['count'] = $count;
+            $partPoint['type'] = 1;
+            $partPoint['get_type'] = 4;
+            $partPoint['frozen_flag'] = 0;
+            $partPoint['create_time'] = date('Y-m-d H:i:s',time());
+            $pObj = new Points();
+            $pObj->data($partPoint);
+            $re = $pObj->save();
+            $re2 = Entrusts::destroy(['user_id' => $userId]);
+            if($re && $re2){
+                $msg = ['type'=>'success','msg'=>'解除托管成功！'];
+                echo json_encode($msg);
+            }else{
+                $msg = ['type'=>'error','msg'=>'解除托管失败！'];
+                echo json_encode($msg);
+            }
+        }else{
+            $msg = ['type'=>'error','msg'=>'观察期，三个月之后才可解除！'];
+            echo json_encode($msg);
+        }
+//        echo "<pre>";var_dump($count);exit;
     }
 
 }
