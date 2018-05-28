@@ -581,12 +581,16 @@ class User extends Controller
             ->limit(1)
             ->order('create_time', 'asc')
             ->column('create_time');
+        if(empty($first)){
+            $msg = ['type'=>'error','msg'=>'你们之间没有委托关系！'];
+            echo json_encode($msg);exit;
+        }
         $first = $first[0];
         $checkTime = strtotime("+3 months", strtotime($first));
         $count = $e->where('user_id',$userId)
             ->where('type','in','0,1')
             ->sum('count');
-//        echo "<pre>";var_dump($count);exit;
+
         if($checkTime < time()){
             $partPoint['user_id'] = $userId;
             $partPoint['count'] = $count;
