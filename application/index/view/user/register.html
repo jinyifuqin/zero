@@ -32,7 +32,15 @@
 				<div class="tm_bottom"></div>
 				<div class="dlimg11 dlimg"><span>确定登录密码</span><input id="dbpsw" name="checkpassword" type="password" placeholder="请确定登录密码 " /></div>
 				<div class="tm_bottom"></div>
-				<div class="dlimg11 dlimg"><span>姓名/昵称</span><input name="nickname" type="text" placeholder="请输入姓名/昵称 " /></div>
+				<div class="dlimg11 dlimg">
+					<span>昵称</span>
+					<input name="nickname" type="text" placeholder="请输入昵称 " />
+				</div>
+				<div class="tm_bottom"></div>
+				<div class="dlimg11 dlimg">
+					<span>真实姓名</span>
+					<input name="truename" type="text" placeholder="请输入真实姓名 " />
+				</div>
 
 			</div>
 			<div class="nannv">
@@ -76,6 +84,16 @@
 			    var data = form.serialize();
 			    var status = $('#radio-1-1').prop('checked');
 			    if(status){
+					var flag = true;
+                    $('input').each(function(){
+                        if($(this).val() == ''){
+                            flag = false;
+                            return false;
+                        }
+					})
+					if(flag  == false){
+                        return layer.msg('请填写完整资料',{icon:0,time:2000});
+					}
 			        if($('#psw').val() == $('#dbpsw').val()){
                         $.ajax({
                             type: "POST",

@@ -135,14 +135,14 @@ Route::group('',[
     'serviceCent' => ['User/service_cent', ['method' => 'get']],
     'entrust' => ['User/entrust', ['method' => 'get']],
     'givePointService' => ['User/give_point_service', ['method' => 'get']],
-    'truename' => ['User/truename', ['method' => 'get']],
-    'saveTrueName' => ['User/save_true_name', ['method' => 'post']],
+    'saveNickname' => ['User/save_nickname', ['method' => 'post']],
     'openbank' => ['User/openbank', ['method' => 'get']],
     'saveOpenBank' => ['User/save_open_bank', ['method' => 'post']],
     'putForward' => ['User/put_forward', ['method' => 'get']],
     'pfAction' => ['User/pf_action', ['method' => 'get']],
     'entrustShow' => ['User/entrust_show', ['method' => 'get']],
     'surePart' => ['User/sure_part', ['method' => 'get']],
+    'nickname' => ['User/nickname', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

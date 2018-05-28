@@ -76,6 +76,7 @@ class User extends Controller
             $data['nickname'] = urlencode(json_encode($post['nickname']));
             $data['sex'] = $post['sex'];
             $data['openid'] = $post['username'];
+            $data['truename'] = $post['truename'];
             $userObj = new Users();
             $userObj->data($data);
             $re = $userObj->save();
@@ -208,19 +209,21 @@ class User extends Controller
 
     }
 
-    public function truename(){
+    public function nickname(){
         $userId = $_SESSION['userinfo']->id;
         $userObj = Users::get(['id' => $userId]);
+        $userObj->nickname = json_decode(urldecode($userObj->nickname));
         $url = url('/selfInfo');
         $re = ['url'=>$url,'info'=>$userObj];
-        return view("index@user/truename",['re'=>$re]);
+        return view("index@user/nickname",['re'=>$re]);
     }
 
-    public function save_true_name(Request $request){
-        $name = $request->param('truename');
+    public function save_nickname(Request $request){
+        $name = $request->param('nickname');
+        $name = urlencode(json_encode($name));
         $userId = $_SESSION['userinfo']->id;
         $userObj = Users::get(['id' => $userId]);
-        $userObj->truename = $name;
+        $userObj->nickname = $name;
         $re = $userObj->save();
         if($re){
             $this->redirect('/selfInfo');

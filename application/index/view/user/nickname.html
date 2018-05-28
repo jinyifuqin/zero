@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=10" />
-		<title>资料编辑姓名</title>
+		<title>资料编辑昵称</title>
 		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="/public/indexsource/js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
@@ -21,16 +21,16 @@
 
 	<body class="bjhs2">
 	{include file="public/indexsource/head/header.html" /}
-	<form action="/saveTrueName" method="post">
+	<form action="/saveNickname" method="post">
 		<div class="big_qb">
 			<div class="qq_qb">
-				<span>真实姓名：</span>
-				{if condition="(isset($re.info.truename))"}
-				<input type="text" style="width:95%" class="shuru" name="truename" placeholder="{$re.info.truename}" value="{$re.info.truename}"></input>
+				<span>昵称：</span>
+				{if condition="(isset($re.info.nickname))"}
+				<input type="text" style="width:95%" class="shuru" name="nickname" placeholder="{$re.info.nickname}" value="{$re.info.nickname}"></input>
 				{else /}
-				<input type="text" style="width:95%" class="shuru" name="truename" placeholder="这里输入"></input>
+				<input type="text" style="width:95%" class="shuru" name="nickname" placeholder="这里输入"></input>
 				{/if}
-				<font>请输入您真实的姓名，方便收款</font>
+				<font>请输入您的昵称</font>
 			</div>
 			<div class="quedingan"><a href="#">确定</a></div>
 		</div>
