@@ -38,9 +38,9 @@
     <div class="Appbanner">
         <div class="flexslider">
             <ul class="slides">
-                <li style="background:url(/public/indexsource/images/banner1.jpg)  no-repeat;background-size: 100% 100%"></li>
-                <li style="background:url(/public/indexsource/images/banner2.jpg) no-repeat;background-size: 100% 100%"></li>
-                <li style="background:url(/public/indexsource/images/banner3.jpg)no-repeat;background-size: 100% 100%"></li>
+                {foreach $re.indexPic as $vo}
+                <li style="background:url(/public/uploads/{$vo.pic})  no-repeat;background-size: 100% 100%"></li>
+                {/foreach}
             </ul>
         </div>
     </div>

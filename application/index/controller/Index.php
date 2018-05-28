@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
+use app\admin\model\IndexPics;
 use app\index\model\Addrs;
 use app\index\model\Weixins;
 use app\index\model\Points;
@@ -34,6 +35,11 @@ class Index
             $_SESSION['share_member_id'] = $memberid;
         }
         $re = Items::all();
+        $indePic = IndexPics::all();
+        foreach($indePic as &$v){
+            $v->pic = addslashes($v->pic);
+        }
+//        echo "<pre>";var_dump($indePic);exit;
         $curl = "index";
         if(array_key_exists('userinfo',$_SESSION)){
             $id = $_SESSION['userinfo']->id;
@@ -67,11 +73,11 @@ class Index
                 'signature'=>$signature,
                 'url'=>$url
             );
-            $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin];
+            $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin,'indexPic'=>$indePic];
             return view("index@index/index",['re'=>$re]);
         }else{
             $re = ['footType'=>$curl,'itemInfo'=>$re];
-            return view("index@index/index",['re'=>$re]);
+            return view("index@index/index",['re'=>$re,'indexPic'=>$indePic]);
 //            $url = $this->wxObj->get_authorize_url(1);
 //            return redirect($url);
 

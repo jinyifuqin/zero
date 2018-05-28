@@ -1,0 +1,174 @@
+﻿{include file="public/admins/head/head.html" /}
+<title>品牌管理2</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 图片管理 <span class="c-gray en">&gt;</span> 品牌管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="text-c">
+		<form class="Huiform" method="post" action="/admin/indexPicSave" target="_self" enctype="multipart/form-data">
+			<!--<input id="name" type="text" name="name" placeholder="品牌名称" value="" class="input-text" style="width:120px">-->
+			<input id="sort" type="text" name="sort" placeholder="排序" value="" class="input-text" style="width:120px">
+			<span class="btn-upload form-group">
+			<input class="input-text upload-url" type="text" name="uploadfile-2" id="uploadfile-2" readonly style="width:200px">
+			<a href="javascript:void();" class="btn btn-primary upload-btn"><i class="Hui-iconfont">&#xe642;</i> 上传轮播图</a>
+			<input id="file-2" type="file" multiple name="file-2" class="input-file">
+			</span>
+			<!--<span class="select-box" style="width:150px">-->
+			<!--<select class="select" name="brandclass" size="1">-->
+			<!--<option value="1" selected>国内品牌</option>-->
+			<!--<option value="0">国外品牌</option>-->
+			<!--</select>-->
+			<!--</span>-->
+			<button type="submit" class="btn btn-success" id="addSub" name="" ><i class="Hui-iconfont">&#xe600;</i> 添加</button>
+		</form>
+	</div>
+	<script>
+        function datadel(){
+            var table = $('#DataTables_Table_0');
+            var checkBox = table.find("input:checkbox");
+            checkBox.splice(0,1);
+            var arr = [];
+            checkBox.each(function(){
+                var checked = $(this).prop('checked');
+                if(checked){
+                    var id = $(this).parent().next().html();
+                    arr.push(id);
+                }
+
+            })
+            $.ajax({
+                type: "GET",
+                url: "{:url('/admin/indexPicDelAll')}",
+                data: {ids:arr},
+                dataType: "json",
+                success: function(data){
+                    if(data.status == "Success"){
+                        location.reload();
+                    }
+                }
+            });
+            console.log(arr);
+
+        }
+	</script>
+	<div class="cl pd-5 bg-1 bk-gray mt-5">
+		<span class="l">
+			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+				<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
+			</a>
+		</span>
+		<span class="r">共有数据：<strong>{$re.count}</strong> 条</span> </div>
+	<div class="mt-5">
+		<table id="DataTables_Table_0" class="table table-border table-bordered table-bg table-sort">
+			<thead>
+			<tr class="text-c">
+				<th width="25"><input type="checkbox" name="" value=""></th>
+				<th width="30">ID</th>
+				<th width="80">排序</th>
+				<th width="200">图片</th>
+				<th width="100">操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<script>
+                function indexPicEdit(title,url,id,w,h){
+                    layer_show(title,url,w,h);
+                }
+                function active_del(dom,id){
+                    data = {'id':id};
+                    $.ajax({
+                        type: "GET",
+                        url: "{:url('/admin/indexPicDel')}",
+                        data: data,
+                        dataType: "json",
+                        success: function(data){
+                            if(data.status == "success"){
+                                location.reload();
+                            }
+
+                        }
+                    });
+                }
+			</script>
+			{foreach $re.all as $vo}
+			<tr class="text-c">
+				<td><input name="" type="checkbox" value=""></td>
+				<td>{$vo.id}</td>
+				<td>{$vo.sort}</td>
+				<td><img style="height: 60px;" src="/public/uploads/{$vo.pic}"></td>
+				<td class="f-14 product-brand-manage">
+					<a style="text-decoration:none" onClick="indexPicEdit('编辑','/admin/indexPicEdit/{$vo.id}','4','','510')" href="javascript:;" title="编辑">
+						<i class="Hui-iconfont">&#xe6df;</i>
+					</a>
+					<a style="text-decoration:none" class="ml-5" onClick="active_del(this,'{$vo.id}')" href="javascript:;" title="删除">
+						<i class="Hui-iconfont">&#xe6e2;</i>
+					</a>
+				</td>
+			</tr>
+			{/foreach}
+			</tbody>
+		</table>
+	</div>
+</div>
+<!--&lt;!&ndash;_footer 作为公共模版分离出去&ndash;&gt;-->
+<!--<script type="text/javascript" src="/public/admins/lib/jquery/onenineone/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>-->
+<!--<script type="text/javascript" src="/public/admins/static/h-ui/js/H-ui.min.js"></script>-->
+<!--<script type="text/javascript" src="/public/admins/static/h-ui.admin/js/H-ui.admin.js"></script> &lt;!&ndash;/_footer 作为公共模版分离出去&ndash;&gt;-->
+{include file="public/admins/foot/foot.html" /}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/admins/lib/My97DatePicker/foureight/WdatePicker.js"></script>
+<script type="text/javascript" src="/public/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/admins/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+
+    // $('.table-sort').dataTable({
+    //     "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+    //     "bStateSave": true,//状态保存
+    //     "aoColumnDefs": [
+    //         //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+    //         {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
+    //     ]
+    // });
+    $(function(){
+        $('#addSub').click(function(e){
+            e.preventDefault();
+            var formData = new FormData();
+            var name = $('#name').val();
+            var sort = $('#sort').val();
+            var form = $(".Huiform");
+            var url = form.attr('action');
+            formData.append('file',$('#file-2')[0].files[0]);
+            formData.append('name',name);
+            formData.append('sort',sort);
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+            }).success(function (data) {
+                data = JSON.parse(data);
+                // console.log(data);return;
+                if(data.status == 'Success'){
+                    location.reload();
+				}else{
+                    alert(data.msg);
+                    // layer.msg(data.msg,{icon: 0,time:1000});
+				}
+
+                // window.parent.location.reload();//刷新父页面
+            }).error(function (data) {
+                // setTimeout(function(){location.reload()},1000);
+                alert("上传失败");
+            });
+
+        })
+
+
+    })
+
+</script>
+</body>
+</html>

@@ -3,6 +3,7 @@ namespace app\Admin\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
+use app\admin\model\IndexPics;
 use app\index\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\Points;
@@ -715,6 +716,97 @@ class Index extends Controller
             echo json_encode($msg);
         }
 //        echo "<pre>";var_dump($id);exit;
+    }
+
+    public function index_pic(){
+        $all = IndexPics::all();
+        $count = IndexPics::count();
+        $data = ['all'=>$all,'count'=>$count];
+        return view("admin@index/indexPic",['re'=>$data]);
+    }
+
+    public function index_pic_save(Request $request){
+        $count = IndexPics::count();
+        if($count >= 3){
+            $msg = array('status'=>'error','msg'=>'只能上传三张！');
+            echo json_encode($msg);
+            exit;
+        }
+//        echo "<pre>";var_dump($count);exit;
+        $file = $request->file('file');
+        $sort = $request->param('sort');
+        $creatTime = date('Y-m-d H:i:s',time());
+        $re = upload($file);
+        $end = htmlspecialchars($re->getSaveName());
+        if($re->getError() == ''){
+            $logo = $end;
+            $brandObj = new IndexPics([
+                'sort' =>  $sort,
+                'pic' => $logo,
+                'create_time' =>$creatTime
+            ]);
+            $result = $brandObj->save();
+            if($result)
+                $msg = array('status'=>'Success');
+            echo json_encode($msg);
+        }
+    }
+
+    public function index_pic_edit(Request $request){
+        $id = $request->param('id');
+        $re = IndexPics::get($id);
+        return view("admin@index/indexPicEdit",['re'=>$re]);
+    }
+
+    public function index_pic_up(Request $request){
+        if($request->file('file-2')){
+            $file = $request->file('file-2');
+            $fileRe = upload($file);
+            $logo = htmlspecialchars($fileRe->getSaveName());
+            $re = array('re'=>$logo);
+            echo json_encode($re);
+            return;
+        }
+
+        $logo = $request->param('logopath');
+        $check = strrpos($logo,'uploads');
+
+        $picObj = new IndexPics();
+        $upTime = date('Y-m-d H:i:s',time());
+        $id = $request->param('id');
+        $sort = $request->param('sort');
+        $re = IndexPics::get(['id' => $id]);
+        if($check){
+            $logo = $re->pic;
+        }
+        $result = $picObj->save(
+            ['pic'=>$logo,'sort'=>$sort,'update_time'=>$upTime],
+            ['id'=>$id]
+        );
+
+        $re = array('type'=>$result);
+        echo json_encode($re);
+    }
+
+    public function index_pic_del(Request $request){
+        $id = $request->param('id');
+        $re = IndexPics::destroy($id);
+        if($re){
+            $data = ['status'=>'success'];
+            echo json_encode($data);
+        }
+    }
+
+    public function index_pic_del_all(Request $request){
+        $ids = $request->param()['ids'];
+//        echo "<pre>";var_dump($request->param());exit;
+        $re = IndexPics::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
     }
 
 

@@ -82,6 +82,13 @@ Route::group('admin',[
     'confirmPf' => ['admin/index/confirm_pf', ['method' => 'post']],
     'partMember' => ['admin/index/part_member', ['method' => 'get']],
     'truePart/:id' => ['admin/index/true_part', ['method' => 'get']],
+    'indexPic' => ['admin/index/index_pic', ['method' => 'get']],
+    'indexPicAdd' => ['admin/index/index_pic_add', ['method' => 'get']],
+    'indexPicSave' => ['admin/index/index_pic_save', ['method' => 'post']],
+    'indexPicEdit/:id' => ['admin/index/index_pic_edit', ['method' => 'get']],
+    'indexPicUp' => ['admin/index/index_pic_up', ['method' => 'post']],
+    'indexPicDel' => ['admin/index/index_pic_del', ['method' => 'get']],
+    'indexPicDelAll' => ['admin/index/index_pic_del_all', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 

@@ -1,0 +1,107 @@
+{include file="public/admins/head/head.html" /}
+	<title>修改图片</title>
+	<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+	<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+</head>
+<body>
+<article class="page-container">
+	<form enctype="multipart/form-data" action="/admin/indexPicUp" method="post" class="form form-horizontal" id="form-member-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>排序：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$re.sort}" placeholder="" id="sort" name="sort">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">LOGO：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+				<input value="/uploads/{$re.pic}" class="input-text upload-url" type="text" name="uploadfile" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<a href="javascript:void(0);" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" id="wenjian" multiple name="file-2" class="input-file">
+				</span> </div>
+		</div>
+		<input type="hidden" name="id" id="iid" value="{$re.id}">
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input id="submit" class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+			</div>
+		</div>
+	</form>
+</article>
+{include file="public/admins/foot/foot.html" /}
+<!--&lt;!&ndash;_footer 作为公共模版分离出去&ndash;&gt;-->
+<!--<script type="text/javascript" src="/public/admins/lib/jquery/onenineone/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="/public/admins/lib/layer/2.4/layer.js"></script>-->
+<!--<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>-->
+<!--<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> &lt;!&ndash;/_footer 作为公共模版分离出去&ndash;&gt;-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/admins/lib/My97DatePicker/foureight/WdatePicker.js"></script>
+<script type="text/javascript" src="/public/admins/lib/jquery.validation/oneonefourzero/jquery.validate.js"></script>
+<script type="text/javascript" src="/public/admins/lib/jquery.validation/oneonefourzero/validate-methods.js"></script>
+<script type="text/javascript" src="/public/admins/lib/jquery.validation/oneonefourzero/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $('#submit').click(function(e){
+            e.preventDefault();
+            var fileObj = document.getElementById("wenjian").files[0]; // js 获取文件对象
+            var data_one = new FormData($('#form-member-add')[0]);
+            var form = $("#form-member-add");
+            var url = form.attr('action');
+            if($('#wenjian').val() == ''){
+                sendFormDate();
+            }else{
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data_one,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    success: function(xx){
+                        sendFormDate(xx);
+                    }
+                });
+            }
+
+		});
+
+        function sendFormDate(param){
+            param = arguments[0]?arguments[0]:null;
+            if(param!=null){
+                var logopath = param.re;
+            }else{
+                var logopath = $('#uploadfile').val();
+            }
+            var sort = $('#sort').val();
+            var id = $('#iid').val();
+            var uu = {'logopath':logopath,'id':id,'sort':sort};
+            var form = $("#form-member-add");
+            var url = form.attr('action');
+            // console.log(uu);return;
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: uu,
+                dataType: "json",
+                success: function(data){
+                    var index = parent.layer.getFrameIndex(window.name);
+                    window.parent.location.reload();//刷新父页面
+                    parent.layer.close(index);
+                }
+            });
+        }
+
+
+
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
