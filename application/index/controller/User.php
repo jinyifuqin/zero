@@ -445,24 +445,27 @@ class User extends Controller
             $return = url('/userInfo');
             $curl = "userinfo";
             $enRe = Entrusts::get(['user_id'=>$uId]);
-            $wtFlag = Points::get(['user_id'=>$uId,'get_type'=>4]);
-            if($wtFlag && $enRe){
-                $msg = '已接收委托';
-            }elseif($wtFlag && !$enRe){
-                $msg = '等待接受';
-            }else{
-                $msg = '未申请';
-            }
-            $re = ['url'=>$return,'footType'=>$curl,'info'=>$serviceInfo,'msg'=>$msg];
-//            echo "<pre>";var_dump($serviceInfo);exit;
+//            $wtFlag = Points::get(['user_id'=>$uId,'get_type'=>4]);
+//            if($wtFlag && $enRe){
+//                $msg = '已接收委托';
+//            }elseif($wtFlag && !$enRe){
+//                $msg = '等待接受';
+//            }else{
+//                $msg = '未申请';
+//            }
+//            echo "<pre>";var_dump($enRe);exit;
+            $re = ['url'=>$return,'footType'=>$curl,'info'=>$serviceInfo];
+//
             return view("index@user/entrust",['re'=>$re]);
         }
     }
 
     public function entrust_show(){
         $return = url('/userInfo');
+        $userInfo = $_SESSION['userinfo'];
+        $userId = $userInfo->id;
         $curl = "userinfo";
-        $ens = Entrusts::all();
+        $ens = Entrusts::all(['user_id'=>$userId]);
         $setGivePointBrokerage = config('setGivePointBrokerage');
 //        echo "<pre>";var_dump($setGivePointBrokerage);exit;
         $re = ['url'=>$return,'footType'=>$curl,'list'=>$ens,'setGivePointBrokerage'=>$setGivePointBrokerage];

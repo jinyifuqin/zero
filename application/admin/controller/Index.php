@@ -660,5 +660,62 @@ class Index extends Controller
         }
     }
 
+    public function part_member(){
+        $admin = $_SESSION['adminUserInfo'];
+        $adminId = $admin->id;
+        $e = new Entrusts();
+        $usersId = $e->where('service_id', $adminId)
+            ->where('type','=' ,1)
+            ->group('user_id')
+            ->column('user_id');
+        $usersId = implode(',',$usersId);
+        $uObj = new Users();
+        $users = $uObj->where('id','in',$usersId )
+            ->select();
+        foreach($users as &$v){
+            $v->nickname = json_decode(urldecode($v->nickname));
+        }
+//        echo "<pre>";var_dump($users);exit;
+        return view("admin@index/partMember",['re'=>$users]);
+    }
+
+    public function true_part(Request $request){
+        $userId = $request->param('id');
+        $e = new Entrusts();
+        $first = $e->where('user_id', $userId)
+            ->limit(1)
+            ->order('create_time', 'asc')
+            ->column('create_time');
+        $first = $first[0];
+        $checkTime = strtotime("+3 months", strtotime($first));
+        $count = $e->where('user_id',$userId)
+            ->where('type','in','0,1')
+            ->sum('count');
+//        echo "<pre>";var_dump($count);exit;
+        if($checkTime < time()){
+            $partPoint['user_id'] = $userId;
+            $partPoint['count'] = $count;
+            $partPoint['type'] = 1;
+            $partPoint['get_type'] = 4;
+            $partPoint['frozen_flag'] = 0;
+            $partPoint['create_time'] = date('Y-m-d H:i:s',time());
+            $pObj = new Points();
+            $pObj->data($partPoint);
+            $re = $pObj->save();
+            $re2 = Entrusts::destroy(['user_id' => $userId]);
+            if($re && $re2){
+                $msg = ['type'=>'success','msg'=>'解除托管成功！'];
+                echo json_encode($msg);
+            }else{
+                $msg = ['type'=>'error','msg'=>'解除托管失败！'];
+                echo json_encode($msg);
+            }
+        }else{
+            $msg = ['type'=>'error','msg'=>'观察期，三个月之后才可解除！'];
+            echo json_encode($msg);
+        }
+//        echo "<pre>";var_dump($id);exit;
+    }
+
 
 }

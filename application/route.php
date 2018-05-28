@@ -80,6 +80,8 @@ Route::group('admin',[
     'itemPrice' => ['admin/item/item_price', ['method' => 'get']],
     'putForward' => ['admin/index/put_forward', ['method' => 'get']],
     'confirmPf' => ['admin/index/confirm_pf', ['method' => 'post']],
+    'partMember' => ['admin/index/part_member', ['method' => 'get']],
+    'truePart/:id' => ['admin/index/true_part', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
