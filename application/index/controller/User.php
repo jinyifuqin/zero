@@ -463,7 +463,9 @@ class User extends Controller
         $return = url('/userInfo');
         $curl = "userinfo";
         $ens = Entrusts::all();
-        $re = ['url'=>$return,'footType'=>$curl,'list'=>$ens];
+        $setGivePointBrokerage = config('setGivePointBrokerage');
+//        echo "<pre>";var_dump($setGivePointBrokerage);exit;
+        $re = ['url'=>$return,'footType'=>$curl,'list'=>$ens,'setGivePointBrokerage'=>$setGivePointBrokerage];
         return view("index@user/entrustShow",['re'=>$re]);
     }
 
@@ -472,6 +474,9 @@ class User extends Controller
         $userId = $userInfo->id;
         $info = Users::get($userId);
         $count = $request->param('number');
+        $brokerage = $request->param('brokerage');
+        $brokerageCount = round($count*$brokerage*0.01,3);
+//        echo "<pre>";var_dump($brokerageCount);exit;
         $serviceId = $info->service_cent_id;
         $pObj = new Points();
         $canUseAdd = $pObj->where('user_id',"=",$userId)
@@ -485,7 +490,7 @@ class User extends Controller
         $canUse = round($canUseAdd-$canUseDel,3);
         if($canUse > $count){
             $givePoint['user_id'] = $userId;
-            $givePoint['count'] = $count;
+            $givePoint['count'] = $count+$brokerageCount;
             $givePoint['type'] = 0;
             $givePoint['get_type'] = 4;
             $givePoint['frozen_flag'] = 0;
