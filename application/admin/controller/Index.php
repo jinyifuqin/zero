@@ -4,6 +4,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
 use app\admin\model\IndexPics;
+use app\admin\model\Votings;
 use app\index\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\Points;
@@ -801,6 +802,70 @@ class Index extends Controller
         $ids = $request->param()['ids'];
 //        echo "<pre>";var_dump($request->param());exit;
         $re = IndexPics::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function voting(){
+        $re = Votings::all();
+//        echo "<pre>";var_dump($re);exit;
+        return view("admin@index/voting",['re'=>$re]);
+    }
+
+    public function add_voting(){
+        return view("admin@index/addVoting");
+    }
+
+    public function save_voting(Request $request){
+        $post = $request->param();
+        $data['point_count'] = $post['point_count'];
+        $data['voting_count'] = $post['voting_count'];
+        $data['title'] = $post['title'];
+        $data['desc'] = $post['desc'];
+        $data['content'] = $post['content'];
+        $v = new Votings();
+//        echo "<pre>";var_dump($post);exit;
+        if(array_key_exists('id',$post)){
+            $data['id'] = $post['id'];
+            $re = $v->save($data,['id'=>$data['id']]);
+        }else{
+            $v->data($data);
+            $re = $v->save();
+        }
+
+        if($re){
+            $msg = array('status'=>'success','msg'=>'投票添加成功！');
+        }else{
+            $msg = array('status'=>'fails','msg'=>'投票添加成功！');
+        }
+        echo json_encode($msg);
+//        echo "<pre>";var_dump($post);exit;
+    }
+
+    public function voting_edit($id){
+        $re = Votings::get($id);
+        return view("admin@index/editVoting",['re'=>$re]);
+    }
+
+    public function voting_del($id){
+
+        $v = Votings::get($id);
+//        echo "<pre>";var_dump($v);exit;
+        $re = $v->delete();
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function voting_delAll($ids){
+        $re = Votings::destroy($ids);
         if($re){
             $msg = array('status'=>'Success');
         }else{

@@ -1,0 +1,89 @@
+{include file="public/admins/head/head.html" /}
+<title>添加投票</title>
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-admin-add" method="post" action="/admin/saveVoting">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>投票标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="title" name="title">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>投票费用：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="point" name="point_count">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>每人投票次数限制：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="votingCount" name="voting_count">
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>投票描述：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="" placeholder="" id="desc" name="desc">
+			</div>
+		</div>
+
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3">投票内容：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<textarea name="content" cols="" rows="" class="textarea"  placeholder="多项选择已'|'符号分割，例如：'足球|篮球'" dragonfly="true" onKeyUp="$.Huitextarealength(this,100)"></textarea>
+			<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+		</div>
+	</div>
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			<input class="btn sub btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+		</div>
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+{include file="public/admins/foot/foot.html" /}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/indexsource/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="/public/indexsource/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="/public/indexsource/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+
+		$('.sub').click(function(e){
+		    e.preventDefault();
+		    var form = $('form');
+		    var data = form.serialize();
+		    var url = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    // console.log(data);return;
+                    if(data.status == 'success'){
+                        var index = parent.layer.getFrameIndex(window.name);
+                        // parent.$('.btn-refresh').click();
+                        window.parent.location.reload();//刷新父页面
+                        parent.layer.close(index);
+                    }else{
+                        layer.msg(data.msg,{icon:0,time:2000});
+                    }
+
+                }
+            });
+		})
+
+});
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

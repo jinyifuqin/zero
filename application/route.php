@@ -96,6 +96,12 @@ Route::group('admin',[
     'indexPicUp' => ['admin/index/index_pic_up', ['method' => 'post']],
     'indexPicDel' => ['admin/index/index_pic_del', ['method' => 'get']],
     'indexPicDelAll' => ['admin/index/index_pic_del_all', ['method' => 'get']],
+    'voting' => ['admin/index/voting', ['method' => 'get']],
+    'addVoting' => ['admin/index/add_voting', ['method' => 'get']],
+    'saveVoting' => ['admin/index/save_voting', ['method' => 'post']],
+    'votingEdit/:id' => ['admin/index/voting_edit', ['method' => 'get']],
+    'votingDel/:id' => ['admin/index/voting_del', ['method' => 'get']],
+    'votingDelAll' => ['admin/index/voting_delAll', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
