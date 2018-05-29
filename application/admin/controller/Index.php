@@ -4,6 +4,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
 use app\admin\model\IndexPics;
+use app\admin\model\VotingList;
 use app\admin\model\Votings;
 use app\index\model\Entrusts;
 use app\index\model\Addrs;
@@ -872,6 +873,24 @@ class Index extends Controller
             $msg = array('status'=>'fails');
         }
         echo json_encode($msg);
+    }
+
+    public function voting_detail($id){
+        $vObj = Votings::get($id);
+        $content = $vObj->content;
+        $content = trim($content);
+        $content = explode('|',$content);
+        $vList = new VotingList();
+        $arr = [];
+        foreach($content as $k=>$v){
+            $count = $vList->where('voting_info','=',$v)
+                ->where('voting_id','=',$id)
+                ->count();
+            $arr[$v] = $count;
+        }
+        $vObj->selectArr = $arr;
+        return view("admin@index/votingDetail",['re'=>$vObj]);
+//        echo "<pre>";var_dump($vObj);exit;
     }
 
 

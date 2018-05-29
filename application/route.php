@@ -102,6 +102,7 @@ Route::group('admin',[
     'votingEdit/:id' => ['admin/index/voting_edit', ['method' => 'get']],
     'votingDel/:id' => ['admin/index/voting_del', ['method' => 'get']],
     'votingDelAll' => ['admin/index/voting_delAll', ['method' => 'get']],
+    'votingDetail/:id' => ['admin/index/voting_detail', ['method' => 'get']],
     '/' => 'admin/index/index', // 首页访问路由
 ]);
 
