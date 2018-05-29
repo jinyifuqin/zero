@@ -19,99 +19,37 @@
 <div class="Cmain">
     <!--这是社区的几个图标按钮-->
     <ul class="sq">
+        {foreach $re.menu as $vo}
         <li>
-            <a class="sq_text" href="#"><img src="/public/indexsource/images/sq_1.png" alt=""/>服务中心</a>
+            <a class="sq_text" href="/community/{$vo.id}"><img src="/public/uploads/{$vo.pic}" alt=""/>{$vo.title}</a>
         </li>
-        <li>
-            <a class="sq_text" href="#"><img src="/public/indexsource/images/sq_2.png" alt=""/>社区活动</a>
-        </li>
-        <li>
-            <a class="sq_text" href="#"><img src="/public/indexsource/images/sq_3.png" alt=""/>健康知识</a>
-        </li>
-        <li>
-            <a class="sq_text" href="#"><img src="/public/indexsource/images/sq_4.png" alt=""/>积分交流</a>
-        </li>
+
+        {/foreach}
     </ul>
 
     <ul class="sq_list">
+        {foreach $re.art as $vo}
         <li>
             <div class="sq_list1">
                 <div class="sq_list_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
                 <div class="sq_text">
                     <!--<span>永之泰</span>-->
                     <!--<span>八分钟前</span>-->
-                    <p>永之泰</p>
+                    <p>{$vo.author}</p>
                     <p>八分钟前</p>
                 </div>
             </div>
-            <a class="sq_list2" href="#">参加社群活动</a>
-            <a class="sq_list3" href="#">服用前提交相应身体检查报告，十盒服用完后，再次进行身体检查，提交报告。新会员需加入服务中心的社群，按要求参加社群活动。自己坚持每天服用，每周将服用后感受反馈至社群中。</a>
+            <a class="sq_list2" href="#">{$vo.title}</a>
+            <a class="sq_list3" href="#">{$vo.content}</a>
             <div class="sq_list4">
-                <span class="sq_list4_zan1">307</span>
-                <span class="sq_list4_ping1">30</span>
+                <span class="sq_list4_zan1">{$vo.give_good}</span>
+                <a href="/articleDetail/{$vo.id}"><span class="sq_list4_ping1">30</span></a>
             </div>
         </li>
+        {/foreach}
 
-        <li>
-            <div class="sq_list1">
-                <div class="sq_list_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
-                <div class="sq_text">
-                    <p>永之泰</p>
-                    <p>八分钟前</p>
-                </div>
-            </div>
-            <a class="sq_list2" href="#">参加社群活动</a>
-            <a class="sq_list3" href="#">服用前提交相应身体检查报告，十盒服用完后，再次进行身体检查，提交报告。新会员需加入服务中心的社群，按要求参加社群活动。自己坚持每天服用，每周将服用后感受反馈至社群中。</a>
-            <div class="sq_list4">
-                <span class="sq_list4_zan">307</span>
-                <span class="sq_list4_ping">30</span>
-            </div>
-        </li>
-        <li>
-            <div class="sq_list1">
-                <div class="sq_list_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
-                <div class="sq_text">
-                    <p>永之泰</p>
-                    <p>八分钟前</p>
-                </div>
-            </div>
-            <a class="sq_list2" href="#">参加社群活动</a>
-            <a class="sq_list3" href="#">服用前提交相应身体检查报告，十盒服用完后，再次进行身体检查，提交报告。新会员需加入服务中心的社群，按要求参加社群活动。自己坚持每天服用，每周将服用后感受反馈至社群中。</a>
-            <div class="sq_list4">
-                <span class="sq_list4_zan">307</span>
-                <span class="sq_list4_ping">30</span>
-            </div>
-        </li>
-        <li>
-            <div class="sq_list1">
-                <div class="sq_list_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
-                <div class="sq_text">
-                    <p>永之泰</p>
-                    <p>八分钟前</p>
-                </div>
-            </div>
-            <a class="sq_list2" href="#">参加社群活动</a>
-            <a class="sq_list3" href="#">服用前提交相应身体检查报告，十盒服用完后，再次进行身体检查，提交报告。新会员需加入服务中心的社群，按要求参加社群活动。自己坚持每天服用，每周将服用后感受反馈至社群中。</a>
-            <div class="sq_list4">
-                <span class="sq_list4_zan">307</span>
-                <span class="sq_list4_ping">30</span>
-            </div>
-        </li>
-        <li>
-            <div class="sq_list1">
-                <div class="sq_list_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
-                <div class="sq_text">
-                    <p>永之泰</p>
-                    <p>八分钟前</p>
-                </div>
-            </div>
-            <a class="sq_list2" href="#">参加社群活动</a>
-            <a class="sq_list3" href="#">服用前提交相应身体检查报告，十盒服用完后，再次进行身体检查，提交报告。新会员需加入服务中心的社群，按要求参加社群活动。自己坚持每天服用，每周将服用后感受反馈至社群中。</a>
-            <div class="sq_list4">
-                <span class="sq_list4_zan">307</span>
-                <span class="sq_list4_ping">30</span>
-            </div>
-        </li>
+
+
     </ul>
 
 </div>

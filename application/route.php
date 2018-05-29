@@ -157,7 +157,8 @@ Route::group('',[
     'entrustShow' => ['User/entrust_show', ['method' => 'get']],
     'surePart' => ['User/sure_part', ['method' => 'get']],
     'nickname' => ['User/nickname', ['method' => 'get']],
-    'community' => ['community', ['method' => 'get']],
+    'community/[:id]' => ['community', ['method' => 'get']],
+    'articleDetail/:id' => ['article_detail', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

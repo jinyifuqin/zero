@@ -461,11 +461,28 @@ class Index
     }
 
 
-    public function community()
+    public function community($id='')
     {
-        $art = Articles::all();
+        if($id == ''){
+            $menuId = ArticleMenus::get(['title'=>'服务中心']);
+            $menuId = $menuId->id;
+        }else{
+            $menuId = $id;
+        }
+        $art = Articles::all(['menu_id'=>$menuId]);
+        foreach ($art as &$v){
+            $v->content = htmlspecialchars_decode($v->content);
+        }
         $menu = ArticleMenus::all();
         $re = ['art'=>$art,'menu'=>$menu];
         return view("index@index/community",['re'=>$re]);
     }
+
+    public function article_detail($id){
+        $art = Articles::get($id);
+        $art->content = htmlspecialchars_decode($art->content);
+        return view("index@index/articleDetail",['re'=>$art]);
+        echo "<pre>";var_dump($id);exit;
+    }
+
 }
