@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\ArticleMenus;
+use app\admin\model\Articles;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
 use app\index\model\Addrs;
@@ -87,6 +88,71 @@ class Article extends Controller
             $msg = array('status'=>'fails');
         }
         echo json_encode($msg);
+    }
+
+    public function article(){
+        $arts = Articles::all();
+        foreach($arts as &$v){
+            $v->menu_name = ArticleMenus::where('id',$v->menu_id)->value('title');
+        }
+        return view("admin@article/article",['re'=>$arts]);
+    }
+
+    public function add_article(){
+        $menus = ArticleMenus::all();
+        return view("admin@article/addArticle",['data'=>$menus]);
+    }
+
+    public function article_save(Request $request){
+        $post = $request->param();
+        $artObj = new Articles();
+        $data['sort'] = $post['sort'];
+        $data['title'] = $post['title'];
+        $data['menu_id'] = $post['menu_id'];
+        $data['author'] = $post['author'];
+        $data['status'] = $post['status'];
+        $data['content'] = htmlspecialchars($post['editorValue']);
+//        echo "<pre>";var_dump($post);exit;
+        if(array_key_exists('id',$post)){
+            $id = $post['id'];
+            $data['id'] = $id;
+            $re = $artObj->save($data,['id'=>$id]);
+        }else{
+            $artObj->data($data);
+            $re = $artObj->save();
+        }
+        if($re){
+            $msg = ['status'=>'success','msg'=>'状态更改成功！'];
+        }else{
+            $msg = ['status'=>'success','msg'=>'状态更改失败！'];
+        }
+        echo json_encode($msg);
+//        echo "<pre>";var_dump($data);exit;
+    }
+
+    public function article_status($id){
+        $artObj = Articles::get($id);
+        if($artObj->status == 1){
+            $artObj->status = 0;
+        }else{
+            $artObj->status = 1;
+        }
+        $re = $artObj->save();
+        if($re){
+            $msg = ['status'=>'success','msg'=>'状态更改成功！'];
+        }else{
+            $msg = ['status'=>'success','msg'=>'状态更改失败！'];
+        }
+        echo json_encode($msg);
+//        echo "<pre>";var_dump($id);exit;
+    }
+
+    public function article_edit($id){
+        $art = Articles::get($id);
+        $menus = ArticleMenus::all();
+        $art->content = htmlspecialchars_decode($art->content);
+        $data = ['info'=>$art,'menu'=>$menus];
+        return view("admin@article/articleEdit",['data'=>$data]);
     }
 
 }
