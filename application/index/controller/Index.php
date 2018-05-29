@@ -473,8 +473,11 @@ class Index
         $art = Articles::all(['menu_id'=>$menuId]);
         foreach ($art as &$v){
             $v->content = htmlspecialchars_decode($v->content);
+            $v->talkCount = Talks::where('art_id','=',$v->id)->count();
+//            echo "<pre>";var_dump($a);exit;
         }
         $menu = ArticleMenus::all();
+
         $re = ['art'=>$art,'menu'=>$menu];
         return view("index@index/community",['re'=>$re]);
     }
@@ -488,7 +491,10 @@ class Index
             $nickname = Users::where('id',$v->user_id)->value('nickname');
             $v->nickname = json_decode(urldecode($nickname));
         }
-        $re = ['talk'=>$talk,'art'=>$art];
+        $url = '/community';
+//        $curl = "userinfo";
+        $re = ['url'=>$url,'talk'=>$talk,'art'=>$art];
+//        $re = ['talk'=>$talk,'art'=>$art];
         return view("index@index/articleDetail",['re'=>$re]);
     }
 

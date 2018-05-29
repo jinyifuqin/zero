@@ -36,14 +36,14 @@
                     <!--<span>永之泰</span>-->
                     <!--<span>八分钟前</span>-->
                     <p>{$vo.author}</p>
-                    <p>八分钟前</p>
+                    <!--<p>八分钟前</p>-->
                 </div>
             </div>
             <a class="sq_list2" href="#">{$vo.title}</a>
             <a class="sq_list3" href="#">{$vo.content}</a>
             <div class="sq_list4">
                 <span class="sq_list4_zan1">{$vo.give_good}</span>
-                <a href="/articleDetail/{$vo.id}"><span class="sq_list4_ping1">30</span></a>
+                <a href="/articleDetail/{$vo.id}"><span class="sq_list4_ping1">{$vo.talkCount}</span></a>
             </div>
         </li>
         {/foreach}
