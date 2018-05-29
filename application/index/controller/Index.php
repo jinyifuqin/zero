@@ -6,6 +6,7 @@ use app\admin\model\Articles;
 use app\admin\model\Brands;
 use app\admin\model\IndexPics;
 use app\index\model\Addrs;
+use app\index\model\Talks;
 use app\index\model\Weixins;
 use app\index\model\Points;
 use app\index\model\Trades;
@@ -481,8 +482,32 @@ class Index
     public function article_detail($id){
         $art = Articles::get($id);
         $art->content = htmlspecialchars_decode($art->content);
-        return view("index@index/articleDetail",['re'=>$art]);
-        echo "<pre>";var_dump($id);exit;
+        $talk = Talks::all(['art_id'=>$id]);
+        foreach($talk as &$v){
+            $v->pic = Users::where('id',$v->user_id)->value('pic');
+            $nickname = Users::where('id',$v->user_id)->value('nickname');
+            $v->nickname = json_decode(urldecode($nickname));
+        }
+        $re = ['talk'=>$talk,'art'=>$art];
+        return view("index@index/articleDetail",['re'=>$re]);
+    }
+
+    public function artTalk(Request $request){
+        $post = $request->param();
+        $data['art_id'] = $post['artId'];
+        $user = $_SESSION['userinfo'];
+        $data['user_id'] = $user->id;
+
+        $data['user_talk'] = $post['userTalk'];
+        $talk = new Talks();
+        $talk->data($data);
+        $re = $talk->save();
+        if($re){
+            $msg = array('status'=>'success');
+        }else{
+            $msg = array('status'=>'error');
+        }
+        echo json_encode($msg);
     }
 
 }

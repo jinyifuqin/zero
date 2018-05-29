@@ -9,6 +9,7 @@
     <script src="/public/indexsource/js/pic.js"></script>
     <!--新闻的滚动-->
     <script src="/public/indexsource/js/jcarousellite_1.0.1c4.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
 </head>
 <body>
 <!--这是头部-->
@@ -27,104 +28,38 @@
                     <span>八分钟前</span>
                 </div>
             </div>
-            <a class="sq_list2" href="#">{$re.title}</a>
-            <a class="sq_list3xq sq_list3" href="#">{$re.content}</a>
+            <a class="sq_list2" href="#">{$re.art.title}</a>
+            <a class="sq_list3xq sq_list3" href="#">{$re.art.content}</a>
             <div class="sq_list4xq sq_list4">
-                <span class="sq_list4_zan">{$re.give_good}</span>
+                <span class="sq_list4_zan">{$re.art.give_good}</span>
             </div>
+            <input id="artId" type="hidden" name="artId" value="{$re.art.id}"/>
         </li>
     </ul>
     <!--这是评论的列-->
     <ul class="pinglun_list">
+        {foreach $re.talk as $vo}
         <li>
             <div class="pinglun_list_img">
+                {if condition="($vo.pic != '')"}
+                <img src="/public/uploads/{$vo.pic}" alt=""/>
+                {else/}
                 <img src="/public/indexsource/images/head.jpg" alt=""/>
+                {/if}
             </div>
             <div class="pinglun_list_text">
-                <div class="pinglun_list_text1">永之泰</div>
+                <div class="pinglun_list_text1">{$vo.nickname}</div>
                 <div class="pinglun_con">
                     <div class="pinglun_con_text">
-                        自己坚持每天服用!
+                        {$vo.user_talk}
                     </div>
-                    <div class="pinglun_zan">20</div>
+                    <div class="pinglun_zan">{$vo.give_good}</div>
                 </div>
             </div>
         </li>
-        <li>
-            <div class="pinglun_list_img">
-                <img src="/public/indexsource/images/head.jpg" alt=""/>
-            </div>
-            <div class="pinglun_list_text">
-                <div class="pinglun_list_text1">永之泰</div>
-                <div class="pinglun_con">
-                    <div class="pinglun_con_text">
-                        自己坚持每天服用!
-                    </div>
-                    <div class="pinglun_zan">20</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="pinglun_list_img">
-                <img src="/public/indexsource/images/head.jpg" alt=""/>
-            </div>
-            <div class="pinglun_list_text">
-                <div class="pinglun_list_text1">永之泰</div>
-                <div class="pinglun_con">
-                    <div class="pinglun_con_text">
-                        自己坚持每天服用!
-                    </div>
-                    <div class="pinglun_zan">20</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="pinglun_list_img">
-                <img src="/public/indexsource/images/head.jpg" alt=""/>
-            </div>
-            <div class="pinglun_list_text">
-                <div class="pinglun_list_text1">永之泰</div>
-                <div class="pinglun_con">
-                    <div class="pinglun_con_text">
-                        自己坚持每天服用!
-                    </div>
-                    <div class="pinglun_zan">20</div>
-                </div>
-            </div>
-        </li>
-        <li>
-            <div class="pinglun_list_img">
-                <img src="/public/indexsource/images/head.jpg" alt=""/>
-            </div>
-            <div class="pinglun_list_text">
-                <div class="pinglun_list_text1">永之泰</div>
-                <div class="pinglun_con">
-                    <div class="pinglun_con_text">
-                        自己坚持每天服用!
-                    </div>
-                    <div class="pinglun_zan">20</div>
-                </div>
-            </div>
-        </li>
-       <li>
-           <div class="pinglun_list_img">
-               <img src="/public/indexsource/images/head.jpg" alt=""/>
-           </div>
-           <div class="pinglun_list_text">
-                 <div class="pinglun_list_text1">永之泰</div>
-                 <div class="pinglun_con">
-                     <div class="pinglun_con_text">
-                         自己坚持每天服用!
-                         自己坚持每天服用!
-                         自己坚持每天服用!
-                         自己坚持每天服用!
-                         自己坚持每天服用!
-                         自己坚持每天服用!
-                     </div>
-                     <div class="pinglun_zan1">21</div>
-                 </div>
-           </div>
-       </li>
+        {/foreach}
+
+
     </ul>
 </div>
 
@@ -138,8 +73,38 @@
 <!--这是社区详情的底部-->
 <div class="sq_btn">
     <img class="sq_btn1" src="/public/indexsource/images/bi.png" alt=""/>
-    <textarea class="sq_btn2" placeholder="我来说几句"></textarea>
+    <textarea name="userTalk" class="sq_btn2 userTalk" placeholder="我来说几句"></textarea>
     <img class="sq_btn3" src="/public/indexsource/images/zan.png" alt=""/>
 </div>
+
+<script>
+    $(function(){
+        $('.sq_btn3').click(function(){
+            var userTalk = $('.userTalk').val();
+            var artId = $('#artId').val();
+            var data = {'artId':artId,'userTalk':userTalk};
+            $.ajax({
+                type: 'POST',
+                url: '/artTalk',
+                data:data,
+                dataType: 'json',
+                success: function(re){
+                    if(re.status == 'success'){
+                        layer.msg('评论成功!',{icon:1,time:1000});
+                        setTimeout(function(){window.location.reload()},1000);
+                    }else{
+                        // $(obj).parents("tr").remove();
+                        layer.msg('删除失败!',{icon:0,time:1000});
+                    }
+
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+
+        })
+    })
+</script>
 </body>
 </html>
