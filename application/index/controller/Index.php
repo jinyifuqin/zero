@@ -1,6 +1,8 @@
 <?php
 namespace app\index\controller;
 use app\admin\model\Adminusers;
+use app\admin\model\ArticleMenus;
+use app\admin\model\Articles;
 use app\admin\model\Brands;
 use app\admin\model\IndexPics;
 use app\index\model\Addrs;
@@ -459,15 +461,11 @@ class Index
     }
 
 
-    public function ajax()
+    public function community()
     {
-//        echo password(123,456);exit;
-        $arr = array(
-            "a"=>"hello",
-            "b"=>"world"
-        );
-        $re = json_encode($arr);
-        echo $re;
-//        return view();
+        $art = Articles::all();
+        $menu = ArticleMenus::all();
+        $re = ['art'=>$art,'menu'=>$menu];
+        return view("index@index/community",['re'=>$re]);
     }
 }

@@ -34,20 +34,22 @@ class Article extends Controller
 
     public function save_article_menus(Request $request){
         $post = $request->param();
-        $title = $post['name'];
-        $sort = $post['sort'];
+        $file = $request->file('file');
+        if($file){
+            $re = upload($file);
+            $data['pic'] = htmlspecialchars($re->getSaveName());
+        }
+        if(array_key_exists('id',$post)){
+            $data['id'] = $post['id'];
+        }
+        $data['title'] = $post['name'];
+        $data['sort'] = $post['sort'];
         $artObj = new ArticleMenus();
         if(array_key_exists('id',$post)){
             $id = $post['id'];
-            $artObj->id = $id;
-            $re = $artObj->save([
-                'title' => $title,
-                'sort' => $sort
-            ],['id' => $id]);
+            $re = $artObj->save($data,['id' => $id]);
         }else{
-            $artObj->sort = $sort;
-            $artObj->title = $title;
-            $re = $artObj->save();
+            $re = $artObj->save($data);
         }
 //        echo "<pre>";var_dump($post);exit;
 

@@ -19,7 +19,14 @@
 				<input type="text" id="sort" class="input-text" value="{$re.sort}" placeholder="" name="sort">
 			</div>
 		</div>
-
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">图片：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+				<input value="/uploads/{$re.pic}" class="input-text upload-url" type="text" name="uploadfile" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input value="{$re.pic}" type="file" id="wenjian" multiple name="file-2" class="input-file">
+				</span> </div>
+		</div>
 
 
 		<div class="row cl">
@@ -46,13 +53,27 @@
         $('#submit').click(function(e){
             e.preventDefault();
             var form = $("#form-cat-add");
+            var name = $('#name').val();
+            var sort = $('#sort').val();
+            var id = $('#id').val();
+            var formData = new FormData();
+            var file = document.getElementById("wenjian").files[0]; // js 获取文件对象
+			// console.log($('#wenjian').val());return;
+            formData.append("name", name);
+            formData.append("sort", sort);
+            formData.append("id", id);
+            if(file){
+                formData.append("file", file);
+            }
             var url = form.attr('action');
-            var data = form.serialize();
             $.ajax({
                 type: "POST",
                 url: url,
-                data: data,
                 dataType: "json",
+                data: formData,
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
                 success: function(data){
                     var index = parent.layer.getFrameIndex(window.name);
                     // parent.$('.btn-refresh').click();

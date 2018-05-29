@@ -37,6 +37,7 @@
 					<th width="25"><input type="checkbox" name="" value=""></th>
 					<th width="80">ID</th>
 					<th>栏目名称</th>
+					<th width="80">LOGO</th>
 					<th width="120">更新时间</th>
 					<th width="120">操作</th>
 				</tr>
@@ -49,6 +50,7 @@
 					<td class="text-c">
 						{$vo.title}
 					</td>
+					<td><img width="80px;" src="/public/uploads/{$vo.pic}"/></td>
 					<td>{$vo.create_time}</td>
 					<td class="f-14 td-manage">
 						<!--<a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架">-->

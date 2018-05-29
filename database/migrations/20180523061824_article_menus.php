@@ -30,7 +30,8 @@ class ArticleMenus extends Migrator
     {
         $table = $this->table('article_menus',array('engine'=>'MyISAM'));
         $table->addColumn('sort', 'integer',array('limit' => 32,'default'=>0,'comment'=>'排序'))
-            ->addColumn('title', 'string',array('limit' => 64,'default'=>'','comment'=>'LOGO'))
+            ->addColumn('title', 'string',array('limit' => 64,'default'=>'','comment'=>'标题'))
+            ->addColumn('pic', 'string',array('default'=>'','comment'=>'LOGO'))
             ->addColumn('create_time', 'timestamp',array('default'=>'CURRENT_TIMESTAMP','comment'=>'创建时间'))
             ->addColumn('update_time', 'timestamp',array('comment'=>'修改时间'))
             ->addIndex(array('title'), array('unique' => true))
