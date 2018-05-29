@@ -160,6 +160,8 @@ Route::group('',[
     'community/[:id]' => ['community', ['method' => 'get']],
     'articleDetail/:id' => ['article_detail', ['method' => 'get']],
     'artTalk' => ['artTalk', ['method' => 'post']],
+    'artGiveGood/:id' => ['art_give_good', ['method' => 'get']],
+    'plGiveGood/:id' => ['pl_give_good', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

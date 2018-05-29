@@ -510,4 +510,39 @@ class Index
         echo json_encode($msg);
     }
 
+    public function art_give_good($id){
+//        setcookie("giveGood.$id",'',time() - 3600);
+//        echo "<pre>";var_dump($id);exit;
+        if(!array_key_exists("giveGood{$id}",$_COOKIE)){
+            $re = Db::table('yzt_articles')->where('id', $id)->setInc('give_good');
+            setcookie("giveGood{$id}",1);
+            if($re){
+                $msg = array('status'=>'success','msg'=>'点赞成功！');
+            }else{
+                $msg = array('status'=>'error','msg'=>'点赞失败！');
+            }
+        }else{
+            $msg = array('status'=>'error','msg'=>'您已经点过赞了！');
+        }
+
+
+        echo json_encode($msg);
+    }
+
+    public function pl_give_good($id){
+        if(!array_key_exists("plGood{$id}",$_COOKIE)){
+            $re = Db::table('yzt_talks')->where('id', $id)->setInc('give_good');
+            setcookie("plGood{$id}",1);
+            if($re){
+                $msg = array('status'=>'success','msg'=>'点赞成功！');
+            }else{
+                $msg = array('status'=>'error','msg'=>'点赞失败！');
+            }
+        }else{
+            $msg = array('status'=>'error','msg'=>'您已经点过赞了！');
+        }
+
+        echo json_encode($msg);
+    }
+
 }

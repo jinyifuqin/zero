@@ -53,7 +53,8 @@
                     <div class="pinglun_con_text">
                         {$vo.user_talk}
                     </div>
-                    <div class="pinglun_zan">{$vo.give_good}</div>
+                    <div class="pinglun_zan" plId="{$vo.id}">{$vo.give_good}</div>
+                    <!--<div class="plId" style="display: none;">{$vo.id}</div>-->
                 </div>
             </div>
         </li>
@@ -79,6 +80,49 @@
 
 <script>
     $(function(){
+        $('.pinglun_zan').click(function(){
+            var plId = $(this).attr('plId');
+            // console.log(plId);return;
+            $.ajax({
+                type: 'get',
+                url: '/plGiveGood/'+plId,
+                dataType: 'json',
+                success: function(re){
+                    if(re.status == 'success'){
+                        layer.msg(re.msg,{icon:1,time:1000});
+                        setTimeout(function(){window.location.reload()},1000);
+                    }else{
+                        layer.msg(re.msg,{icon:0,time:1000});
+                    }
+
+                },
+                error:function(re) {
+                    console.log(re.msg);
+                },
+            });
+        })
+
+        $('.sq_list4_zan').click(function(){
+            var artId = $('#artId').val();
+            $.ajax({
+                type: 'get',
+                url: '/artGiveGood/'+artId,
+                dataType: 'json',
+                success: function(re){
+                    if(re.status == 'success'){
+                        layer.msg(re.msg,{icon:1,time:1000});
+                        setTimeout(function(){window.location.reload()},1000);
+                    }else{
+                        layer.msg(re.msg,{icon:0,time:1000});
+                    }
+
+                },
+                error:function(re) {
+                    console.log(re.msg);
+                },
+            });
+        })
+
         $('.sq_btn3').click(function(){
             var userTalk = $('.userTalk').val();
             var artId = $('#artId').val();
@@ -94,7 +138,7 @@
                         setTimeout(function(){window.location.reload()},1000);
                     }else{
                         // $(obj).parents("tr").remove();
-                        layer.msg('删除失败!',{icon:0,time:1000});
+                        layer.msg('评论失败!',{icon:0,time:1000});
                     }
 
                 },
