@@ -9,6 +9,8 @@
 namespace app\index\controller;
 use app\admin\model\Adminusers;
 use app\admin\model\Brands;
+use app\admin\model\VotingList;
+use app\admin\model\Votings;
 use app\index\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\PutForwards;
@@ -617,6 +619,66 @@ class User extends Controller
             echo json_encode($msg);
         }
 //        echo "<pre>";var_dump($count);exit;
+    }
+    
+    public function user_voting(){
+        $v = Votings::all();
+        $curl = "userinfo";
+        $re = ['v'=>$v,'footType'=>$curl];
+//        echo "<pre>";var_dump($v);exit;
+        return view("index@user/userVoting",['re'=>$re]);
+    }
+
+    public function voting_detail($id){
+        $info = Votings::get($id);
+        $content = $info->content;
+        $content = trim($content);
+        $content = explode('|',$content);
+        $info->content = $content;
+        $curl = "userinfo";
+        $re = ['info'=>$info,'footType'=>$curl];
+//        echo "<pre>";var_dump($content);exit;
+        return view("index@user/votingDetail",['re'=>$re]);
+    }
+    
+    public function voting_action(Request $request){
+        $user = $_SESSION['userinfo'];
+        $userId = $user->id;
+        $post = $request->param();
+        $voting_count = $post['voting_count'];
+        $vListObj = new VotingList();
+//        echo "<pre>";var_dump($post);exit;
+        $allCount = $vListObj->where('user_id','=',$userId)
+            ->where('voting_id','=',$post['voId'])
+            ->count();
+        if($allCount >= $voting_count){
+            $msg = ['status'=>'error','msg'=>"最多投票{$voting_count}次！"];
+            echo json_encode($msg);exit;
+        }
+
+        $votingPoint['user_id'] = $userId;
+        $votingPoint['count'] = $post['pointCount'];
+        $votingPoint['type'] = 0;
+        $votingPoint['get_type'] = 6;
+        $votingPoint['frozen_flag'] = 0;
+        $votingPoint['create_time'] = date('Y-m-d H:i:s',time());
+        $p = new Points();
+        $p->data($votingPoint);
+        $re = $p->save();
+        $voListObj = new VotingList();
+        $voData['user_id'] = $userId;
+        $voData['voting_id'] = $post['voId'];
+        $voData['voting_info'] = $post['voting_info'];
+        $voListObj->data($voData);
+        $re2 = $voListObj->save();
+        if($re && $re2){
+            $msg = ['status'=>'success','msg'=>'投票成功！'];
+            echo json_encode($msg);
+        }else{
+            $msg = ['status'=>'error','msg'=>'投票失败！'];
+            echo json_encode($msg);
+        }
+//        echo "<pre>";var_dump($post);exit;
     }
 
 }

@@ -168,6 +168,9 @@ Route::group('',[
     'artTalk' => ['artTalk', ['method' => 'post']],
     'artGiveGood/:id' => ['art_give_good', ['method' => 'get']],
     'plGiveGood/:id' => ['pl_give_good', ['method' => 'get']],
+    'userVoting' => ['User/user_voting', ['method' => 'get']],
+    'votingDetail/:id' => ['User/voting_detail', ['method' => 'get']],
+    'votingAction' => ['User/voting_action', ['method' => 'post']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

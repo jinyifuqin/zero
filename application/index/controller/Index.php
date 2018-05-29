@@ -57,6 +57,7 @@ class Index
             if(isset($memberid) || isset($serviceuserid)){
                 $userObj->save();
             }
+
 //            echo "<pre>";var_dump($userObj->id);exit;
             $appid = WX_APPID;
             $wxObj = Weixins::all();
@@ -76,11 +77,13 @@ class Index
                 'signature'=>$signature,
                 'url'=>$url
             );
+
             $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin,'indexPic'=>$indePic];
             return view("index@index/index",['re'=>$re]);
         }else{
-            $re = ['footType'=>$curl,'itemInfo'=>$re];
-            return view("index@index/index",['re'=>$re,'indexPic'=>$indePic]);
+
+            $re = ['footType'=>$curl,'itemInfo'=>$re,'indexPic'=>$indePic];
+            return view("index@index/index",['re'=>$re]);
 //            $url = $this->wxObj->get_authorize_url(1);
 //            return redirect($url);
 

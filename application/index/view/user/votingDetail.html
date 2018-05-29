@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>积分商品投票</title>
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/css2.css" />
+		<script src="/public/indexsource/js/jquery.min.js"></script>
+		<script src="/public/indexsource/js/pic.js"></script>
+		<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+	</head>
+
+	<body>
+		<!--这是头部-->
+		{include file="public/indexsource/head/header.html" /}
+
+		<!--这是最外边的div，用来隔开与底部栏目的高度-->
+		<div class="Cmain">
+			<!--这是用户个人中心的头部-->
+			<!--<div class="user_bj">-->
+				<!--<div class="user_info">-->
+					<!--<div class="user_info_img"><img src="images/head.jpg" alt="" /></div>-->
+					<!--<span class="user_info_name">永之泰</span>-->
+				<!--</div>-->
+				<!--<div class="user_jifen">126000积分</div>-->
+			<!--</div>-->
+			<div class="mh"></div>
+			<div class="title_line line_bottom"><span class="line"></span>{$re.info.title}</div>
+			<!--<div class="find_qb">
+				<div class="find">
+					<input type="submit" class="find2" value="" /><input type="text" class="find1" placeholder="搜索" />
+				</div>
+			</div>-->
+			<div class="title_line line_bottom">
+				<div>{$re.info.desc}</div>
+				<div class="cl"></div>
+			</div>
+			<div class="jifen6">
+				<ul>
+					{foreach $re.info.content as $vo}
+					<li><a href="#">{$vo}</a></li>
+					{/foreach}
+					
+				</ul>
+				<div class="cl"></div>
+			</div>
+			<div class="tmtm"></div>
+			<div class="jifen5">
+				<div class="jifen5_1">
+					<span>你确定要花<i id="pointCount">{$re.info.point_count}</i>积分投<i></i>？</span>
+				</div>
+				<div>
+					<div id="voId" style="display: none;">{$re.info.id}</div>
+					<div id="voting_count" style="display: none;">{$re.info.voting_count}</div>
+				<button type="button" class="button1"><a href="#">确定</a></button>
+				<button type="button" class="button2"><a href="#">取消</a></button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$(".jifen6 ul li").click(function() {
+					$(".tmtm").css("display", "block");
+                    $(".jifen5").css("display", "block");
+                    var str = $(this).find('a').html();
+                    $('.jifen5_1').find('i').eq(1).html(str);
+				})
+
+				$(".button1").click(function() {
+                    var pointCount = $('#pointCount').html();
+                    var voId = $('#voId').html();
+                    var voting_count = $('#voting_count').html();
+                    var voting_info =  $('.jifen5_1').find('i').eq(1).html();
+                    var data = {'pointCount':pointCount,'voId':voId,'voting_count':voting_count,'voting_info':voting_info};
+                    $.ajax({
+                        type: "POST",
+                        url: "/votingAction",
+                        data: data,
+                        dataType: "json",
+                        success: function(rs){
+                            if(rs.status=="success"){
+                                layer.msg(rs.msg,{icon:1,time:2000});
+                                setTimeout(function(){window.location.reload()},1000);
+							}else{
+                                layer.msg(rs.msg,{icon:0,time:2000});
+							}
+
+                        }
+                    });
+					$(".tmtm").css("display", "none");
+                    $(".jifen5").css("display", "none");
+				})
+
+				$(".button2").click(function() {
+					$(".tmtm").css("display", "none");
+                    $(".jifen5").css("display", "none");
+				})
+
+			})
+		</script>
+
+		<!--底部-->
+		{include file="public/indexsource/foot/footer.html" /}
+	</body>
+
+</html>
