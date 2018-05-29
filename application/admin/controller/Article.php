@@ -155,4 +155,25 @@ class Article extends Controller
         return view("admin@article/articleEdit",['data'=>$data]);
     }
 
+    public function article_del($id){
+        $re = Articles::destroy($id);
+        if($re){
+            $msg = array('status'=>'success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function article_del_all(Request $request){
+        $ids = $request->param()['ids'];
+        $re = Articles::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
 }

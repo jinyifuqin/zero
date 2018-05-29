@@ -70,6 +70,8 @@ Route::group('admin',[
     'articleMenuDel/:id' => ['admin/article/article_menu_del', ['method' => 'get']],
     'articleMenuDelAll' => ['admin/article/article_menu_del_all', ['method' => 'get']],
     'article' => ['admin/article/article', ['method' => 'get']],
+    'articleDel/:id' => ['admin/article/article_del', ['method' => 'get']],
+    'articleDelAll' => ['admin/article/article_del_all', ['method' => 'get']],
     'addArticle' => ['admin/article/add_article', ['method' => 'get']],
     'articleSave' => ['admin/article/article_save', ['method' => 'post']],
     'articleStatus/:id' => ['admin/article/article_status', ['method' => 'get']],
