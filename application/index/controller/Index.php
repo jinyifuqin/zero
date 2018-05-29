@@ -480,8 +480,8 @@ class Index
 //            echo "<pre>";var_dump($a);exit;
         }
         $menu = ArticleMenus::all();
-
-        $re = ['art'=>$art,'menu'=>$menu];
+        $curl = "community";
+        $re = ['footType'=>$curl,'art'=>$art,'menu'=>$menu];
         return view("index@index/community",['re'=>$re]);
     }
 

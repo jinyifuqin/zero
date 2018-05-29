@@ -38,11 +38,20 @@
     <div class="APPbtn1">
         <a href="/community">
             <div class="APPbtn1_img">
+                {eq name="$re.footType" value="community"}
+                <img src="/public/indexsource/images/Appbottom3.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom33.png" alt=""/>
+                {else/}
                 <img src="/public/indexsource/images/Appbottom33.png" alt=""/>
                 <img src="/public/indexsource/images/Appbottom3.png" alt=""/>
+                {/eq}
             </div>
         </a>
+        {eq name="$re.footType" value="community"}
+        <a style="color: #faa73f!important;" href="/community">社区</a>
+        {else/}
         <a href="/community">社区</a>
+        {/eq}
     </div>
 
     <div class="APPbtn1 -mob-share-open" >
