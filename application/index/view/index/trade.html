@@ -23,21 +23,6 @@
     </style>
 </head>
 <body>
-<!--这是头部-->
-<!--<div class="APPtop user_top">-->
-    <!--<a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>-->
-    <!--<p class="page">永之泰俱乐部</p>-->
-    <!--&lt;!&ndash;<img class="applogo" src="/public/indexsource/images/applogo.png" alt="" />&ndash;&gt;-->
-    <!--<img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />-->
-<!--</div>-->
-<!--<div class="rbj"></div>-->
-<!--<ul class="menuS">-->
-    <!--<a href="index.html"><p>首页</p></a>-->
-    <!--<a href="#"><p>商城</p></a>-->
-    <!--<a href="#"><p>社区</p></a>-->
-    <!--<a href="#"><p>分享</p></a>-->
-    <!--<a href="#"><p>会员中心</p></a>-->
-<!--</ul>-->
 {include file="public/indexsource/head/header.html" /}
 
 
@@ -100,6 +85,7 @@
     <ul class="order_list" >
         {foreach $re.trade as $vo}
         <li>
+            <a href="/tradeDetail/{$vo.id}">
             <div class="order_list1">
                 <div class="order_list1_img">
                     <img src="/public/uploads/{$vo.pic}" alt=""/>
@@ -109,6 +95,7 @@
                     <p class="order_list1_text2">{$vo.buy_price}元</p>
                 </div>
             </div>
+            </a>
             <div class="order_list2">共{$vo.buy_num}件商品{$vo.trade_type} 合计{$vo.buy_price}元 &nbsp;</div>
             <div class="order_list3">
                 <!--<a class="order_list31" href="#">查看物流</a>-->

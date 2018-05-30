@@ -127,6 +127,7 @@ Route::group('',[
     'addrEdit/:id' => ['item/addr_edit', ['method' => 'get']],
     'userInfo' => ['user_info', ['method' => 'get']],
     'myTrade/[:type]' => ['user_trade', ['method' => 'get']],
+    'tradeDetail/:id' => ['trade_detail', ['method' => 'get']],
     'ajaxGetTrade' => ['ajax_get_trade', ['method' => 'post']],
     'trueGet' => ['trade_true_get', ['method' => 'get']],
     'tradeDel' => ['trade_del', ['method' => 'get']],

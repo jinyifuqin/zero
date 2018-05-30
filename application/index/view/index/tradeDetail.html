@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=10" />
+		<title>订单详情</title>
+		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+		<link href="/public/indexsource/css/css2.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/public/admins/lib/jquery/onenineone/jquery.min.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/superslide.2.1.js"></script>
+		<script type="text/javascript" src="/public/indexsource/js/iscroll.js"></script>
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
+	</head>
+
+	<body>
+	{include file="public/indexsource/head/header.html" /}
+
+		<div class="big_qb111" style="margin-bottom: 4.5rem; margin-top: 3rem;">
+			<div class="order">
+				<div class="ddxq_qb">
+					<!--<div class="ddxq">-->
+						<!--<img src="/public/indexsource/images/zz29.png" /><span>待确认</span>-->
+					<!--</div>-->
+					<div class="ddxq2">
+						<img src="/public/indexsource/images/zz31.png" /><span>{$re.trade.name} </span><span>  {$re.trade.phone_num} </span>
+						<p>所在地区：{$re.trade.address}</p>
+
+					</div>
+					<div class="cl"></div>
+				</div>
+				<div class="huise"></div>
+				<div class="order_qb">
+					<div class="border_bottom">
+						<!--<div class="border_bottom1"><img src="/public/indexsource/images/zz27.png" class="bottom1" /><span>科迅网络</span>-->
+							<!--<img src="/public/indexsource/images/zz32.png" class="bottom11" />-->
+							<!--<font class="bottom5">联系卖家</font>-->
+							<!--<div class="cl"></div>-->
+						<!--</div>-->
+						<div class="order_qb">
+							<div class="border_bottom2 border_bottom22">
+								<dl>
+									<dt><img src="/public/uploads/{$re.item.pic}"/></dt>
+									<dd class="d1"><span>{$re.item.name}</span>
+										<!--<font>¥ {$re.trade.onePrice}</font>-->
+									</dd>
+									<!--<dd class="d2">数量：{$re.trade.buy_num}</dd>-->
+									<!--<dd class="d3">实付款：<i>¥{$re.trade.buy_price} </i></dd>-->
+									<div class="cl"></div>
+								</dl>
+
+							</div>
+
+						</div>
+						<div class="cl"></div>
+						<div class="huise"></div>
+
+					</div>
+				</div>
+				<div class="order_qb1">
+					<div class="ddxq3">
+						<div class="ddxq4"><span>单价</span>
+							<font>{$re.trade.onePrice}</font>
+						</div>
+						<div class="ddxq4"><span>数量</span>
+							<font>{$re.trade.buy_num}</font>
+						</div>
+						<div class="ddxq4"><span>总价</span>
+							<font>¥{$re.trade.buy_price}</font>
+						</div>
+
+					</div>
+					<div class="ddxq5">付款：<i>¥{$re.trade.buy_price}</i></div>
+					<div class="cl"></div>
+					<div class="huise"></div>
+					<div class="ddxq6">
+						<div class="ddxq7">订单编号：{$re.trade.trade_number}<span>
+							<!--<a href="#">  复制</a> -->
+						</span> </div>
+						<div class="ddxq7">下单时间：<?php echo date('Y-m-d H:i:s',$re['trade']->create_time) ?></div>
+
+					</div>
+					<div class="huise"></div>
+				</div>
+
+				<!--<div class="cl"></div>-->
+				<!--<div class="huise3"></div>-->
+
+
+			</div>
+
+			<!--底部-->
+			<!--<div class="APPbtn">
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="/public/indexsource/images/Appbottom11.png" alt="" />
+						<img src="/public/indexsource/images/Appbottom1.png" alt="" />
+					</div>
+				</a>
+				<a href="#">店铺首页</a>
+			</div>
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="/public/indexsource/images/z2.png" alt="" />
+						<img src="/public/indexsource/images/z22.png" alt="" />
+					</div>
+				</a>
+				<a href="#">全部服务</a>
+			</div>
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="/public/indexsource/images/z33.png" alt="" />
+						<img src="/public/indexsource/images/z3.png" alt="" />
+					</div>
+				</a>
+				<a href="#">精彩案例</a>
+			</div>
+			<div class="APPbtn1">
+				<a href="#">
+					<div class="APPbtn1_img">
+						<img src="/public/indexsource/images/z44.png" alt="" />
+						<img src="/public/indexsource/images/z4.png" alt="" />
+					</div>
+				</a>
+				<a href="#">店铺资料</a>
+			</div>
+		</div>-->
+	</body>
+
+</html>

@@ -411,6 +411,18 @@ class Index
         return view("index@index/trade",['re'=>$re]);
     }
 
+    public function trade_detail($id){
+        $trade = Trades::get($id);
+        $trade->address = preg_replace('/%2C/',' ',$trade->address);
+        $trade->onePrice = $trade->buy_price/$trade->buy_num;
+        $item = Items::get($trade->item_id);
+        $url = '/userInfo';
+        $re = ['trade'=>$trade,'item'=>$item,'url'=>$url];
+
+//        echo "<pre>";var_dump($trade);exit;
+        return view("index@index/tradeDetail",['re'=>$re]);
+    }
+
     public function ajax_get_trade(Request $request){
         $post = $request->param();
         $macth = ['pd'=>0,'as'=>1,'finish'=>2,'all'=>null];
