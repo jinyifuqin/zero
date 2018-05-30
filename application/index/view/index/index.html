@@ -41,18 +41,20 @@
         </div>
         <div class="newsticker-jcarousellite gonggaoR">
             <ul>
+                {if condition="(array_key_exists('gg',$re))"}
+                {volist name="re.gg" id="vo"}
                 <li>
                     <div class="thumbnail"></div>
-                    <div class="info"> <a href="#">凡一次购买“尚善靓延”综合酵素饮品...</a> <span class="cat">【2018-4-19】</span> </div>
+                    <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">{$vo.title}{$key}</a> <span class="cat" style="width:40%">【{$vo.create_time}】</span> </div>
                 </li>
+                {/volist}
+                {else /}
                 <li>
                     <div class="thumbnail"></div>
-                    <div class="info"> <a href="#">健康推广大使奖：每位会员均可成为健...</a> <span class="cat">【2018-4-19】</span> </div>
+                    <div class="info"> <a href="#">暂时没有公告</a> <span class="cat"></span> </div>
                 </li>
-                <li>
-                    <div class="thumbnail"></div>
-                    <div class="info"> <a href="#">健康推广大使奖</a> <span class="cat">【2018-4-19】</span> </div>
-                </li>
+                {/if}
+
             </ul>
         </div>
     </div>
@@ -89,22 +91,12 @@
         </div>
         <div class="sqrtR">
             <ul>
+                {foreach $re.hotArt as $vo}
                 <li>
                     <div class="thumbnail"> <img src="/public/indexsource/images/sqrt_jt.jpg"> </div>
-                    <div class="info"> <a href="#">尚善靓延”零元购”</a> <span class="cat">【2018-4-19】</span> </div>
+                    <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">{$vo.title}</a> <span style="width:40%;" class="cat">【{$vo.create_time}】</span> </div>
                 </li>
-                <li>
-                    <div class="thumbnail"> <img src="/public/indexsource/images/sqrt_jt.jpg"> </div>
-                    <div class="info"> <a href="#">健康推广大使奖</a> <span class="cat">【2018-4-19】</span> </div>
-                </li>
-                <li>
-                    <div class="thumbnail"> <img src="/public/indexsource/images/sqrt_jt.jpg"> </div>
-                    <div class="info"> <a href="#">“太岁”独有成分</a> <span class="cat">【2018-4-19】</span> </div>
-                </li>
-                <li>
-                    <div class="thumbnail"> <img src="/public/indexsource/images/sqrt_jt.jpg"> </div>
-                    <div class="info"> <a href="#">“尚善靓延”经营理念</a> <span class="cat">【2018-4-19】</span> </div>
-                </li>
+                {/foreach}
             </ul>
         </div>
     </div>
@@ -185,7 +177,8 @@
             hoverPause:true,
             visible:2,
             auto:500,
-            speed:1500
+            speed:1500,
+            scroll:1
         });
 
     });
