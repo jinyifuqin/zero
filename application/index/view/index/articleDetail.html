@@ -96,6 +96,11 @@
                 url: '/plGiveGood/'+plId,
                 dataType: 'json',
                 success: function(re){
+                    if(re.url){
+                        layer.msg('请先登录！',{icon:0,time:1000});
+                        setTimeout(function(){window.location.href=re.url},1000);
+                        return false;
+                    }
                     if(re.status == 'success'){
                         layer.msg(re.msg,{icon:1,time:1000});
                         setTimeout(function(){window.location.reload()},1000);
@@ -117,6 +122,11 @@
                 url: '/artGiveGood/'+artId,
                 dataType: 'json',
                 success: function(re){
+                    if(re.url){
+                        layer.msg('请先登录！',{icon:0,time:1000});
+                        setTimeout(function(){window.location.href=re.url},1000);
+                        return false;
+                    }
                     if(re.status == 'success'){
                         layer.msg(re.msg,{icon:1,time:1000});
                         setTimeout(function(){window.location.reload()},1000);
@@ -133,6 +143,9 @@
 
         $('.sq_btn3').click(function(){
             var userTalk = $('.userTalk').val();
+            if(userTalk == ''){
+                return layer.msg('请输入评论内容!',{icon:0,time:1000});
+            }
             var artId = $('#artId').val();
             var data = {'artId':artId,'userTalk':userTalk};
             $.ajax({
@@ -141,6 +154,11 @@
                 data:data,
                 dataType: 'json',
                 success: function(re){
+                    if(re.url){
+                        layer.msg('请先登录！',{icon:0,time:1000});
+                        setTimeout(function(){window.location.href=re.url},1000);
+                        return false;
+                    }
                     if(re.status == 'success'){
                         layer.msg('评论成功!',{icon:1,time:1000});
                         setTimeout(function(){window.location.reload()},1000);

@@ -553,8 +553,11 @@ class Index
 
     public function community($id='')
     {
-        $user = $_SESSION['userinfo'];
-        $userId = $user->id;
+        if(array_key_exists('userinfo',$_SESSION)){
+            $user = $_SESSION['userinfo'];
+            $userId = $user->id;
+        }
+
 
         if($id == ''){
             $menuId = ArticleMenus::get(['title'=>'服务中心']);
@@ -567,15 +570,18 @@ class Index
         foreach ($art as &$v){
             $v->content = htmlspecialchars_decode($v->content);
             $v->talkCount = Talks::where('art_id','=',$v->id)->count();
-            $gObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$v->id,'type'=>0]);
-            $talkFlag = Talks::get(['art_id'=>$v->id,'user_id'=>$userId]);
+            if(isset($userId)){
+                $gObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$v->id,'type'=>0]);
+                $talkFlag = Talks::get(['art_id'=>$v->id,'user_id'=>$userId]);
+            }
+
 //            echo "<pre>";var_dump($talkFlag);exit;
-            if($talkFlag){
+            if(isset($talkFlag)){
                 $v->talkFlag = true;
             }else{
                 $v->talkFlag = false;
             }
-            if($gObj){
+            if(isset($gObj)){
                 $v->artFlag = true;
             }else{
                 $v->artFlag = false;
@@ -589,12 +595,16 @@ class Index
     }
 
     public function article_detail($id){
-        $user = $_SESSION['userinfo'];
-        $userId = $user->id;
+        if(array_key_exists('userinfo',$_SESSION)){
+            $user = $_SESSION['userinfo'];
+            $userId = $user->id;
+            $agObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$id,'type'=>0]);
+        }
+
         $art = Articles::get($id);
         $art->content = htmlspecialchars_decode($art->content);
-        $agObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$id,'type'=>0]);
-        if($agObj){
+
+        if(isset($agObj)){
             $art->artFlag = true;
         }else{
             $art->artFlag = false;
@@ -604,8 +614,10 @@ class Index
             $v->pic = Users::where('id',$v->user_id)->value('pic');
             $nickname = Users::where('id',$v->user_id)->value('nickname');
             $v->nickname = json_decode(urldecode($nickname));
-            $pgObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$v->id,'type'=>1]);
-            if($pgObj){
+            if(isset($userId)){
+                $pgObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$v->id,'type'=>1]);
+            }
+            if(isset($pgObj)){
                 $v->plFlag = true;
             }else{
                 $v->plFlag = false;
@@ -621,6 +633,10 @@ class Index
     public function artTalk(Request $request){
         $post = $request->param();
         $data['art_id'] = $post['artId'];
+        if(!array_key_exists('userinfo',$_SESSION)){
+            $msg = array('url'=>'/userInfo');
+            echo json_encode($msg);exit;
+        }
         $user = $_SESSION['userinfo'];
         $data['user_id'] = $user->id;
 
@@ -638,6 +654,10 @@ class Index
 
     public function art_give_good($id){
         $giveDoodsObj = new GiveGoods();
+        if(!array_key_exists('userinfo',$_SESSION)){
+            $msg = array('url'=>'/userInfo');
+            echo json_encode($msg);exit;
+        }
         $user = $_SESSION['userinfo'];
         $userId = $user->id;
         $gObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$id,'type'=>0]);
@@ -664,6 +684,10 @@ class Index
 
     public function pl_give_good($id){
         $giveDoodsObj = new GiveGoods();
+        if(!array_key_exists('userinfo',$_SESSION)){
+            $msg = array('url'=>'/userInfo');
+            echo json_encode($msg);exit;
+        }
         $user = $_SESSION['userinfo'];
         $userId = $user->id;
         $gObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$id,'type'=>1]);

@@ -78,6 +78,11 @@
                 url: '/artGiveGood/'+artId,
                 dataType: 'json',
                 success: function(re){
+                    if(re.url){
+                        layer.msg('请先登录！',{icon:0,time:1000});
+                        setTimeout(function(){window.location.href=re.url},1000);
+                        return false;
+                    }
                     if(re.status == 'success'){
                         layer.msg(re.msg,{icon:1,time:1000});
                         setTimeout(function(){window.location.reload()},1000);
