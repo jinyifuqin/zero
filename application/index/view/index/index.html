@@ -15,20 +15,7 @@
 </head>
 <body>
 <!--这是头部-->
-<div class="APPtop">
-    <!--<a href="#"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>-->
-    <p class="page">永之泰俱乐部</p>
-    <!--<img class="applogo" src="/public/indexsource/images/applogo.png" alt="" />-->
-    <img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />
-</div>
-<div class="rbj"></div>
-<ul class="menuS">
-    <a href="index.html"><p>首页</p></a>
-    <a href="#"><p>商城</p></a>
-    <a href="#"><p>社区</p></a>
-    <a href="#"><p>分享</p></a>
-    <a href="#"><p>会员中心</p></a>
-</ul>
+{include file="public/indexsource/head/header.html" /}
 
 
 
@@ -88,7 +75,7 @@
             </a>
             <div class="cpjs_text3">
                 <span class="cpjs_text31">价格：<b>￥{$vo.price}</b></span>
-                <a class="cpjs_text32" href="/itemList">购买</a>
+                <a class="cpjs_text32" href="/item/{$vo.id}">购买</a>
             </div>
         </div>
     </div>

@@ -37,12 +37,16 @@ class Index
         if(isset($memberid)){
             $_SESSION['share_member_id'] = $memberid;
         }
-        $re = Items::all();
+        $itemObj = new Items();
+        $re = $itemObj->limit(2)
+            ->order('sort', 'desc')
+            ->select();
+//        $re = Items::all();
         $indePic = IndexPics::all();
         foreach($indePic as &$v){
             $v->pic = addslashes($v->pic);
         }
-//        echo "<pre>";var_dump($indePic);exit;
+//        echo "<pre>";var_dump($re);exit;
         $curl = "index";
         if(array_key_exists('userinfo',$_SESSION)){
             $id = $_SESSION['userinfo']->id;

@@ -8,6 +8,8 @@
 
 namespace app\index\controller;
 use app\admin\model\Adminusers;
+use app\admin\model\ArticleMenus;
+use app\admin\model\Articles;
 use app\admin\model\Discounts;
 use app\admin\model\Items;
 use app\index\model\Addrs;
@@ -25,8 +27,9 @@ class Item extends Controller
     }
 
     public function itemList(){
-//        echo "<pre>";var_dump($_SESSION);exit;
-        $re = Items::all();
+        $itemObj = new Items();
+        $re = $itemObj->order('sort', 'desc')
+            ->select();
         $curl = "itemList";
         $re = ['footType'=>$curl,'itemList'=>$re];
         return view("index@item/index",['re'=>$re]);
@@ -35,9 +38,12 @@ class Item extends Controller
     public function item(Request $request){
         $id = $request->param('id');
         $result = Items::get(['id' => $id]);
-//        echo "<pre>";var_dump($re);exit;
+        $artM = ArticleMenus::get(['title'=>'公告']);
+        $artMId = $artM->id;
+        $atrs = Articles::all(['menu_id'=>$artMId]);
+//        echo "<pre>";var_dump($atrs);exit;
         $curl = "itemInfo";
-        $re = ['footType'=>$curl,'itemInfo'=>$result];
+        $re = ['footType'=>$curl,'itemInfo'=>$result,''];
 //        echo "<pre>";var_dump($re);exit;
         return view("index@item/item",['re'=>$re]);
     }

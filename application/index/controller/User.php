@@ -681,4 +681,18 @@ class User extends Controller
 //        echo "<pre>";var_dump($post);exit;
     }
 
+    public function user_get(){
+        $userId = $_SESSION['userinfo']->id;
+        $pObj = new Points();
+        $list = $pObj->where('user_id', $userId)
+            ->where('type', '=',1)
+            ->where('get_type', '=',1)
+            ->where('frozen_flag', 0)
+            ->select();
+        $curl = "userinfo";
+        $re = ['list'=>$list,'footType'=>$curl];
+//        echo "<pre>";var_dump($list);exit;
+        return view("index@user/userGet",['re'=>$re]);
+    }
+
 }

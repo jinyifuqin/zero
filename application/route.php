@@ -156,6 +156,7 @@ Route::group('',[
     'serviceCent' => ['User/service_cent', ['method' => 'get']],
     'entrust' => ['User/entrust', ['method' => 'get']],
     'givePointService' => ['User/give_point_service', ['method' => 'get']],
+    'userGet' => ['User/user_get', ['method' => 'get']],
     'saveNickname' => ['User/save_nickname', ['method' => 'post']],
     'openbank' => ['User/openbank', ['method' => 'get']],
     'saveOpenBank' => ['User/save_open_bank', ['method' => 'post']],
