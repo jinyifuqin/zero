@@ -51,7 +51,7 @@
                 {else /}
                 <li>
                     <div class="thumbnail"></div>
-                    <div class="info"> <a href="#">暂时没有公告</a> <span class="cat"></span> </div>
+                    <div class="info"> <a href="javascript:void(0)">暂时没有公告</a> <span class="cat"></span> </div>
                 </li>
                 {/if}
 
@@ -101,7 +101,7 @@
                 {else/}
                 <li>
                     <div class="thumbnail"> <img src="/public/indexsource/images/sqrt_jt.jpg"> </div>
-                    <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">暂无数据</a> <span style="width:40%;" class="cat"></span> </div>
+                    <div class="info"> <a style="width:60%;" href="javascript:void(0) ">暂无数据</a> <span style="width:40%;" class="cat"></span> </div>
                 </li>
                 {/if}
             </ul>
@@ -149,14 +149,14 @@
         {if condition="(array_key_exists('serArt',$re))"}
         {foreach $re.serArt as $vo}
         <li>
-            <a class="fwzx1" style="width:66%;" href="#"><span>●</span>{$vo.title}</a>
-            <a class="fwzx2" style="width:32%;" href="#">【{$vo.create_time}】</a>
+            <a class="fwzx1" style="width:66%;" href="/articleDetail/{$vo.id}"><span>●</span>{$vo.title}</a>
+            <a class="fwzx2" style="width:32%;" href="/articleDetail/{$vo.id}">【{$vo.create_time}】</a>
         </li>
         {/foreach}
         {else/}
         <li>
-            <a class="fwzx1" style="width:66%;" href="#"><span>●</span>暂无数据</a>
-            <a class="fwzx2" style="width:32%;" href="#"></a>
+            <a class="fwzx1" style="width:66%;" href="javascript:void(0)"><span>●</span>暂无数据</a>
+            <a class="fwzx2" style="width:32%;" href="javascript:void(0)"></a>
         </li>
         {/if}
     </ul>
