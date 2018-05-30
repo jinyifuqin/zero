@@ -107,7 +107,7 @@ class Index
             );
 
             $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin,'indexPic'=>$indePic];
-            if($gg){
+            if(isset($gg)){
                 $re['gg'] = $gg;
             }
             if($hotArt){
