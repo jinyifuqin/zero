@@ -6,6 +6,7 @@ use app\admin\model\Articles;
 use app\admin\model\Brands;
 use app\admin\model\IndexPics;
 use app\index\model\Addrs;
+use app\index\model\GiveGoods;
 use app\index\model\Talks;
 use app\index\model\Weixins;
 use app\index\model\Points;
@@ -552,6 +553,9 @@ class Index
 
     public function community($id='')
     {
+        $user = $_SESSION['userinfo'];
+        $userId = $user->id;
+
         if($id == ''){
             $menuId = ArticleMenus::get(['title'=>'服务中心']);
             $menuId = $menuId->id;
@@ -559,9 +563,23 @@ class Index
             $menuId = $id;
         }
         $art = Articles::all(['menu_id'=>$menuId]);
+
         foreach ($art as &$v){
             $v->content = htmlspecialchars_decode($v->content);
             $v->talkCount = Talks::where('art_id','=',$v->id)->count();
+            $gObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$v->id,'type'=>0]);
+            $talkFlag = Talks::get(['art_id'=>$v->id,'user_id'=>$userId]);
+//            echo "<pre>";var_dump($talkFlag);exit;
+            if($talkFlag){
+                $v->talkFlag = true;
+            }else{
+                $v->talkFlag = false;
+            }
+            if($gObj){
+                $v->artFlag = true;
+            }else{
+                $v->artFlag = false;
+            }
 //            echo "<pre>";var_dump($a);exit;
         }
         $menu = ArticleMenus::all();
@@ -571,13 +589,27 @@ class Index
     }
 
     public function article_detail($id){
+        $user = $_SESSION['userinfo'];
+        $userId = $user->id;
         $art = Articles::get($id);
         $art->content = htmlspecialchars_decode($art->content);
+        $agObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$id,'type'=>0]);
+        if($agObj){
+            $art->artFlag = true;
+        }else{
+            $art->artFlag = false;
+        }
         $talk = Talks::all(['art_id'=>$id]);
         foreach($talk as &$v){
             $v->pic = Users::where('id',$v->user_id)->value('pic');
             $nickname = Users::where('id',$v->user_id)->value('nickname');
             $v->nickname = json_decode(urldecode($nickname));
+            $pgObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$v->id,'type'=>1]);
+            if($pgObj){
+                $v->plFlag = true;
+            }else{
+                $v->plFlag = false;
+            }
         }
         $url = '/community';
 //        $curl = "userinfo";
@@ -605,12 +637,19 @@ class Index
     }
 
     public function art_give_good($id){
-//        setcookie("giveGood.$id",'',time() - 3600);
-//        echo "<pre>";var_dump($id);exit;
-        if(!array_key_exists("giveGood{$id}",$_COOKIE)){
-            $re = Db::table('yzt_articles')->where('id', $id)->setInc('give_good');
-            setcookie("giveGood{$id}",1);
-            if($re){
+        $giveDoodsObj = new GiveGoods();
+        $user = $_SESSION['userinfo'];
+        $userId = $user->id;
+        $gObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$id,'type'=>0]);
+
+        if(!$gObj){
+            $re1 = Db::table('yzt_articles')->where('id', $id)->setInc('give_good');
+            $data['type'] = 0;
+            $data['user_id'] = $userId;
+            $data['gooded_id'] = $id;
+            $giveDoodsObj->data($data);
+            $re = $giveDoodsObj->save();
+            if($re && $re1){
                 $msg = array('status'=>'success','msg'=>'点赞成功！');
             }else{
                 $msg = array('status'=>'error','msg'=>'点赞失败！');
@@ -624,9 +663,18 @@ class Index
     }
 
     public function pl_give_good($id){
-        if(!array_key_exists("plGood{$id}",$_COOKIE)){
+        $giveDoodsObj = new GiveGoods();
+        $user = $_SESSION['userinfo'];
+        $userId = $user->id;
+        $gObj = GiveGoods::get(['user_id'=>$userId,'gooded_id'=>$id,'type'=>1]);
+
+        if(!$gObj){
             $re = Db::table('yzt_talks')->where('id', $id)->setInc('give_good');
-            setcookie("plGood{$id}",1);
+            $data['type'] = 1;
+            $data['user_id'] = $userId;
+            $data['gooded_id'] = $id;
+            $giveDoodsObj->data($data);
+            $re = $giveDoodsObj->save();
             if($re){
                 $msg = array('status'=>'success','msg'=>'点赞成功！');
             }else{

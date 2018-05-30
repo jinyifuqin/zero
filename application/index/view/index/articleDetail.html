@@ -24,14 +24,18 @@
             <div class="sq_list1">
                 <div class="sq_list_img"><img src="/public/indexsource/images/head.jpg" alt=""/></div>
                 <div class="sq_text">
-                    <span>永之泰</span>
-                    <!--<span>八分钟前</span>-->
+                    <span>{$re.art.author}</span>
+                    <!--<span>{$re.art.create_time}</span>-->
                 </div>
             </div>
             <a class="sq_list2" href="#">{$re.art.title}</a>
             <a class="sq_list3xq sq_list3" href="#">{$re.art.content}</a>
             <div class="sq_list4xq sq_list4">
-                <span class="sq_list4_zan">{$re.art.give_good}</span>
+                {if condition="($re.art.artFlag)"}
+                <span class="sq_list4_zan1 artclick" style="border: 0.1rem solid #faa73f;">{$re.art.give_good}</span>
+                {else/}
+                <span class="sq_list4_zan artclick">{$re.art.give_good}</span>
+                {/if}
             </div>
             <input id="artId" type="hidden" name="artId" value="{$re.art.id}"/>
         </li>
@@ -53,7 +57,11 @@
                     <div class="pinglun_con_text">
                         {$vo.user_talk}
                     </div>
-                    <div class="pinglun_zan" plId="{$vo.id}">{$vo.give_good}</div>
+                    {if condition="($vo.plFlag)"}
+                    <div class="pinglun_zan1 plclick"  plId="{$vo.id}">{$vo.give_good}</div>
+                    {else/}
+                    <div class="pinglun_zan plclick" plId="{$vo.id}">{$vo.give_good}</div>
+                    {/if}
                     <!--<div class="plId" style="display: none;">{$vo.id}</div>-->
                 </div>
             </div>
@@ -80,7 +88,7 @@
 
 <script>
     $(function(){
-        $('.pinglun_zan').click(function(){
+        $('.plclick').click(function(){
             var plId = $(this).attr('plId');
             // console.log(plId);return;
             $.ajax({
@@ -102,7 +110,7 @@
             });
         })
 
-        $('.sq_list4_zan').click(function(){
+        $('.artclick').click(function(){
             var artId = $('#artId').val();
             $.ajax({
                 type: 'get',
