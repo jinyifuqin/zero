@@ -11,6 +11,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Cats;
 use app\admin\model\Items;
+use app\admin\model\PointItems;
 use think\Config;
 use \think\Controller;
 use think\Request;
@@ -47,12 +48,23 @@ class Item  extends Controller
                 $brandname = Brands::where('id',$v->brand_id)->column('name');
                 $v->brand_name = $brandname[0];
             }
-
-//            echo "<pre>";var_dump($v);
         }
-//exit;
-//        exit;
         return view("admin@index/item",['item'=>$items]);
+    }
+
+    public function point_items(){
+        $items = PointItems::all();
+        foreach ($items as $k=>&$v){
+            if($v->cat_id){
+                $catname = Cats::where('id',$v->cat_id)->column('name');
+                $v->cat_name = $catname[0];
+            }
+            if($v->brand_id){
+                $brandname = Brands::where('id',$v->brand_id)->column('name');
+                $v->brand_name = $brandname[0];
+            }
+        }
+        return view("admin@index/pointItems",['item'=>$items]);
     }
 
     public function itemAdd(){
@@ -60,6 +72,13 @@ class Item  extends Controller
         $cat = Cats::all();
         $data = ['brand'=>$brand,'cat'=>$cat];
         return view("admin@index/itemAdd",['data'=>$data]);
+    }
+
+    public function point_item_add(){
+        $brand = Brands::all();
+        $cat = Cats::all();
+        $data = ['brand'=>$brand,'cat'=>$cat];
+        return view("admin@index/pointItemAdd",['data'=>$data]);
     }
 
     public function itemEdit(Request $request){
@@ -73,6 +92,19 @@ class Item  extends Controller
 //        echo "<pre>";var_dump($item->content);exit;
         $item->pic = preg_replace('/\\\\/','/',$item->pic);
         return view("admin@index/itemEdit",['data'=>$data]);
+    }
+
+    public function point_item_edit(Request $request){
+        $id = $request->param('id');
+        $item = PointItems::get($id);
+//        echo "<pre>";var_dump($items);exit;
+        $brand = Brands::all();
+        $cat = Cats::all();
+        $data = ['brand'=>$brand,'cat'=>$cat,'item'=>$item];
+        $item->content = htmlspecialchars_decode($item->content);
+//        echo "<pre>";var_dump($item->content);exit;
+        $item->pic = preg_replace('/\\\\/','/',$item->pic);
+        return view("admin@index/pointItemEdit",['data'=>$data]);
     }
 
     public function itemUpdate(Request $request){
@@ -124,6 +156,47 @@ class Item  extends Controller
         echo json_encode($re);
     }
 
+    public function point_item_update(Request $request){
+        if($request->file('file-2')){
+            $file = $request->file('file-2');
+            $fileRe = upload($file);
+            $pic = htmlspecialchars($fileRe->getSaveName());
+            $re = array('re'=>$pic);
+            echo json_encode($re);
+            return;
+        }
+        $pic = $request->param('logopath');
+        $check = strrpos($pic,'uploads');
+        $prepareConten = $request->param('content');
+
+//        echo"<pre>";var_dump($content);exit;
+        $item = new PointItems();
+        $creatTime = date('Y-m-d H:i:s',time());
+        $id = $request->param('id');
+        $name = $request->param('name');
+        $desc = $request->param('desc');
+        $content = htmlspecialchars($prepareConten);
+        $price = $request->param('price');
+        $status = $request->param('status');
+        $catid = $request->param('cat_id');
+        $brandid = $request->param('brand_id');
+        $sort = $request->param('sort');
+        $re = PointItems::get(['id' => $id]);
+        if($check){
+            $pic = $re->pic;
+        }
+
+        $result = $item->save(
+            ['pic'=>$pic,'name'=>$name,'desc'=>$desc,'sort'=>$sort,'create_time'=>$creatTime,
+                'content'=>$content,'price'=>$price,
+                'status'=>$status,'cat_id'=>$catid,'brand_id'=>$brandid],
+            ['id'=>$id]
+        );
+
+        $re = array('type'=>$result);
+        echo json_encode($re);
+    }
+
     public function itemSave(Request $request){
         $data = $request->param();
 //        echo"<pre>";var_dump($data);exit;
@@ -154,9 +227,50 @@ class Item  extends Controller
 
     }
 
+    public function point_item_save(Request $request){
+        $data = $request->param();
+        unset($data['/admin/pointItemSave']);
+        unset($data['uploadfile']);
+        $data['content'] = $data['editorValue'];
+        unset($data['editorValue']);
+        $data['create_time'] = date('Y-m-d H:i:s',time());
+        $file = $request->file('file-2');
+        $re = upload($file);
+
+        if($re == null){
+            $itemObj = new PointItems($data);
+            $result = $itemObj->save();
+            if($result)
+                return  redirect('/admin/pointItems');
+        }
+
+        if($re->getError() == ''){
+            $end = htmlspecialchars($re->getSaveName());
+            $data['pic'] = $end;
+            $itemObj = new PointItems($data);
+            $result = $itemObj->save();
+            if($result)
+                return  redirect('/admin/pointItems');
+        }
+
+
+    }
+
     public function itemDelById(Request $request){
         $id = $request->param("id");
         $item = Items::get($id);
+        $re = $item->delete();
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function point_item_del(Request $request){
+        $id = $request->param("id");
+        $item = PointItems::get($id);
         $re = $item->delete();
         if($re){
             $msg = array('status'=>'Success');
@@ -179,10 +293,35 @@ class Item  extends Controller
         echo json_encode($msg);
     }
 
+    public function point_item_status(Request $request){   //商品上下架
+        $item = PointItems::get($request->param('id'));
+
+        $item->status = $item->status == 0?1:0;
+        $result = $item->save();
+        if($result){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
     public function itemDelAll(Request $request){
 //        echo "<pre>";var_dump($request);exit;
         $ids = $request->param()['ids'];
         $re = Items::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function point_item_delAll(Request $request){
+//        echo "<pre>";var_dump($request);exit;
+        $ids = $request->param()['ids'];
+        $re = PointItems::destroy($ids);
         if($re){
             $msg = array('status'=>'Success');
         }else{
