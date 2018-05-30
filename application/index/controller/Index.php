@@ -334,6 +334,8 @@ class Index
         $list = $pObj->where('user_id', $userId)
 //            ->where('get_type', '>',0)
             ->where('frozen_flag', 0)
+            ->limit(10)
+            ->order('create_time', 'desc')
             ->select();
         $url = '/userInfo';
         $curl = "userinfo";
@@ -349,6 +351,8 @@ class Index
         $list = $pObj->where('user_id', $userId)
             ->where('get_type', '>',0)
             ->where('frozen_flag', 1)
+            ->limit(10)
+            ->order('create_time', 'desc')
             ->select();
 
 //        $list = \app\index\model\Points::all([

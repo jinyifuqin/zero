@@ -688,6 +688,8 @@ class User extends Controller
             ->where('type', '=',1)
             ->where('get_type', '=',1)
             ->where('frozen_flag', 0)
+            ->limit(10)
+            ->order('create_time', 'desc')
             ->select();
         $curl = "userinfo";
         $re = ['list'=>$list,'footType'=>$curl];
