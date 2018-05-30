@@ -38,7 +38,8 @@ class Index
             $_SESSION['share_member_id'] = $memberid;
         }
         $itemObj = new Items();
-        $re = $itemObj->limit(2)
+        $re = $itemObj->where('status',1)
+            ->limit(2)
             ->order('sort', 'desc')
             ->select();
         $indePic = IndexPics::all();
@@ -50,27 +51,49 @@ class Index
         if($ggM){
             $ggMId = $ggM->id;
             $gg = $artObj->where('menu_id',$ggMId)
+                ->where('status',1)
                 ->order('give_good', 'desc')
                 ->select();
-            foreach($gg as $val){
-                $val->create_time = date('Y-m-d',strtotime($val->create_time));
+            if(!empty($gg)){
+                foreach($gg as $val){
+                    $val->create_time = date('Y-m-d',strtotime($val->create_time));
+                }
             }
+
             $hotArt = $artObj->where('menu_id', '<>',$ggMId)
+                ->where('status',1)
                 ->limit(4)
                 ->order('give_good', 'desc')
                 ->select();
 
         }else{
-            $hotArt = $artObj->limit(4)
+            $hotArt = $artObj->where('status',1)
+                ->limit(4)
                 ->order('give_good', 'desc')
                 ->select();
         }
-        foreach($hotArt as $value){
-            $value->create_time = date('Y-m-d',strtotime($value->create_time));
+
+        if(!empty($hotArt)){
+            foreach($hotArt as $value){
+                $value->create_time = date('Y-m-d',strtotime($value->create_time));
+            }
         }
 
 
-//        echo "<pre>";var_dump($hotArt);exit;
+        $serviceMid = ArticleMenus::where('title','服务中心')->value('id');
+        $serviceArt = $artObj->where('menu_id',$serviceMid)
+            ->where('status',1)
+            ->limit(4)
+            ->order('give_good', 'desc')
+            ->select();
+
+        if(!empty($serviceArt)){
+            foreach($serviceArt as $vv){
+                $vv->create_time = date('Y-m-d',strtotime($vv->create_time));
+            }
+        }
+
+
         $curl = "index";
         if(array_key_exists('userinfo',$_SESSION)){
             $id = $_SESSION['userinfo']->id;
@@ -107,22 +130,27 @@ class Index
             );
 
             $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin,'indexPic'=>$indePic];
-            if(isset($gg)){
+            if(!empty($gg)){
                 $re['gg'] = $gg;
             }
-            if($hotArt){
+            if(!empty($hotArt)){
                 $re['hotArt'] = $hotArt;
             }
-//            echo "<pre>";var_dump($re['gg']);exit;
+            if(!empty($serviceArt)){
+                $re['serArt'] = $serviceArt;
+            }
             return view("index@index/index",['re'=>$re]);
         }else{
 
             $re = ['footType'=>$curl,'itemInfo'=>$re,'indexPic'=>$indePic];
-            if($gg){
+            if(!empty($gg)){
                 $re['gg'] = $gg;
             }
-            if($hotArt){
+            if(!empty($hotArt)){
                 $re['hotArt'] = $hotArt;
+            }
+            if(!empty($serviceArt)){
+                $re['serArt'] = $serviceArt;
             }
             return view("index@index/index",['re'=>$re]);
 //            $url = $this->wxObj->get_authorize_url(1);

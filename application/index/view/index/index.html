@@ -45,7 +45,7 @@
                 {volist name="re.gg" id="vo"}
                 <li>
                     <div class="thumbnail"></div>
-                    <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">{$vo.title}{$key}</a> <span class="cat" style="width:40%">【{$vo.create_time}】</span> </div>
+                    <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">{$vo.title}</a> <span class="cat" style="width:40%">【{$vo.create_time}】</span> </div>
                 </li>
                 {/volist}
                 {else /}
@@ -91,12 +91,19 @@
         </div>
         <div class="sqrtR">
             <ul>
+                {if condition="(array_key_exists('hotArt',$re))"}
                 {foreach $re.hotArt as $vo}
                 <li>
                     <div class="thumbnail"> <img src="/public/indexsource/images/sqrt_jt.jpg"> </div>
                     <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">{$vo.title}</a> <span style="width:40%;" class="cat">【{$vo.create_time}】</span> </div>
                 </li>
                 {/foreach}
+                {else/}
+                <li>
+                    <div class="thumbnail"> <img src="/public/indexsource/images/sqrt_jt.jpg"> </div>
+                    <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">暂无数据</a> <span style="width:40%;" class="cat"></span> </div>
+                </li>
+                {/if}
             </ul>
         </div>
     </div>
@@ -139,22 +146,19 @@
     <!--标题-->
     <div class="title">服务中心</div>
     <ul class="fwzx">
+        {if condition="(array_key_exists('serArt',$re))"}
+        {foreach $re.serArt as $vo}
         <li>
-            <a class="fwzx1" href="#"><span>●</span>小东门服务中心四月特惠</a>
-            <a class="fwzx2" href="#">【2018-4-17】</a>
+            <a class="fwzx1" style="width:66%;" href="#"><span>●</span>{$vo.title}</a>
+            <a class="fwzx2" style="width:32%;" href="#">【{$vo.create_time}】</a>
         </li>
+        {/foreach}
+        {else/}
         <li>
-            <a class="fwzx1"  href="#"><span>●</span>光谷服务中心开业酬宾</a>
-            <a class="fwzx2" href="#">【2018-4-17】</a>
+            <a class="fwzx1" style="width:66%;" href="#"><span>●</span>暂无数据</a>
+            <a class="fwzx2" style="width:32%;" href="#"></a>
         </li>
-        <li>
-            <a class="fwzx1"  href="#"><span>●</span>江汉路服务中心限时抢购</a>
-            <a class="fwzx2" href="#">【2018-4-17】</a>
-        </li>
-        <li>
-            <a class="fwzx1"  href="#"><span>●</span>循礼门服务中心正式上线</a>
-            <a class="fwzx2" href="#">【2018-4-17】</a>
-        </li>
+        {/if}
     </ul>
 </div>
 
