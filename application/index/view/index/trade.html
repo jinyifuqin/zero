@@ -85,18 +85,26 @@
     <ul class="order_list" >
         {foreach $re.trade as $vo}
         <li>
-            <a href="/tradeDetail/{$vo.id}">
+            <a href="/tradeDetail/{$vo.id}/{$vo.item_type}">
             <div class="order_list1">
                 <div class="order_list1_img">
                     <img src="/public/uploads/{$vo.pic}" alt=""/>
                 </div>
                 <div class="order_list1_text">
                     <p class="order_list1_text1">{$vo.item_name}</p>
+                    {eq name="$vo.item_type" value="0"}
                     <p class="order_list1_text2">{$vo.buy_price}元</p>
+                    {else/}
+                    <p class="order_list1_text2">{$vo.buy_price}积分</p>
+                    {/eq}
                 </div>
             </div>
             </a>
+            {eq name="$vo.item_type" value="0"}
             <div class="order_list2">共{$vo.buy_num}件商品{$vo.trade_type} 合计{$vo.buy_price}元 &nbsp;</div>
+            {else/}
+            <div class="order_list2">共{$vo.buy_num}件商品{$vo.trade_type} 合计{$vo.buy_price}积分 &nbsp;</div>
+            {/eq}
             <div class="order_list3">
                 <!--<a class="order_list31" href="#">查看物流</a>-->
                 {eq name="$vo.trade_status" value="2"}
@@ -137,7 +145,6 @@
 <!--<div style="height:50px;background: red">222222</div>-->
 <script>
     $(function(){
-
         $('#wrapper').on('click','.getTrue',function(){
             var tradeId = $(this).attr('tradeid');
             var index = $(this).parents('li').index();
@@ -238,8 +245,14 @@
                         $('#page').attr('data',1);
                         $('.order_list li').remove();
                         $.each(data.trades,function (index,ele) {
+                            if(ele.item_type == 0){
+                                var dw = "元";
+                            }else{
+                                var dw = "积分";
+                            }
                             if(ele.trade_type == "已完成"){
-                                xx = "<li> <div class=\"order_list1\">\n" +
+                                xx = "<li><a href='/tradeDetail/" +ele.id+'\/'+ele.item_type+'\'>'+
+                                    " <div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +
                                     "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
                                     "                </div>\n" +
@@ -248,44 +261,55 @@
                                     "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
                                     "                </div>\n" +
                                     "            </div>\n" +
-                                    "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
+                                    "           <div class=\"order_list2\">共"+ele.buy_num+"件商品 " +
+                                    "<span>订单已完成</span>"+
+                                    "合计"+ele.buy_price+dw+" &nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
-                                    "<span>订单已完成！</span>"+
                                     "            </div>" +
+                                    "            </a>"+
                                     "</li>";
                             }else if(ele.trade_type == "已发货"){
-                                xx = "<li> <div class=\"order_list1\">\n" +
+                                xx = "<li><a href='/tradeDetail/" +ele.id+'\/'+ele.item_type+'\'>'+
+                                    "<div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +
                                     "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
                                     "                </div>\n" +
                                     "                <div class=\"order_list1_text\">\n" +
                                     "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
-                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price +dw+ "</p>\n" +
                                     "                </div>\n" +
                                     "            </div>\n" +
-                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "           <div class=\"order_list2\">共"+ele.buy_num+"件商品 " +
+                                    "<span>已发货</span>"+
+                                    "合计"+ele.buy_price+dw+"&nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
                                     "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
                                     "            </div>" +
+                                    "            </a>"+
                                     "</li>";
                             }else{
 
-                                xx = "<li> <div class=\"order_list1\">\n" +
+                                xx = "<li><a href='/tradeDetail/" +ele.id+'\/'+ele.item_type+'\'>'+
+                                    "<div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +
                                     "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
                                     "                </div>\n" +
                                     "                <div class=\"order_list1_text\">\n" +
                                     "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
-                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + dw+"</p>\n" +
                                     "                </div>\n" +
                                     "            </div>\n" +
-                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "           <div class=\"order_list2\">共"+ele.buy_num+"件商品" +
+                                    "<span>未发货</span>"+
+                                    " 合计"+ele.buy_price+dw+" &nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
                                     "                <a class=\"order_list31 deltrade\" tradeid=\" " + ele.id + " \" href=\"#\">删除订单</a>\n" +
                                     "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
                                     "            </div>" +
+                                    "            </a>"+
                                     "</li>";
                             }
+                            // console.log(el.childNodes[0]);
                             $("#wrapper ul").append(xx, el.childNodes[0]);
                         });
                     }else{
@@ -339,55 +363,70 @@
                     if(data.trades.length){
                         $('#page').attr('data',data.page);
                         $.each(data.trades,function (index,ele) {
+                            if(ele.item_type == 0){
+                                var dw = "元";
+                            }else{
+                                var dw = "积分";
+                            }
                             if(ele.trade_type == "已完成"){
-                                xx = "<li> <div class=\"order_list1\">\n" +
+                                xx = "<li><a href='/tradeDetail/" +ele.id+'\/'+ele.item_type+'\'>'+
+                                    " <div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +
                                     "                    <img src=\"/public/uploads/"+ele.pic+"\" alt=\"\"/>\n" +
                                     "                </div>\n" +
                                     "                <div class=\"order_list1_text\">\n" +
                                     "                    <p class=\"order_list1_text1\">"+ele.item_name+"</p>\n" +
-                                    "                    <p class=\"order_list1_text2\">"+ele.buy_price+"元</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">"+ele.buy_price+dw+"</p>\n" +
                                     "                </div>\n" +
                                     "            </div>\n" +
-                                    "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 合计"+ele.buy_price+"元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list2\">共"+ele.buy_num+"件商品 " +
+                                    "<span>订单已完成</span>"+
+                                    "合计"+ele.buy_price+dw+" &nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
-                                    "<span>订单已完成！</span>"+
                                     "            </div>" +
                                     "</li>";
                             }else if(ele.trade_type == "已发货"){
-                                xx = "<li> <div class=\"order_list1\">\n" +
+                                xx = "<li><a href='/tradeDetail/" +ele.id+'\/'+ele.item_type+'\'>'+
+                                    " <div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +
                                     "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
                                     "                </div>\n" +
                                     "                <div class=\"order_list1_text\">\n" +
                                     "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
-                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + dw+"</p>\n" +
                                     "                </div>\n" +
                                     "            </div>\n" +
-                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 " +
+                                    "<span>已发货</span>"+
+                                    "合计" + ele.buy_price +dw+ " &nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
                                     "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
                                     "            </div>" +
                                     "</li>";
                             }else{
 
-                                xx = "<li> <div class=\"order_list1\">\n" +
+                                xx = "<li><a href='/tradeDetail/" +ele.id+'\/'+ele.item_type+'\'>'+
+                                    " <div class=\"order_list1\">\n" +
                                     "                <div class=\"order_list1_img\">\n" +
                                     "                    <img src=\"/public/uploads/" + ele.pic + "\" alt=\"\"/>\n" +
                                     "                </div>\n" +
                                     "                <div class=\"order_list1_text\">\n" +
                                     "                    <p class=\"order_list1_text1\">" + ele.item_name + "</p>\n" +
-                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + "元</p>\n" +
+                                    "                    <p class=\"order_list1_text2\">" + ele.buy_price + dw+"</p>\n" +
                                     "                </div>\n" +
                                     "            </div>\n" +
-                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品 合计" + ele.buy_price + "元 &nbsp;</div>\n" +
+                                    "            <div class=\"order_list2\">共" + ele.buy_num + "件商品" +
+                                    "<span>未发货</span>"+
+                                    " 合计" + ele.buy_price + dw+" &nbsp;</div>\n" +
                                     "            <div class=\"order_list3\">\n" +
                                     "                <a class=\"order_list31 deltrade\" tradeid=\" " + ele.id + " \" href=\"#\">删除订单</a>\n" +
                                     "                <a class=\"order_list32 getTrue\" tradeid=\" " + ele.id + " \" href=\"#\">确认收货</a>\n" +
                                     "            </div>" +
                                     "</li>";
                             }
-                            $("#wrapper ul").append(xx, el.childNodes[0]);
+                            // console.log(el.childNodes[1]);return false;
+                            // $("#wrapper ul").append(xx, el.childNodes[1]);
+                            $("#wrapper ul").append(xx);
                         });
                     }else{
                         $('.pullUp').css('display','none');

@@ -474,29 +474,39 @@ class Index
             if($tradeType == 'pd'){ // 待发货
                 $trades = $tradeObj->where('user_id='.$userRe->id)
                     ->where('trade_type',0)
+                    ->order('create_time', 'desc')
                     ->limit($this->pagesize)
                     ->select();
             }elseif($tradeType == 'as'){// 已发货Already shipped
                 $trades = $tradeObj->where('user_id',$userRe->id)
                     ->where('trade_type',1)
+                    ->order('create_time', 'desc')
                     ->limit($this->pagesize)
                     ->select();
             }elseif($tradeType == 'finish'){//已完成
                 $trades = $tradeObj->where('user_id',$userRe->id)
                     ->where('trade_type',2)
+                    ->order('create_time', 'desc')
                     ->limit($this->pagesize)
                     ->select();
 
             }else{
                 $trades = $tradeObj->where('user_id',$userRe->id)
+                    ->order('create_time', 'desc')
                     ->limit($this->pagesize)
                     ->select();
             }
 
         $curl = "userinfo";
         foreach ($trades as $k=>&$v){
-            $v->item_name = Items::where('id',$v->item_id)->value('name');
-            $v->pic = Items::where('id',$v->item_id)->value('pic');
+            if($v->item_type == 0){
+                $v->item_name = Items::where('id',$v->item_id)->value('name');
+                $v->pic = Items::where('id',$v->item_id)->value('pic');
+            }else{
+                $v->item_name = PointItems::where('id',$v->item_id)->value('name');
+                $v->pic = PointItems::where('id',$v->item_id)->value('pic');
+            }
+
             $v->trade_status = $v->getData('trade_type');
         }
 //
@@ -505,12 +515,17 @@ class Index
         return view("index@index/trade",['re'=>$re]);
     }
 
-    public function trade_detail($id){
+    public function trade_detail($id,$type){
         $trade = Trades::get($id);
         $trade->address = preg_replace('/%2C/',' ',$trade->address);
         $trade->onePrice = $trade->buy_price/$trade->buy_num;
-        $item = Items::get($trade->item_id);
-        $url = '/userInfo';
+        if($type == 0){
+            $item = Items::get($trade->item_id);
+        }else{
+            $item = PointItems::get($trade->item_id);
+        }
+
+        $url = '/myTrade';
         $re = ['trade'=>$trade,'item'=>$item,'url'=>$url];
 
 //        echo "<pre>";var_dump($trade);exit;
@@ -532,18 +547,28 @@ class Index
             $trades = $tradeObj
                 ->where('user_id',$userid)
                 ->where('trade_type',$type)
+                ->order('create_time', 'desc')
                 ->limit($start,$pagesize)
                 ->select();
         }else{
             $trades = $tradeObj
                 ->where('user_id',$userid)
+                ->order('create_time', 'desc')
                 ->limit($start,$pagesize)
                 ->select();
         }
 
         foreach ($trades as $k=>&$v){
-            $v->item_name = Items::where('id',$v->item_id)->value('name');
-            $v->pic = Items::where('id',$v->item_id)->value('pic');
+            if($v->item_type == 0){
+                $v->item_name = Items::where('id',$v->item_id)->value('name');
+                $v->pic = Items::where('id',$v->item_id)->value('pic');
+            }else{
+                $v->item_name = PointItems::where('id',$v->item_id)->value('name');
+                $v->pic = PointItems::where('id',$v->item_id)->value('pic');
+            }
+
+//            $v->item_name = Items::where('id',$v->item_id)->value('name');
+//            $v->pic = Items::where('id',$v->item_id)->value('pic');
         }
         $data = ['page'=>$page,'trades'=>$trades];
         echo  json_encode($data);

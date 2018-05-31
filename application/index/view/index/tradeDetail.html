@@ -68,12 +68,23 @@
 						<div class="ddxq4"><span>数量</span>
 							<font>{$re.trade.buy_num}</font>
 						</div>
+						{eq name="$re.trade.item_type" value="0"}
 						<div class="ddxq4"><span>总价</span>
 							<font>¥{$re.trade.buy_price}</font>
 						</div>
+						{else/}
+						<div class="ddxq4"><span>总价</span>
+							<font>{$re.trade.buy_price}积分</font>
+						</div>
+						{/eq}
 
 					</div>
+					{eq name="$re.trade.item_type" value="0"}
 					<div class="ddxq5">付款：<i>¥{$re.trade.buy_price}</i></div>
+					{else/}
+					<div class="ddxq5">付款：<i>{$re.trade.buy_price}积分</i></div>
+					{/eq}
+
 					<div class="cl"></div>
 					<div class="huise"></div>
 					<div class="ddxq6">
