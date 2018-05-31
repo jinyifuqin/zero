@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index,follow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=10" />
+		<title>找回密码</title>
+		<link href="/public/indexsource/css/css1.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/style2.css" />
+		<style>
+			.dlimg input{
+				width:55%!important;
+			}
+		</style>
+	</head>
+	<script type="text/javascript" src="/public/indexsource/js/jquery.min.js"></script>
+	<script src="/public/indexsource/js/pic.js"></script>
+	<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+
+	<body style="background: white;">
+		<!--这是头部-->
+		{include file="public/indexsource/head/header.html" /}
+
+		<div class="tm_big" style="margin-top: 5rem;">
+			<form method="post" action="/checkEmail">
+			<div class="dlym">
+				<div class="dlimg11 dlimg">
+					<span>用户账号</span>
+					<input name="username" type="text" placeholder="注册时的账号 " /></div>
+				<div class="tm_bottom"></div>
+				<div class="dlimg11 dlimg">
+					<span>邮箱</span>
+					<input class="email" name="email" type="email" placeholder="注册时的邮箱 " /></div>
+				<div class="tm_bottom"></div>
+				<div class="dlimg11 dlimg">
+					<span>邮箱验证码</span>
+					<input type="text" name="emailCode" placeholder="请输入手机验证码 " style="width:24%!important;" />
+					<i>|</i>
+					<b><a class="sendEmail" href="#">发送验证码</a> </b>
+				</div>
+				<div class="tm_bottom"></div>
+
+			</div>
+			<button type="button" class="last_button"><a href="#">确定</a></button>
+			</form>
+		</div>
+	<script>
+		$(function(){
+            $('.sendEmail').click(function(){
+               var email = $('.email').val();
+               var url = '/sendEmail';
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {'email':email},
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == "success"){
+                            layer.msg("邮箱发送成功，请查收！",{icon:1,time:2000});
+                            // setTimeout(function(){window.location.href=data.url},3000);
+                        }else{
+                            layer.msg(data.msg,{icon:0,time:2000});
+                        }
+                    }
+                });
+            })
+
+			$('.last_button').click(function(e){
+			    e.preventDefault();
+			    var form = $('form');
+			    var url = form.attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == "success"){
+                            layer.msg(data.msg,{icon:1,time:2000});
+                            setTimeout(function(){window.location.href=data.url},1000);
+                        }else{
+                            layer.msg(data.msg,{icon:0,time:2000});
+                        }
+                    }
+                });
+			})
+
+
+
+
+
+		})
+	</script>
+
+	</body>
+
+</html>

@@ -43,6 +43,7 @@ class Users extends Migrator
             ->addColumn('sex', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'性别'))
             ->addColumn('status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'0普通会员1服务中心'))
             ->addColumn('id_card', 'integer',array('limit' => 18,'default'=>0,'comment'=>'身份证'))
+            ->addColumn('email', 'string',array('default'=>'','comment'=>'邮箱'))
             ->addColumn('address', 'string',array('default'=>'','comment'=>'收货地址'))
             ->addColumn('open_bank', 'string',array('default'=>'','comment'=>'开户行'))
             ->addColumn('collections', 'string',array('default'=>'','comment'=>'收款账号'))

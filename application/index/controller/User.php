@@ -59,24 +59,79 @@ class User extends Controller
         return view("index@user/register",['re'=>$re]);
     }
 
-    public function getEmailCheck(Request $request){
+    public function forget(){
+        $url = '/';
+        $re['url'] = $url;
+        return view("index@user/forget",['re'=>$re]);
+    }
+
+    public function send_email(Request $request){
+        $email = $request->param('email');
         $content = '';
         for ($i=0;$i<5;$i++){
             $content.=mt_rand(0,9);
         }
-        $_SESSION['yzmEmail'] = $content;
+        $t = time();
+        $_SESSION['yzmEmail'] = [$t=>$content];
         $str = '【永之泰】,本次验证码为：'.$content.'。请勿告诉他人';
-        $re = sendEmail('263711365@qq.com',$str);
+        $re = sendEmail($email,$str);
         if($re){
-            $msg = array('status'=>'Success','msg'=>'邮件发送成功，请注意查收！');
+            $msg = array('status'=>'success','msg'=>'邮件发送成功，请注意查收！');
             echo json_encode($msg);
         }else{
             $msg = array('status'=>'Success','msg'=>'发送失败！');
             echo json_encode($msg);
         }
+    }
 
+    public function check_email(Request $request){
+        $post = $request->param();
+        $username = $post['username'];
+        $email = $post['email'];
+        $emailCode = $post['emailCode'];
+        $yzm = $_SESSION['yzmEmail'];
+        $getTime = key($yzm);
+        $now = time();
+        $filter = 3*60;
+//        echo "<pre>";var_dump();
+        if($yzm[$getTime] == $emailCode){
+            if($filter < $now - $getTime){
+                $msg = array('status'=>'error','msg'=>"验证码已过期，请重新获取！");
+                echo json_encode($msg);exit;
+            }
+            $user = Users::get(['email'=>$email,'username'=>$username]);
+            if($user){
+                $id = $user->id;
+                $msg = array('status'=>'success','msg'=>'邮箱验证成功，等待跳转！','url'=>"/changePsw/{$id}");
+                echo json_encode($msg);
+            }else{
+                $msg = array('status'=>'error','msg'=>"邮箱与：$username 不匹配！");
+                echo json_encode($msg);
+            }
+        }else{
+            $msg = array('status'=>'error','msg'=>'邮箱验证码错误！');
+            echo json_encode($msg);
+        }
+    }
 
+    public function change_psw($id){
+        return view("index@user/changePsw",['id'=>$id]);
+    }
 
+    public function save_c_psw(Request $request){
+        $post = $request->param();
+        $password = $post['password'];
+        $id = $post['userId'];
+        $uObj = Users::get($id);
+        $uObj->password = $password;
+        $re = $uObj->save();
+        if($re){
+            $msg = array('status'=>'success','msg'=>'密码重置成功，请重新登录！','url'=>"/userInfo");
+            echo json_encode($msg);
+        }else{
+            $msg = array('status'=>'error','msg'=>"不能与之前的密码一样！");
+            echo json_encode($msg);
+        }
     }
 
     public function register_captcha(){
@@ -95,6 +150,7 @@ class User extends Controller
             echo json_encode($msg);
         }else{
             $data['username'] = $post['username'];
+            $data['email'] = $post['email'];
             $data['password'] = $post['password'];
             $data['phone_number'] = $post['username'];
             $data['nickname'] = urlencode(json_encode($post['nickname']));
