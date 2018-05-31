@@ -116,7 +116,7 @@ Route::group('admin',[
 
 Route::post([
     'tradeCreate' => ['item/tradeCreate', ['method' => 'post']],
-
+    'pointTradeCreate' => ['item/point_trade_create', ['method' => 'post']],
 ]);
 
 Route::group('',[
@@ -125,9 +125,12 @@ Route::group('',[
     'getInfo' => ['getInfo', ['method' => 'get']],
     'itemList' => ['item/itemList', ['method' => 'get']],
     'item/:id' => ['item/item', ['method' => 'get']],
+    'pointItem/:id' => ['item/point_item', ['method' => 'get']],
     'item/checkDiscount' => ['item/check_discount', ['method' => 'get']],
     'wxlogin/:id' => ['wxLogin', ['method' => 'get']],
+    'pointwxlogin/:id' => ['point_wx_login', ['method' => 'get']],
     'buy' => ['buy', ['method' => 'get']],
+    'pointBuy' => ['point_buy', ['method' => 'get']],
     'addAddr' => ['item/addAddr', ['method' => 'get']],
     'addAddrInfo' => ['item/add_addr_info', ['method' => 'get']],
     'saveAddr' => ['item/saveAddr', ['method' => 'post']],

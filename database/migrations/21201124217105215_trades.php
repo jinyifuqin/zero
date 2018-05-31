@@ -42,6 +42,7 @@ class Trades extends Migrator
             ->addColumn('buy_num', 'integer',array('null'=>true,'comment'=>'购买数量'))
             ->addColumn('buy_price', 'string',array('null'=>true,'comment'=>'订单金额'))
             ->addColumn('phone_num', 'string',array('default'=>'','null'=>true,'comment'=>'手机号'))
+            ->addColumn('item_type', 'integer',array('limit' => 1,'default'=>0,'comment'=>'商品类型0普通商品1积分商品'))
             ->addColumn('create_time', 'datetime',array('comment'=>'最后登录时间'))
             ->addColumn('update_time', 'datetime',array('comment'=>'更新时间'))
             ->create();

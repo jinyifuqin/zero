@@ -117,30 +117,14 @@
     <div class="title_line"><span class="line"></span>积分换礼</div>
     <!--积分换礼的列表-->
     <ul class="jfhl">
+        {foreach $re.pItem as $vo}
         <li>
-            <a class="jfhl1" href="#"><img src="/public/indexsource/images/sp1.jpg" alt=""/></a>
-            <a class="jfhl2" href="#">立体手绘工艺树脂画摆件</a>
-            <a class="jfhl3" href="#">现金价:<span>￥359 <b></b></span></a>
-            <a class="jfhl4" href="#">积分换购:<span>3888积分</span></a>
+            <a class="jfhl1" href="/pointItem/{$vo.id}"><img src="/public/uploads/{$vo.pic}" alt=""/></a>
+            <a class="jfhl2" href="/pointItem/{$vo.id}">{$vo.name}</a>
+            <!--<a class="jfhl3" href="#">现金价:<span>￥359 <b></b></span></a>-->
+            <a class="jfhl4" href="/pointItem/{$vo.id}">积分换购:<span>{$vo.price}积分</span></a>
         </li>
-        <li>
-            <a class="jfhl1" href="#"><img src="/public/indexsource/images/sp2.jpg" alt=""/></a>
-            <a class="jfhl2" href="#">立体手绘工艺树脂画摆件</a>
-            <a class="jfhl3" href="#">现金价:<span>￥359 <b></b></span></a>
-            <a class="jfhl4" href="#">积分换购:<span>3888积分</span></a>
-        </li>
-        <li>
-            <a class="jfhl1" href="#"><img src="/public/indexsource/images/sp3.jpg" alt=""/></a>
-            <a class="jfhl2" href="#">立体手绘工艺树脂画摆件</a>
-            <a class="jfhl3" href="#">现金价:<span>￥359 <b></b></span></a>
-            <a class="jfhl4" href="#">积分换购:<span>3888积分</span></a>
-        </li>
-        <li>
-            <a class="jfhl1" href="#"><img src="/public/indexsource/images/sp4.jpg" alt=""/></a>
-            <a class="jfhl2" href="#">立体手绘工艺树脂画摆件</a>
-            <a class="jfhl3" href="#">现金价:<span>￥359 <b></b></span></a>
-            <a class="jfhl4" href="#">积分换购:<span>3888积分</span></a>
-        </li>
+        {/foreach}
     </ul>
 
     <!--标题-->

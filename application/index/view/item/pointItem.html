@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>产品详情(测试)</title>
+    <link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
+    <script src="/public/indexsource/js/jquery.min.js"></script>
+    <script src="/public/indexsource/js/pic.js"></script>
+    <!--新闻的滚动-->
+    <script src="/public/indexsource/js/jcarousellite_1.0.1c4.js" type="text/javascript"></script>
+</head>
+<body>
+<!--这是头部-->
+{include file="public/indexsource/head/header.html" /}
+
+
+
+<!--这是最外边的div，用来隔开与底部栏目的高度-->
+<div class="Cmain">
+    <!--banner图-->
+    <div class="Appbanner">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background:url(/public/indexsource/images/banner1.jpg)  no-repeat;background-size: 100% 100%"></li>
+                <li style="background:url(/public/indexsource/images/banner2.jpg) no-repeat;background-size: 100% 100%"></li>
+                <li style="background:url(/public/indexsource/images/banner3.jpg)no-repeat;background-size: 100% 100%"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--公告-->
+    <div class="sqrt gonggao">
+        <div class="sqrtL gonggaoL">
+            <a href="#">
+                <img src="/public/indexsource/images/gonggao_bj.jpg" alt=""/>
+            </a>
+        </div>
+        <div class="newsticker-jcarousellite gonggaoR">
+            <ul>
+                <li>
+                    <div class="thumbnail"></div>
+                    <div class="info"> <a href="#">凡一次购买“尚善靓延”综合酵素饮品...</a> <span class="cat">【2018-4-19】</span> </div>
+                </li>
+                <li>
+                    <div class="thumbnail"></div>
+                    <div class="info"> <a href="#">健康推广大使奖：每位会员均可成为健...</a> <span class="cat">【2018-4-19】</span> </div>
+                </li>
+                <li>
+                    <div class="thumbnail"></div>
+                    <div class="info"> <a href="#">健康推广大使奖</a> <span class="cat">【2018-4-19】</span> </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <!--标题-->
+    <div class="title">产品介绍</div>
+    <!--产品介绍-->
+    <div class="cpjs">
+        <div class="cpjs_img">
+            <a href="#"><img src="/public/uploads/{$re.itemInfo.pic}" alt=""/></a>
+        </div>
+        <div class="cpjs_text">
+            <a class="cpjs_text1" href="#">{$re.itemInfo.name}</a>
+            <a class="cpjs_text2" href="#">
+                {$re.itemInfo.desc}
+            </a>
+            <div class="cpjs_text3">
+                <span class="cpjs_text31">价格：<b>￥{$re.itemInfo.price}</b></span>
+                <a class="cpjs_text32" href="/pointwxlogin/{$re.itemInfo.id}">购买</a>
+            </div>
+        </div>
+    </div>
+    <div class="mh"></div>
+    <!--类别-->
+    <div class="title_line line_bottom"><span class="line"></span>产品详情</div>
+    <!--添加资料的内容区-->
+    <div class="add_main">
+        <div class="add_main_box">
+            {$re.itemInfo.content|htmlspecialchars_decode}
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<!--底部-->
+{include file="public/indexsource/foot/footer.html" /}
+</body>
+<script>
+    $(function() {
+        $(".newsticker-jcarousellite").jCarouselLite({
+            vertical: true,
+            hoverPause:true,
+            visible:2,
+            auto:500,
+            speed:1500
+        });
+    });
+</script>
+</html>

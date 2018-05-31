@@ -5,6 +5,7 @@ use app\admin\model\ArticleMenus;
 use app\admin\model\Articles;
 use app\admin\model\Brands;
 use app\admin\model\IndexPics;
+use app\admin\model\PointItems;
 use app\index\model\Addrs;
 use app\index\model\GiveGoods;
 use app\index\model\Talks;
@@ -43,6 +44,7 @@ class Index
             ->limit(2)
             ->order('sort', 'desc')
             ->select();
+        $pointItem = PointItems::all();
         $indePic = IndexPics::all();
         foreach($indePic as &$v){
             $v->pic = addslashes($v->pic);
@@ -130,7 +132,7 @@ class Index
                 'url'=>$url
             );
 
-            $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin,'indexPic'=>$indePic];
+            $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin,'indexPic'=>$indePic,'pItem'=>$pointItem];
             if(!empty($gg)){
                 $re['gg'] = $gg;
             }
@@ -143,7 +145,7 @@ class Index
             return view("index@index/index",['re'=>$re]);
         }else{
 
-            $re = ['footType'=>$curl,'itemInfo'=>$re,'indexPic'=>$indePic];
+            $re = ['footType'=>$curl,'itemInfo'=>$re,'indexPic'=>$indePic,'pItem'=>$pointItem];
             if(!empty($gg)){
                 $re['gg'] = $gg;
             }
@@ -173,11 +175,8 @@ class Index
         }else{
             $flag = 'success';
         }
-        
-//        echo "<pre>";var_dump($service_cent_id);exit;
         $_SESSION['userinfo'] = $user;
         $addr = Addrs::where('id',$user->address)->find();
-//        echo "<pre>";var_dump($addr);exit;
         $item->brandName = Brands::where('id',$item->brand_id)->value('name');
         $data['item'] = $item;
         $data['userinfo'] = $user;
@@ -192,29 +191,58 @@ class Index
         return view("index@item/buying",['data'=>$data]);
     }
 
+    public function point_buy(){
+        $itemid = $_SESSION['itemid'];
+        $item = PointItems::get(['id' => $itemid]);
+        $userinfo = $_SESSION['userinfo'];
+        $userid = $userinfo->id;
+        $user = Users::where('id',$userid)->find();
+        $service_cent_id = $user->service_cent_id;
+        if($service_cent_id == 0){
+            $flag = 'error';
+        }else{
+            $flag = 'success';
+        }
+        $_SESSION['userinfo'] = $user;
+        $addr = Addrs::where('id',$user->address)->find();
+        $item->brandName = Brands::where('id',$item->brand_id)->value('name');
+        $data['item'] = $item;
+        $data['userinfo'] = $user;
+
+        if($addr){
+            $addr->name = json_decode(urldecode($addr->name));
+            $addr->desc = preg_replace('/%2C/',' ',$addr->desc);
+            $data['addr'] = $addr;
+        }
+        $data['flag'] = $flag;
+//        echo "<pre>";var_dump($data['service_list']);exit;
+        return view("index@item/pointBuy",['data'=>$data]);
+    }
+
     public function wxLogin(Request $request=null){
         if($request){
             $_SESSION['itemid'] = $request->param('id');
         }
         $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
-//        echo "<pre>";var_dump($_SESSION);exit;
-//        unset($_SESSION['userinfo']);
         if(array_key_exists('userinfo',$_SESSION) && $_SESSION['userinfo'] != null){
 
             return redirect('/buy');
         }else{
             return redirect('/userInfo');
         }
-//        $url = $this->wxObj->get_authorize_url(1);
-//        unset($_SESSION['getinfo']);
-//        unset($_SESSION['get_access_token']);
-//        echo "<pre>";var_dump($url);exit;
-//        if($request){
-//            return redirect($url);
-//        }else{
-//            return $url;
-//        }
-//
+    }
+
+    public function point_wx_login(Request $request=null){
+        if($request){
+            $_SESSION['itemid'] = $request->param('id');
+        }
+        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+        if(array_key_exists('userinfo',$_SESSION) && $_SESSION['userinfo'] != null){
+
+            return redirect('/pointBuy');
+        }else{
+            return redirect('/userInfo');
+        }
     }
 
     public function getInfo(Request $request){
