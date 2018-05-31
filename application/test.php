@@ -51,6 +51,12 @@ return [
         'datetime_format' => 'Y-m-d H:i:s',
         // 是否需要进行SQL性能分析
         'sql_explain'     => false,
+    ],
+    'email'=>[
+        'username'=>'jinyifuqin@163.com',
+        'password'=>'jinyifuqin123',
+        'host'=>'smtp.163.com'
     ]
+
 ];
     // 服务器地址

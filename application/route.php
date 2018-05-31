@@ -160,6 +160,7 @@ Route::group('',[
     'loginCheck' => ['User/login_check', ['method' => 'post']],
     'weiXinLogin' => ['User/weixin_login', ['method' => 'get']],
     'register' => ['User/register', ['method' => 'get']],
+    'getSms' => ['User/getSms', ['method' => 'post']],
     'captcha' => ['User/register_captcha', ['method' => 'get']],
     'saveUser' => ['User/save_user', ['method' => 'post']],
     'exitLogin' => ['User/exit_login', ['method' => 'get']],

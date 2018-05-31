@@ -275,3 +275,27 @@ function i_array_column($input, $columnKey, $indexKey=null){
         return array_column($input, $columnKey, $indexKey);
     }
 }
+
+function sendEmail($to,$content){
+    $eConfig = config('email');
+    $username = $eConfig['username'];
+    $password = $eConfig['password'];
+    $host = $eConfig['host'];
+    $mail = new \app\email\PHPMailer(true);
+    $mail->IsSMTP(); // 启用SMTP
+    $mail->Host=$host; //smtp服务器的名称（这里以QQ邮箱为例）
+    $mail->SMTPAuth = true; //启用smtp认证
+    $mail->Username = $username; //你的邮箱名
+    $mail->Password = $password ; //邮箱密码
+    $mail->From = $username; //发件人地址（也就是你的邮箱地址）
+    $mail->FromName = '永之泰'; //发件人姓名
+    $mail->AddAddress($to,"尊敬的客户");
+    $mail->WordWrap = 50; //设置每行字符长度
+    $mail->IsHTML(true); // 是否HTML格式邮件
+    $mail->CharSet='utf-8'; //设置邮件编码
+    $mail->Subject ='找回密码'; //邮件主题
+    $mail->Body = $content; //邮件内容
+    $mail->AltBody = "这是一个纯文本的身体在非营利的HTML电子邮件客户端"; //邮件正文不支持HTML的备用显示
+    $re = $mail->Send();
+    return $re;
+}

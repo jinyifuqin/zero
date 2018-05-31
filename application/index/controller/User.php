@@ -11,6 +11,8 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\VotingList;
 use app\admin\model\Votings;
+use app\email\PHPMailer;
+use app\email\Smtp;
 use app\index\model\Entrusts;
 use app\index\model\Addrs;
 use app\index\model\PutForwards;
@@ -55,6 +57,26 @@ class User extends Controller
         $url = '/';
         $re['url'] = $url;
         return view("index@user/register",['re'=>$re]);
+    }
+
+    public function getEmailCheck(Request $request){
+        $content = '';
+        for ($i=0;$i<5;$i++){
+            $content.=mt_rand(0,9);
+        }
+        $_SESSION['yzmEmail'] = $content;
+        $str = '【永之泰】,本次验证码为：'.$content.'。请勿告诉他人';
+        $re = sendEmail('263711365@qq.com',$str);
+        if($re){
+            $msg = array('status'=>'Success','msg'=>'邮件发送成功，请注意查收！');
+            echo json_encode($msg);
+        }else{
+            $msg = array('status'=>'Success','msg'=>'发送失败！');
+            echo json_encode($msg);
+        }
+
+
+
     }
 
     public function register_captcha(){
