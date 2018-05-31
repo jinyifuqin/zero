@@ -336,8 +336,8 @@ class User extends Controller
         $memberid = $_SESSION['userinfo']->id;
         $url = "http://".$_SERVER['HTTP_HOST'].'?memberid='.$memberid;
         $link = "http://qr.liantu.com/api.php?text=$url";
-        $return = url('/selfInfo');
-        $re = ['url'=>$return,'link'=>$link];
+        $backUrl = $_SERVER['HTTP_REFERER'];
+        $re = ['url'=>$backUrl,'link'=>$link];
         return view("index@user/myQrcode",['re'=>$re]);
 //        echo "<pre>";var_dump($_SERVER['HTTP_HOST']);exit;
     }
