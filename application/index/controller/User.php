@@ -198,6 +198,13 @@ class User extends Controller
             $userObj->desc = $detailDesc;
         }
         $userObj->nickname = json_decode(urldecode($userObj->nickname));
+//        echo "<pre>";var_dump($userObj->truename);exit;
+        $re['nameFlag'] = false;
+        if($userObj->truename == ''){
+            $re['nameFlag'] = true;
+        }else{
+            $re['nameFlag'] = false;
+        }
         $url = url('/userInfo');
         $re['url'] = $url;
         $re['userInfo'] = $userObj;
@@ -304,6 +311,25 @@ class User extends Controller
         $userId = $_SESSION['userinfo']->id;
         $userObj = Users::get(['id' => $userId]);
         $userObj->nickname = $name;
+        $re = $userObj->save();
+        if($re){
+            $this->redirect('/selfInfo');
+        }
+    }
+
+    public function truename(){
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $url = url('/selfInfo');
+        $re = ['url'=>$url,'info'=>$userObj];
+        return view("index@user/truename",['re'=>$re]);
+    }
+
+    public function save_truename(Request $request){
+        $name = $request->param('truename');
+        $userId = $_SESSION['userinfo']->id;
+        $userObj = Users::get(['id' => $userId]);
+        $userObj->truename = $name;
         $re = $userObj->save();
         if($re){
             $this->redirect('/selfInfo');

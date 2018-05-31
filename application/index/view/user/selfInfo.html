@@ -62,13 +62,20 @@
 						</a>
 					</div>
 					<div class="szym21">
-						<a href="javascript:void(0)">
-							<!--<a href="/truename">-->
+						{if condition="($re.nameFlag)"}
+						<a href="/truename">
 							<span class="spanspan">真实姓名</span>
-
+							<img src="/public/indexsource/images/jian1.jpg" class="imgimg" />
+							<font>{$re.userInfo.truename}</font>
+						</a>
+						{else/}
+						<a href="javascript:void(0)">
+							<span class="spanspan">真实姓名</span>
 							<img src="/public/indexsource/images/jian1.jpg" class="imgimg1" />
 							<font>{$re.userInfo.truename}</font>
 						</a>
+						{/if}
+
 					</div>
 					<div class="szym21">
 						<a href="/myQrcode">

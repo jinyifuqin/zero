@@ -21,16 +21,16 @@
 
 	<body class="bjhs2">
 	{include file="public/indexsource/head/header.html" /}
-	<form action="/saveNickname" method="post">
+	<form action="/saveTruename" method="post">
 		<div class="big_qb">
 			<div class="qq_qb">
-				<span>昵称：</span>
-				{if condition="(isset($re.info.nickname))"}
-				<input type="text" style="width:95%" class="shuru" name="nickname" placeholder="{$re.info.nickname}" value="{$re.info.nickname}"></input>
+				<span>真实姓名：</span>
+				{if condition="(isset($re.info.truename))"}
+				<input type="text" style="width:95%" class="shuru" name="truename" placeholder="{$re.info.truename}" value="{$re.info.truename}"></input>
 				{else /}
-				<input type="text" style="width:95%" class="shuru" name="nickname" placeholder="这里输入"></input>
+				<input type="text" style="width:95%" class="shuru" name="truename" placeholder="这里输入"></input>
 				{/if}
-				<font>请输入您的昵称</font>
+				<font>请输入您的真实姓名</font>
 			</div>
 			<div class="quedingan"><a href="#">确定</a></div>
 		</div>
