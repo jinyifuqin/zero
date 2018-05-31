@@ -46,6 +46,7 @@ Route::group('admin',[
     'catDelAll' => ['admin/item/catDelAll', ['method' => 'get']],
     'catDelById' => ['admin/item/catDelById', ['method' => 'get']],
     'trade' => ['admin/trade/index', ['method' => 'get']],
+    'pointTrade' => ['admin/trade/point_trade', ['method' => 'get']],
     'tradeDelById/:id' => ['admin/trade/trade_del_by_id', ['method' => 'get']],
     'tradeDelAll' => ['admin/trade/trade_del_all', ['method' => 'get']],
     'send/:id' => ['admin/trade/send', ['method' => 'get']],

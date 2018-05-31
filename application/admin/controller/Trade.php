@@ -11,6 +11,7 @@ use app\admin\model\Adminusers;
 use app\admin\model\Brands;
 use app\admin\model\Cats;
 use app\admin\model\Items;
+use app\admin\model\PointItems;
 use app\index\model\Addrs;
 use app\index\model\Points;
 use app\index\model\Trades;
@@ -53,7 +54,10 @@ class Trade extends Controller
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
         $delimiter = urlencode(',');
         $keys = implode(',',$keys);
-        $tr = Db::table('yzt_trades')->where('user_id','IN',$keys)->select();
+        $tr = Db::table('yzt_trades')
+            ->where('user_id','IN',$keys)
+            ->where('item_type','IN',0)
+            ->select();
         foreach ($tr as &$val){
             $val['item_name'] = Items::where('id',$val['item_id'])->value('name');
             $val['address'] = preg_replace("/$delimiter/",' ',$val['address']);
@@ -98,7 +102,10 @@ class Trade extends Controller
             $keys[] = $v->id;
         }
         $keys = implode(',',$keys);
-        $tr = Db::table('yzt_trades')->where('user_id','IN',$keys)->select();
+        $tr = Db::table('yzt_trades')
+            ->where('user_id','IN',$keys)
+            ->where('item_type',0)
+            ->select();
         foreach ($tr as &$val){
             $val['item_name'] = Items::where('id',$val['item_id'])->value('name');
             $val['address'] = preg_replace("/$delimiter/",' ',$val['address']);
@@ -125,8 +132,54 @@ class Trade extends Controller
             }
         }
         $count = count($tr);
+//        echo "<pre>";var_dump($tr);exit;
         $data = ['type'=>$type,'trades'=>$tr,'count'=>$count];
         return view("admin@trade/index",['data'=>$data]);
+    }
+
+    public function point_trade(){
+        $delimiter = urlencode(',');
+        $adminId = $_SESSION['adminUserInfo']->id;
+        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+        $users = Users::all(['service_cent_id'=>$adminId]);
+        $keys = [];
+        foreach($users as $v){
+            $keys[] = $v->id;
+        }
+        $keys = implode(',',$keys);
+        $tr = Db::table('yzt_trades')
+            ->where('user_id','IN',$keys)
+            ->where('item_type',1)
+            ->select();
+        foreach ($tr as &$val){
+            $val['item_name'] = PointItems::where('id',$val['item_id'])->value('name');
+            $val['address'] = preg_replace("/$delimiter/",' ',$val['address']);
+            if($type == 1){
+                $val['trade_status'] = $val['admin_check_type'] == 1?"通过":"未通过";   //管理员审核状态
+                $val['admin_get_bill_status'] = $val['admin_get_bill_type'] == 1?"通过":"未通过";
+                if($val['trade_type'] == 1){
+                    $val['trade_type_status'] = '已发货';
+                }elseif($val['trade_type'] == 2){
+                    $val['trade_type_status'] = '已完成';
+                }else{
+                    $val['trade_type_status'] = '未发货';
+                }
+            }else{
+                $val['trade_status'] = $val['check_type'] == 1?"通过":"未通过";   //服务中心审核状态
+                $val['get_bill_status'] = $val['get_bill_type'] == 1?"通过":"未通过";  //服务中心审核状态
+                if($val['trade_type'] == 1){
+                    $val['trade_type_status'] = '已发货';
+                }elseif($val['trade_type'] == 2){
+                    $val['trade_type_status'] = '已完成';
+                }else{
+                    $val['trade_type_status'] = '未发货';
+                }
+            }
+        }
+        $count = count($tr);
+//        echo "<pre>";var_dump($tr);exit;
+        $data = ['type'=>$type,'trades'=>$tr,'count'=>$count];
+        return view("admin@trade/pointTrade",['data'=>$data]);
     }
 
     public function trade_del_by_id(Request $request){
@@ -143,6 +196,19 @@ class Trade extends Controller
 
     public function trade_del_all(Request $request){
         $ids = $request->param()['ids'];
+        $trades = Trades::all($ids);
+        $flag = false;
+        foreach ($trades as $v){
+            if($v->getData('trade_type') != 0){
+                $flag = true;
+                break;
+            }
+        }
+        if($flag){
+            $msg = array('status'=>'fails');
+            echo json_encode($msg);exit;
+        }
+//        echo "<pre>";var_dump($trades);exit;
         $re = Trades::destroy($ids);
         if($re){
             $msg = array('status'=>'Success');
@@ -293,6 +359,11 @@ class Trade extends Controller
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
         foreach($post as $k=>$v){
             $trade = Trades::get($v);
+            if($trade->getData('trade_type') != 0){
+                $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                return json_encode($msg);
+                continue;
+            }
             $memberId = $trade->user_id;
             $memObj = Users::get($memberId);
             $shareId = $memObj->share_member_id;
@@ -322,7 +393,7 @@ class Trade extends Controller
                 }
                 $trade->admin_check_type = $admin_check_type;
             }else{
-                if($trade->getData('check_type') == 0){
+                if($trade->getData('check_type') == 0 && $trade->item_type == 0){
                     $check_type = 1;
                     $trade_type = 1;
                     if($flag){
@@ -349,7 +420,7 @@ class Trade extends Controller
             }
             $result = $trade->save();
             if($type){
-                if($trade->getData('admin_check_type') == 1){
+                if($trade->getData('admin_check_type') == 1 && $trade->item_type == 0){
 
                     $givePoint['user_id'] = $trade->user_id;
                     $givePoint['count'] = $trade->buy_price*$setPointCount*0.01;
@@ -384,6 +455,11 @@ class Trade extends Controller
         $setPointCount = config('setPointCount');
         $id = $request->param('id');
         $trade = Trades::get($id);
+//        echo "<pre>";var_dump($trade->getData('trade_type'));exit;
+        if($trade->getData('trade_type') != 0){
+            $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+            return json_encode($msg);exit;
+        }
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
         $memberId = $trade->user_id;
         $memObj = Users::get($memberId);
@@ -415,7 +491,7 @@ class Trade extends Controller
             }
             $trade->admin_check_type = $admin_check_type;
         }else{
-            if($trade->getData('check_type') == 0){
+            if($trade->getData('check_type') == 0 && $trade->item_type == 0){
                 $check_type = 1;
                 $trade_type = 1;
                 if($flag){
@@ -446,7 +522,7 @@ class Trade extends Controller
 //        echo "<pre>";var_dump(6);exit;
         if($request){
             if($type){
-                if($trade->getData('admin_check_type') == 1){
+                if($trade->getData('admin_check_type') == 1 && $trade->item_type == 0){
 
                     $givePoint['user_id'] = $trade->user_id;
                     $givePoint['count'] = $trade->buy_price*$setPointCount*0.01;
