@@ -19,6 +19,7 @@ use app\index\model\Users;
 use app\index\model\Trades;
 use \think\Controller;
 use think\Db;
+use think\Log;
 use think\Request;
 
 class Item extends Controller
@@ -29,6 +30,7 @@ class Item extends Controller
     }
 
     public function itemList(){
+//        Log::write('测试','notice');
         $itemObj = new Items();
         $re = $itemObj->order('sort', 'desc')
             ->select();

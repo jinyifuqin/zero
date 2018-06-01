@@ -359,7 +359,7 @@ class Trade extends Controller
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
         foreach($post as $k=>$v){
             $trade = Trades::get($v);
-            if($trade->getData('trade_type') != 0){
+            if($trade->getData('trade_type') != 0 && $type !=1){
                 $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
                 return json_encode($msg);
                 continue;
@@ -393,21 +393,24 @@ class Trade extends Controller
                 }
                 $trade->admin_check_type = $admin_check_type;
             }else{
-                if($trade->getData('check_type') == 0 && $trade->item_type == 0){
+                if($trade->getData('check_type') == 0){
                     $check_type = 1;
                     $trade_type = 1;
-                    if($flag){
-                        $giveSharePoint['user_id'] = $shareId;
-                        $giveSharePoint['count'] = $trade->buy_price*0.01;
-                        $giveSharePoint['type'] = 1;
-                        $giveSharePoint['get_type'] = 3;
-                        $giveSharePoint['frozen_flag'] = 1;
-                        $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
-                        $pointObj = new Points();
-                        $pointObj->data($giveSharePoint);
-                        $pointObj->save();
-                        unset($giveSharePoint);
+                    if($trade->item_type == 0){
+                        if($flag){
+                            $giveSharePoint['user_id'] = $shareId;
+                            $giveSharePoint['count'] = $trade->buy_price*0.01;
+                            $giveSharePoint['type'] = 1;
+                            $giveSharePoint['get_type'] = 3;
+                            $giveSharePoint['frozen_flag'] = 1;
+                            $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                            $pointObj = new Points();
+                            $pointObj->data($giveSharePoint);
+                            $pointObj->save();
+                            unset($giveSharePoint);
+                        }
                     }
+
                 }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
                     $check_type = 0;
                     $trade_type = 0;
@@ -456,7 +459,7 @@ class Trade extends Controller
         $id = $request->param('id');
         $trade = Trades::get($id);
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
-//                echo "<pre>";var_dump($type);exit;
+
         if($trade->getData('trade_type') != 0 && $type !=1){
             $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
             return json_encode($msg);exit;
@@ -491,19 +494,22 @@ class Trade extends Controller
             }
             $trade->admin_check_type = $admin_check_type;
         }else{
-            if($trade->getData('check_type') == 0 && $trade->item_type == 0){
+
+            if($trade->getData('check_type') == 0){
                 $check_type = 1;
                 $trade_type = 1;
-                if($flag){
-                    $giveSharePoint['user_id'] = $shareId;
-                    $giveSharePoint['count'] = $trade->buy_price*0.01;
-                    $giveSharePoint['type'] = 1;
-                    $giveSharePoint['get_type'] = 3;
-                    $giveSharePoint['frozen_flag'] = 0;
-                    $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
-                    $pointObj = new Points();
-                    $pointObj->data($giveSharePoint);
-                    $pointObj->save();
+                if($trade->item_type == 0){
+                    if($flag){
+                        $giveSharePoint['user_id'] = $shareId;
+                        $giveSharePoint['count'] = $trade->buy_price*0.01;
+                        $giveSharePoint['type'] = 1;
+                        $giveSharePoint['get_type'] = 3;
+                        $giveSharePoint['frozen_flag'] = 0;
+                        $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                        $pointObj = new Points();
+                        $pointObj->data($giveSharePoint);
+                        $pointObj->save();
+                    }
                 }
             }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
                 $check_type = 0;
@@ -519,7 +525,7 @@ class Trade extends Controller
 
 
         $result = $trade->save();
-//        echo "<pre>";var_dump(6);exit;
+
         if($request){
             if($type){
                 if($trade->getData('admin_check_type') == 1 && $trade->item_type == 0){
