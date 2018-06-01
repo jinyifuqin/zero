@@ -45,20 +45,7 @@
 	}
 </style>
 	<body class="bjhs1">
-	<div class="APPtop user_top">
-		<a href="/item/{$data.item.id}"><img class="fh" src="/public/indexsource/images/fh.png" alt=""/></a>
-		<p class="page">永之泰俱乐部</p>
-		<!--<img class="applogo" src="images/applogo.png" alt="" />-->
-		<img class="shouse" src="/public/indexsource/images/shouse.png" alt="" />
-	</div>
-	<div class="rbj"></div>
-	<ul class="menuS">
-		<a href="index.html"><p>首页</p></a>
-		<a href="#"><p>商城</p></a>
-		<a href="#"><p>社区</p></a>
-		<a href="#"><p>分享</p></a>
-		<a href="#"><p>会员中心</p></a>
-	</ul>
+	{include file="public/indexsource/head/header.html" /}
 
 
 		<form method="post" action="/pointTradeCreate">
@@ -66,7 +53,7 @@
 
 		<div class="big_qb11" style="overflow: hidden;">
 			<div class="shdz">
-				{if condition="(!array_key_exists('addr',$data))"}
+				{if condition="(!array_key_exists('addr',$re))"}
 				<div class="tjddb1">
 					<a href="/addAddr">
 						<span>您还没有收货地址，</span>
@@ -78,33 +65,33 @@
 				{else/}
 				<a href="/addAddr">
 					<div class="shdz1">
-						<font>{$data.addr.name}</font><span>{$data.addr.phone_num}</span></div>
+						<font>{$re.addr.name}</font><span>{$re.addr.phone_num}</span></div>
 					<img src="/public/indexsource/images/jian1.jpg" class="jiantou" />
 					<div class="shdz2">
-						<span>地址：{$data.addr.desc} {$data.addr.detail_desc}</span>
+						<span>地址：{$re.addr.desc} {$re.addr.detail_desc}</span>
 					</div>
 					<div class="shdz3"></div>
-					<input type="hidden" name="name" value="{$data.addr.name}">
-					<input type="hidden" name="address" value="{$data.addr.desc} {$data.addr.detail_desc}">
-					<input type="hidden" name="phone_num" value="{$data.addr.phone_num}">
+					<input type="hidden" name="name" value="{$re.addr.name}">
+					<input type="hidden" name="address" value="{$re.addr.desc} {$re.addr.detail_desc}">
+					<input type="hidden" name="phone_num" value="{$re.addr.phone_num}">
 				</a>
 				{/if}
 			</div>
 			<div class="yidakuai">
 				<div class="tjddb3">
 					<div class="tjddb31">
-						<h3>品牌：{$data.item.brandName} </h3>
-						<input type="hidden" name="itemid" value="{$data.item.id}">
+						<h3>品牌：{$re.item.brandName} </h3>
+						<input type="hidden" name="itemid" value="{$re.item.id}">
 						<!--<input id="inpB" type="hidden" name="buynum" value="">-->
-						<input id="inpP" type="hidden" name="totalprice" value="{$data.item.price}">
+						<input id="inpP" type="hidden" name="totalprice" value="{$re.item.price}">
 					</div>
 					<div class="tjddb32">
 						<dl>
-							<dt><img src="/public/uploads/{$data.item.pic}"/></dt>
+							<dt><img src="/public/uploads/{$re.item.pic}"/></dt>
 							<dd class="tjddb34">
-								<h4>{$data.item.name}</h4><span>x1</span></dd>
+								<h4>{$re.item.name}</h4><span>x1</span></dd>
 							<dd class="tjddb35">
-								<b>¥{$data.item.price}</b>
+								<b>¥{$re.item.price}</b>
 								<div class="tjddb33">
 									<ul>
 										<li style="vertical-align: middle;font-size: 1.2rem;background: transparent;outline: none;width: 2rem;" class="tjddb36 plus"> +</li>
@@ -121,7 +108,7 @@
 
 				</div>
 			</div>
-			<div class="oneprice" style="display: none;" oneprice="{$data.item.price}"></div>
+			<div class="oneprice" style="display: none;" oneprice="{$re.item.price}"></div>
 			<!--<div class="fan">-->
 				<!--<a href="#">-->
 					<!--<i>优惠券</i><input id="discount" name="discount" type="text" placeholder="请输入优惠券号码" />-->
@@ -129,7 +116,7 @@
 			<!--</div>-->
 			<div class="tjddb40">
 				<span>共1件商品 </span>
-				<font>小计：</font><b>{$data.item.price}积分</b>
+				<font>小计：</font><b>{$re.item.price}积分</b>
 			</div>
 			<div class="jifen5" style="background: gainsboro">
 				<div class="jifen5_1">
@@ -144,7 +131,7 @@
 
 			<div class="tjddb43">
 				<div class="tjddb44">
-					<font>共<i>1</i>件</font><span>合计支付：</span><b>{$data.item.price}积分</b>
+					<font>共<i>1</i>件</font><span>合计支付：</span><b>{$re.item.price}积分</b>
 				</div>
 				<div class="tjddb45">
 					<a href="#" id="sub">提交订单</a>
@@ -251,7 +238,7 @@
 
             $('#sub').click(function(e){
                 e.preventDefault();
-                var flag = "<?php echo $data['flag'] ?>";
+                var flag = "<?php echo $re['flag'] ?>";
                 if(flag == 'error'){
                     alert_choose_service('选择服务中心','/choose_service_cent','10001');
                     return;

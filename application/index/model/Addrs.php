@@ -26,10 +26,12 @@ class Addrs extends Model
 
         if(array_key_exists('addrid',$postInfo)){
             $addrId = $postInfo['addrid'];
+
             if(count($postInfo) == 1){
-                $this->save([
+                $re = $this->save([
                     'default'  => $default,
                 ],['id' => $addrId]);
+//                echo "<pre>";var_dump($re);exit;
             }else{
                 $postInfo['name'] = urlencode(json_encode($postInfo['name']));
                 $data = [

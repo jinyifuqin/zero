@@ -68,11 +68,21 @@
 
 			<span>设为默认地址<br><font>注：每次下单时会使用该地址</font></span>
 			<div class="mrdz1">
+				{eq name="$re.default" value="1"}
 				<label class="switch-btn1 circle-style1">
-					<input name="default" value="1" class="checked-switch1" type="checkbox"  />
+					<input name="default" value="1" class="checked-switch1" checked  type="checkbox"  />
 					<span class="text-switch1"></span>
 					<span class="toggle-btn1"></span>
-				</label></div>
+				</label>
+				{else/}
+				<label class="switch-btn1 circle-style1">
+					<input name="default" value="0" class="checked-switch1"  type="checkbox"  />
+					<span class="text-switch1"></span>
+					<span class="toggle-btn1"></span>
+				</label>
+				{/eq}
+
+			</div>
 
 		</div>
 		<div class="shdz15"><a href="#" id="sub">保存并使用</a></div>

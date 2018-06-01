@@ -187,6 +187,7 @@ class Index
             $data['addr'] = $addr;
         }
         $data['flag'] = $flag;
+        $_SESSION['itemType'] = 0;
 //        echo "<pre>";var_dump($data['service_list']);exit;
         return view("index@item/buying",['data'=>$data]);
     }
@@ -215,8 +216,10 @@ class Index
             $data['addr'] = $addr;
         }
         $data['flag'] = $flag;
-//        echo "<pre>";var_dump($data['service_list']);exit;
-        return view("index@item/pointBuy",['data'=>$data]);
+        $_SESSION['itemType'] = 1;
+        $data['url'] = $_SESSION['pyHttp'];
+//        echo "<pre>";var_dump($_SERVER);exit;
+        return view("index@item/pointBuy",['re'=>$data]);
     }
 
     public function wxLogin(Request $request=null){

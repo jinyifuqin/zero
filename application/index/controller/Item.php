@@ -44,7 +44,7 @@ class Item extends Controller
         $artMId = $artM->id;
         $atrs = Articles::all(['menu_id'=>$artMId]);
 //        echo "<pre>";var_dump($atrs);exit;
-        $curl = "itemInfo";
+        $curl = "itemList";
         $re = ['footType'=>$curl,'itemInfo'=>$result,''];
 //        echo "<pre>";var_dump($re);exit;
         return view("index@item/item",['re'=>$re]);
@@ -52,14 +52,16 @@ class Item extends Controller
 
     public function point_item($id){
         $result = PointItems::get(['id' => $id]);
-        $curl = "itemInfo";
-        $re = ['footType'=>$curl,'itemInfo'=>$result,''];
+        $curl = "itemList";
+        $re = ['footType'=>$curl,'itemInfo'=>$result];
+        $_SESSION['pyHttp'] = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $re['url'] = $_SERVER['HTTP_REFERER'];
 //        echo "<pre>";var_dump($re);exit;
         return view("index@item/pointItem",['re'=>$re]);
     }
 
     public function addAddr(){
-        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
+//        $_SESSION['url'] = $_SERVER['HTTP_REFERER'];
 //        echo "<pre>";var_dump($_SESSION);exit;
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
@@ -71,7 +73,13 @@ class Item extends Controller
         }
 
         $data['addr'] = $addr;
+        if($_SESSION['itemType'] == 1){
+            $data['url'] = '/pointBuy';
+        }else{
+            $data['url'] = '/buy';
+        }
 
+//        echo "<pre>";var_dump($_SERVER);exit;
         return view("index@item/addAddrList",['re'=>$data]);
     }
 
@@ -116,7 +124,7 @@ class Item extends Controller
             $default = 0;
         }
 
-//        echo "<pre>";var_dump($request->param());exit;
+
         $userinfo = $_SESSION['userinfo'];
         $userid = $userinfo->id;
         $postInfo = [
@@ -128,12 +136,12 @@ class Item extends Controller
         ];
         if(array_key_exists('addrId',$request->param())){
             $postInfo['addrid']=$request->param('addrId');
-            $AddrObj = Addrs::get($postInfo['addrid']);
-            if($AddrObj){
-                $default = $AddrObj->default;
-            }
+//            $AddrObj = Addrs::get($postInfo['addrid']);
+//            if($AddrObj){
+//                $default = $AddrObj->default;
+//            }
         }
-//        echo "<pre>";var_dump($postInfo);exit;
+//
 
 
         $addrsObj = new Addrs();
