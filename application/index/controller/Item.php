@@ -41,22 +41,41 @@ class Item extends Controller
         $id = $request->param('id');
         $result = Items::get(['id' => $id]);
         $artM = ArticleMenus::get(['title'=>'公告']);
-        $artMId = $artM->id;
-        $atrs = Articles::all(['menu_id'=>$artMId]);
-//        echo "<pre>";var_dump($atrs);exit;
+        $artObj = new Articles();
+        if($artM){
+            $artMId = $artM->id;
+            $gg = $artObj->where('menu_id',$artMId)
+                ->where('status',1)
+                ->order('give_good', 'desc')
+                ->select();
+        }
         $curl = "itemList";
-        $re = ['footType'=>$curl,'itemInfo'=>$result,''];
+        $re = ['footType'=>$curl,'itemInfo'=>$result];
+        if($gg){
+            $re['gg'] = $gg;
+        }
 //        echo "<pre>";var_dump($re);exit;
         return view("index@item/item",['re'=>$re]);
     }
 
     public function point_item($id){
         $result = PointItems::get(['id' => $id]);
+        $artM = ArticleMenus::get(['title'=>'公告']);
+        $artObj = new Articles();
+        if($artM){
+            $artMId = $artM->id;
+            $gg = $artObj->where('menu_id',$artMId)
+                ->where('status',1)
+                ->order('give_good', 'desc')
+                ->select();
+        }
         $curl = "itemList";
         $re = ['footType'=>$curl,'itemInfo'=>$result];
         $_SESSION['pyHttp'] = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $re['url'] = $_SERVER['HTTP_REFERER'];
-//        echo "<pre>";var_dump($re);exit;
+        if($gg){
+            $re['gg'] = $gg;
+        }
         return view("index@item/pointItem",['re'=>$re]);
     }
 

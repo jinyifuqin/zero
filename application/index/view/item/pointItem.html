@@ -38,18 +38,19 @@
         </div>
         <div class="newsticker-jcarousellite gonggaoR">
             <ul>
+                {if condition="(array_key_exists('gg',$re))"}
+                {volist name="re.gg" id="vo"}
                 <li>
                     <div class="thumbnail"></div>
-                    <div class="info"> <a href="#">凡一次购买“尚善靓延”综合酵素饮品...</a> <span class="cat">【2018-4-19】</span> </div>
+                    <div class="info"> <a style="width:60%;" href="/articleDetail/{$vo.id}">{$vo.title}</a> <span class="cat" style="width:40%">【{$vo.create_time}】</span> </div>
                 </li>
+                {/volist}
+                {else /}
                 <li>
                     <div class="thumbnail"></div>
-                    <div class="info"> <a href="#">健康推广大使奖：每位会员均可成为健...</a> <span class="cat">【2018-4-19】</span> </div>
+                    <div class="info"> <a href="javascript:void(0)">暂时没有公告</a> <span class="cat"></span> </div>
                 </li>
-                <li>
-                    <div class="thumbnail"></div>
-                    <div class="info"> <a href="#">健康推广大使奖</a> <span class="cat">【2018-4-19】</span> </div>
-                </li>
+                {/if}
             </ul>
         </div>
     </div>
