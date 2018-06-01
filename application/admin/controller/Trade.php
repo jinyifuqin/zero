@@ -455,12 +455,12 @@ class Trade extends Controller
         $setPointCount = config('setPointCount');
         $id = $request->param('id');
         $trade = Trades::get($id);
-//        echo "<pre>";var_dump($trade->getData('trade_type'));exit;
-        if($trade->getData('trade_type') != 0){
+        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+//                echo "<pre>";var_dump($type);exit;
+        if($trade->getData('trade_type') != 0 && $type !=1){
             $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
             return json_encode($msg);exit;
         }
-        $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
         $memberId = $trade->user_id;
         $memObj = Users::get($memberId);
         $shareId = $memObj->share_member_id;

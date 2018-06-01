@@ -280,7 +280,23 @@ class Item extends Controller
             $data = ['msg'=>"请添加收货地址！",'type'=>"error"];
             return json_encode($data);
         }
-//        echo "<pre>";var_dump(($phoneMatch));exit;
+        $noUseAdd = Points::where([
+            'user_id' => $userid,
+            'type'=>1,
+            'frozen_flag'=>0
+        ])->sum('count');
+
+        $noUseDel = Points::where([
+            'user_id' => $userid,
+            'type'=>0,
+            'frozen_flag'=>0
+        ])->sum('count');
+        $noUseEnd = $noUseAdd-$noUseDel;
+        if($noUseEnd < $post['totalprice']){
+            $data = ['msg'=>"您的积分不足！",'type'=>"error"];
+            return json_encode($data);
+        }
+//        echo "<pre>";var_dump(($post['totalprice']));exit;
         $delimiter = urlencode(',');
         $post['address'] = implode($delimiter,explode(' ',$post['address']));
         $buyPoint['user_id'] = $userid;
