@@ -655,6 +655,13 @@ class User extends Controller
         $canUse = $canUseAdd - $canUseDel;
 //        echo "<pre>";var_dump($canUse);exit;
         if($canUse >= $pfNum){
+            $collections = Users::where('id',$userId)->value('collections');
+            $open_bank = Users::where('id',$userId)->value('open_bank');
+            if($collections == '' || $open_bank == ''){
+                $msg = ['type'=>'error','msg'=>'请在个人中心添加银行卡信息！'];
+                echo json_encode($msg);exit;
+            }
+//            echo "<pre>";var_dump($open_bank);exit;
             $pfPoint['user_id'] = $userId;
             $pfPoint['count'] = $pfNum;
             $pfPoint['type'] = 0;
