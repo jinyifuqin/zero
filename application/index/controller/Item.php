@@ -24,6 +24,7 @@ use think\Request;
 
 class Item extends Controller
 {
+    public $pages = 4;
     public function __construct(Request $request)
     {
         session_start();
@@ -33,10 +34,21 @@ class Item extends Controller
 //        Log::write('测试','notice');
         $itemObj = new Items();
         $re = $itemObj->order('sort', 'desc')
+            ->limit($this->pages)
             ->select();
         $curl = "itemList";
-        $re = ['footType'=>$curl,'itemList'=>$re];
+        $re = ['footType'=>$curl,'itemList'=>$re,'page'=>1];
         return view("index@item/index",['re'=>$re]);
+    }
+
+    public function ajax_item($page){
+        $start = ($page-1)*$this->pages;
+        $itemObj = new Items();
+        $re = $itemObj->order('sort', 'desc')
+            ->limit($start,$this->pages)
+            ->select();
+        $info = ['items'=>$re,'pages'=>$page];
+        echo json_encode($info);
     }
 
     public function item(Request $request){

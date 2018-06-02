@@ -11,5 +11,8 @@ use think\Model;
 
 class Items extends Model
 {
-
+    public function getCreateTimeAttr($time)
+    {
+        return $time;
+    }
 }

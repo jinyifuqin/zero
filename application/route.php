@@ -126,6 +126,7 @@ Route::group('',[
     'getInfo' => ['getInfo', ['method' => 'get']],
     'itemList' => ['item/itemList', ['method' => 'get']],
     'item/:id' => ['item/item', ['method' => 'get']],
+    'ajaxItem/:page' => ['item/ajax_item', ['method' => 'get']],
     'pointItem/:id' => ['item/point_item', ['method' => 'get']],
     'item/checkDiscount' => ['item/check_discount', ['method' => 'get']],
     'wxlogin/:id' => ['wxLogin', ['method' => 'get']],
