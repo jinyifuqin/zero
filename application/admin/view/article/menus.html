@@ -28,7 +28,7 @@
 				<i class="Hui-iconfont">&#xe600;</i> 添加文章栏目
 			</a>
 		</span>
-		<span class="r">共有数据：<strong>54</strong> 条</span>
+		<span class="r">共有数据：<strong>{$list|count}</strong> 条</span>
 	</div>
 	<div class="mt-20">
 		<table id="DataTables_Table_0" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
@@ -50,7 +50,7 @@
 					<td class="text-c">
 						{$vo.title}
 					</td>
-					<td><img width="80px;" src="/public/uploads/{$vo.pic}"/></td>
+					<td><img style="width:40px;height:40px;" src="/public/uploads/{$vo.pic}"/></td>
 					<td>{$vo.create_time}</td>
 					<td class="f-14 td-manage">
 						<!--<a style="text-decoration:none" onClick="article_stop(this,'10001')" href="javascript:;" title="下架">-->

@@ -1,5 +1,5 @@
 ﻿{include file="public/admins/head/head.html" /}
-<title>资讯列表</title>
+<title>订单列表</title>
 <script>
     function datadel(){
         var table = $('#DataTables_Table_0');
@@ -106,7 +106,7 @@
 </script>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯管理 <span class="c-gray en">&gt;</span> 资讯列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 产品管理 <span class="c-gray en">&gt;</span> 订单列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<!--<div class="text-c">-->
 		<!--<button onclick="removeIframe()" class="btn btn-primary radius">关闭选项卡</button>-->
@@ -175,7 +175,12 @@
 				<tr class="text-c">
 					<td><input type="checkbox" value="" name=""></td>
 					<td>{$vo.id}</td>
-					<td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10001')" title="查看">{$vo.trade_number}</u></td>
+					<td class="text-l">
+						{$vo.trade_number}
+						<!--<u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10001')" title="查看">-->
+							<!--{$vo.trade_number}-->
+						<!--</u>-->
+					</td>
 					<!--<td>{$vo.user_id}</td>-->
 					<td>{$vo.name}</td>
 					<td>{$vo.phone_num}</td>

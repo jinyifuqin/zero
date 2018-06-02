@@ -82,8 +82,21 @@
 
 					<td><input name="" type="checkbox" value=""></td>
 					<td>{$vo.id}</td>
-					<td><a onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img width="60" class="product-thumb" src="/public/uploads/{$vo.pic}"></a></td>
-					<td class="text-l"><a style="text-decoration:none" onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;"><img title="国内品牌" src="/public/admins/static/h-ui.admin/images/cn.gif"> <b class="text-success"></b> {$vo.name}</a></td>
+					<td>
+						<img style="width:40px;height:40px;" class="product-thumb" src="/public/uploads/{$vo.pic}">
+						<!--<a onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;">-->
+							<!--<img style="width:40px;height:40px;" class="product-thumb" src="/public/uploads/{$vo.pic}">-->
+						<!--</a>-->
+					</td>
+					<td class="text-l">
+							<img title="国内品牌" src="/public/admins/static/h-ui.admin/images/cn.gif">
+							<b class="text-success"></b> {$vo.name}
+
+						<!--<a style="text-decoration:none" onClick="product_show('哥本哈根橡木地板','product-show.html','10001')" href="javascript:;">-->
+							<!--<img title="国内品牌" src="/public/admins/static/h-ui.admin/images/cn.gif">-->
+							<!--<b class="text-success"></b> {$vo.name}-->
+						<!--</a>-->
+					</td>
 					<td class="text-l">{$vo.desc}</td>
 					<td><span class="price">{$vo.price}</span> 积分/件</td>
 					<td><span class="price">{$vo.sort}</span></td>
