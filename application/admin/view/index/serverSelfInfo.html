@@ -17,7 +17,7 @@
 			<!--<th width="25"><input type="checkbox" value="" name=""></th>-->
 			<th width="40">ID</th>
 			<th width="200">角色名</th>
-			<th>积分范围</th>
+			<th>手机号&微信二维码</th>
 			<th width="300">描述</th>
 			<th width="70">操作</th>
 		</tr>
@@ -28,7 +28,7 @@
 			<td>1</td>
 			<td>个人手机号</td>
 			<td>
-				最低：<input type="number" name="a_low" value="{$re.phone_number}"/>
+				<input type="number" name="a_low" value="{$re.phone_number}"/>
 				<!--最高：<input type="number" name="height"/>-->
 			</td>
 			<td>用于客户手机号联系</td>
@@ -44,9 +44,9 @@
 			<td>个人二维码上传</td>
 			<td>
 				{if condition="($re.qrcode == ' ')  OR ($re.qrcode  == '')"}
-				<img onclick="javascript:openBrowse();" id="qrPic" style="width: 50px;" src="/public/indexsource/images/head.jpg"/>
+				<img onclick="javascript:openBrowse();" id="qrPic" style="width: 50px;cursor: pointer" src="/public/indexsource/images/head.jpg"/>
 				{else /}
-				<img onclick="javascript:openBrowse();" id="qrPic" style="width: 50px;" src="/public/uploads/{$re.qrcode}"/>
+				<img onclick="javascript:openBrowse();" id="qrPic" style="width: 50px;cursor: pointer" src="/public/uploads/{$re.qrcode}"/>
 				{/if}
 				<input type="file" id="file" multiple accept="image/*" style="display:none;" onchange="handleFiles(this.files)">
 			</td>
