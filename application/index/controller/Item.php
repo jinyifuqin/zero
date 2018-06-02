@@ -33,7 +33,8 @@ class Item extends Controller
     public function itemList(){
 //        Log::write('测试','notice');
         $itemObj = new Items();
-        $re = $itemObj->order('sort', 'desc')
+        $re = $itemObj->where('status',1)
+            ->order('sort', 'desc')
             ->limit($this->pages)
             ->select();
         $curl = "itemList";
@@ -44,7 +45,8 @@ class Item extends Controller
     public function ajax_item($page){
         $start = ($page-1)*$this->pages;
         $itemObj = new Items();
-        $re = $itemObj->order('sort', 'desc')
+        $re = $itemObj->where('status',1)
+            ->order('sort', 'desc')
             ->limit($start,$this->pages)
             ->select();
         $info = ['items'=>$re,'pages'=>$page];
