@@ -437,6 +437,9 @@ class User extends Controller
     }
 
     public function my_qrcode(){
+        if(!array_key_exists('userinfo',$_SESSION)){
+            $this->redirect('/userInfo');
+        }
         $memberid = $_SESSION['userinfo']->id;
         $url = "http://".$_SERVER['HTTP_HOST'].'?memberid='.$memberid;
         $link = "http://qr.liantu.com/api.php?text=$url";
