@@ -893,5 +893,25 @@ class Index extends Controller
 //        echo "<pre>";var_dump($vObj);exit;
     }
 
+    public function change_psw(){
+
+        return view("admin@index/changePsw");
+    }
+
+    public function save_change_psw(Request $request){
+        $psw = $request->param('password');
+        $info = $_SESSION['adminUserInfo'];
+        $serverId = $info->id;
+        $user = Adminusers::get($serverId);
+        $user->password = $psw;
+        $re = $user->save();
+        if($re){
+            $msg = array('status'=>'success');
+        }else{
+            $msg = array('status'=>'error');
+        }
+        echo json_encode($msg);
+    }
+
 
 }

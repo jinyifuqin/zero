@@ -1,0 +1,88 @@
+{include file="public/admins/head/head.html" /}
+<script type="text/javascript" src="/public/indexsource/js/jquery.min.js"></script>
+<title>角色管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+	<div class="cl pd-5 bg-1 bk-gray">
+
+		<!--<span class="r">共有数据：<strong>54</strong> 条</span> </div>-->
+	<form method="post" action="/admin/saveChangePsw">
+		<table class="table table-border table-bordered table-hover table-bg">
+			<thead>
+			<tr>
+				<th scope="col" colspan="6">个人信息</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr class="text-c">
+				<!--<td><input type="checkbox" value="" name=""></td>-->
+				<td>请输入新密码</td>
+				<td><input class="password1" type="password" name="password"> </td>
+			</tr>
+			<tr class="text-c">
+				<!--<td><input type="checkbox" value="" name=""></td>-->
+				<td>请再次输入新密码</td>
+				<td><input class="password2" type="password"> </td>
+			</tr>
+			<tr class="text-c">
+				<td colspan="2">
+					<div class="row cl">
+						<div class="col-xs-8 col-sm-9 col-xs-offset-1 col-sm-offset-1">
+							<input class="btn subf btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+						</div>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/public/admins/lib/jquery/onenineone/jquery.min.js"></script>
+<script type="text/javascript" src="/public/admins/lib/layer/twofour/layer.js"></script>
+<script type="text/javascript" src="/public/admins/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/public/admins/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/public/admins/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.subf').click(function(e){
+		    e.preventDefault();
+		    var psw = $('.password1').val();
+            var pswB = $('.password2').val();
+            if(psw != pswB){
+                return layer.msg('两次密码不一致，请重新输入!',{icon:0,time:1000});
+			}else{
+                var form = $('form');
+                var url = form.attr('action');
+                var data = form.serialize();
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data,
+                    dataType: "json",
+                    success: function(data){
+                        if(data.status == 'success'){
+                            layer.msg('密码修改成功!等待重新登录！',{icon:1,time:2000});
+                            setTimeout(function(){
+                                // var index = parent.layer.getFrameIndex(window.name);
+                                // parent.$('.btn-refresh').click();
+                                // window.parent.location.reload();//刷新父页面
+                                // parent.layer.close(index);
+                                window.parent.location.href='/admin/signout';
+							},2000);
+                        }else{
+                            layer.msg('密码修改失败！',{icon:0,time:1000});
+                        }
+
+                    }
+                });
+			}
+		})
+	})
+</script>
+</body>
+</html>
