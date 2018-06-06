@@ -504,7 +504,7 @@ class Trade extends Controller
                         $giveSharePoint['count'] = $trade->buy_price*0.01;
                         $giveSharePoint['type'] = 1;
                         $giveSharePoint['get_type'] = 3;
-                        $giveSharePoint['frozen_flag'] = 0;
+                        $giveSharePoint['frozen_flag'] = 1;
                         $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
                         $pointObj = new Points();
                         $pointObj->data($giveSharePoint);
