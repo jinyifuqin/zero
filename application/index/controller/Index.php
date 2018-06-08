@@ -21,6 +21,7 @@ class Index
 {
     public $wxObj;
     public $pagesize = 2;
+    private $user;
     public function __construct()
     {
         session_start();
@@ -30,6 +31,14 @@ class Index
     public function index(Request $request)
     {
 //        session_destroy();
+        $wxLook = check_login_type();
+        if($wxLook){
+            if(!array_key_exists('wxInfo',$_SESSION)){
+                $url = $this->wxObj->get_authorize_url(1);
+                return redirect($url);
+            }
+        }
+//        echo "<pre>";var_dump($_SESSION);exit;
         $_SESSION['url'] = $_SERVER['HTTP_HOST'];
         $serviceuserid = $request->param('userid');
         $memberid = $request->param('memberid');
@@ -292,11 +301,10 @@ class Index
         }
 
         $get_user_info = $this->wxObj->get_user_info($data['access_token'],$_SESSION['openid']);
-//        echo "<pre>";var_dump($get_user_info);exit;
-        $re = $this->createUser($get_user_info);
-//        $dataAll = $this->get_signature($data['ticket']);
-//        $_SESSION['signature'] = $dataAll['signature'];
-//        $_SESSION['noncestr'] = $dataAll['noncestr'];
+        $_SESSION['wxInfo'] = $get_user_info;
+
+//        $re = $this->createUser($get_user_info);
+
 //        echo "<pre>";var_dump(222);exit;
 
         return redirect('/');

@@ -299,3 +299,10 @@ function sendEmail($to,$content){
     $re = $mail->Send();
     return $re;
 }
+
+function check_login_type(){
+    if ( strpos($_SERVER['HTTP_USER_AGENT'],'MicroMessenger') !== false ) {
+        return true;
+    }
+    return false;
+}

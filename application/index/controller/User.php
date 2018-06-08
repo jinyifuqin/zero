@@ -44,6 +44,15 @@ class User extends Controller
         $password = $request->param('password');
         $userObj = Users::get(['username'=>$username,'password'=>$password]);
         if($userObj){
+            if(array_key_exists('wxInfo',$_SESSION)){
+                $flag = Users::get(['openid'=>$_SESSION['wxInfo']['openid']]);
+                if(!$flag && $userObj->openid == $userObj->username){
+                    $userObj->pic = download($_SESSION['wxInfo']['headimgurl']);
+                    $userObj->nickname = urlencode(json_encode($_SESSION['wxInfo']['nickname']));
+                    $userObj->openid = $_SESSION['wxInfo']['openid'];
+                    $userObj->save();
+                }
+            }
             $_SESSION['userinfo'] = $userObj;
             $msg = array('status'=>'Success','url'=>'/');
             echo json_encode($msg);
@@ -139,7 +148,7 @@ class User extends Controller
     }
 
     public function exit_login(){
-        session_destroy();
+        unset($_SESSION['userinfo']);
         $this->redirect('/userInfo');
     }
 
@@ -155,8 +164,16 @@ class User extends Controller
             $data['phone_number'] = $post['username'];
             $data['nickname'] = urlencode(json_encode($post['nickname']));
             $data['sex'] = $post['sex'];
-            $data['openid'] = $post['username'];
             $data['truename'] = $post['truename'];
+            $data['openid'] = $post['username'];
+            if(array_key_exists('wxInfo',$_SESSION)){
+                $flag = Users::get(['openid'=>$_SESSION['wxInfo']['openid']]);
+                if(!$flag){
+                    $data['pic'] = download($_SESSION['wxInfo']['headimgurl']);
+                    $data['nickname'] = urlencode(json_encode($_SESSION['wxInfo']['nickname']));
+                    $data['openid'] = $_SESSION['wxInfo']['openid'];
+                }
+            }
             $userObj = new Users();
             $userObj->data($data);
             $re = $userObj->save();
@@ -181,8 +198,21 @@ class User extends Controller
     }
 
     public function weixin_login(){
-        $url = $this->wxObj->get_authorize_url(1);
-        return redirect($url);
+        if(array_key_exists('wxInfo',$_SESSION)){
+            $userObj = Users::get(['openid'=>$_SESSION['wxInfo']['openid']]);
+            if(!$userObj){
+                $this->redirect('/register');
+            }else{
+                $_SESSION['userinfo'] = $userObj;
+                $this->redirect('/');
+            }
+        }else{
+            $url = $this->wxObj->get_authorize_url(1);
+            return redirect($url);
+        }
+//        $this->redirect('/admin/login');
+//        $url = $this->wxObj->get_authorize_url(1);
+//        return redirect($url);
     }
 
     public function self_info(Request $request){
