@@ -5,6 +5,7 @@ use app\admin\model\ArticleMenus;
 use app\admin\model\Articles;
 use app\admin\model\Brands;
 use app\admin\model\IndexPics;
+use app\admin\model\Notices;
 use app\admin\model\PointItems;
 use app\index\model\Addrs;
 use app\index\model\GiveGoods;
@@ -58,13 +59,13 @@ class Index
         foreach($indePic as &$v){
             $v->pic = addslashes($v->pic);
         }
+        $noticeObj = new Notices();
         $artObj = new Articles();
         $ggM = ArticleMenus::get(['title'=>'公告']);
         if($ggM){
             $ggMId = $ggM->id;
-            $gg = $artObj->where('menu_id',$ggMId)
-                ->where('status',1)
-                ->order('give_good', 'desc')
+            $gg = $noticeObj->where('status',1)
+                ->order('sort', 'desc')
                 ->select();
             if(!empty($gg)){
                 foreach($gg as $val){
@@ -656,6 +657,22 @@ class Index
         $curl = "community";
         $re = ['footType'=>$curl,'art'=>$art,'menu'=>$menu];
         return view("index@index/community",['re'=>$re]);
+    }
+
+    public function notice(){
+        $notice = Notices::all();
+        return view("index@index/notice",['re'=>$notice]);
+    }
+
+    public function notice_detail($id){
+        $notice = Notices::get($id);
+        $notice->content = htmlspecialchars_decode($notice->content);
+        $url = $_SERVER['HTTP_REFERER'];
+        $re = ['url'=>$url,'content'=>$notice];
+//        echo "<pre>";var_dump($url);exit;
+        return view("index@index/noticeDetail",['re'=>$re]);
+
+
     }
 
     public function article_detail($id){

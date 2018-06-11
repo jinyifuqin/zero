@@ -198,12 +198,14 @@ Route::group('',[
     'saveTruename' => ['User/save_truename', ['method' => 'post']],
     'community/[:id]' => ['community', ['method' => 'get']],
     'articleDetail/:id' => ['article_detail', ['method' => 'get']],
+    'noticeDetail/:id' => ['notice_detail', ['method' => 'get']],
     'artTalk' => ['artTalk', ['method' => 'post']],
     'artGiveGood/:id' => ['art_give_good', ['method' => 'get']],
     'plGiveGood/:id' => ['pl_give_good', ['method' => 'get']],
     'userVoting' => ['User/user_voting', ['method' => 'get']],
     'votingDetail/:id' => ['User/voting_detail', ['method' => 'get']],
     'votingAction' => ['User/voting_action', ['method' => 'post']],
+    'notice' => ['notice', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);

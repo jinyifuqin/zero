@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>服务中心(测试)</title>
+    <link rel="stylesheet" href="/public/indexsource/css/css_yan.css"/>
+    <script src="/public/indexsource/js/jquery.min.js"></script>
+    <script src="/public/indexsource/js/pic.js"></script>
+</head>
+<body>
+<!--这是头部-->
+{include file="public/indexsource/head/header.html" /}
+
+
+<!--这是最外边的div，用来隔开与底部栏目的高度-->
+<div class="Cmain">
+    <!--内页的banner图-->
+    <div class="nbanner">
+        <img src="/public/indexsource/images/nbanner1.jpg" alt=""/>
+    </div>
+    <!--标题-->
+    <div class="title">公告中心</div>
+    <!--服务中心的列表-->
+    <ul class="fwzx_list">
+        {foreach $re as $vo}
+        <li>
+            <!--<div class="fwzx_listL">-->
+                <!--<a href="#"><img src="/public/indexsource/images/fushow1.jpg" alt=""/></a>-->
+            <!--</div>-->
+            <div class="fwzx_listR" style="float: left;width: 10%;">
+                <a class="fwzx_listR1" href="/noticeDetail/{$vo.id}">{$vo.id}.</a>
+            </div>
+            <div class="fwzx_listR" style="float: left">
+                <a class="fwzx_listR1" href="/noticeDetail/{$vo.id}">{$vo.title}</a>
+                <a class="fwzx_listR3" href="/noticeDetail/{$vo.id}">{$vo.create_time}</a>
+            </div>
+        </li>
+        {/foreach}
+    </ul>
+
+</div>
+
+
+
+
+
+<!--底部-->
+<div class="APPbtn">
+    <div class="APPbtn1 APPbtnbj">
+        <a href="#"><div class="APPbtn1_img">
+            <img src="/public/indexsource/images/Appbottom11.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom1.png" alt=""/>
+        </div>
+        </a>
+        <a href="#">首页</a>
+    </div>
+    <div class="APPbtn1">
+        <a href="#"><div class="APPbtn1_img">
+            <img src="/public/indexsource/images/Appbottom22.png" alt=""/>
+            <img src="/public/indexsource/images/Appbottom2.png" alt=""/>
+        </div>
+        </a>
+        <a href="#">商城</a>
+    </div>
+    <div class="APPbtn1">
+        <a href="#">
+            <div class="APPbtn1_img">
+                <img src="/public/indexsource/images/Appbottom33.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom3.png" alt=""/>
+            </div>
+        </a>
+        <a href="#">社区</a>
+    </div>
+    <div class="APPbtn1">
+        <a href="#">
+            <div class="APPbtn1_img">
+                <img src="/public/indexsource/images/Appbottom44.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom4.png" alt=""/>
+            </div>
+        </a>
+        <a href="#">分享</a>
+    </div>
+    <div class="APPbtn1">
+        <a href="#">
+            <div class="APPbtn1_img">
+                <img src="/public/indexsource/images/Appbottom55.png" alt=""/>
+                <img src="/public/indexsource/images/Appbottom5.png" alt=""/>
+            </div>
+        </a>
+        <a href="#">会员中心</a>
+    </div>
+</div>
+</body>
+</html>
