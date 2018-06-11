@@ -53,6 +53,15 @@ class User extends Controller
                     $userObj->save();
                 }
             }
+            if(array_key_exists('share_member_id',$_SESSION) && $userObj->share_member_id == 0){
+                $userObj->share_member_id = $_SESSION['share_member_id'];
+                $userObj->save();
+            }
+            if(array_key_exists('adminUserId',$_SESSION) && $userObj->service_cent_id == 0){
+                $userObj->service_cent_id = $_SESSION['adminUserId'];
+                $userObj->save();
+            }
+
             $_SESSION['userinfo'] = $userObj;
             $msg = array('status'=>'Success','url'=>'/');
             echo json_encode($msg);
@@ -183,6 +192,13 @@ class User extends Controller
             $addrObj->default = 1;
             $addrObj->save();
             $userObj->address = $addrObj->id;
+            if(array_key_exists('share_member_id',$_SESSION)){
+                $userObj->share_member_id = $_SESSION['share_member_id'];
+            }
+            if(array_key_exists('adminUserId',$_SESSION)){
+                $userObj->service_cent_id = $_SESSION['adminUserId'];
+            }
+
             $userObj->save();
             $_SESSION['userinfo'] = Users::get($userObj->id);
             if($re){
