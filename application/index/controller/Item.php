@@ -12,6 +12,7 @@ use app\admin\model\ArticleMenus;
 use app\admin\model\Articles;
 use app\admin\model\Discounts;
 use app\admin\model\Items;
+use app\admin\model\Notices;
 use app\admin\model\PointItems;
 use app\index\model\Addrs;
 use app\index\model\Points;
@@ -56,15 +57,11 @@ class Item extends Controller
     public function item(Request $request){
         $id = $request->param('id');
         $result = Items::get(['id' => $id]);
-        $artM = ArticleMenus::get(['title'=>'公告']);
-        $artObj = new Articles();
-        if($artM){
-            $artMId = $artM->id;
-            $gg = $artObj->where('menu_id',$artMId)
-                ->where('status',1)
-                ->order('give_good', 'desc')
+        $noticeObj = new Notices();
+        $gg = $noticeObj->where('status',1)
+                ->order('sort', 'desc')
                 ->select();
-        }
+
         $curl = "itemList";
         $re = ['footType'=>$curl,'itemInfo'=>$result];
         if($gg){
