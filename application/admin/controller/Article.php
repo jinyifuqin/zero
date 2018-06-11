@@ -12,6 +12,7 @@ use app\admin\model\ArticleMenus;
 use app\admin\model\Articles;
 use app\admin\model\Brands;
 use app\admin\model\Discounts;
+use app\admin\model\Notices;
 use app\index\model\Addrs;
 use app\index\model\Trades;
 use app\index\model\Users;
@@ -174,6 +175,84 @@ class Article extends Controller
             $msg = array('status'=>'Success');
         }else{
             $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function notice(){   //公告
+        $arts = Notices::all();
+        return view("admin@article/notice",['re'=>$arts]);
+    }
+
+    public function add_notice(){   //公告
+        return view("admin@article/addNotice");
+    }
+
+    public function notice_save(Request $request){
+        $post = $request->param();
+        $notObj = new Notices();
+        $data['sort'] = $post['sort'];
+        $data['title'] = $post['title'];
+        $data['status'] = $post['status'];
+        $data['content'] = htmlspecialchars($post['editorValue']);
+//        echo "<pre>";var_dump($post);exit;
+        if(array_key_exists('id',$post)){
+            $id = $post['id'];
+            $data['id'] = $id;
+            $re = $notObj->save($data,['id'=>$id]);
+        }else{
+            $notObj->data($data);
+            $re = $notObj->save();
+        }
+        if($re){
+            $msg = ['status'=>'success','msg'=>'状态更改成功！'];
+        }else{
+            $msg = ['status'=>'success','msg'=>'状态更改失败！'];
+        }
+        echo json_encode($msg);
+    }
+
+    public function notice_edit($id){
+        $art = Notices::get($id);
+        $art->content = htmlspecialchars_decode($art->content);
+        $data = ['info'=>$art];
+//                echo "<pre>";var_dump($data);exit;
+        return view("admin@article/noticeEdit",['data'=>$data]);
+    }
+
+    public function notice_del($id){
+        $re = Notices::destroy($id);
+        if($re){
+            $msg = array('status'=>'success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function notice_del_all(Request $request){
+        $ids = $request->param()['ids'];
+        $re = Notices::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function notice_status($id){
+        $artObj = Notices::get($id);
+        if($artObj->status == 1){
+            $artObj->status = 0;
+        }else{
+            $artObj->status = 1;
+        }
+        $re = $artObj->save();
+        if($re){
+            $msg = ['status'=>'success','msg'=>'状态更改成功！'];
+        }else{
+            $msg = ['status'=>'success','msg'=>'状态更改失败！'];
         }
         echo json_encode($msg);
     }
