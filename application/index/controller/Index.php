@@ -61,30 +61,18 @@ class Index
         }
         $noticeObj = new Notices();
         $artObj = new Articles();
-        $ggM = ArticleMenus::get(['title'=>'公告']);
-        if($ggM){
-            $ggMId = $ggM->id;
-            $gg = $noticeObj->where('status',1)
-                ->order('sort', 'desc')
-                ->select();
-            if(!empty($gg)){
-                foreach($gg as $val){
-                    $val->create_time = date('Y-m-d',strtotime($val->create_time));
-                }
+        $gg = $noticeObj->where('status',1)
+            ->order('sort', 'desc')
+            ->select();
+        if(!empty($gg)){
+            foreach($gg as $val){
+                $val->create_time = date('Y-m-d',strtotime($val->create_time));
             }
-
-            $hotArt = $artObj->where('menu_id', '<>',$ggMId)
-                ->where('status',1)
-                ->limit(4)
-                ->order('give_good', 'desc')
-                ->select();
-
-        }else{
-            $hotArt = $artObj->where('status',1)
-                ->limit(4)
-                ->order('give_good', 'desc')
-                ->select();
         }
+        $hotArt = $artObj->where('status',1)
+            ->limit(4)
+            ->order('give_good', 'desc')
+            ->select();
 
         if(!empty($hotArt)){
             foreach($hotArt as $value){
@@ -660,7 +648,7 @@ class Index
     }
 
     public function notice(){
-        $notice = Notices::all();
+        $notice = Notices::all(['status'=>1]);
         return view("index@index/notice",['re'=>$notice]);
     }
 

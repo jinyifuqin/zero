@@ -29,7 +29,7 @@ class Articles extends Migrator
     public function change()
     {
         $table = $this->table('articles',array('engine'=>'MyISAM'));
-        $table->addColumn('content', 'string',array('default'=>'','comment'=>'文章内容'))
+        $table->addColumn('content', 'text',array('default'=>'','comment'=>'文章内容'))
             ->addColumn('sort', 'integer',array('limit' => 32,'default'=>0,'comment'=>'排序'))
             ->addColumn('title', 'string',array('limit' => 32,'default'=>'','comment'=>'文章标题'))
             ->addColumn('menu_id', 'integer',array('default'=>0,'null'=>true,'comment'=>'栏目Id'))
