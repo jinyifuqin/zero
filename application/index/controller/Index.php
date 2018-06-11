@@ -649,7 +649,9 @@ class Index
 
     public function notice(){
         $notice = Notices::all(['status'=>1]);
-        return view("index@index/notice",['re'=>$notice]);
+        $curl = 'index';
+        $re = ['footType'=>$curl,'list'=>$notice];
+        return view("index@index/notice",['re'=>$re]);
     }
 
     public function notice_detail($id){
