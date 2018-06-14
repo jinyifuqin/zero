@@ -357,6 +357,7 @@ class Trade extends Controller
         $sharePointFilterConfig = config('sharePointFilterConfig');
         $setPointCount = config('setPointCount');
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
+        $pO = new \app\index\model\Points();
         foreach($post as $k=>$v){
             $trade = Trades::get($v);
             if($trade->getData('trade_type') != 0 && $type !=1){
@@ -368,7 +369,18 @@ class Trade extends Controller
             $memObj = Users::get($memberId);
             $shareId = $memObj->share_member_id;
             if($shareId != 0){
-                $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
+//                $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
+                $shareBuyPriceAdd = $pO->where('user_id',"=",$shareId)
+//                ->where('get_type',">",0)
+                    ->where('type',"=",1)
+                    ->where('frozen_flag',"=",0)
+                    ->sum('count');
+                $shareBuyPriceDel = $pO->where('user_id',"=",$shareId)
+//                ->where('get_type',">",0)
+                    ->where('type',"=",0)
+                    ->where('frozen_flag',"=",0)
+                    ->sum('count');
+                $shareBuyPrice = $shareBuyPriceAdd - $shareBuyPriceDel;
                 if($shareBuyPrice >= $sharePointFilterConfig){
                     $flag = true;
                 }else{
@@ -459,7 +471,7 @@ class Trade extends Controller
         $id = $request->param('id');
         $trade = Trades::get($id);
         $type = $_SESSION['adminUserInfo']->getData('type'); // 账号类型
-
+        $pO = new \app\index\model\Points();
         if($trade->getData('trade_type') != 0 && $type !=1){
             $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
             return json_encode($msg);exit;
@@ -467,9 +479,19 @@ class Trade extends Controller
         $memberId = $trade->user_id;
         $memObj = Users::get($memberId);
         $shareId = $memObj->share_member_id;
-//        echo "<pre>";var_dump($shareId);var_dump($sharePointFilterConfig);exit;
         if($shareId != 0){
-            $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
+//            $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
+            $shareBuyPriceAdd = $pO->where('user_id',"=",$shareId)
+//                ->where('get_type',">",0)
+                ->where('type',"=",1)
+                ->where('frozen_flag',"=",0)
+                ->sum('count');
+            $shareBuyPriceDel = $pO->where('user_id',"=",$shareId)
+//                ->where('get_type',">",0)
+                ->where('type',"=",0)
+                ->where('frozen_flag',"=",0)
+                ->sum('count');
+            $shareBuyPrice = $shareBuyPriceAdd - $shareBuyPriceDel;
             if($shareBuyPrice >= $sharePointFilterConfig){
                 $flag = true;
             }else{
