@@ -130,7 +130,7 @@ Route::post([
 ]);
 
 Route::group('',[
-    '/[:memberid]$' => 'index', // 首页访问路由
+    '/$' => 'index', // 首页访问路由
     'my' => 'ajax', // 静态地址路由
     'getInfo' => ['getInfo', ['method' => 'get']],
     'itemList' => ['item/itemList', ['method' => 'get']],
