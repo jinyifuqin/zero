@@ -38,7 +38,7 @@ class Users extends Migrator
             ->addColumn('pic', 'string',array('default'=>'','comment'=>'头像'))
             ->addColumn('phone_number', 'string',array('default'=>'','comment'=>'手机号'))
             ->addColumn('service_cent_id', 'integer',array('limit' => 15,'default'=>0,'comment'=>'服务中心推广人'))
-            ->addColumn('share_member_id', 'integer',array('limit' => 15,'default'=>0,'comment'=>'分享的朋友'))
+            ->addColumn('share_member_id', 'string',array('default'=>0,'comment'=>'分享的朋友'))
             ->addColumn('referee_id', 'integer',array('limit' => 15,'default'=>0,'comment'=>'推荐人'))
             ->addColumn('sex', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'性别'))
             ->addColumn('status', 'boolean',array('limit' => 1,'default'=>0,'comment'=>'0普通会员1服务中心'))

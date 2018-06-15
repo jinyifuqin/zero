@@ -411,7 +411,7 @@ class Trade extends Controller
                     if($trade->item_type == 0){
                         if($flag){
                             $giveSharePoint['user_id'] = $shareId;
-                            $giveSharePoint['count'] = $trade->buy_price*0.07;
+                            $giveSharePoint['count'] = $trade->buy_price*0.035;
                             $giveSharePoint['type'] = 1;
                             $giveSharePoint['get_type'] = 3;
                             $giveSharePoint['frozen_flag'] = 1;
@@ -523,7 +523,7 @@ class Trade extends Controller
                 if($trade->item_type == 0){
                     if($flag){
                         $giveSharePoint['user_id'] = $shareId;
-                        $giveSharePoint['count'] = $trade->buy_price*0.07;
+                        $giveSharePoint['count'] = $trade->buy_price*0.035;
                         $giveSharePoint['type'] = 1;
                         $giveSharePoint['get_type'] = 3;
                         $giveSharePoint['frozen_flag'] = 1;
