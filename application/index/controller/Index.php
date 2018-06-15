@@ -94,6 +94,24 @@ class Index
             }
         }
 
+        $appid = WX_APPID;
+        $wxObj = Weixins::all();
+        $ticket = $wxObj[0]->ticket;
+        $access_token_true = $wxObj[0]->access_token_true;
+        $signatureRe = $this->get_signature($ticket);
+        $signature = $signatureRe['signature'];
+        $noncestr = $signatureRe['noncestr'];
+//            echo "<pre>";var_dump($signatureRe);exit;
+//        $url = "http://".$_SERVER['HTTP_HOST'].'?memberid='.$id;
+//        $weixin = array(
+//            'appid'=>$appid,
+//            'access_token_true'=>$access_token_true,
+//            'ticket'=>$ticket,
+//            'timestamp'=>$signatureRe['timestamp'],
+//            'noncestr'=>$noncestr,
+//            'signature'=>$signature,
+//            'url'=>$url
+//        );
 
         $curl = "index";
         if(array_key_exists('userinfo',$_SESSION)){
@@ -111,14 +129,6 @@ class Index
             }
 
 //            echo "<pre>";var_dump($userObj->id);exit;
-            $appid = WX_APPID;
-            $wxObj = Weixins::all();
-            $ticket = $wxObj[0]->ticket;
-            $access_token_true = $wxObj[0]->access_token_true;
-            $signatureRe = $this->get_signature($ticket);
-            $signature = $signatureRe['signature'];
-            $noncestr = $signatureRe['noncestr'];
-//            echo "<pre>";var_dump($signatureRe);exit;
             $url = "http://".$_SERVER['HTTP_HOST'].'?memberid='.$id;
             $weixin = array(
                 'appid'=>$appid,
@@ -142,8 +152,18 @@ class Index
             }
             return view("index@index/index",['re'=>$re]);
         }else{
+            $url = "http://".$_SERVER['HTTP_HOST'];
+            $weixin = array(
+                'appid'=>$appid,
+                'access_token_true'=>$access_token_true,
+                'ticket'=>$ticket,
+                'timestamp'=>$signatureRe['timestamp'],
+                'noncestr'=>$noncestr,
+                'signature'=>$signature,
+                'url'=>$url
+            );
 
-            $re = ['footType'=>$curl,'itemInfo'=>$re,'indexPic'=>$indePic,'pItem'=>$pointItem];
+            $re = ['footType'=>$curl,'itemInfo'=>$re,'weixin'=>$weixin,'indexPic'=>$indePic,'pItem'=>$pointItem];
             if(!empty($gg)){
                 $re['gg'] = $gg;
             }
