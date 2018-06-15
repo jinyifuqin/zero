@@ -102,7 +102,7 @@ class Index
             if(isset($serviceuserid) && $userObj->service_cent_id == 0){
                 $userObj->service_cent_id = $serviceuserid;
             }
-            if(isset($memberid)){
+            if(isset($memberid) && $userObj->share_member_id == 0){
                 $userObj->share_member_id = $memberid;
             }
 
