@@ -163,6 +163,7 @@ class User extends Controller
 
     public function save_user(Request $request){
         $post = $request->param();
+        $post['captcha'] = strtolower($post['captcha']);
         if($_SESSION['captcha'] != $post['captcha']){
             $msg = array('status'=>'error','msg'=>'验证码输入错误，请重新输入！');
             echo json_encode($msg);
