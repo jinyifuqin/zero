@@ -368,6 +368,7 @@ class Trade extends Controller
             $memberId = $trade->user_id;
             $memObj = Users::get($memberId);
             $shareId = $memObj->share_member_id;
+            $parnetFlag = false;
             if($shareId != 0){
 //                $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
                 $shareBuyPriceAdd = $pO->where('user_id',"=",$shareId)
@@ -383,6 +384,25 @@ class Trade extends Controller
                 $shareBuyPrice = $shareBuyPriceAdd - $shareBuyPriceDel;
                 if($shareBuyPrice >= $sharePointFilterConfig){
                     $flag = true;
+                    //                newAddStart
+                    $memParentObj = Users::get($shareId);
+                    $shareParentId = $memParentObj->share_member_id;
+                    if($shareParentId != 0){
+                        $sharePrentBuyPriceAdd = $pO->where('user_id',"=",$shareParentId)
+                            ->where('type',"=",1)
+                            ->where('frozen_flag',"=",0)
+                            ->sum('count');
+                        $shareParentBuyPriceDel = $pO->where('user_id',"=",$shareParentId)
+                            ->where('type',"=",0)
+                            ->where('frozen_flag',"=",0)
+                            ->sum('count');
+                        $shareParentBuyPrice = $sharePrentBuyPriceAdd - $shareParentBuyPriceDel;
+                        if($shareParentBuyPrice >= $sharePointFilterConfig){
+                            $parnetFlag = true;
+                        }
+                    }
+//                echo "<pre>";var_dump($shareId);var_dump($shareParentId);exit;
+//                new AddEnd
                 }else{
                     $flag = false;
                 }
@@ -420,6 +440,18 @@ class Trade extends Controller
                             $pointObj->data($giveSharePoint);
                             $pointObj->save();
                             unset($giveSharePoint);
+                        }
+
+                        if($parnetFlag){
+                            $givePrentSharePoint['user_id'] = $shareParentId;
+                            $givePrentSharePoint['count'] = $trade->buy_price*0.01;
+                            $givePrentSharePoint['type'] = 1;
+                            $givePrentSharePoint['get_type'] = 3;
+                            $givePrentSharePoint['frozen_flag'] = 1;
+                            $givePrentSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                            $pointParentObj = new Points();
+                            $pointParentObj->data($givePrentSharePoint);
+                            $pointParentObj->save();
                         }
                     }
 
@@ -479,6 +511,7 @@ class Trade extends Controller
         $memberId = $trade->user_id;
         $memObj = Users::get($memberId);
         $shareId = $memObj->share_member_id;
+        $parnetFlag = false;
         if($shareId != 0){
 //            $shareBuyPrice = Trades::where(['user_id'=>$shareId,'check_type'=>1])->sum('buy_price');
             $shareBuyPriceAdd = $pO->where('user_id',"=",$shareId)
@@ -494,6 +527,25 @@ class Trade extends Controller
             $shareBuyPrice = $shareBuyPriceAdd - $shareBuyPriceDel;
             if($shareBuyPrice >= $sharePointFilterConfig){
                 $flag = true;
+//                newAddStart
+                $memParentObj = Users::get($shareId);
+                $shareParentId = $memParentObj->share_member_id;
+                if($shareParentId != 0){
+                    $sharePrentBuyPriceAdd = $pO->where('user_id',"=",$shareParentId)
+                        ->where('type',"=",1)
+                        ->where('frozen_flag',"=",0)
+                        ->sum('count');
+                    $shareParentBuyPriceDel = $pO->where('user_id',"=",$shareParentId)
+                        ->where('type',"=",0)
+                        ->where('frozen_flag',"=",0)
+                        ->sum('count');
+                    $shareParentBuyPrice = $sharePrentBuyPriceAdd - $shareParentBuyPriceDel;
+                    if($shareParentBuyPrice >= $sharePointFilterConfig){
+                        $parnetFlag = true;
+                    }
+                }
+//                echo "<pre>";var_dump($parnetFlag);exit;
+//                new AddEnd
             }else{
                 $flag = false;
             }
@@ -531,6 +583,18 @@ class Trade extends Controller
                         $pointObj = new Points();
                         $pointObj->data($giveSharePoint);
                         $pointObj->save();
+                    }
+
+                    if($parnetFlag){
+                        $givePrentSharePoint['user_id'] = $shareParentId;
+                        $givePrentSharePoint['count'] = $trade->buy_price*0.01;
+                        $givePrentSharePoint['type'] = 1;
+                        $givePrentSharePoint['get_type'] = 3;
+                        $givePrentSharePoint['frozen_flag'] = 1;
+                        $givePrentSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                        $pointParentObj = new Points();
+                        $pointParentObj->data($givePrentSharePoint);
+                        $pointParentObj->save();
                     }
                 }
             }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){

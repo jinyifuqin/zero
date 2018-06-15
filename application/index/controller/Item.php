@@ -31,7 +31,22 @@ class Item extends Controller
         session_start();
     }
 
-    public function itemList(){
+    public function itemList(Request $request){
+        $serviceuserid = $request->param('userid');
+        $memberid = $request->param('memberid');
+        if(isset($serviceuserid)){
+            $_SESSION['adminUserId'] = $serviceuserid;
+        }
+        if(isset($memberid)){
+            $_SESSION['share_member_id'] = $memberid;
+        }
+        $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        if(array_key_exists('userinfo',$_SESSION)){
+            $id = $_SESSION['userinfo']->id;
+            $weixin = wechat_js($id,$url);
+        }else{
+            $weixin = wechat_js(null,$url);
+        }
 //        Log::write('测试','notice');
         $itemObj = new Items();
         $re = $itemObj->where('status',1)
@@ -39,7 +54,7 @@ class Item extends Controller
             ->limit($this->pages)
             ->select();
         $curl = "itemList";
-        $re = ['footType'=>$curl,'itemList'=>$re,'page'=>1];
+        $re = ['footType'=>$curl,'weixin'=>$weixin,'itemList'=>$re,'page'=>1];
         return view("index@item/index",['re'=>$re]);
     }
 
@@ -55,6 +70,22 @@ class Item extends Controller
     }
 
     public function item(Request $request){
+        $serviceuserid = $request->param('userid');
+        $memberid = $request->param('memberid');
+        if(isset($serviceuserid)){
+            $_SESSION['adminUserId'] = $serviceuserid;
+        }
+        if(isset($memberid)){
+            $_SESSION['share_member_id'] = $memberid;
+        }
+        $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        if(array_key_exists('userinfo',$_SESSION)){
+            $id = $_SESSION['userinfo']->id;
+            $weixin = wechat_js($id,$url);
+        }else{
+            $weixin = wechat_js(null,$url);
+        }
+
         $id = $request->param('id');
         $result = Items::get(['id' => $id]);
         $noticeObj = new Notices();
@@ -63,7 +94,7 @@ class Item extends Controller
                 ->select();
 
         $curl = "itemList";
-        $re = ['footType'=>$curl,'itemInfo'=>$result];
+        $re = ['footType'=>$curl,'weixin'=>$weixin,'itemInfo'=>$result];
         if($gg){
             $re['gg'] = $gg;
         }

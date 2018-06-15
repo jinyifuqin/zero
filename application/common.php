@@ -306,3 +306,42 @@ function check_login_type(){
     }
     return false;
 }
+
+function wechat_js($id = null,$url){
+    $wxFlag = check_login_type();
+    if($wxFlag){
+        $appid = WX_APPID;
+        $wxObj = \app\index\model\Weixins::all();
+        $ticket = $wxObj[0]->ticket;
+        $access_token_true = $wxObj[0]->access_token_true;
+        $signatureRe = get_signature($ticket);
+        $signature = $signatureRe['signature'];
+        $noncestr = $signatureRe['noncestr'];
+        if($id){
+            $url = $url.'?memberid='.$id;
+        }
+
+        $weixin = array(
+            'appid'=>$appid,
+            'access_token_true'=>$access_token_true,
+            'ticket'=>$ticket,
+            'timestamp'=>$signatureRe['timestamp'],
+            'noncestr'=>$noncestr,
+            'signature'=>$signature,
+            'url'=>$url
+        );
+        return $weixin;
+    }
+
+}
+
+function get_signature($ticket){
+    $wxObj = new \app\weixin\controller\Wechat();
+    $noncestr = $wxObj->randcode();
+    $timestamp = time();
+    $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $signature='jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url.'';
+    $signature = sha1( $signature );
+    $data = ['noncestr'=>$noncestr,'signature'=>$signature,'timestamp'=>$timestamp];
+    return $data;
+}
