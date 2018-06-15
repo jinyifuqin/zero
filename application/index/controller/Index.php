@@ -32,14 +32,6 @@ class Index
     public function index(Request $request)
     {
 //        session_destroy();
-        $wxLook = check_login_type();
-        if($wxLook){
-            if(!array_key_exists('wxInfo',$_SESSION)){
-                $url = $this->wxObj->get_authorize_url(1);
-                return redirect($url);
-            }
-        }
-//        echo "<pre>";var_dump($_SESSION);exit;
         $_SESSION['url'] = $_SERVER['HTTP_HOST'];
         $serviceuserid = $request->param('userid');
         $memberid = $request->param('memberid');
@@ -48,6 +40,14 @@ class Index
         }
         if(isset($memberid)){
             $_SESSION['share_member_id'] = $memberid;
+        }
+
+        $wxLook = check_login_type();
+        if($wxLook){
+            if(!array_key_exists('wxInfo',$_SESSION)){
+                $url = $this->wxObj->get_authorize_url(1);
+                return redirect($url);
+            }
         }
         $itemObj = new Items();
         $re = $itemObj->where('status',1)
