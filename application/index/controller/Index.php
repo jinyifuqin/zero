@@ -102,7 +102,7 @@ class Index extends Common
             if(isset($serviceuserid) && $userObj->service_cent_id == 0){
                 $userObj->service_cent_id = $serviceuserid;
             }
-            if(isset($memberid) && $userObj->share_member_id == 0){
+            if(isset($memberid) && $userObj->share_member_id == 0 && $memberid != $id){
                 $userObj->share_member_id = $memberid;
             }
 
