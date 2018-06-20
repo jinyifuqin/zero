@@ -913,5 +913,53 @@ class Index extends Controller
         echo json_encode($msg);
     }
 
+    public function user_point(){
+        $user = Users::all();
+//            ->order(['create_time'=>'desc']);
+//        echo "<pre>";var_dump($user);exit;
+        $pO = new \app\index\model\Points();
+        foreach ($user as &$v){
+            $noUseAdd = $pO->where('user_id',$v->id)
+                ->where('type',1)
+                ->where('frozen_flag',0)
+                ->sum('count');
+
+            $noUseDel = $pO->where('user_id',$v->id)
+                ->where('type',0)
+                ->where('frozen_flag',0)
+                ->sum('count');
+            $noUseEnd = $noUseAdd-$noUseDel;
+
+            $canUseAdd = $pO->where('user_id',"=",$v->id)
+                ->where('get_type',">",0)
+                ->where('type',"=",1)
+                ->where('frozen_flag',"=",1)
+                ->sum('count');
+
+            $canUseDel = $pO->where('user_id',"=",$v->id)
+                ->where('get_type',">",0)
+                ->where('type',"=",0)
+                ->where('frozen_flag',"=",1)
+                ->sum('count');
+
+            $canUseEnd = $canUseAdd - $canUseDel;
+            $v->noUseEnd = round($noUseEnd,'3');
+            $v->canUseEnd = round($canUseEnd,3);
+        }
+
+//        echo "<pre>";var_dump($user);exit;
+        return view("admin@index/userPoint",['re'=>$user]);
+    }
+    
+    public function point_detail($id){
+        $pO = new \app\index\model\Points();
+        $detail = $pO->where('user_id',"=",$id)
+            ->order('create_time','desc')
+            ->select();
+
+//        echo "<pre>";var_dump($detail);exit;
+        return view("admin@index/pointDetail",['re'=>$detail]);
+    }
+
 
 }

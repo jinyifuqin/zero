@@ -104,6 +104,8 @@ Route::group('admin',[
     'selfPoint' => ['admin/index/self_point', ['method' => 'get']],
     'itemPrice' => ['admin/item/item_price', ['method' => 'get']],
     'putForward' => ['admin/index/put_forward', ['method' => 'get']],
+    'userPoint' => ['admin/index/user_point', ['method' => 'get']],
+    'pointDetail/:id' => ['admin/index/point_detail', ['method' => 'get']],
     'confirmPf' => ['admin/index/confirm_pf', ['method' => 'post']],
     'partMember' => ['admin/index/part_member', ['method' => 'get']],
     'truePart/:id' => ['admin/index/true_part', ['method' => 'get']],
