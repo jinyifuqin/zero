@@ -125,15 +125,15 @@ function getPoint($userId){ // 获取用户总积分
             'frozen_flag'=>1
         ]);
     }
-
+    $flag = false;
 //    echo "<pre>";var_dump($flag);exit;
     $canUse = 0;
     if(!$flag && !empty($mintime) && $x){
         \app\index\model\Points::destroy([
             'user_id' => $userId,
             'get_type'=>2,
-            'type'=>1,
-            'frozen_flag'=>1
+//            'type'=>1,
+//            'frozen_flag'=>1
         ]);
         call_self($userId,$x,$mmtime,$pointObj);
 

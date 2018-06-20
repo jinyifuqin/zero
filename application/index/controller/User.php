@@ -53,7 +53,7 @@ class User extends Controller
                     $userObj->save();
                 }
             }
-            if(array_key_exists('share_member_id',$_SESSION) && $userObj->share_member_id == 0){
+            if(array_key_exists('share_member_id',$_SESSION) && $userObj->share_member_id == 0 && $_SESSION['share_member_id'] != $userObj->id){
                 $userObj->share_member_id = $_SESSION['share_member_id'];
                 $userObj->save();
             }
