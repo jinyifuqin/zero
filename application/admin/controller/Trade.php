@@ -428,7 +428,22 @@ class Trade extends Controller
                 if($trade->getData('check_type') == 0){
                     $check_type = 1;
                     $trade_type = 1;
-                    if($trade->item_type == 0){
+
+
+                }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
+                    $check_type = 0;
+                    $trade_type = 0;
+                }else{
+                    $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
+                    return json_encode($msg);
+                }
+                $trade->check_type = $check_type;
+                $trade->trade_type = $trade_type;
+            }
+            $result = $trade->save();
+            if($type){
+                if($trade->getData('admin_check_type') == 1 && $trade->item_type == 0){
+
                         if($flag){
                             $giveSharePoint['user_id'] = $shareId;
                             $giveSharePoint['count'] = $trade->buy_price*0.07;
@@ -453,22 +468,6 @@ class Trade extends Controller
                             $pointParentObj->data($givePrentSharePoint);
                             $pointParentObj->save();
                         }
-                    }
-
-                }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
-                    $check_type = 0;
-                    $trade_type = 0;
-                }else{
-                    $msg = array('status'=>'fails','msg'=>'抱歉，状态无法改变！');
-                    return json_encode($msg);
-                }
-                $trade->check_type = $check_type;
-                $trade->trade_type = $trade_type;
-            }
-            $result = $trade->save();
-            if($type){
-                if($trade->getData('admin_check_type') == 1 && $trade->item_type == 0){
-
                     $givePoint['user_id'] = $trade->user_id;
                     $givePoint['count'] = $trade->buy_price*$setPointCount*0.01;
                     $givePoint['type'] = 1;
@@ -572,31 +571,7 @@ class Trade extends Controller
             if($trade->getData('check_type') == 0){
                 $check_type = 1;
                 $trade_type = 1;
-                if($trade->item_type == 0){
-                    if($flag){
-                        $giveSharePoint['user_id'] = $shareId;
-                        $giveSharePoint['count'] = $trade->buy_price*0.07;
-                        $giveSharePoint['type'] = 1;
-                        $giveSharePoint['get_type'] = 3;
-                        $giveSharePoint['frozen_flag'] = 1;
-                        $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
-                        $pointObj = new Points();
-                        $pointObj->data($giveSharePoint);
-                        $pointObj->save();
-                    }
 
-                    if($parnetFlag){
-                        $givePrentSharePoint['user_id'] = $shareParentId;
-                        $givePrentSharePoint['count'] = $trade->buy_price*0.02;
-                        $givePrentSharePoint['type'] = 1;
-                        $givePrentSharePoint['get_type'] = 3;
-                        $givePrentSharePoint['frozen_flag'] = 1;
-                        $givePrentSharePoint['create_time'] = date('Y-m-d H:i:s',time());
-                        $pointParentObj = new Points();
-                        $pointParentObj->data($givePrentSharePoint);
-                        $pointParentObj->save();
-                    }
-                }
             }elseif($trade->getData('check_type') == 1 && $trade->getData('admin_check_type') != 1 && $trade->getData('admin_get_bill_type') != 1 && $trade->getData('get_bill_type') != 1 ){
                 $check_type = 0;
                 $trade_type = 0;
@@ -615,6 +590,29 @@ class Trade extends Controller
         if($request){
             if($type){
                 if($trade->getData('admin_check_type') == 1 && $trade->item_type == 0){
+                        if($flag){
+                            $giveSharePoint['user_id'] = $shareId;
+                            $giveSharePoint['count'] = $trade->buy_price*0.07;
+                            $giveSharePoint['type'] = 1;
+                            $giveSharePoint['get_type'] = 3;
+                            $giveSharePoint['frozen_flag'] = 1;
+                            $giveSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                            $pointObj = new Points();
+                            $pointObj->data($giveSharePoint);
+                            $pointObj->save();
+                        }
+
+                        if($parnetFlag){
+                            $givePrentSharePoint['user_id'] = $shareParentId;
+                            $givePrentSharePoint['count'] = $trade->buy_price*0.02;
+                            $givePrentSharePoint['type'] = 1;
+                            $givePrentSharePoint['get_type'] = 3;
+                            $givePrentSharePoint['frozen_flag'] = 1;
+                            $givePrentSharePoint['create_time'] = date('Y-m-d H:i:s',time());
+                            $pointParentObj = new Points();
+                            $pointParentObj->data($givePrentSharePoint);
+                            $pointParentObj->save();
+                        }
 
                     $givePoint['user_id'] = $trade->user_id;
                     $givePoint['count'] = $trade->buy_price*$setPointCount*0.01;
