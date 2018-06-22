@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>服务中心</title>
+		<link rel="stylesheet" href="/public/indexsource/css/css_yan.css" />
+		<link rel="stylesheet" href="/public/indexsource/css/css2.css" />
+		<script src="/public/indexsource/js/jquery.min.js"></script>
+		<script src="/public/indexsource/js/pic.js"></script>
+		<style>
+			.jifen2_1 img{
+				border-radius: 50%;width:2rem;position: absolute;top:15%;z-index:99999;height:2rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--这是头部-->
+		{include file="public/indexsource/head/header.html" /}
+
+		<!--这是最外边的div，用来隔开与底部栏目的高度-->
+		<div class="Cmain">
+			<div class="mh"></div>
+			<div class="title_line line_bottom"><span class="line"></span>我的分享者</div>
+			{if condition="($re.info != null)"}
+			<div class="jifen2">
+				<div class="jifen2_1"><span style="width: 34%;">分享者头像</span>
+					<i style="width: 60%;position: relative;height: inherit;">
+						{if condition="($re.info.pic == ' ')  OR ($re.info.pic  == '')"}
+						<img src="/public/indexsource/images/head.jpg"/>
+						{else}
+						<img src="/public/uploads/{$re.info.pic}"/>
+						{/if}
+					</i>
+				</div>
+				<div class="jifen2_1"><span style="width: 34%;">分享者昵称</span>
+					<i style="width: 60%;">{$re.info.nickname}</i></div>
+				<div class="jifen2_1"><span style="width: 34%;">手机号</span>
+					<i style="width: 60%;">{$re.info.phone_number}</i></div>
+			</div>
+			{/if}
+		</div>
+
+		<!--底部-->
+        {include file="public/indexsource/foot/footer.html" /}
+	</body>
+
+</html>

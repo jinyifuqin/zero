@@ -858,4 +858,21 @@ class User extends Controller
         return view("index@user/userGet",['re'=>$re]);
     }
 
+    public function my_share(){
+        $user = $_SESSION['userinfo'];
+        $userObj = Users::get($user->id);
+        $shareInfo = $userObj->share_member_id;
+        if($shareInfo != 0){
+            $shareMem = Users::get($shareInfo);
+            $shareMem->nickname = json_decode(urldecode($shareMem->nickname));
+        }else{
+            $shareMem = null;
+        }
+        $curl = "userinfo";
+        $re = ['info'=>$shareMem,'footType'=>$curl];
+//                echo "<pre>";var_dump($re);exit;
+        return view("index@user/myShare",['re'=>$re]);
+
+    }
+
 }

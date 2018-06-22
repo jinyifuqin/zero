@@ -208,6 +208,7 @@ Route::group('',[
     'votingDetail/:id' => ['User/voting_detail', ['method' => 'get']],
     'votingAction' => ['User/voting_action', ['method' => 'post']],
     'notice' => ['notice', ['method' => 'get']],
+    'myShare' => ['User/my_share', ['method' => 'get']],
 
 // ':user/:blog_id'=>'Blog/read',// 全动态地址
 ]);
