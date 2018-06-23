@@ -104,15 +104,10 @@ class Item extends Controller
 
     public function point_item($id){
         $result = PointItems::get(['id' => $id]);
-        $artM = ArticleMenus::get(['title'=>'公告']);
-        $artObj = new Articles();
-        if($artM){
-            $artMId = $artM->id;
-            $gg = $artObj->where('menu_id',$artMId)
-                ->where('status',1)
-                ->order('give_good', 'desc')
-                ->select();
-        }
+        $noticeObj = new Notices();
+        $gg = $noticeObj->where('status',1)
+            ->order('sort', 'desc')
+            ->select();
         $curl = "itemList";
         $re = ['footType'=>$curl,'itemInfo'=>$result];
         $_SESSION['pyHttp'] = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
