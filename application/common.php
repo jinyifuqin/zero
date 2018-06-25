@@ -294,7 +294,7 @@ function sendEmail($to,$content){
     $mail->WordWrap = 50; //设置每行字符长度
     $mail->IsHTML(true); // 是否HTML格式邮件
     $mail->CharSet='utf-8'; //设置邮件编码
-    $mail->Subject ='找回密码'; //邮件主题
+    $mail->Subject ='永之泰找回密码'; //邮件主题
     $mail->Body = $content; //邮件内容
     $mail->AltBody = "永之泰欢迎您"; //邮件正文不支持HTML的备用显示
     $re = $mail->Send();

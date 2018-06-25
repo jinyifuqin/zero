@@ -53,8 +53,8 @@ return [
         'sql_explain'     => false,
     ],
     'email'=>[
-        'username'=>'jinyifuqin@163.com',
-        'password'=>'jinyifuqin123',
+        'username'=>'yzt_admin@163.com',
+        'password'=>'yzt123',//yztadminyzt
         'host'=>'smtp.163.com'
     ]
 
