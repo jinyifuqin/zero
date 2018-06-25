@@ -960,6 +960,57 @@ class Index extends Controller
 //        echo "<pre>";var_dump($detail);exit;
         return view("admin@index/pointDetail",['re'=>$detail]);
     }
+    
+    public function user_list(){
+        $users = Users::all();
+        foreach($users as $k=>&$v){
+            $v->nickname = json_decode(urldecode($v->nickname));
+        }
+        return view("admin@index/userList",['re'=>$users]);
+    }
 
+    public function user_edit(Request $request){
+        $id = $request->param('id');
+        $re = Users::get(['id' => $id]);
+        $re->nickname = json_decode(urldecode($re->nickname));
+        return view("admin@index/userEdit",['re'=>$re]);
+    }
+    
+    public function save_user(Request $request){
+        $post = $request->param();
+        $data = [
+            'truename' => $post['trueName'],
+            'nickname' => urlencode(json_encode($post['nickname'])),
+            'password' => $post['password'],
+            'phone_number' => $post['phone'],
+            'email' => $post['email'],
+        ];
+        $result = Users::where('id', $post['id'])
+            ->update($data);
+        return json_encode(['status'=>1]);
+    }
+
+    public function user_del(Request $request){
+        $id = $request->param("id");
+        $user = Users::get($id);
+        $re = $user->delete();
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
+
+    public function user_del_all(Request $request){
+        $ids = $request->param()['ids'];
+        $re = Users::destroy($ids);
+        if($re){
+            $msg = array('status'=>'Success');
+        }else{
+            $msg = array('status'=>'fails');
+        }
+        echo json_encode($msg);
+    }
 
 }
